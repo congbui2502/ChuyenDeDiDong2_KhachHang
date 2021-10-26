@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyDonHang"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:gravity="end"
+        android:paddingVertical="20dp"
+        android:paddingRight="20dp"
+
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tvKhuyenMai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green"
+            android:textSize="20sp"
+            android:text="Khuyen mai"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:gravity="end"
+
+        android:paddingRight="20dp"
+        android:layout_weight="1">
+
+
+
+        <TextView
+            android:id="@+id/tvTongGia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green"
+            android:textSize="30sp"
+            android:text="100000 VND"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="end"
+        android:paddingHorizontal="40dp"
+        android:paddingVertical="5dp"
+        android:layout_weight="1">
+       <Button
+           android:id="@+id/btnDatDon"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:text="@string/datdon"
+           android:background="@color/green_dam"
+           android:textSize="30dp"/>
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

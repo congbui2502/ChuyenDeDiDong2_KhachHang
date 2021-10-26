@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Coffe</string>
+    <string name="facebook_app_id">248728940107368</string>
+    <string name="fb_login_protocol_scheme">fb248728940107368</string>
+    //
+    <string name="navigation_drawer_open">Open Navigation drawer</string>
+    <string name="navigation_drawer_close">Close Navigation drawer</string>
+
+
+    <string name="text123">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock</string>
+
+    //cong triet
+
+    <string name="tab_1">Home</string>
+    <string name="tab_2">History</string>
+    <string name="tab_3">Account</string>
+    <string name="tab_4">Cart</string>
+
+    <string name="btnTru">-</string>
+    <string name="btnCong">+</string>
+    <string name="datdon">Đặt Hàng</string>
+
+    <string name="delete">Delete</string>
+
+
+    <string name="btnDatHang">Đặt Hàng</string>
+    <string name="search">Search what do your will drink </string>
+
+</resources>

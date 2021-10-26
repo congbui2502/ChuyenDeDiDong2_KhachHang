@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.sa90.materialarcmenu:library:2.0.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9cfa0a86a5a017015969b0fa0ec0d1ac/transformed/jetified-library-2.0.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/9cfa0a86a5a017015969b0fa0ec0d1ac/transformed/jetified-library-2.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9cfa0a86a5a017015969b0fa0ec0d1ac/transformed/jetified-library-2.0.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

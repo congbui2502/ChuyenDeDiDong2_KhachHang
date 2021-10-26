@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.chauthai.swipereveallayout.SwipeRevealLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="10dp"
+    android:layout_marginHorizontal="10dp"
+    app:mode="same_level"
+    app:dragEdge="right"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Your secondary layout here -->
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/gray"
+        android:layout_marginHorizontal="10dp"
+
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardCornerRadius="8dp">
+        <TextView
+            android:gravity="center"
+            android:id="@+id/tvDelete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:text="@string/delete"
+            android:background="@color/red"
+            android:textColor="@color/white"/>
+
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Your main layout here -->
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/gray"
+        android:layout_marginHorizontal="10dp"
+
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardCornerRadius="8dp">
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <CheckBox
+                    android:id="@+id/rdProduct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+
+                android:gravity="center"
+                android:layout_weight="3">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/crImgProductCart"
+
+
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:layout_weight="5"
+                android:weightSum="4"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2">
+                    <TextView
+                        android:id="@+id/tvCartProduct"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Cong bui"
+                        android:textSize="20sp"/>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/tvGiaProduct"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="10000 VND"
+                        android:textSize="15sp"/>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:paddingBottom="5dp"
+                    android:orientation="horizontal">
+                    <Button
+
+                        android:id="@+id/btnTru"
+
+                        android:layout_marginRight="5dp"
+                        android:layout_width="30dp"
+                        android:layout_gravity="center"
+                        android:layout_height="20dp"
+                        android:background="@drawable/ic_baseline_remove_24" />
+                    <TextView
+                        android:id="@+id/tvSoLuongSanPham"
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:text="1"
+                        android:gravity="center"
+                        android:background="@color/gray"/>
+
+
+
+                    <Button
+                        android:id="@+id/btnCong"
+
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="30dp"
+                        android:layout_gravity="center"
+                        android:layout_height="20dp"
+                        android:background="@drawable/ic_baseline_add_24" />
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</com.chauthai.swipereveallayout.SwipeRevealLayout>
+
+
+
+
+

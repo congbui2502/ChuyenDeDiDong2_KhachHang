@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_weight="14">
+    <EditText
+        android:id="@+id/editUpdateTensanpham"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:hint="Ten san pham"></EditText>
+    <EditText
+        android:id="@+id/editUpdateChitietsanpham"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:hint="Chi tiet"></EditText>
+
+    <Spinner
+        android:id="@+id/spnUpdateNhomsanpham"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"></Spinner>
+
+    <EditText
+        android:id="@+id/editUpdateGianhap"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:hint="Gia nhap"></EditText>
+
+    <EditText
+        android:id="@+id/editUpdateGianban"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:hint="Gia ban"></EditText>
+
+    <EditText
+        android:id="@+id/editUpdateSoluong"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:hint="So luong"></EditText>
+
+
+</LinearLayout>
