@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.shipper.R;
 import com.example.shipper.Shipper;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +34,7 @@ public class CaNhanFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private FirebaseAuth mFirebaseAuth;
     private DatabaseReference mDatabase;
     private TextView tv_name,tv_email,tv_phone,tv_date;
 
@@ -81,13 +83,14 @@ public class CaNhanFragment extends Fragment {
     }
     private void onDataChange()
     {
+        mFirebaseAuth= FirebaseAuth.getInstance();
+        String id=mFirebaseAuth.getUid();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("Shipper").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("Shipper").child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot item : snapshot.getChildren())
-                {
-                    Shipper sp=item.getValue(Shipper.class);
+
+                    Shipper sp=snapshot.getValue(Shipper.class);
                     String nameShipper=sp.getNameShipper();
                     String phoneShipper= sp.getPhoneShipper();
                     String emailShipper=sp.getEmailShipper();
@@ -97,7 +100,7 @@ public class CaNhanFragment extends Fragment {
                     tv_email.setText(emailShipper);
                     tv_phone.setText(phoneShipper);
 
-                }
+
             }
 
             @Override

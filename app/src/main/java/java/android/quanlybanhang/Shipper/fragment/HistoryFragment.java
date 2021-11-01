@@ -22,7 +22,9 @@ import android.widget.TextView;
 import com.example.shipper.ChiTietActivity;
 import com.example.shipper.DonHang;
 import com.example.shipper.History;
+import com.example.shipper.LichSuActivity;
 import com.example.shipper.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,6 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import adapter.DonHangAdapter;
@@ -37,8 +40,10 @@ import adapter.HistoryAdapter;
 
 
 public class HistoryFragment extends Fragment {
+    public static final String KEY_LICHSU = "LICHSU";
     private TextView tvDiemNhan,tvDiemGiao,tvThoiGian;
     private DatabaseReference databaseReference;
+    private FirebaseAuth mFirebaseAuth;
     private Context context;
     ListView recyclerView;
     ArrayList<History> arrayList;
@@ -66,11 +71,11 @@ public class HistoryFragment extends Fragment {
         recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(context,ChiTietActivity.class);
+                Intent intent = new Intent(context, LichSuActivity.class);
                 History history = arrayList.get(position);
                 Log.d("aaa","bbb");
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(,history);
+                bundle.putSerializable(KEY_LICHSU,history);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -84,7 +89,9 @@ public class HistoryFragment extends Fragment {
     }
 
     private void getDataFromFirebase() {
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Shipper").child("idShipper").child("lichSuDonOnline");
+        mFirebaseAuth=FirebaseAuth.getInstance();
+        String id=mFirebaseAuth.getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Shipper").child(id).child("lichSuDonOnline");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
