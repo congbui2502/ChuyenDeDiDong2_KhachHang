@@ -70,7 +70,8 @@ public class DangkyActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_signin_now:
-                onBackPressed();
+                Intent intent = new Intent(DangkyActivity.this, DangNhapActivity.class);
+                startActivity(intent);
                 break;
             case R.id.btn_signup:
                 signup();
