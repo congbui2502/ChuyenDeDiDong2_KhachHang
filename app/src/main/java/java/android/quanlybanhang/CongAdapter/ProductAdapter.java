@@ -24,14 +24,21 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
+public  class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
-    private List<SanPham> products;
+    private static  List<SanPham> products;
     private KhachHangActivity mainActivity;
+
+    public SetPos setPos;
+
+    public  interface  SetPos{
+        void setPos(int size);
+
+    }
 //    private long build;
 
 
-    public     IclickAddToCartListener iclickAddToCartListener;
+    public  IclickAddToCartListener iclickAddToCartListener;
 
     public void setFlag(Boolean flag) {
         this.flag = flag;
@@ -46,11 +53,22 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         void setGiaDonHang(long donHang);
     }
 
-    public void setData(KhachHangActivity mainActivity, IclickAddToCartListener listener)
+    public void setData(KhachHangActivity mainActivity, IclickAddToCartListener listener,SetPos setPos)
     {
         this.mainActivity=mainActivity;
         this.iclickAddToCartListener=listener;
         notifyDataSetChanged();
+        this.setPos=setPos;
+
+
+    }
+    public void  setListCart(SanPham sanPham)
+    {
+        if(products.size()>0)
+        {
+            products.add(sanPham);
+            notifyDataSetChanged();
+        }
     }
 
     public ProductAdapter(List<SanPham> products) {
@@ -70,6 +88,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         SanPham product=products.get(position);
         holderList.add(holder);
         Log.d("QQQ",holderList.size()+"");
+        int abc=position;
 
         if(product!=null)
         {
@@ -87,7 +106,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                         holder.btnTru.setEnabled(false);
                         holder.soLuong.setText(i+"");
                         holder.gia.setText(product.getGiaBan()*i+" VND");
-                        products.get(position).setSoluong(i);
+                        products.get(abc).setSoluong(i);
 
                         iclickAddToCartListener.setGiaDonHang(setGiaDonHang());
 
@@ -95,7 +114,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                         i--;
                         holder.soLuong.setText(i+"");
                         holder.gia.setText(product.getGiaBan()*i+" VND");
-                        products.get(position).setSoluong(i);
+                        products.get(abc).setSoluong(i);
                         iclickAddToCartListener.setGiaDonHang(setGiaDonHang());
                         if (i==0)
                         {
@@ -118,14 +137,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                         i++;
                         holder.soLuong.setText(i+"");
                         holder.gia.setText(product.getGiaBan()*i+" VND");
-                        products.get(position).setSoluong(i);
+                        products.get(abc).setSoluong(i);
                         iclickAddToCartListener.setGiaDonHang(setGiaDonHang());
 
                     }else {
                         i++;
                         holder.soLuong.setText(i+"");
                         holder.gia.setText(product.getGiaBan()*i+" VND");
-                        products.get(position).setSoluong(i);
+                        products.get(abc).setSoluong(i);
 
                         iclickAddToCartListener.setGiaDonHang(setGiaDonHang());
                     }
@@ -184,6 +203,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public int getItemCount() {
         if (this.products!=null)
         {
+            setPos.setPos(products.size());
             return products.size();
         }
 
@@ -260,7 +280,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     {
         long build=0;
 
-        for (int i = 0; i <products.size() ; i++) {
+        for (int i = 0; i <holderList.size() ; i++) {
             if(holderList.get(i).checkBox.isChecked())
             {
                 build=build+products.get(i).getGiaBan()*products.get(i).getSoluong();

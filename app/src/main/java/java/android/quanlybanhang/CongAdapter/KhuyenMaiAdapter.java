@@ -56,10 +56,11 @@ public class KhuyenMaiAdapter extends RecyclerView.Adapter<KhuyenMaiAdapter.Khuy
             {
                 return;
             }
+            
 
             int abc=position;
-            holder.tvGiakhuyenmai.setText(sanPhams.get(position).getPhanTramKhuyenMai()+"%");
-            holder.tvDieuKienKhuyenMai.setText(sanPhams.get(position).getGiaDeDuocKhuyenMai()+" vnd");
+
+            holder.tvDieuKienKhuyenMai.setText(sanPhams.get(position).getMota() );
             Log.d("bbb",sanPhams.get(abc).getLoaiKhuyenmai()+" abc");
             holder.lineKhuyenMai.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -73,8 +74,6 @@ public class KhuyenMaiAdapter extends RecyclerView.Adapter<KhuyenMaiAdapter.Khuy
 
     }
 
-
-
     @Override
     public int getItemCount() {
         if (sanPhams.size()>0)
@@ -85,7 +84,7 @@ public class KhuyenMaiAdapter extends RecyclerView.Adapter<KhuyenMaiAdapter.Khuy
     }
 
     public class KhuyenMaiViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvGiakhuyenmai;
+
         private TextView tvDieuKienKhuyenMai;
         private LinearLayout lineKhuyenMai;
 
@@ -93,7 +92,7 @@ public class KhuyenMaiAdapter extends RecyclerView.Adapter<KhuyenMaiAdapter.Khuy
         public KhuyenMaiViewHolder(@NonNull View itemView) {
             super(itemView);
             tvDieuKienKhuyenMai=itemView.findViewById(R.id.tvDieukienkhuyenmai);
-            tvGiakhuyenmai=itemView.findViewById(R.id.tvGiakhuyenmai);
+
             lineKhuyenMai=itemView.findViewById(R.id.lineKhuyenmai);
 
         }

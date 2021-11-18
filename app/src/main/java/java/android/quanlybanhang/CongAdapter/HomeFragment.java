@@ -5,10 +5,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +36,7 @@ public class HomeFragment  extends Fragment {
 
     private DatabaseReference mReference;
     private KhachHangActivity activity;
+    private TextView tvSearch;
 
     public HomeFragment(KhachHangActivity activity) {
         this.activity = activity;
@@ -57,10 +60,21 @@ public class HomeFragment  extends Fragment {
         loaiTraiAdapter=new LoaiTraiAdapter(getContext());
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
         recyclerView.setLayoutManager(linearLayoutManager);
-
+        tvSearch= view.findViewById(R.id.tvSearch);
         loaiTraiAdapter.setData(getList(),activity);
         recyclerView.setAdapter(loaiTraiAdapter);
         Log.d("BBB","onCreated HomeFragment");
+
+        tvSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchFragment fragment=new SearchFragment();
+                FragmentTransaction transaction= activity.getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container,fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
     }
 
     @Override
@@ -123,12 +137,19 @@ public class HomeFragment  extends Fragment {
 
 
         mReference.child("cuaHang").addChildEventListener(new ChildEventListener() {
+            String idShop="";
+            String nameShop="";
+            String logoUrl="";
+
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                CuaHang sanPham=snapshot.getValue(CuaHang.class);
+                idShop = snapshot.getKey();
+                idShop=snapshot.child("thongtin").child("id").getValue(String.class);
+                logoUrl=snapshot.child("thongtin").child("logoUrl").getValue(String.class);
+                nameShop=snapshot.child("thongtin").child("name").getValue(String.class);
+
+                CuaHang sanPham=new CuaHang(idShop,logoUrl,nameShop);
                 cuahang.add(sanPham);
-
-
                 loaiTraiAdapter.notifyDataSetChanged();
             }
 
@@ -160,11 +181,17 @@ public class HomeFragment  extends Fragment {
 
 
         mReference.child("sanphamQuangcao").addChildEventListener(new ChildEventListener() {
+            int pos =0;
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 SanPham sanPham=snapshot.getValue(SanPham.class);
-                sanphamquangcao.add(sanPham);
-                loaiTraiAdapter.notifyDataSetChanged();
+                if(pos<10)
+                {
+                    sanphamquangcao.add(sanPham);
+                    loaiTraiAdapter.notifyDataSetChanged();
+                }
+                pos++;
+
             }
 
             @Override

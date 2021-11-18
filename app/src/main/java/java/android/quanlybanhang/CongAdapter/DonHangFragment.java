@@ -1,5 +1,7 @@
 package java.android.quanlybanhang.CongAdapter;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +25,10 @@ import java.android.quanlybanhang.Sonclass.DonHangOnline;
 import java.android.quanlybanhang.Sonclass.KhuyenMai;
 import java.android.quanlybanhang.Sonclass.SanPham;
 import java.android.quanlybanhang.Activity.KhachHangActivity;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class DonHangFragment  extends Fragment {
@@ -58,7 +64,7 @@ public class DonHangFragment  extends Fragment {
         DonHangAdapter donHangAdapter=new DonHangAdapter();
         donHangAdapter.setData(sanPhams);
         recyDonHang.setAdapter(donHangAdapter);
-        tongtien=donHangAdapter.tinhTongTien();
+        tongtien = donHangAdapter.tinhTongTien();
         tongTien.setText(tongtien+" VND");
 
         giaKhuyenMai.setOnClickListener(new View.OnClickListener() {
@@ -81,11 +87,9 @@ public class DonHangFragment  extends Fragment {
                     @Override
                     public void setTv(KhuyenMai khuyenMai) {
 //                        Toast.makeText(getContext(),khuyenMai.getLoaiKhuyenmai()+ "abc",Toast.LENGTH_LONG).show();
-
-
                         tinhtoan(khuyenMai);
                     }
-                });
+                },idQuan);
                 customDialogKhuyanMai.show();
 
             }
@@ -96,14 +100,37 @@ public class DonHangFragment  extends Fragment {
             public void onClick(View v) {
                 DatabaseReference mReference= FirebaseDatabase.getInstance().getReference()
                         .child(idQuan).child("donhangonline").child("dondadat");
+                Date date = Calendar.getInstance().getTime();
+                // Display a date in day, month, year format
+                DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+                String today = formatter.format(date);
 
-                String millis =java.time.LocalTime.now().toString()+" " +java.time.LocalDate.now().toString();
-                String key=System.currentTimeMillis()+"";
 
-                DonHangOnline donHangOnline=new DonHangOnline("idKhachhang",donHangAdapter.tinhTongTien(),0,millis,sanPhams,
+                String millis =java.time.LocalTime.now().toString()+" " +today;
+                String key = System.currentTimeMillis()+"";
+
+                DonHangOnline donHangOnline=new DonHangOnline("idKhachhang",donHangAdapter.tinhTongTien()
+                        ,0,millis,sanPhams,
                         "12/21 đường số 12 p.Linh Chieu",key,"Bùi Đình Công","0374193095");
-                mReference.child(key).push().setValue(donHangOnline);
+                HomeFragment fragment =new HomeFragment(mainActivity);
+                mReference.child(today).child(key).setValue(donHangOnline);
+                mainActivity.getSupportFragmentManager().beginTransaction().
+                replace(R.id.fragment_container,fragment).commit();
                 btnDatHang.setEnabled(false);
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+                builder1.setMessage("Đơn hàng của bạn đã được đặt.");
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Ok",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
 
             }
         });

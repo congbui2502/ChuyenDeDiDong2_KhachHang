@@ -24,14 +24,15 @@ public class QuanNoiBatAdapter extends RecyclerView.Adapter<QuanNoiBatAdapter.Tr
     private List<CuaHang> trais;
     private KhachHangActivity mainActivity;
     private Context context;
+    public interface getdata{
+        CuaHang getData();
+    }
     public void setData(List<CuaHang> list, KhachHangActivity mainActivity, Context context)
     {
         this.mainActivity=mainActivity;
         this.trais=list;
         notifyDataSetChanged();
         this.context=context;
-
-
     }
 
 
@@ -56,16 +57,20 @@ public class QuanNoiBatAdapter extends RecyclerView.Adapter<QuanNoiBatAdapter.Tr
         }
 
 
-        holder.textView.setText(trai.getNameShop());
-        Glide.with(context).load(trai.getLogo()).into(holder.imageView);
+        holder.textView.setText(trai.getName());
+        Glide.with(context).load(trai.getLogoUrl()).into(holder.imageView);
 
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction=  mainActivity.getSupportFragmentManager().beginTransaction();
-                ShopProductFragment fragment1=new ShopProductFragment(mainActivity,context);
-
+                ShopProductFragment fragment1=new ShopProductFragment(mainActivity,context, new getdata() {
+                    @Override
+                    public CuaHang getData() {
+                        return trai;
+                    }
+                });
                 fragmentTransaction.replace(R.id.fragment_container,fragment1);
 //                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
@@ -78,7 +83,12 @@ public class QuanNoiBatAdapter extends RecyclerView.Adapter<QuanNoiBatAdapter.Tr
             @Override
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction=  mainActivity.getSupportFragmentManager().beginTransaction();
-                ShopProductFragment fragment1=new ShopProductFragment(mainActivity,context);
+                ShopProductFragment fragment1=new ShopProductFragment(mainActivity,context, new getdata() {
+                    @Override
+                    public CuaHang getData() {
+                        return trai;
+                    }
+                });
                 fragmentTransaction.add(R.id.fragment_container,fragment1,"homefragment");
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();

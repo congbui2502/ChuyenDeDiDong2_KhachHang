@@ -80,9 +80,6 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.DonHangV
         for (int i = 0; i < trais.size(); i++) {
             tong=tong+ trais.get(i).getGiaBan()*trais.get(i).getSoluong();
         }
-
-
-
         return tong;
     }
 }

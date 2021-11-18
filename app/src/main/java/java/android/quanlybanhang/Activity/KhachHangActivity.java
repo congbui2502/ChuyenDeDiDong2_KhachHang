@@ -1,16 +1,22 @@
 package java.android.quanlybanhang.Activity;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RemoteViews;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -24,15 +30,20 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.android.quanlybanhang.CongAdapter.Account_fragment;
 import java.android.quanlybanhang.CongAdapter.Cart_Fragment;
 import java.android.quanlybanhang.CongAdapter.HomeFragment;
+import java.android.quanlybanhang.CongAdapter.ProductAdapter;
+import java.android.quanlybanhang.CongAdapter.Putnotification;
 import java.android.quanlybanhang.CongAdapter.TableFragment;
 import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.CuaHang;
 import java.android.quanlybanhang.Sonclass.SanPham;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -58,6 +69,7 @@ public class KhachHangActivity extends AppCompatActivity {
     private ImageView viewAnimation;
     private DatabaseReference mReference;
     private   AHBottomNavigation bottomNavigation;
+    public static Cart_Fragment cart_fragment;
 
     public AHBottomNavigation getBottomNavigation() {
         return bottomNavigation;
@@ -91,9 +103,16 @@ public class KhachHangActivity extends AppCompatActivity {
         
 //        viewEndAnimation= findViewById(R.id.viewEndAnimation);
 //        viewAnimation=findViewById(R.id.view_animation);
-            fragment=new Cart_Fragment(products);
+            cart_fragment=new Cart_Fragment(products);
+           cart_fragment.setData(new ProductAdapter.SetPos() {
+               @Override
+               public void setPos(int size) {
+                   setCountProductInBuild(size);
+               }
+           });
+
         FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container,fragment);
+        transaction.replace(R.id.fragment_container,cart_fragment);
         transaction.addToBackStack("cartfragment");
         transaction.commit();
 
@@ -101,9 +120,9 @@ public class KhachHangActivity extends AppCompatActivity {
 
 
         mReference=FirebaseDatabase.getInstance().getReference();
-        fragment=new HomeFragment(this);
+        Fragment fragment1=new HomeFragment(this);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).addToBackStack("").commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment1).addToBackStack("").commit();
 
         setMenuItem();
 //        addProduct();
@@ -112,19 +131,13 @@ public class KhachHangActivity extends AppCompatActivity {
         products=getCartList();
 
 
-       if(mReference.child("CuaHangOder").child("XDtrGrfpqvZCk5FzyqP896twSwK2").child("bienlai").child("thu").getKey()!=null)
-       {
-           Log.d("aaa","ton tai thu");
-       }else {
-           Log.d("aaa","khong ton tai thu");
-       }
 
 //        BottomNavigationView  navigationView=findViewById(R.id.bottomNavigation);
 //
 //        navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
 //           @Override
 //           public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//              Fragment fragment=null;
+//              Fragment cart_fragment=null;
 //
 //               Log.d("AAA",item.getItemId()+"");
 //               Log.d("AAA",R.id.nav_home+"");
@@ -137,18 +150,18 @@ public class KhachHangActivity extends AppCompatActivity {
 //
 //               }else  if(item.getItemId()==R.id.nav_library)
 //               {
-//                    fragment=new History_Fragment();
+//                    cart_fragment=new History_Fragment();
 //               }else  if(item.getItemId()==R.id.nav_myAccount)
 //               {
-//                   fragment=new Account_fragment();
+//                   cart_fragment=new Account_fragment();
 //
 //               }else {
-//                   fragment=new HomeFragment();
+//                   cart_fragment=new HomeFragment();
 //
 //               }
 //
 //
-//                   getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
+//                   getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,cart_fragment).commit();
 //
 //              return true;
 //           }
@@ -156,10 +169,24 @@ public class KhachHangActivity extends AppCompatActivity {
 
         Log.d("AAA",getListProduct().size()+"");
 
-        this.products=getListProduct();
+//        this.products=getListProduct();
 
 //        history_fragment=new Cart_Fragment(this.products);
         setCountProductInBuild(products.size());
+
+        CountDownTimer countDownTimer=new CountDownTimer(2000,2000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                sendNotification();
+
+            }
+        }.start();
+
     }
 
     public void setCountProductInBuild(int count)
@@ -281,10 +308,17 @@ public class KhachHangActivity extends AppCompatActivity {
 //
 //                       fragment = getSupportFragmentManager().findFragmentByTag("cartfragment");
 //                   }else {
-                       fragment=new Cart_Fragment(products);
+                      Cart_Fragment fragment1=new Cart_Fragment(products);
+                      fragment1.setData(new ProductAdapter.SetPos() {
+                          @Override
+                          public void setPos(int size) {
+                              setCountProductInBuild(size);
+                          }
+                      });
+
 //                   }
                    FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
-                   transaction.replace(R.id.fragment_container,fragment);
+                   transaction.replace(R.id.fragment_container,fragment1);
                    transaction.addToBackStack("cartfragment");
                    transaction.commit();
 
@@ -337,28 +371,28 @@ public class KhachHangActivity extends AppCompatActivity {
     {
 
         List<SanPham> trais=new ArrayList<SanPham>();
-        mReference.child("gioHang").child(idKhachHang).child("sanPham").addChildEventListener(new ChildEventListener() {
+        mReference.child("gioHang").child(idKhachHang).child("sanPham").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                SanPham sanPham=snapshot.getValue(SanPham.class);
-                trais.add(sanPham);
-                setCountProductInBuild(trais.size());
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                for(DataSnapshot snapshot1:snapshot.getChildren())
+                {
+                    String key= snapshot1.getKey();
+                    SanPham sanPham=snapshot.child(key).getValue(SanPham.class);
+                    boolean flag=true;
+                    for (int i = 0; i < products.size(); i++) {
+                        if (sanPham.getNameProduct().equals(products.get(i).getNameProduct()))
+                        {
+                            flag=false;
+                            break;
+                        }
+                    }
+                    if(flag)
+                    {
+                        trais.add(sanPham);
 
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    }
+                }
 
             }
 
@@ -422,7 +456,7 @@ public class KhachHangActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 CuaHang cuaHang=snapshot.getValue(CuaHang.class);
-                Log.d("ppp",cuaHang.getNameShop()+"nmb");
+                Log.d("ppp",cuaHang.getName()+"nmb");
             }
 
             @Override
@@ -445,6 +479,50 @@ public class KhachHangActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void sendNotification()
+    {
+        Bitmap bitmap= BitmapFactory.decodeResource(getResources(), R.drawable.add);
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy");
+        String day =simpleDateFormat.format(new Date());
+
+        simpleDateFormat=new SimpleDateFormat("HH:mm:ss");
+
+        String time =simpleDateFormat.format(new Date());
+
+        RemoteViews notificationLayout = new RemoteViews(getPackageName(), R.layout.donga_bank_notification);
+//        RemoteViews notificationLayoutExpanded = new RemoteViews(getPackageName(), R.layout.notification_large);
+        notificationLayout.setTextViewText(R.id.tvMessage,day+" "+time+" Ma xac thuc chu...");
+        notificationLayout.setImageViewBitmap(R.id.imgLogo,bitmap);
+
+
+        RemoteViews notificationLayoutmax = new RemoteViews(getPackageName(), R.layout.donga_bank_notification_max);
+//        RemoteViews notificationLayoutExpanded = new RemoteViews(getPackageName(), R.layout.notification_large);
+        notificationLayoutmax.setTextViewText(R.id.tvMessagemax,day+" "+time+" Ma xac thuc chuyen khoan " +
+                "ngoai he thong tren INTERNET la 387155. Vui long nhap ma xac thuc trong vong 5 phut " +
+                "de hoan tat giao dich.");
+        notificationLayoutmax.setImageViewBitmap(R.id.imgLogo,bitmap);
+
+
+
+
+        Notification notification=new NotificationCompat.Builder(this, Putnotification.CHANNEL_ID)
+//                .setContentTitle("this is my application")
+//                .setContentText("cmm")
+//                .setLargeIcon(bitmap)
+                .setCustomContentView(notificationLayout)
+
+                .setSmallIcon(R.drawable.ic_baseline_message_24)
+                .setCustomBigContentView(notificationLayoutmax)
+                .build();
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if(notificationManager!=null)
+        {
+            notificationManager.notify(0,notification);
+        }
+
     }
 
 

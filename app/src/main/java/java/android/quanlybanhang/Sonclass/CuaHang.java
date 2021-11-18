@@ -1,43 +1,45 @@
 package java.android.quanlybanhang.Sonclass;
 
 public class CuaHang {
-    private String idShop;
+    private String id;
+    private String name;
+    private  String logoUrl;
 
+//
+//    private String idShop;
+//    private String nameShop;
+//    private  String logoUrl;
 
-
-    private String nameShop;
-    private  String logo;
-
-    public CuaHang(String idShop, String logo,String nameShop) {
-        this.idShop = idShop;
-        this.logo = logo;
-        this.nameShop=nameShop;
+    public CuaHang(String id, String logoUrl,String name) {
+        this.id = id;
+        this.logoUrl = logoUrl;
+        this.name =name;
     }
 
     public CuaHang() {
     }
 
-    public String getIdShop() {
-        return idShop;
+    public String getId() {
+        return id;
     }
 
-    public void setIdShop(String idShop) {
-        this.idShop = idShop;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getLogo() {
-        return logo;
+    public String getLogoUrl() {
+        return logoUrl;
     }
 
-    public void setLogo(String logo) {
-        this.logo = logo;
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
-    public String getNameShop() {
-        return nameShop;
+    public String getName() {
+        return name;
     }
 
-    public void setNameShop(String nameShop) {
-        this.nameShop = nameShop;
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

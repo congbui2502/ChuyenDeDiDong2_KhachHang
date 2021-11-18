@@ -1,228 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+
+xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+android:orientation="horizontal"
+android:layout_width="match_parent"
+app:cardCornerRadius="10dp"
+android:layout_height="140dp"
+android:layout_margin="15dp">
+
+<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-     android:clipChildren= "false"
-     android:clipToPadding= "false"
-    app:cardCornerRadius="8dp"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3">
+        <ImageView
+            android:id="@+id/imgRecy3"
 
-
-    android:layout_marginTop="10dp"
-    android:layout_marginEnd="10dp">
-
-    <com.ramotion.foldingcell.FoldingCell
-
-        android:id="@+id/folding_cell"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <FrameLayout
+            android:scaleType="fitXY"
             android:layout_width="match_parent"
-            android:visibility="gone"
-            android:background="@color/gray"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="300dp">
+    </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="5"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="7"
+        android:background="@color/xam"
+        android:paddingLeft="10dp"
 
-                    android:orientation="horizontal">
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvHagtag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="diving"
+            android:textSize="15sp"
+            android:textColor="@color/blue"
+            android:layout_marginTop="10dp"/>
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="5"
-                        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvTittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The latest in scuba diving news "
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
 
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:cardCornerRadius="8dp">
-                            <ImageView
-                                android:id="@+id/imgspFC"
-                                android:layout_width="match_parent"
+            android:layout_marginTop="10dp"/>
 
-                                android:scaleType="fitXY"
-                                android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvDesscription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The latest in scuba diving news "
+            android:textStyle="normal"
+            android:textColor="@color/den_nhat"
+            android:textSize="15sp"
 
-                            </ImageView>
+            android:layout_marginTop="10dp"/>
 
-                        </androidx.cardview.widget.CardView>
 
 
 
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="5"
+    </LinearLayout>
 
-
-                        android:orientation="vertical">
-                        <TextView
-                            android:id="@+id/tvTenspFC"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:gravity="center"
-                            android:textSize="20sp"
-                            android:text="Ten san pham"/>
-
-                        <TextView
-
-                            android:id="@+id/tvGiaFC"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-
-                            android:textSize="30sp"
-                            android:layout_marginRight="20dp"
-
-                            android:gravity="bottom|end"
-                            android:text="Gia"/>
-
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="5"
-
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:padding="10dp"
-                        android:layout_weight="3">
-                        <TextView
-                            android:id="@+id/tvDescriptionFC"
-                            android:layout_width="match_parent"
-                            android:textSize="15sp"
-                            android:text="Description"
-
-                            android:layout_height="match_parent"/>
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-
-                        android:gravity="end"
-                        android:layout_weight="1">
-
-                        <ImageView
-                            android:id="@+id/imgAddtoCartSanPhamNoiBat"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="20dp"
-                            android:background="@drawable/cart_shopping"
-                            android:src="@drawable/ic_baseline_shopping_cart_24"/>
-
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-
-
-
-
-
-
-
-            </LinearLayout>
-
-        </FrameLayout>
-
-
-
-        <FrameLayout
-            android:id="@+id/cell_title_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/gray"
-                android:paddingTop="10dp">
-                <ImageView
-
-                    android:id="@+id/imgSanPhamNoiBat"
-                    android:layout_margin="10dp"
-
-                    android:layout_width="50dp"
-                    android:scaleType="centerCrop"
-                    android:layout_centerVertical="true"
-                    android:layout_height="50dp"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@+id/imgSanPhamNoiBat">
-
-                    <TextView
-                        android:id="@+id/tvTenSanPhamNoiBat"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:text="tean quan"
-                        android:textColor="@color/green"
-                        android:layout_marginTop="10dp"/>
-
-                    <TextView
-                        android:id="@+id/tvgiaSanPhamNoiBat"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="10sp"
-                        android:text="So mon"
-
-                        android:textColor="@color/green"
-                        android:layout_margin="10dp"/>
-
-
-
-
-
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-        </FrameLayout>
-
-
-
-
-
-
-        ​
-    </com.ramotion.foldingcell.FoldingCell>
-
-
-
-
-
-
-
-
-
+</LinearLayout>
 
 
 

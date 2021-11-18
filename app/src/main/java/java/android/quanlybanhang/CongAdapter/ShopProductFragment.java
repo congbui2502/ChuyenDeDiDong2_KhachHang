@@ -8,17 +8,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -29,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.android.quanlybanhang.R;
+import java.android.quanlybanhang.Sonclass.CuaHang;
 import java.android.quanlybanhang.Sonclass.SanPham;
 import java.android.quanlybanhang.Activity.KhachHangActivity;
 import java.util.ArrayList;
@@ -49,14 +51,21 @@ public class ShopProductFragment extends Fragment  {
     private boolean isExpanded=true;
     private KhachHangActivity khachHangActivity;
     private Context context;
-
+    private ImageView imgShop;
     private ShopProductAdapter loaiTraiAdapter;
     private Shop_Adapter shop_adapter;
     private String Shop_Name="Highland";
+    private CuaHang cuaHang;
+    private String id_shop= "";
+    private String logoUrl="";
 
-    public ShopProductFragment(KhachHangActivity mainActivity, Context context) {
+    public ShopProductFragment(KhachHangActivity mainActivity, Context context, QuanNoiBatAdapter.getdata getdata) {
             this.khachHangActivity =mainActivity;
             this.context=context;
+            this.cuaHang=getdata.getData();
+            this.id_shop=cuaHang.getId();
+            this.Shop_Name=cuaHang.getName();
+            this.logoUrl= cuaHang.getLogoUrl();
     }
 
 
@@ -86,11 +95,16 @@ public class ShopProductFragment extends Fragment  {
 
         collapsingToolbarLayout=view.findViewById(R.id.CollapsingToolbarLayout);
         toolbar=view.findViewById(R.id.toolBar);
-
+        imgShop=view.findViewById(R.id.imgShop);
 
         fabAdd=view.findViewById(R.id.FloatingActionButton);
         recyProduct=view.findViewById(R.id.recyShopproduct);
         recyLoaiSP=view.findViewById(R.id.recyLoaisanPham);
+        Glide.with(context).load(logoUrl).into(imgShop);
+
+        Log.d("abc",logoUrl+" cdc");
+        Log.d("abc",id_shop+" cdc");
+
         getloaiDoUong();
 
     }
@@ -177,6 +191,7 @@ public class ShopProductFragment extends Fragment  {
     {
 
         collapsingToolbarLayout.setTitle(Shop_Name);
+        collapsingToolbarLayout.setExpandedTitleColor(R.color.black);
 
 
         Bitmap bitmap= BitmapFactory.decodeResource(getResources(), R.drawable.background);
@@ -209,15 +224,17 @@ public class ShopProductFragment extends Fragment  {
     private List<SanPham> getListproduct(String s)
     {
                 dsSanPhamTheoLoai=new ArrayList<>();
-            String id_shop= khachHangActivity.getShop_Id();
+
             List<SanPham> sanPhams=new ArrayList<>();
-            mReference.child(id_shop).child("sanpham").child(s).addChildEventListener(new ChildEventListener() {
+            mReference.child("cuaHang").child(id_shop).child("sanpham").child(s).addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                     SanPham sanPham=snapshot.getValue(SanPham.class);
                     sanPhams.add(sanPham);
+
                     dsSanPhamTheoLoai.add((sanPham));
                     loaiTraiAdapter.notifyDataSetChanged();
+                    Toast.makeText(context,dsSanPhamTheoLoai.size()+"123",Toast.LENGTH_SHORT).show();
                     Log.d("CCC",sanPhams.size()+"abc");
 
                 }
@@ -226,17 +243,14 @@ public class ShopProductFragment extends Fragment  {
                 public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
                 }
-
                 @Override
                 public void onChildRemoved(@NonNull DataSnapshot snapshot) {
 
                 }
-
                 @Override
                 public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
@@ -252,9 +266,9 @@ public class ShopProductFragment extends Fragment  {
 
     private void getloaiDoUong()
     {
-        String id_shop= khachHangActivity.getShop_Id();
 
-        mReference.child(id_shop).child("sanpham").addChildEventListener(new ChildEventListener() {
+
+        mReference.child("cuaHang").child(id_shop).child("sanpham").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 String bien="";

@@ -10,12 +10,17 @@ public class SanPham {
     private String imgProduct;
     private String nhomsanpham;
     private int soluong;
-    private boolean isAddToCart;
+    private boolean addToCart;
+    private long giamGia;
+    private String idCuaHang;
+    private String tittle;
+
 
     public SanPham() {
     }
 
-    public SanPham(String imgProduct, String chitiet, long giaBan, long giaNhap, String nameProduct, String nhomsanpham, int soluong,boolean isAddToCart) {
+    public SanPham(String imgProduct, String chitiet, long giaBan, long giaNhap, String nameProduct,
+                   String nhomsanpham, int soluong,boolean addToCart) {
         this.chitiet = chitiet;
         this.giaBan = giaBan;
         this.giaNhap = giaNhap;
@@ -23,12 +28,46 @@ public class SanPham {
         this.nhomsanpham = nhomsanpham;
         this.soluong = soluong;
         this.imgProduct = imgProduct;
-        this.isAddToCart=false;
+        this.addToCart =false;
     }
 
 
+    public SanPham(String chitiet, long giaBan, String nameProduct, String imgProduct,
+                   String nhomsanpham, int soluong, long giamGia, String idCuaHang, String tittle) {
+        this.chitiet = chitiet;
+        this.giaBan = giaBan;
+        this.nameProduct = nameProduct;
+        this.imgProduct = imgProduct;
+        this.nhomsanpham = nhomsanpham;
+        this.soluong = soluong;
+        this.giamGia = giamGia;
+        this.idCuaHang = idCuaHang;
+        this.tittle = tittle;
+    }
 
+    public long getGiamGia() {
+        return giamGia;
+    }
 
+    public void setGiamGia(long giamGia) {
+        this.giamGia = giamGia;
+    }
+
+    public String getIdCuaHang() {
+        return idCuaHang;
+    }
+
+    public void setIdCuaHang(String idCuaHang) {
+        this.idCuaHang = idCuaHang;
+    }
+
+    public String getTittle() {
+        return tittle;
+    }
+
+    public void setTittle(String tittle) {
+        this.tittle = tittle;
+    }
 
     public String getChitiet() {
         return chitiet;
@@ -88,11 +127,11 @@ public class SanPham {
 
 
     public boolean isAddToCart() {
-        return isAddToCart;
+        return addToCart;
     }
 
     public void setAddToCart(boolean addToCart) {
-        isAddToCart = addToCart;
+        this.addToCart = addToCart;
     }
 
 }

@@ -5,47 +5,73 @@ public class KhuyenMai {
     private String idCuahang;
     private int phanTramKhuyenMai;
     private int giaDeDuocKhuyenMai;
-    private String thoiGianBatDau;
-    private String thoiGianKetThuc;
     private int loaiKhuyenmai;
+    private  String tenQuanHuyen;
+    private String mota;
 
 
-    public KhuyenMai(String idCuahang, int phanTramKhuyenMai, int giaDeDuocKhuyenMai, String thoiGianBatDau, String thoiGianKetThuc) {
-        this.idCuahang = idCuahang;
-        this.phanTramKhuyenMai = phanTramKhuyenMai;
-        this.giaDeDuocKhuyenMai = giaDeDuocKhuyenMai;
-        this.thoiGianBatDau = thoiGianBatDau;
-        this.thoiGianKetThuc = thoiGianKetThuc;
-    }
-
-    public KhuyenMai(String idCuahang, int phanTramKhuyenMai, int giaDeDuocKhuyenMai, String thoiGianBatDau, String thoiGianKetThuc, int loaiKhuyenmai) {
-        this.idCuahang = idCuahang;
-        this.phanTramKhuyenMai = phanTramKhuyenMai;
-        this.giaDeDuocKhuyenMai = giaDeDuocKhuyenMai;
-        this.thoiGianBatDau = thoiGianBatDau;
-        this.thoiGianKetThuc = thoiGianKetThuc;
-        this.loaiKhuyenmai = loaiKhuyenmai;
-    }
 
     public KhuyenMai() {
     }
 
-    public KhuyenMai(String idCuahang, int phanTramKhuyenMai, int giaDeDuocKhuyenMai) {
+    public KhuyenMai(String idCuahang, int phanTramKhuyenMai, int giaDeDuocKhuyenMai, int loaiKhuyenmai, String mota) {
         this.idCuahang = idCuahang;
         this.phanTramKhuyenMai = phanTramKhuyenMai;
         this.giaDeDuocKhuyenMai = giaDeDuocKhuyenMai;
+        this.loaiKhuyenmai = loaiKhuyenmai;
+        this.mota = mota;
     }
 
-    public KhuyenMai(int loaiKhuyenmai,int phanTramKhuyenMai, int giaDeDuocKhuyenMai) {
-        this.phanTramKhuyenMai = phanTramKhuyenMai;
+    public KhuyenMai(String idCuahang, int giaDeDuocKhuyenMai, int loaiKhuyenmai, String tenQuanHuyen, String mota) {
+        this.idCuahang = idCuahang;
         this.giaDeDuocKhuyenMai = giaDeDuocKhuyenMai;
         this.loaiKhuyenmai = loaiKhuyenmai;
+        this.tenQuanHuyen = tenQuanHuyen;
+        this.mota = mota;
     }
 
-    public KhuyenMai(int phanTramKhuyenMai, int giaDeDuocKhuyenMai ) {
-        this.phanTramKhuyenMai = phanTramKhuyenMai;
-        this.giaDeDuocKhuyenMai = giaDeDuocKhuyenMai;
+    //
+//    public KhuyenMai(String idCuahang, int phanTramKhuyenMai, int giaDeDuocKhuyenMai) {
+//        this.idCuahang = idCuahang;
+//        this.phanTramKhuyenMai = phanTramKhuyenMai;
+//        this.giaDeDuocKhuyenMai = giaDeDuocKhuyenMai;
+//    }
+//
+//    public KhuyenMai(int loaiKhuyenmai,int phanTramKhuyenMai, int giaDeDuocKhuyenMai) {
+//        this.phanTramKhuyenMai = phanTramKhuyenMai;
+//        this.giaDeDuocKhuyenMai = giaDeDuocKhuyenMai;
+//        this.loaiKhuyenmai = loaiKhuyenmai;
+//    }
+//
+//    public KhuyenMai(int phanTramKhuyenMai, int giaDeDuocKhuyenMai ) {
+//        this.phanTramKhuyenMai = phanTramKhuyenMai;
+//        this.giaDeDuocKhuyenMai = giaDeDuocKhuyenMai;
+//
+//    }
+//
+//    public KhuyenMai(String idCuahang, int giaDeDuocKhuyenMai, int loaiKhuyenmai, String tenQuanHuyen) {
+//        this.idCuahang = idCuahang;
+//        this.giaDeDuocKhuyenMai = giaDeDuocKhuyenMai;
+//        this.loaiKhuyenmai = loaiKhuyenmai;
+//        this.tenQuanHuyen = tenQuanHuyen;
+//    }
+//
 
+
+    public String getMota() {
+        return mota;
+    }
+
+    public void setMota(String mota) {
+        this.mota = mota;
+    }
+
+    public String getTenQuanHuyen() {
+        return tenQuanHuyen;
+    }
+
+    public void setTenQuanHuyen(String tenQuanHuyen) {
+        this.tenQuanHuyen = tenQuanHuyen;
     }
 
     public int getLoaiKhuyenmai() {
@@ -64,21 +90,6 @@ public class KhuyenMai {
         this.idCuahang = idCuahang;
     }
 
-    public String getThoiGianBatDau() {
-        return thoiGianBatDau;
-    }
-
-    public void setThoiGianBatDau(String thoiGianBatDau) {
-        this.thoiGianBatDau = thoiGianBatDau;
-    }
-
-    public String getThoiGianKetThuc() {
-        return thoiGianKetThuc;
-    }
-
-    public void setThoiGianKetThuc(String thoiGianKetThuc) {
-        this.thoiGianKetThuc = thoiGianKetThuc;
-    }
 
     public int getPhanTramKhuyenMai() {
         return phanTramKhuyenMai;

@@ -1,5 +1,6 @@
 package java.android.quanlybanhang.CongAdapter;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,10 +8,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.android.quanlybanhang.Activity.KhachHangActivity;
 import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.SanPham;
 import java.util.List;
@@ -18,6 +22,8 @@ import java.util.List;
 public class SanPhamNoiBatAdapter extends RecyclerView.Adapter<SanPhamNoiBatAdapter.TraiViewHolder>{
     private List<SanPham> trais;
     private IclickAddToCartListener iclickAddToCartListener;
+    private KhachHangActivity activity;
+
 
     public interface IclickAddToCartListener{
         void onClickAddToCart(ImageView imageToCart,SanPham trai);
@@ -26,9 +32,18 @@ public class SanPhamNoiBatAdapter extends RecyclerView.Adapter<SanPhamNoiBatAdap
 
 
 
-    public void setData(List<SanPham> list, IclickAddToCartListener listener)
+    public void setData(KhachHangActivity activity,List<SanPham> list, IclickAddToCartListener listener)
     {
+        this.activity=activity;
         this.iclickAddToCartListener=listener;
+        this.trais=list;
+        notifyDataSetChanged();
+    }
+
+
+    public void setData1(KhachHangActivity activity,List<SanPham> list )
+    {
+        this.activity=activity;
         this.trais=list;
         notifyDataSetChanged();
     }
@@ -49,33 +64,23 @@ public class SanPhamNoiBatAdapter extends RecyclerView.Adapter<SanPhamNoiBatAdap
             return;
         }
 
-        holder.textViewSanPhamNoiBat.setText(trai.getNameProduct());
+        holder.tvHagtag.setText(trai.getNameProduct());
 //        holder.imageViewSanPhamNoiBat.setBackgroundResource(trai.getImgProduct());
         Picasso.get().load(trai.getImgProduct()).into(holder.imageViewSanPhamNoiBat);
-        holder.textViewgiaSPNoiBat.setText(trai.getGiaBan()+" VND");
-
-        if(trai.isAddToCart())
-        {
-            holder.imgaddSanPhamNoiBat.setBackgroundResource(R.drawable.cart_unshopping);
-
-        }
-        else {
-            holder.imgaddSanPhamNoiBat.setBackgroundResource(R.drawable.cart_shopping);
-        }
-
-        holder.imgaddSanPhamNoiBat.setOnClickListener(new View.OnClickListener() {
+        holder.imgaddSanPhamNoiBat.setText(trai.getGiaBan()+" VND");
+        holder.textViewgiaSPNoiBat.setText(trai.getChitiet());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(!trai.isAddToCart())
-                {
-                    iclickAddToCartListener.onClickAddToCart(holder.imgaddSanPhamNoiBat,trai);
-                }
-
-
-
+                ChiTietFragment fragment=new ChiTietFragment();
+                fragment.setData(trai);
+                FragmentTransaction transaction= activity.getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container,fragment);
+                transaction.addToBackStack("");
+                transaction.commit();
             }
         });
+
 
 
     }
@@ -93,16 +98,18 @@ public class SanPhamNoiBatAdapter extends RecyclerView.Adapter<SanPhamNoiBatAdap
     public class TraiViewHolder extends RecyclerView.ViewHolder{
 
         private ImageView imageViewSanPhamNoiBat;
-        private TextView textViewSanPhamNoiBat;
+        private TextView tvHagtag;
         private TextView textViewgiaSPNoiBat;
-        private ImageView imgaddSanPhamNoiBat;
+        private TextView imgaddSanPhamNoiBat;
+        private CardView cardView;
 
         public TraiViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageViewSanPhamNoiBat=itemView.findViewById(R.id.imgSanPhamNoiBat);
-            textViewSanPhamNoiBat=itemView.findViewById(R.id.tvTenSanPhamNoiBat);
-            imgaddSanPhamNoiBat=itemView.findViewById(R.id.imgAddtoCartSanPhamNoiBat);
-            textViewgiaSPNoiBat=itemView.findViewById(R.id.tvgiaSanPhamNoiBat);
+            imageViewSanPhamNoiBat=itemView.findViewById(R.id.imgRecy3);
+            tvHagtag=itemView.findViewById(R.id.tvHagtag);
+            imgaddSanPhamNoiBat=itemView.findViewById(R.id.tvTittle);
+            textViewgiaSPNoiBat=itemView.findViewById(R.id.tvDesscription);
+            cardView=itemView.findViewById(R.id.cardView);
         }
     }
 }

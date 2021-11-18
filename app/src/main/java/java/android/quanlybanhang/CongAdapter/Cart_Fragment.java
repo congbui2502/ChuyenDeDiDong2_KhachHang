@@ -36,11 +36,13 @@ public class Cart_Fragment extends Fragment {
     private CheckBox cbCartFragment;
     private TextView tvCartFragment;
     private Button btnCartFragment;
+    private ProductAdapter.SetPos setPos;
 
 
-
-
-
+    public void setData(ProductAdapter.SetPos setPos)
+    {
+        this.setPos=setPos;
+    }
     private List<SanPham> quans;
 
     public Cart_Fragment(List<SanPham> quan) {
@@ -101,7 +103,7 @@ public class Cart_Fragment extends Fragment {
             }
 
 
-        });
+        },setPos);
 
         recyclerProduct.setAdapter(productAdapter);
 
@@ -193,8 +195,6 @@ public class Cart_Fragment extends Fragment {
 //
 //
 //        recyclerViewHistory.setAdapter(history_adapter);
-
-
 
 
 

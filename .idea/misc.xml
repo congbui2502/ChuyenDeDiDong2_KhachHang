@@ -3,6 +3,34 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable-hdpi/edittext_style.xml" value="0.23958333333333334" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable-hdpi/ic_baseline_search_24.xml" value="0.23958333333333334" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable-hdpi/new_style.xml" value="0.23958333333333334" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable-hdpi/style_indicator.xml" value="0.15572916666666667" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable-xhdpi/ic_baseline_message_24.xml" value="0.2890625" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable-xhdpi/person.xml" value="0.16510416666666666" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable/bg_indicator3.xml" value="0.2890625" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable/cart_shopping.xml" value="0.1" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable/chitiet_sp_style.xml" value="0.2890625" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/autorun_viewpager2.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/cart_fragment.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/chitietsanpham_layout.xml" value="0.15572916666666667" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/donga_bank_notification.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/donga_bank_notification_max.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/donhang_fragment.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/donhang_recy.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/home_fragment.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/item_khuyenmai.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/item_quangcao.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/item_search_layout.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/khachhang_activity.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/loaitrai.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/quannoibat.xml" value="0.2234375" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/sanphamcuahang_layout.xml" value="0.2234375" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/sanphamnoibat.xml" value="0.21458333333333332" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/search_fragment.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/shop_product.xml" value="0.1859375" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/test.xml" value="0.1484375" />
         <entry key="..\:/AndroidStudio/Thach (1)/app/src/main/res/layout/activity_image_upload.xml" value="0.24791666666666667" />
         <entry key="..\:/AndroidStudio/Thach (1)/app/src/main/res/layout/cart_fragment.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/Thach (1)/app/src/main/res/layout/cart_product.xml" value="0.25" />

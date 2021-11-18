@@ -35,13 +35,15 @@ public class CustomDialogKhuyanMai extends Dialog implements
     private FirebaseStorage mStorage;
     private DatabaseReference mReference;
     private KhuyenMaiAdapter adapter;
+    private String idCuaHang;
 
 
     private KhuyenMaiAdapter.setTvKhuyenMai tvKhuyenMai;
 
-    public void setData(KhuyenMaiAdapter.setTvKhuyenMai tvKhuyenMai)
+    public void setData(KhuyenMaiAdapter.setTvKhuyenMai tvKhuyenMai,String idCuaHang)
     {
         this.tvKhuyenMai=tvKhuyenMai;
+        this.idCuaHang=idCuaHang;
     }
 
 
@@ -92,7 +94,7 @@ public class CustomDialogKhuyanMai extends Dialog implements
 
     private  void getData()
     {
-        mReference =FirebaseDatabase.getInstance().getReference().child("khuyenmai");
+        mReference =FirebaseDatabase.getInstance().getReference().child("khuyenmai").child(idCuaHang);
 
         mReference.addChildEventListener(new ChildEventListener() {
             @Override

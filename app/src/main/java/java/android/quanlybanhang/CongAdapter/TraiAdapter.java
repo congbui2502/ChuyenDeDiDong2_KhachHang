@@ -1,9 +1,13 @@
 package java.android.quanlybanhang.CongAdapter;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.android.quanlybanhang.Activity.KhachHangActivity;
 import java.android.quanlybanhang.R;
@@ -31,7 +36,7 @@ public class TraiAdapter extends RecyclerView.Adapter<TraiAdapter.TraiViewHolder
     @NonNull
     @Override
     public TraiViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.traidep,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_quangcao,parent,false);
         return new TraiViewHolder(view);
     }
 
@@ -41,20 +46,30 @@ public class TraiAdapter extends RecyclerView.Adapter<TraiAdapter.TraiViewHolder
 
         if (trai==null)
         {
-
             return;
         }
 
-        holder.textView.setText(trai.getNameProduct());
-//        holder.imageView.setImageResource(trai.getImgProduct());
-        Picasso.get().load(trai.getImgProduct()).into(holder.imageView);
 
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
+//        holder.imageView.setImageResource(trai.getImgProduct());
+        Picasso.get().load(trai.getImgProduct()).into(new Target() {
             @Override
-            public void onClick(View v) {
-                activity.getSupportFragmentManager().popBackStack();
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                holder.lineBG.setBackground(new BitmapDrawable(activity.getApplicationContext().getResources(),bitmap));
+            }
+
+            @Override
+            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
             }
         });
+
+       holder.tvTrending.setText(trai.getNameProduct());
+       holder.tvDescription.setText(trai.getChitiet());
 
     }
 
@@ -70,13 +85,18 @@ public class TraiAdapter extends RecyclerView.Adapter<TraiAdapter.TraiViewHolder
 
     public class TraiViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView imageView;
-        private TextView textView;
+        private LinearLayout lineBG;
+        private TextView tvTrending,tvDescription;
+
+
 
         public TraiViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView=itemView.findViewById(R.id.imgTrai);
-            textView=itemView.findViewById(R.id.tvName);
+            lineBG=itemView.findViewById(R.id.lineBG);
+            tvDescription=itemView.findViewById(R.id.tvDescription);
+            tvTrending=itemView.findViewById(R.id.tvTrending);
+
+
         }
     }
 }

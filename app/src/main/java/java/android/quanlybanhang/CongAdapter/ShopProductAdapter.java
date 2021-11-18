@@ -25,7 +25,6 @@ public class ShopProductAdapter extends RecyclerView.Adapter<ShopProductAdapter.
         void onClickAddToCart(ImageView imageToCart,SanPham trai);
 
     }
-
     public void setData(List<SanPham> list)
     {
         this.trais=list;
@@ -53,25 +52,23 @@ public class ShopProductAdapter extends RecyclerView.Adapter<ShopProductAdapter.
 
         Picasso.get().load(trai.getImgProduct()).into( holder.imageViewSanPhamNoiBat);
         holder.textViewgiaSPNoiBat.setText(trai.getGiaBan()+" VND");
+//        holder.foldingCell.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                holder.foldingCell.toggle(false);
+//            }
+//        });
 
-        holder.foldingCell.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.foldingCell.toggle(false);
-            }
-        });
-
-        if(trai.isAddToCart())
-        {
-            holder.imgaddSanPhamNoiBat.setBackgroundResource(R.drawable.cart_unshopping);
-
-
-        }
-        else {
-            holder.imgaddSanPhamNoiBat.setBackgroundResource(R.drawable.cart_shopping);
-        }
-
-
+//        Picasso.get().load(trai.getImgProduct()).into( holder.imgSMTo);
+//        holder.tvTenSPTo.setText(trai.getNameProduct());
+//        holder.tvGiaTo.setText(trai.getGiaBan()+" VND");
+//        holder.tvDesTo.setText(trai.getChitiet());
+//        holder.tvDatmuaTo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
 
     }
@@ -86,21 +83,28 @@ public class ShopProductAdapter extends RecyclerView.Adapter<ShopProductAdapter.
         return 0;
     }
 
-    public class TraiViewHolder extends RecyclerView.ViewHolder{
+    public class TraiViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView imageViewSanPhamNoiBat;
-        private TextView textViewSanPhamNoiBat;
-        private TextView textViewgiaSPNoiBat;
-        private ImageView imgaddSanPhamNoiBat;
         private FoldingCell foldingCell;
+        private ImageView imageViewSanPhamNoiBat,imgSMTo;
+        private TextView textViewSanPhamNoiBat,tvTenSPTo,tvGiaTo,tvDesTo,tvDatmuaTo;
+        private TextView textViewgiaSPNoiBat;
+
+
 
         public TraiViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageViewSanPhamNoiBat=itemView.findViewById(R.id.imgSanPhamNoiBat);
-            textViewSanPhamNoiBat=itemView.findViewById(R.id.tvTenSanPhamNoiBat);
-            imgaddSanPhamNoiBat=itemView.findViewById(R.id.imgAddtoCartSanPhamNoiBat);
-            textViewgiaSPNoiBat=itemView.findViewById(R.id.tvgiaSanPhamNoiBat);
+            imageViewSanPhamNoiBat=itemView.findViewById(R.id.imgRecy3);
+            textViewSanPhamNoiBat=itemView.findViewById(R.id.tvHagtag);
+
+            textViewgiaSPNoiBat=itemView.findViewById(R.id.tvDesscription);
+            imgSMTo=itemView.findViewById(R.id.imgSP);
+            tvTenSPTo=itemView.findViewById(R.id.tvTensp);
+            tvGiaTo=itemView.findViewById(R.id.tvGia);
+            tvDesTo=itemView.findViewById(R.id.tvDescription);
+            tvDatmuaTo=itemView.findViewById(R.id.tvDatmua);
             foldingCell=itemView.findViewById(R.id.folding_cell);
+
 
         }
     }

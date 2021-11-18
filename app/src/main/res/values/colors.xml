@@ -7,7 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
+    <color name="xam">#B3B4B5</color>
     <color name="vang">#FFEB3B</color>
     <color name="den_nhat">#666666</color>
     <color name="hong_nhat">#FBEFEF</color>
@@ -23,5 +23,7 @@
     <color name="gray_nhat">#CCCCCC</color>
     <color name="green_dam">#088A08</color>
     <color name="trans">#00000000 </color>
-
+    <color name="first_edt">#5d8cfe</color>
+    <color name="last_edt">#3ea6fd</color>
+    <color name="xanh_dam">#0A45B8</color>
 </resources>
