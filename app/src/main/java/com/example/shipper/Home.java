@@ -1,6 +1,8 @@
 package com.example.shipper;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,13 +25,6 @@ public class Home extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ListView listview;
-        ArrayList<DonHang> arrayList;
-        DonHangAdapter adapter;
-
-
-        //listview.setAdapter(adapter);
-
         viewPager = findViewById(R.id.viewpaper);
         //viewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
         tabLayout = findViewById(R.id.tablayout);
@@ -39,4 +34,12 @@ public class Home extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menus,menu);
+        return true;
+    }
+
+
 }

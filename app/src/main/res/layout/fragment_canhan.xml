@@ -45,6 +45,7 @@
                     android:gravity="center"
                     android:background="@drawable/boder"
                     android:textStyle="bold"
+                    android:textColor="@color/xanh"
                     android:layout_gravity="center_horizontal"></TextView>
             </LinearLayout>
             <LinearLayout
@@ -58,11 +59,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:textStyle="bold"
                     android:id="@+id/tv_hoten"
                     android:gravity="center"
                     android:background="@drawable/boder"
+                    android:textColor="@color/xanh"
                     android:layout_gravity="center_horizontal"></TextView>
             </LinearLayout>
             <LinearLayout
@@ -81,6 +83,7 @@
                     android:textStyle="bold"
                     android:gravity="center"
                     android:background="@drawable/boder"
+                    android:textColor="@color/xanh"
                     android:layout_gravity="center_horizontal"></TextView>
             </LinearLayout>
             <LinearLayout
@@ -100,6 +103,7 @@
                     android:textStyle="bold"
                     android:gravity="center"
                     android:background="@drawable/boder"
+                    android:textColor="@color/xanh"
                     android:layout_gravity="center_horizontal"></TextView>
             </LinearLayout>
         </LinearLayout>
@@ -125,7 +129,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Đổi mật khẩu"
-
+            android:textColor="@color/black"
             android:gravity="center_vertical"
             android:textSize="30dp"
             android:drawableLeft="@drawable/iconchangepw"
@@ -145,6 +149,7 @@
             android:paddingLeft="5dp"
             android:text="Đăng xuất"
             android:textSize="30dp"
+            android:textColor="@color/black"
             android:textStyle="bold"></TextView>
     </LinearLayout>
     <LinearLayout
@@ -162,6 +167,7 @@
             android:paddingLeft="5dp"
             android:text="Thoát"
             android:textSize="30dp"
+            android:textColor="@color/black"
             android:textStyle="bold"></TextView>
 
     </LinearLayout>

@@ -132,16 +132,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:gravity="center"
                 >
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:drawableLeft="@drawable/iconphone"
-                    android:gravity="center_vertical"
-                    android:text="Điện thoại"
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/phoneicon"
+                    android:id="@+id/btn_call"
+
                     android:paddingLeft="20dp"
-                    android:textSize="20dp"></TextView>
+                    android:textSize="20dp"></Button>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -163,50 +164,64 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Ghi chú: "
-                android:id="@+id/ghiChu"
-                android:background="@drawable/boder"></TextView>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-
+                android:layout_weight="7"
                 >
-                <TextView
+                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:drawableLeft="@drawable/iconxanh"
-                    android:id="@+id/diemnhan"
-                    android:text="Điểm nhận hàng"
-                    android:textSize="12dp"
-                    android:gravity="center_vertical"
-                    android:textStyle="bold">
-                </TextView>
+                    android:background="@drawable/trackorder"></ImageView>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                >
-                <TextView
+                android:orientation="vertical">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:drawableLeft="@drawable/iconxanhla"
-                    android:text="Điểm giao hàng"
-                    android:textSize="12dp"
-                    android:textStyle="bold"
-                    android:id="@+id/diemgiao"
-                    android:gravity="center_vertical"></TextView>
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/diemnhan"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="Điểm nhận hàng"
+                        android:textSize="14dp"
+                        android:textStyle="bold"></TextView>
+
+                    <ImageView
+                        android:layout_width="125dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:background="@drawable/location"></ImageView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/diemgiao"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        android:gravity="center_vertical"
+                        android:text="Điểm giao hàng"
+                        android:textSize="14dp"
+                        android:textStyle="bold"></TextView>
+
+                    <ImageView
+                        android:layout_width="125dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:background="@drawable/location"></ImageView>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout

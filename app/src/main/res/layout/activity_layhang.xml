@@ -175,38 +175,49 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-
+                android:layout_weight="7"
                 >
-                <TextView
+                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:drawableLeft="@drawable/iconxanh"
-                    android:id="@+id/diemnhan"
-                    android:text="Điểm nhận hàng"
-                    android:textSize="12dp"
-                    android:gravity="center_vertical"
-                    android:textStyle="bold">
-                </TextView>
+                    android:background="@drawable/trackorder"></ImageView>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                >
-                <TextView
+                android:orientation="vertical">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:drawableLeft="@drawable/iconxanhla"
-                    android:text="Điểm giao hàng"
-                    android:textSize="12dp"
-                    android:textStyle="bold"
-                    android:id="@+id/diemgiao"
-                    android:gravity="center_vertical"></TextView>
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/diemnhan"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="Điểm nhận hàng"
+                        android:textSize="14dp"
+                        android:textStyle="bold"></TextView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/diemgiao"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="Điểm giao hàng"
+                        android:textSize="14dp"
+                        android:textStyle="bold"></TextView>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout

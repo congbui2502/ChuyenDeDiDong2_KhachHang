@@ -20,18 +20,19 @@ public class LichSuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chitietlichsu_activity);
         Anhxa();
-//        btnquaylai.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(LichSuActivity.this, Home.class);
-//                startActivity(intent);
-//            }
-//        });
+        btnquaylai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LichSuActivity.this, Home.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
 
     private void Anhxa(){
+        btnquaylai = (Button) findViewById(R.id.btn_quaylai);
         tvdiemnhan = (TextView) findViewById(R.id.diemnhan);
         tvdiemgiao = (TextView) findViewById(R.id.diemgiao);
         tvtonggia = (TextView) findViewById(R.id.tonggia);
@@ -45,8 +46,8 @@ public class LichSuActivity extends AppCompatActivity {
         history = (History) bundle.getSerializable(HistoryFragment.KEY_LICHSU);
         tvdiemnhan.setText(history.getDiemnhan());
         tvdiemgiao.setText(history.getDiaChi());
-        tvtonggia.setText( history.getThunhap()+"");
-        tvtenkh.setText( history.getTenKhachhang());
+        tvtonggia.setText( history.getDonGia()+"");
+        tvtenkh.setText(history.getTenKhachHang());
         tvsodt.setText(history.getSdtkhachhang());
         tvthunhap.setText(history.getThunhap()+"");
         tvghichu.setText(history.getGhiChu());

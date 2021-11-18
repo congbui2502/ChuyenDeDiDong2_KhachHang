@@ -56,6 +56,17 @@ public class HistoryAdapter extends ArrayAdapter<History> {
         TextView textView6 = view.findViewById(R.id.tv_thoigiangiao);
 
         textView1.setText(history.getTrangthai()+"");
+        if (history.getTrangthai()==0){
+            textView1.setText("Đã hủy");
+        }else if (history.getTrangthai()==4){
+            textView1.setText("Thành công");
+        }else {
+            textView1.setText("Thất bại");
+        }
+
+
+
+
         textView2.setText(history.getDiemnhan());
         textView3.setText(history.getDiaChi());
         textView4.setText(history.getTime());

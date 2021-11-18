@@ -14,7 +14,7 @@ public class History implements Serializable {
 
     private List<SanPham> sanpham;
 
-    private String tenKhachhang;
+    private String tenKhachHang;
 
     private String sdtkhachhang;
 
@@ -48,7 +48,7 @@ public class History implements Serializable {
         this.diemnhan = diemnhan;
         this.diaChi = diaChi;
         this.donGia = donGia;
-        this.tenKhachhang = tenKhachhang;
+        this.tenKhachHang = tenKhachhang;
         this.sdtkhachhang = sdtkhachhang;
         this.thunhap = thunhap;
         this.sanpham = sanpham;
@@ -61,8 +61,8 @@ public class History implements Serializable {
         this.trangthai=trangthai;
         this.idKhachhang =idKhachhang;
         this.idDonHang=idDonHang;
-        this.tgNhanDon=tgNhanDon;
-        this.tgHoanThanh=tgHoanThanh;
+//        this.tgNhanDon=tgNhanDon;
+//        this.tgHoanThanh=tgHoanThanh;
     }
     public History() {
 
@@ -108,12 +108,12 @@ public class History implements Serializable {
         this.sanpham = sanpham;
     }
 
-    public String getTenKhachhang() {
-        return tenKhachhang;
+    public String getTenKhachHang() {
+        return tenKhachHang;
     }
 
-    public void setTenKhachhang(String tenKhachhang) {
-        this.tenKhachhang = tenKhachhang;
+    public void setTenKhachHang(String tenKhachHang) {
+        this.tenKhachHang = tenKhachHang;
     }
 
     public String getSdtkhachhang() {

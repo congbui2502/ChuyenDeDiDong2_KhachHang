@@ -3,7 +3,7 @@ package com.example.shipper;
 import java.io.Serializable;
 import java.util.List;
 
-public class DonHang implements Serializable {
+public class DonDaNhan implements Serializable {
     private int trangthai;
 
     private String diemnhan;
@@ -38,7 +38,7 @@ public class DonHang implements Serializable {
 
 
 
-    public DonHang(String diaChi, String diemnhan, long donGia, String tenKhachhang, String sdtkhachhang, long thunhap,
+    public DonDaNhan(String diaChi, String diemnhan, long donGia, String tenKhachhang, String sdtkhachhang, long thunhap,
                    List<SanPham> sanpham, String ghiChu, String time, String idQuan, String shipper, String phoneShipper,
                    String key, int trangthai, String idKhachhang,String idDonHang ) {
         this.diemnhan = diemnhan;
@@ -59,7 +59,7 @@ public class DonHang implements Serializable {
         this.idDonHang=idDonHang;
     }
 
-    public DonHang() {
+    public DonDaNhan() {
 
     }
 

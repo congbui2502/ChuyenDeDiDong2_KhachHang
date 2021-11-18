@@ -75,6 +75,8 @@ public class DangkyActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.btn_signup:
                 signup();
+                Intent intent1 = new Intent(DangkyActivity.this, DangNhapActivity.class);
+                startActivity(intent1);
                 break;
         }
     }

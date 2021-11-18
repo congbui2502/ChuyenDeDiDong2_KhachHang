@@ -24,7 +24,8 @@
                 android:text="Tên khách hàng"
                 android:id="@+id/tenKH"
                 android:gravity="center"
-
+                android:textStyle="bold"
+                android:textSize="20dp"
                 android:background="@drawable/boder">
 
             </TextView>
@@ -63,16 +64,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
+
                 <TextView
                     android:id="@+id/tv_thunhap"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/boder"
-                    android:gravity="center_vertical"
+                    android:gravity="center"
                     android:text=""
-                    android:textSize="40dp"
+                    android:textSize="18dp"
                     android:textStyle="bold"></TextView>
 
                 <TextView
@@ -81,9 +84,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/boder"
-                    android:gravity="center_vertical"
+                    android:gravity="center"
                     android:text=""
-                    android:textSize="40dp"
+                    android:textSize="18dp"
                     android:textStyle="bold"></TextView>
             </LinearLayout>
         </LinearLayout>
@@ -146,15 +149,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:gravity="center"
                 >
 
                 <TextView
+                    android:id="@+id/sdt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="Số điện thoại"
                     android:textSize="20dp"
                     android:textStyle="bold"
+
                     android:background="@drawable/boder"></TextView>
             </LinearLayout>
         </LinearLayout>
@@ -179,34 +185,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    >
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/trackorder"></ImageView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+                        <TextView
+                            android:id="@+id/diemnhan"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="Điểm nhận hàng"
+                            android:textSize="14dp"
+                            android:textStyle="bold"></TextView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+                        <TextView
+                            android:id="@+id/diemgiao"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="Điểm nhận hàng"
+                            android:textSize="14dp"
+                            android:textStyle="bold"></TextView>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
 
-                >
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:drawableLeft="@drawable/iconxanh"
-                    android:id="@+id/diemnhan"
-                    android:text="Điểm nhận hàng"
-                    android:textSize="14dp"
-                    android:gravity="center_vertical"
-                    android:textStyle="bold">
-                </TextView>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                >
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:drawableLeft="@drawable/iconxanhla"
-                    android:text="Điểm giao hàng"
-                    android:textSize="14dp"
-                    android:id="@+id/diemgiao"
-                    android:textStyle="bold"
-                    android:gravity="center_vertical"></TextView>
-            </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -217,7 +240,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="2">
+                android:layout_weight="2"
+
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    >
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Quay lại"
+                        android:id="@+id/btn_quaylai"
+                        android:background="@drawable/button"
+                        ></Button>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

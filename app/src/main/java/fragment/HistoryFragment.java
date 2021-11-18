@@ -8,8 +8,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,25 +17,20 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.shipper.ChiTietActivity;
-import com.example.shipper.DonHang;
 import com.example.shipper.History;
 import com.example.shipper.LichSuActivity;
 import com.example.shipper.R;
 import com.example.shipper.SanPham;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import adapter.DonHangAdapter;
 import adapter.HistoryAdapter;
 
 
@@ -81,6 +74,7 @@ public class HistoryFragment extends Fragment {
                 bundle.putSerializable(KEY_LICHSU,history);
                 intent.putExtras(bundle);
                 startActivity(intent);
+
             }
         });
         return view;
@@ -104,7 +98,7 @@ public class HistoryFragment extends Fragment {
                         String diaChi = history.getDiaChi();
                         String diemNhan = history.getDiemnhan();
                         long thuNhap = history.getThunhap();
-                        String tenKhachhang = history.getTenKhachhang();
+                        String tenKhachhang = history.getTenKhachHang();
                         String ghiChu = history.getGhiChu();
                         String sdtkhachhang = history.getSdtkhachhang();
                         long donGia = history.getDonGia();
@@ -117,8 +111,7 @@ public class HistoryFragment extends Fragment {
                         int trangthai = history.getTrangthai();
                         String idKhachHang = history.getIdKhachhang();
                         String idDonHang = history.getIdDonHang();
-                        String tgNhanDon = history.getTgNhanDon();
-                        String tgHoanThanh = history.getTgHoanThanh();
+
                         historyActivity = new History(diaChi, diemNhan, donGia, tenKhachhang, sdtkhachhang, thuNhap, sanpham, ghiChu, time,
                                 idQuan, shipper, phoneShipper, key, trangthai, idKhachHang, idDonHang);
 

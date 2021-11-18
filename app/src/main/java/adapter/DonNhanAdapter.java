@@ -1,28 +1,32 @@
 package adapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
+import com.example.shipper.DonDaNhan;
 import com.example.shipper.DonHang;
 import com.example.shipper.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DonHangAdapter extends ArrayAdapter<DonHang> {
+public class DonNhanAdapter extends ArrayAdapter<DonDaNhan> {
 
     private Activity context;
     private int layout;
-    private ArrayList<DonHang> arrayList;
+    private ArrayList<DonDaNhan> arrayList;
 
-    public void setData(List<DonHang> list){
-        this.arrayList= (ArrayList<DonHang>) list;
+    public void setData(List<DonDaNhan> list){
+        this.arrayList= (ArrayList<DonDaNhan>) list;
         notifyDataSetChanged();
     }
-    public DonHangAdapter(Activity context, int layout, ArrayList<DonHang> arrayList) {
+    public DonNhanAdapter(Activity context, int layout, ArrayList<DonDaNhan> arrayList) {
         super(context,layout,arrayList);
         this.context = context;
         this.layout = layout;
@@ -38,21 +42,21 @@ public class DonHangAdapter extends ArrayAdapter<DonHang> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
 
-        view = context.getLayoutInflater().inflate(R.layout.activity_donhang, parent, false);
+        view = context.getLayoutInflater().inflate(R.layout.activity_donnhan, parent, false);
 
-        DonHang donHang = arrayList.get(position);
-        if (donHang!=null){
+        DonDaNhan donDaNhan = arrayList.get(position);
+        if (donDaNhan!=null){
             TextView textView1 = view.findViewById(R.id.trangthai);
             TextView textView2 = view.findViewById(R.id.tv_diemnhan);
             TextView textView3 = view.findViewById(R.id.tv_diemgiao);
             TextView textView4 = view.findViewById(R.id.tv_tonggia);
             TextView textView5= view.findViewById(R.id.tv_thunhap);
 
-            textView1.setText("Chưa nhận đơn");
-            textView2.setText(donHang.getDiemnhan());
-            textView3.setText(donHang.getDiaChi());
-            textView4.setText(donHang.getDonGia()+"đ");
-            textView5.setText(donHang.getThunhap()+"đ");
+            textView1.setText("Đã nhận đơn");
+            textView2.setText(donDaNhan.getDiemnhan());
+            textView3.setText(donDaNhan.getDiaChi());
+            textView4.setText(donDaNhan.getDonGia()+"đ");
+            textView5.setText(donDaNhan.getThunhap()+"đ");
         }
 
 

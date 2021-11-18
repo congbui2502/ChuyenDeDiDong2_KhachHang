@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.shipper">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Shipper">
+        <activity
+            android:name=".DanhanActivity"
+            android:exported="false" />
         <activity android:name=".DangNhapActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,31 +21,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChiTietActivity">
-
-        </activity>
-        <activity android:name=".HoaDonActivity">
-
-        </activity>
-        <activity android:name=".DangkyActivity">
-
-
-        </activity>
-        <activity android:name=".LayHangActivity">
-
-
-        </activity>
-        <activity android:name=".LichSuActivity">
-
-
-        </activity>
-        <activity android:name=".Home">
-
-        </activity>
-
-        <activity android:name=".ForgotPasswordActivity"></activity>
-        <activity android:name=".ImageUploadActivity"></activity>
-
+        <activity android:name=".ChiTietActivity"></activity>
+        <activity android:name=".HoaDonActivity"></activity>
+        <activity android:name=".DangkyActivity"></activity>
+        <activity android:name=".LayHangActivity"></activity>
+        <activity android:name=".LichSuActivity"></activity>
+        <activity android:name=".Home"></activity>
+        <activity android:name=".ForgotPasswordActivity" />
+        <activity android:name=".ImageUploadActivity" />
     </application>
 
 </manifest>

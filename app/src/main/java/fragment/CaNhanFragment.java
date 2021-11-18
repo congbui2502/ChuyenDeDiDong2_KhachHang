@@ -1,5 +1,7 @@
 package fragment;
 
+import static androidx.core.app.ActivityCompat.finishAffinity;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,7 +34,7 @@ public class CaNhanFragment extends Fragment {
     private FirebaseAuth mFirebaseAuth;
 
     private DatabaseReference mDatabase;
-    private TextView tv_name,tv_email,tv_phone,tv_date,tv_dangxuat;
+    private TextView tv_name,tv_email,tv_phone,tv_date,tv_dangxuat,tv_thoat;
     private ImageView avatar;
     public CaNhanFragment() {
         // Required empty public constructor
@@ -47,9 +49,38 @@ public class CaNhanFragment extends Fragment {
         tv_email=view.findViewById(R.id.tv_email);
         tv_phone=view.findViewById(R.id.tv_sdt);
         tv_dangxuat=view.findViewById(R.id.logout);
+        tv_thoat = view.findViewById(R.id.exit);
         DangXuat();
+        Thoat();
         onDataChange();
         return view;
+    }
+
+    private void Thoat(){
+        tv_thoat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_DeviceDefault_Dialog_Alert);
+                builder.setTitle("Thoát");
+                builder.setMessage("Bạn có muốn thoát ứng dụng?");
+                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                    }
+
+
+                });
+                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.show();
+            }
+        });
     }
     private void DangXuat(){
         tv_dangxuat.setOnClickListener(new View.OnClickListener() {

@@ -18,6 +18,26 @@
            android:layout_width="match_parent"
            android:layout_height="match_parent"></ListView>
    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="11"
+        android:padding="5dp">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/btn_danhan"
+            android:background="@drawable/boder"
+            android:text="Đơn đã nhận"></Button>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Đang giao"
+            android:id="@+id/btn_danggiao"
+            android:background="@drawable/boder"></Button>
+    </LinearLayout>
 
 </LinearLayout>

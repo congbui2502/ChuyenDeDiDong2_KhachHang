@@ -2,11 +2,13 @@ package fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -14,14 +16,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shipper.ChiTietActivity;
+import com.example.shipper.DanhanActivity;
 import com.example.shipper.DonHang;
+import com.example.shipper.HoaDonActivity;
+import com.example.shipper.Home;
+import com.example.shipper.LayHangActivity;
 import com.example.shipper.R;
 import com.example.shipper.SanPham;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,10 +47,12 @@ public class HomeFragment extends Fragment {
     public static final String KEY_DIEMGIAO = "DIEMGIAO";
     public static final String KEY_TONGGIA = "TONGGIA";
     public static final String KEY_BUNDLE = "BUNDLE";
-    private TextView tvDiemNhan,tvDiemGiao,tvTongGia;
+    private TextView tvDiemNhan,tvDiemGiao,tvTongGia, tvThuNhap,tvTrangThai;
     private DatabaseReference databaseReference;
     private Context context;
+    private Button btnDaNhanDon;
     ListView listView;
+    private DonHang donHang;
     ArrayList<DonHang> arrayList;
     private DonHangAdapter adapter;
     DonHang donHangActivity = new DonHang();
@@ -54,6 +64,9 @@ public class HomeFragment extends Fragment {
         tvDiemNhan = view.findViewById(R.id.tv_diemnhan);
         tvDiemGiao= view.findViewById(R.id.tv_diemgiao);
         tvTongGia = view.findViewById(R.id.tv_tonggia);
+        tvThuNhap = view.findViewById(R.id.tv_thunhap);
+        tvTrangThai = view.findViewById(R.id.trangthai);
+        btnDaNhanDon = view.findViewById(R.id.btn_danhan);
     }
     @Nullable
 
@@ -62,10 +75,16 @@ public class HomeFragment extends Fragment {
         listView =(ListView) view.findViewById(R.id.lvdonhang);
         AnhXa(view);
         arrayList = new ArrayList<>();
-
          adapter = new DonHangAdapter((Activity) view.getContext(), R.layout.activity_donhang, arrayList);
         listView.setAdapter(adapter);
         getDataFromFirebase();
+        btnDaNhanDon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DanhanActivity.class);
+                startActivity(intent);
+            }
+        });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -79,6 +98,7 @@ public class HomeFragment extends Fragment {
             }
         });
         return view;
+
     }
 
     @Override
@@ -111,6 +131,7 @@ public class HomeFragment extends Fragment {
                         long donGia= donHang.getDonGia();
                         List<SanPham> sanpham = donHang.getSanpham();
                         String time = donHang.getTime();
+                        Log.d("asd",sanpham.size()+"");
                         String idQuan = donHang.getIdQuan();
                         String shipper = donHang.getShipper();
                         String phoneShipper = donHang.getPhoneShipper();
