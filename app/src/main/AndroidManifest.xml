@@ -11,9 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Shipper">
-        <activity
-            android:name=".DanhanActivity"
-            android:exported="false" />
         <activity android:name=".DangNhapActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,14 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChiTietActivity"></activity>
-        <activity android:name=".HoaDonActivity"></activity>
-        <activity android:name=".DangkyActivity"></activity>
-        <activity android:name=".LayHangActivity"></activity>
-        <activity android:name=".LichSuActivity"></activity>
-        <activity android:name=".Home"></activity>
+        <activity android:name=".ChiTietActivity" />
+        <activity android:name=".HoaDonActivity" />
+        <activity android:name=".DangkyActivity" />
+        <activity android:name=".LayHangActivity" />
+        <activity android:name=".LichSuActivity" />
+        <activity android:name=".Home" />
         <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".ImageUploadActivity" />
+        <activity android:name=".DaNhanActivity" />
+        <activity android:name=".DangGiaoActivity" />
     </application>
 
 </manifest>

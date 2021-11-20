@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
@@ -32,7 +33,8 @@ public class HoaDonActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "AndroidExample";
     Button btnnhandon, btnquaylai;
-    TextView tvdiemnhan,tvdiemgiao,tvtonggia,tvtenkh,tvsodt,tvghichu,tvthunhap,tvtensp;
+    TextView tvdiemnhan,tvdiemgiao,tvtonggia,tvtenkh,tvsodt,tvghichu,tvthunhap;
+    ListView tvtensp;
     private DonHang donHang;
     private FirebaseAuth mFirebaseAuth;
     @Override
@@ -166,11 +168,11 @@ public class HoaDonActivity extends AppCompatActivity {
                         Intent intent = new Intent(HoaDonActivity.this, Home.class);
                         mFirebaseAuth=FirebaseAuth.getInstance();
                         String id = mFirebaseAuth.getUid();
-
+                        String date = formatDateS(donHang.getTime());
 //                        String [] keys = donHang.getTime().split(" ");
                         donHang.setTrangthai(3);
                         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-
+                        db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("trangthai").setValue(6);
                         db.child("DonHangOnline").child("DaDatDon").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).setValue(donHang);
                         db.child("DonHangOnline").child("ShipperDaNhan").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).removeValue();
                         db.child("Shipper").child(id).child("lichSuDonOnline").push().setValue(donHang);
@@ -207,7 +209,7 @@ public class HoaDonActivity extends AppCompatActivity {
                         donHang.setTrangthai(4);
                         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
                         String date = formatDateS(donHang.getTime());
-                        db.child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("trangthai").setValue(5);
+                        db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("trangthai").setValue(6);
                         db.child("DonHangOnline").child("ShipperDaGiao").child(donHang.getIdKhachhang()).child(donHang.getKey()).setValue(donHang);
                         db.child("DonHangOnline").child("DaLayHang").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).removeValue();
 
@@ -239,7 +241,7 @@ public class HoaDonActivity extends AppCompatActivity {
         tvsodt = (TextView) findViewById(R.id.sdt);
         tvghichu = (TextView) findViewById(R.id.ghiChu);
         tvthunhap = (TextView) findViewById(R.id.tv_thunhap);
-        tvtensp = (TextView) findViewById(R.id.tenSanPham);
+        tvtensp = (ListView) findViewById(R.id.tenSanPham);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         donHang = (DonHang) bundle.getSerializable(HomeFragment.KEY_DIEMNHAN);

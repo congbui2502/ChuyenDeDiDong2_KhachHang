@@ -21,23 +21,46 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="11"
-        android:padding="5dp">
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/btn_danhan"
-            android:background="@drawable/boder"
-            android:text="Đơn đã nhận"></Button>
+        android:layout_weight="9">
 
-        <Button
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Đang giao"
-            android:id="@+id/btn_danggiao"
-            android:background="@drawable/boder"></Button>
+
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:padding="10dp"
+                android:gravity="center_vertical">
+
+                <Button
+                    android:id="@+id/btn_danhan"
+                    android:layout_width="170dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/boder"
+                    android:text="Đã nhận"></Button>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="10dp">
+
+                <Button
+                    android:id="@+id/btn_danggiao"
+                    android:layout_width="170dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/boder"
+                    android:text="Đang giao"></Button>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

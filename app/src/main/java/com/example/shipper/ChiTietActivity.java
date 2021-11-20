@@ -46,13 +46,15 @@ public class ChiTietActivity extends AppCompatActivity {
     String phone, name;
     private FirebaseAuth mFirebaseAuth;
     private DatabaseReference mDatabase;
-
+    String idShipper;
     ArrayList<SanPham> arrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chitiet);
         Anhxa();
+        mFirebaseAuth=FirebaseAuth.getInstance();
+        idShipper=mFirebaseAuth.getUid();
         arrayList = new ArrayList<>();
        SanPhamAdapter adapter = new SanPhamAdapter(ChiTietActivity.this, R.layout.activity_sanpham, arrayList);
         tvtensp.setAdapter(adapter);
@@ -75,15 +77,15 @@ public class ChiTietActivity extends AppCompatActivity {
                 DatabaseReference db = FirebaseDatabase.getInstance().getReference();
                 String date = formatDateS(donHang.getTime());
 
-                db.child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("shipper").setValue(name);
-                db.child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("phoneShipper").setValue(phone);
-                db.child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("trangthai").setValue(2);
+                db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("shipper").setValue(name);
+                db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("phoneShipper").setValue(phone);
+                db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("trangthai").setValue(2);
                 Log.d("aad",donHang.getTime());
-                db.child("DonHangOnline").child("ShipperDaNhan").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).child("shipper").setValue(name);
-                db.child("DonHangOnline").child("ShipperDaNhan").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).child("phoneShipper").setValue(phone);
-                db.child("DonHangOnline").child("ShipperDaNhan").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).setValue(donHang);
-                db.child("DonHangOnline").child("ShipperDaNhan").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).child("shipper").setValue(name);
-                db.child("DonHangOnline").child("ShipperDaNhan").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).child("phoneShipper").setValue(phone);
+//                db.child("DonHangOnline").child("ShipperDaNhan").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).child("shipper").setValue(name);
+//                db.child("DonHangOnline").child("ShipperDaNhan").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).child("phoneShipper").setValue(phone);
+                db.child("DonHangOnline").child("ShipperDaNhan").child(idShipper).child(donHang.getIdDonHang()).setValue(donHang);
+                db.child("DonHangOnline").child("ShipperDaNhan").child(idShipper).child(donHang.getIdDonHang()).child("shipper").setValue(name);
+                db.child("DonHangOnline").child("ShipperDaNhan").child(idShipper).child(donHang.getIdDonHang()).child("phoneShipper").setValue(phone);
                 db.child("DonHangOnline").child("DaDatDon").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).removeValue();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(HomeFragment.KEY_DIEMNHAN,donHang);

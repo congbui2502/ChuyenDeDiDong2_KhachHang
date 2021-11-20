@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Shipper/app/src/main/res/layout/activity_chitiet.xml" value="0.20416666666666666" />
+        <entry key="..\:/Shipper/app/src/main/res/layout/activity_dang_giao.xml" value="0.14356884057971014" />
         <entry key="..\:/Shipper/app/src/main/res/layout/activity_dangnhap.xml" value="0.20416666666666666" />
         <entry key="..\:/Shipper/app/src/main/res/layout/activity_danhan.xml" value="0.14130434782608695" />
+        <entry key="..\:/Shipper/app/src/main/res/layout/activity_don_giao.xml" value="0.14356884057971014" />
         <entry key="..\:/Shipper/app/src/main/res/layout/activity_donhang.xml" value="0.20416666666666666" />
         <entry key="..\:/Shipper/app/src/main/res/layout/activity_donnhan.xml" value="0.14130434782608695" />
         <entry key="..\:/Shipper/app/src/main/res/layout/activity_hoa_don.xml" value="0.20416666666666666" />

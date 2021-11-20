@@ -23,7 +23,10 @@ public class LayHangActivity extends AppCompatActivity {
     Button btnhuydon, btndalayhang;
     TextView tvdiemnhan,tvdiemgiao,tvtonggia,tvtenkh,tvsodt,tvghichu,tvthunhap;
     private DonHang donHang;
+
     private FirebaseAuth mFirebaseAuth;
+    private DatabaseReference mDatabase;
+    String idShipper;
     ListView tvtensp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,8 @@ public class LayHangActivity extends AppCompatActivity {
         Anhxa();
         ControlButtonHuyDon();
         ControlButtonDaLayHang();
+        mFirebaseAuth= FirebaseAuth.getInstance();
+        idShipper = mFirebaseAuth.getUid();
     }
     private void ControlButtonHuyDon(){
         btnhuydon.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +57,7 @@ public class LayHangActivity extends AppCompatActivity {
                         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
                         db.child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("trangthai").setValue(1);
                         db.child("DonHangOnline").child("DaDatDon").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).setValue(donHang);
-                        db.child("DonHangOnline").child("ShipperDaNhan").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).removeValue();
+                        db.child("DonHangOnline").child("ShipperDaNhan").child(idShipper).child(donHang.getIdDonHang()).removeValue();
                         db.child("Shipper").child(id).child("lichSuDonOnline").push().setValue(donHang);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable(HomeFragment.KEY_DIEMNHAN,donHang);
@@ -102,11 +107,10 @@ public class LayHangActivity extends AppCompatActivity {
                         String [] keys = donHang.getTime().split(" ");
                         donHang.setTrangthai(2);
                         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-
                         String date = formatDateS(donHang.getTime());
-                        db.child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("trangthai").setValue(4);
-                        db.child("DonHangOnline").child("DaLayHang").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).setValue(donHang);
-                        db.child("DonHangOnline").child("ShipperDaNhan").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).removeValue();
+                        db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("trangthai").setValue(5);
+                        db.child("DonHangOnline").child("DaLayHang").child(idShipper).child(donHang.getIdDonHang()).setValue(donHang);
+                        db.child("DonHangOnline").child("ShipperDaNhan").child(idShipper).child(donHang.getIdDonHang()).removeValue();
 //                        db.child("Shipper").child(id).child("lichSuDonOnline").push().setValue(donHang);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable(HomeFragment.KEY_DIEMNHAN,donHang);
@@ -137,6 +141,7 @@ public class LayHangActivity extends AppCompatActivity {
         tvtensp = (ListView) findViewById(R.id.tenSanPham);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
+//        donDaNhan = (DonDaNhan) bundle.getSerializable(DaNhanActivity.KEY_DIEMNHAN);
         donHang = (DonHang) bundle.getSerializable(HomeFragment.KEY_DIEMNHAN);
         Log.d("bbb",donHang.getTenKhachHang());
         tvdiemnhan.setText(donHang.getDiemnhan());
@@ -147,6 +152,13 @@ public class LayHangActivity extends AppCompatActivity {
         tvthunhap.setText(donHang.getThunhap()+"");
         tvghichu.setText(donHang.getGhiChu());
 
+//        tvdiemnhan.setText(donDaNhan.getDiemnhan());
+//        tvdiemgiao.setText(donDaNhan.getDiaChi());
+//        tvtonggia.setText( donDaNhan.getDonGia()+"");
+//        tvtenkh.setText( donDaNhan.getTenKhachHang());
+//        tvsodt.setText(donDaNhan.getSdtkhachhang());
+//        tvthunhap.setText(donDaNhan.getThunhap()+"");
+//        tvghichu.setText(donDaNhan.getGhiChu());
         btndalayhang.setText("Đã lấy hàng");
         btnhuydon.setText("Hủy đơn");
 }

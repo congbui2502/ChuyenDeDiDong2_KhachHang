@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DaNhanActivity">
+    tools:context=".DangGiaoActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -12,7 +12,7 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/lv_danhan"
+            android:id="@+id/lv_danggiao"
             android:layout_weight="1"></ListView>
         <Button
             android:layout_width="match_parent"

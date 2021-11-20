@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.shipper.DonDaNhan;
+
 import com.example.shipper.R;
 import com.example.shipper.SanPham;
 

@@ -227,43 +227,42 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1.07">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1">
 
-                >
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+
                     android:padding="10dp"
-                    >
+                    android:gravity="center_vertical">
+
                     <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="Thất bại"
                         android:id="@+id/btn_thatbai"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:background="@drawable/boder"
-                        ></Button>
-
+                        android:text="Thất bại"></Button>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:padding="10dp"
-                    >
+                    android:padding="10dp">
+
                     <Button
+                        android:id="@+id/btn_hoanthanh"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Hoàn thành"
-                        android:id="@+id/btn_hoanthanh"
                         android:background="@drawable/boder"
-                        ></Button>
+                        android:text="Hoàn thành"></Button>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
