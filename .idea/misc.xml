@@ -60,6 +60,22 @@
         <entry key="..\:/AndroidStudio/Thach/app/src/main/res/layout/test.xml" value="0.27760416666666665" />
         <entry key="..\:/AndroidStudio/Thach/app/src/main/res/layout/traidep.xml" value="0.27760416666666665" />
         <entry key="..\:/AndroidStudio/Thach/app/src/main/res/menu/bottommenu.xml" value="0.27760416666666665" />
+        <entry key="..\:/ChuyenDeDiDong3/app/src/main/res/drawable/bg_button_10.xml" value="0.1824074074074074" />
+        <entry key="..\:/ChuyenDeDiDong3/app/src/main/res/drawable/bg_button_16.xml" value="0.1824074074074074" />
+        <entry key="..\:/ChuyenDeDiDong3/app/src/main/res/drawable/bg_titel_16.xml" value="0.1824074074074074" />
+        <entry key="..\:/ChuyenDeDiDong3/app/src/main/res/drawable/bg_white_16.xml" value="0.1824074074074074" />
+        <entry key="..\:/ChuyenDeDiDong3/app/src/main/res/drawable/bg_white_edittext.xml" value="0.1824074074074074" />
+        <entry key="..\:/ChuyenDeDiDong3/app/src/main/res/drawable/bg_white_spn.xml" value="0.1824074074074074" />
+        <entry key="..\:/ChuyenDeDiDong3/app/src/main/res/layout/dialog_phuongthucthanhtoan.xml" value="0.13518518518518519" />
+        <entry key="..\:/ChuyenDeDiDong3/app/src/main/res/layout/dialogphuongthucthanhtoan.xml" value="0.1675925925925926" />
+        <entry key="..\:/ChuyenDeDiDong3/app/src/main/res/layout/dilog_daichikhachhang.xml" value="0.22" />
+        <entry key="..\:/ChuyenDeDiDong3/app/src/main/res/layout/donhang_fragment.xml" value="0.20416666666666666" />
+        <entry key="..\:/ChuyenDeDiDong3/app/src/main/res/layout/home_fragment.xml" value="0.20416666666666666" />
+        <entry key="..\:/ChuyenDeDiDong3/app/src/main/res/layout/item_khuyenmai.xml" value="0.20416666666666666" />
+        <entry key="..\:/ChuyenDeDiDong3/app/src/main/res/layout/item_quangcao.xml" value="0.1675925925925926" />
+        <entry key="..\:/ChuyenDeDiDong3/app/src/main/res/layout/item_sanpham.xml" value="0.1398148148148148" />
+        <entry key="..\:/ChuyenDeDiDong3/app/src/main/res/layout/sanphamnoibat.xml" value="0.1675925925925926" />
+        <entry key="..\:/ChuyenDeDiDong3/app/src/main/res/layout/traidep.xml" value="0.1675925925925926" />
         <entry key="..\:/QuanLyBanHang/app/src/main/res/drawable-hdpi/rv_kv.xml" value="0.19583333333333333" />
         <entry key="..\:/QuanLyBanHang/app/src/main/res/drawable-mdpi/rv_khuvuc_bg.xml" value="0.19583333333333333" />
         <entry key="..\:/QuanLyBanHang/app/src/main/res/drawable/bnt_huy.xml" value="0.37222222222222223" />
@@ -106,10 +122,17 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="SuppressABINotification">
+    <option name="modulesWithSuppressedNotConfigured">
+      <set>
+        <option value="QuanLyBanHang.app" />
+      </set>
+    </option>
   </component>
 </project>

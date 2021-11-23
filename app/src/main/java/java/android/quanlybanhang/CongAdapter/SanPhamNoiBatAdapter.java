@@ -19,6 +19,8 @@ import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.SanPham;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class SanPhamNoiBatAdapter extends RecyclerView.Adapter<SanPhamNoiBatAdapter.TraiViewHolder>{
     private List<SanPham> trais;
     private IclickAddToCartListener iclickAddToCartListener;

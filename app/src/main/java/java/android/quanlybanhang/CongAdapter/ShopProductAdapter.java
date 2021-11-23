@@ -17,6 +17,8 @@ import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.SanPham;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ShopProductAdapter extends RecyclerView.Adapter<ShopProductAdapter.TraiViewHolder>{
     private List<SanPham> trais;
     private SanPhamNoiBatAdapter.IclickAddToCartListener iclickAddToCartListener;
@@ -86,7 +88,7 @@ public class ShopProductAdapter extends RecyclerView.Adapter<ShopProductAdapter.
     public class TraiViewHolder extends RecyclerView.ViewHolder {
 
         private FoldingCell foldingCell;
-        private ImageView imageViewSanPhamNoiBat,imgSMTo;
+        private ImageView imgSMTo,imageViewSanPhamNoiBat;
         private TextView textViewSanPhamNoiBat,tvTenSPTo,tvGiaTo,tvDesTo,tvDatmuaTo;
         private TextView textViewgiaSPNoiBat;
 
