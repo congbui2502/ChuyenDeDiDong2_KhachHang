@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="6dp"
+
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp">
+        <ImageView
+
+            android:id="@+id/imgQuanAn"
+            android:layout_margin="10dp"
+
+            android:layout_width="50dp"
+            android:scaleType="centerCrop"
+            android:layout_centerVertical="true"
+            android:layout_height="50dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/imgQuanAn">
+
+            <TextView
+                android:id="@+id/tvTenQuan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="tean quan"
+                android:textColor="@color/green"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/tvSoMon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:text="So mon"
+
+                android:textColor="@color/green"
+                android:layout_margin="10dp"/>
+
+
+
+
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imgAddtoCart"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/cart_shopping"
+            android:src="@drawable/ic_baseline_shopping_cart_24"/>
+
+
+
+
+
+    </RelativeLayout>
+
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_weight="1.5">-->
+
+<!--            <ImageView-->
+
+<!--                android:id="@+id/imgQuanAn"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:background="@mipmap/baxe"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:scaleType="centerCrop"-->
+<!--                android:layout_height="50dp"/>-->
+
+
+
+
+<!--    </LinearLayout>-->
+
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="0dp"-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_weight="4">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tvTenQuan"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="20sp"-->
+<!--            android:text="tean quan"-->
+<!--            android:textColor="@color/green"-->
+<!--            android:layout_marginTop="10dp"/>-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tvSoMon"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="10sp"-->
+<!--            android:text="So mon"-->
+
+<!--            android:textColor="@color/green"-->
+<!--            android:layout_margin="10dp"/>-->
+
+
+
+
+
+
+<!--    </LinearLayout>-->
+
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_weight="2">-->
+
+<!--&lt;!&ndash;        <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_marginTop="10dp"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/tvNgayMua"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:text="6/8/2021"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"/>&ndash;&gt;-->
+<!--        -->
+<!--        <ImageView-->
+<!--            android:id="@+id/imgAddtoCart"-->
+<!--            android:layout_width="60dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/cart_shopping"-->
+<!--            android:src="@drawable/ic_baseline_shopping_cart_24"/>-->
+
+
+
+<!--    </LinearLayout>-->
+
+
+
+
+
+</androidx.cardview.widget.CardView>

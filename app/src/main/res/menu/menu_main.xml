@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_homes"
+            android:icon="@drawable/img_home_menu"
+            android:title="Home" />
+    </group>
+
+    <item android:title="selected">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/ds_order"
+                    android:icon="@drawable/order_menu"
+                    android:title="Order" />
+                <item
+                    android:id="@+id/ds_chebien"
+                    android:icon="@drawable/chef"
+                    android:title="Processing" />
+                <item
+                    android:id="@+id/ds_thuchi"
+                    android:icon="@drawable/income"
+                    android:title="Income" />
+                <item
+                    android:id="@+id/quanly"
+                    android:icon="@drawable/management"
+                    android:title="manager " />
+            </group>
+        </menu>
+    </item>
+
+
+    <item android:title="profile">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/profile"
+                    android:icon="@drawable/user"
+                    android:title="profile" />
+                <item
+                    android:id="@+id/logout"
+                    android:icon="@drawable/logout"
+                    android:title="logout" />
+            </group>
+        </menu>
+    </item>
+
+</menu>

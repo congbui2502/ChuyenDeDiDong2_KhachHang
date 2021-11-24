@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_weight="10">
+    <LinearLayout
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <EditText
+            android:id="@+id/textTensanpham"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:hint="Ten san pham"></EditText>
+        <EditText
+            android:id="@+id/textChitietsanpham"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:hint="Chi tiet"></EditText>
+
+        <Spinner
+            android:id="@+id/spnNhomsanpham"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"></Spinner>
+
+        <EditText
+            android:id="@+id/textGianhap"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:hint="Gia nhap"></EditText>
+
+        <EditText
+            android:id="@+id/textGianban"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:hint="Gia ban"></EditText>
+
+        <EditText
+            android:id="@+id/textSoluong"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:hint="So luong"></EditText>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="2.5"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/imgChoose"
+            android:layout_width="400dp"
+            android:layout_height="200dp"
+            android:padding="5dp"
+            android:layout_marginLeft="5dp"></ImageView>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            />
+    </LinearLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="0dp"
+    android:layout_weight="1">
+    <Button
+        android:id="@+id/btnChoose"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose"></Button>
+</LinearLayout>
+<LinearLayout
+    android:layout_weight="0.5"
+    android:layout_width="match_parent"
+    android:layout_height="0dp">
+    <Button
+        android:id="@+id/btnAddproduct"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="ADD"></Button>
+</LinearLayout>
+
+
+</LinearLayout>
