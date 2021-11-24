@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ import java.android.quanlybanhang.CongAdapter.AddressVN.DataAddress;
 import java.android.quanlybanhang.CongAdapter.AddressVN.DiaChi;
 import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.DonHangOnline;
+import java.android.quanlybanhang.Sonclass.KhachHang;
 import java.android.quanlybanhang.Sonclass.KhuyenMai;
 import java.android.quanlybanhang.Sonclass.SanPham;
 import java.android.quanlybanhang.Activity.KhachHangActivity;
@@ -53,7 +55,7 @@ public class DonHangFragment  extends Fragment {
     private RecyclerView recyDonHang;
     private TextView giaKhuyenMai;
     private TextView tongTien;
-    private TextView edtDiaChi;
+    private TextView edtDiaChi,tienShipper;
     private EditText soNha;
     private Button btnDatHang, btnThemDialog, btnHuyDialog;
     private KhachHangActivity mainActivity;
@@ -67,17 +69,26 @@ public class DonHangFragment  extends Fragment {
     private String[] huyen;
     private String[] xa;
     private String sonha;
-
+    private AlertDialog alert11;
+    private long giaKhuyenmai;
     private String tenTinh;
     private String tenHuyen;
     private String tenXa;
-
+    private KhachHang khachHang;
     private ArrayAdapter<String> adapterTinh;
     private ArrayAdapter<String> adapterHuyen;
     private ArrayAdapter<String> adapterXa;
     private int ViTri = 0;
+    private long thunhap;
+    private long donGia;
 
     private ArrayList<DiaChi> listDiaChi = new ArrayList<>();
+
+    public void getIdQuan(String idQuan)
+    {
+        this.idQuan= idQuan;
+
+    }
 
     public DonHangFragment(List<SanPham> sanPhams) {
         this.sanPhams = sanPhams;
@@ -88,25 +99,26 @@ public class DonHangFragment  extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.donhang_fragment,container,false);
         mainActivity=(KhachHangActivity) getActivity();
+        khachHang= mainActivity.getKhachHang();
         Log.d("aaa","nhap sai roi");
         recyDonHang=view.findViewById(R.id.recyDonHang);
         giaKhuyenMai=view.findViewById(R.id.tvKhuyenMai);
         tongTien=view.findViewById(R.id.tvTongGia);
         btnDatHang=view.findViewById(R.id.btnDatDon);
         edtDiaChi = view.findViewById(R.id.edtDiachi);
+        tienShipper= view.findViewById(R.id.tvTienShipper);
         dialog = new Dialog(mainActivity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dilog_daichikhachhang);
         window = dialog.getWindow();
         LinearLayoutManager manager=new LinearLayoutManager(mainActivity);
         recyDonHang.setLayoutManager(manager);
-
+        giaKhuyenmai =0;
         DonHangAdapter donHangAdapter=new DonHangAdapter();
         donHangAdapter.setData(sanPhams);
         recyDonHang.setAdapter(donHangAdapter);
         tongtien = donHangAdapter.tinhTongTien();
         tongTien.setText(tongtien+" VND");
-
 
         DataAddress dataAddress = new DataAddress();
         try {
@@ -118,6 +130,13 @@ public class DonHangFragment  extends Fragment {
             e.printStackTrace();
         }
 
+        String[] tienKM = tienShipper.getText().toString().split(" ");
+         thunhap =Long.parseLong(tienKM[2]);
+         donGia = tongtien+thunhap;
+
+        tongTien.setText((tongtien+ thunhap)+" VNĐ");
+
+
         edtDiaChi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,18 +147,8 @@ public class DonHangFragment  extends Fragment {
         giaKhuyenMai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                KhuyenMai khuyenMai=new KhuyenMai("xZOOK1RzcMM7pL5I6naGZfYSsu2",10,
-//                        0);
-//                if(donHangAdapter.tinhTongTien()>khuyenMai.getGiaDeDuocKhuyenMai())
-//                {
-////                    String abc= Cart_Fragment.addDauPhay((donHangAdapter.tinhTongTien()-
-////                            donHangAdapter.tinhTongTien()*khuyenMai.getPhanTramKhuyenMai()/100));
-//
-//                    String abc= Cart_Fragment.addDauPhay(33000);
-//
-//                    tongTien.setText(abc+" VND");
-//
-//                }
+
+//                Toast.makeText(getContext(),idQuan,Toast.LENGTH_SHORT).show();
                 CustomDialogKhuyanMai customDialogKhuyanMai=new CustomDialogKhuyanMai(mainActivity);
                 customDialogKhuyanMai.setData(new KhuyenMaiAdapter.setTvKhuyenMai() {
                     @Override
@@ -157,6 +166,7 @@ public class DonHangFragment  extends Fragment {
             @Override
             public void onClick(View v) {
                 DatabaseReference mReference= FirebaseDatabase.getInstance().getReference()
+                        .child("CuaHangOder")
                         .child(idQuan).child("donhangonline").child("dondadat");
                 Date date = Calendar.getInstance().getTime();
                 // Display a date in day, month, year format
@@ -165,28 +175,103 @@ public class DonHangFragment  extends Fragment {
                 String millis =java.time.LocalTime.now().toString()+" " +today;
                 String key = System.currentTimeMillis()+"";
 
-                DonHangOnline donHangOnline=new DonHangOnline("idKhachhang",donHangAdapter.tinhTongTien()
-                        ,0,millis,sanPhams,
-                        "12/21 đường số 12 p.Linh Chieu",key,"Bùi Đình Công","0374193095");
-                HomeFragment fragment =new HomeFragment(mainActivity);
-                mReference.child(today).child(key).setValue(donHangOnline);
-                mainActivity.getSupportFragmentManager().beginTransaction().
-                        replace(R.id.fragment_container,fragment).commit();
-                btnDatHang.setEnabled(false);
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
-                builder1.setMessage("Đơn hàng của bạn đã được đặt.");
-                builder1.setCancelable(true);
+                View view1 = inflater.inflate(R.layout.dialog_phuongthucthanhtoan, null);
+                Button btnThem=view1.findViewById(R.id.btnthemDiaLogDVT);
+                Button btnHuyBo=view1.findViewById(R.id.btnhuyDiaLogDVT);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//                LayoutInflater inflater = getLayoutInflater();
+                builder.setView(view1);
 
-                builder1.setPositiveButton(
-                        "Ok",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
+                alert11 = builder.create();
 
-                AlertDialog alert11 = builder1.create();
                 alert11.show();
+
+                btnHuyBo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        alert11.cancel();
+                    }
+                });
+                btnThem.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        RadioButton btnChuyenKhoan=view1.findViewById(R.id.PT1);
+                        RadioButton btnTienMat=view1.findViewById(R.id.gtPT2);
+
+                        if(btnChuyenKhoan.isChecked()==false && btnTienMat.isChecked() ==false)
+                        {
+                            Toast.makeText(getContext(),"Vui lòng chọn phương thức thanh toán",Toast.LENGTH_SHORT).show();
+                        }else if (btnChuyenKhoan.isChecked() == false)
+                        {
+                            if(edtDiaChi.getText().toString().equals(""))
+                            {
+                                Toast.makeText(getContext(),"Vui lòng chọn địa chỉ giao hàng",Toast.LENGTH_SHORT).show();
+                            }else {
+                                DonHangOnline donHangOnline=new DonHangOnline(khachHang.getIdKhachhang(),donHangAdapter.tinhTongTien()
+                                        ,0,millis,sanPhams,
+                                        edtDiaChi.getText().toString(),key, khachHang.getNameKhachHang(), khachHang.getSdtKhachHang());
+
+                                DonHangOnline donHangOnline1=new DonHangOnline(idQuan, khachHang.getIdKhachhang(),giaKhuyenmai,
+                                        0,millis,donGia, sanPhams,edtDiaChi.getText().toString(),key, khachHang.getNameKhachHang(),
+                                        khachHang.getSdtKhachHang(), "abcxyz",thunhap,1);
+
+                                HomeFragment fragment =new HomeFragment(mainActivity);
+                                mReference.child(today).child(key).setValue(donHangOnline1);
+                                mainActivity.getSupportFragmentManager().beginTransaction().
+                                        replace(R.id.fragment_container,fragment).commit();
+                                btnDatHang.setEnabled(false);
+                                AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+                                builder1.setMessage("Đơn hàng của bạn đã được đặt.");
+                                builder1.setCancelable(true);
+
+                                builder1.setPositiveButton(
+                                        "Ok",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                dialog.cancel();
+                                            }
+                                        });
+
+                                AlertDialog alert12 = builder1.create();
+                                alert12.show();
+
+                                alert11.cancel();
+
+                            }
+                        }
+                        else {
+                            DonHangOnline donHangOnline1=new DonHangOnline(idQuan, khachHang.getIdKhachhang(),giaKhuyenmai,
+                                    0,millis,donGia, sanPhams,edtDiaChi.getText().toString(),key, khachHang.getNameKhachHang(),
+                                    khachHang.getSdtKhachHang(), "abcxyz",thunhap,2);
+
+                            HomeFragment fragment =new HomeFragment(mainActivity);
+                            mReference.child(today).child(key).setValue(donHangOnline1);
+                            mainActivity.getSupportFragmentManager().beginTransaction().
+                                    replace(R.id.fragment_container,fragment).commit();
+                            btnDatHang.setEnabled(false);
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+                            builder1.setMessage("Đơn hàng của bạn đã được đặt.");
+                            builder1.setCancelable(true);
+
+                            builder1.setPositiveButton(
+                                    "Ok",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                            AlertDialog alert12 = builder1.create();
+                            alert12.show();
+
+                            alert11.cancel();
+
+                        }
+
+                    }
+                });
+
 
             }
         });
@@ -194,18 +279,23 @@ public class DonHangFragment  extends Fragment {
     }
 
     private void tinhtoan(KhuyenMai khuyenMai) {
+
+
+
+
         if(khuyenMai.getLoaiKhuyenmai()==1)
         {
             if(tongtien>khuyenMai.getGiaDeDuocKhuyenMai())
             {
                 tongTien.setText((tongtien- tongtien*khuyenMai.getPhanTramKhuyenMai()/100)+" VNĐ");
+                giaKhuyenmai = tongtien * khuyenMai.getPhanTramKhuyenMai()/100;
             }else {
                 Toast.makeText(getContext(), "Tổng tiền không đủ để sử dụng.",Toast.LENGTH_LONG).show();
             }
 
 
         }else {
-            Toast.makeText(getContext(), "không đúng loai khuyen mãi",Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Không đúng loai khuyen mãi",Toast.LENGTH_LONG).show();
         }
 
 
@@ -233,7 +323,8 @@ public class DonHangFragment  extends Fragment {
         else {
             dialog.setCancelable(false);
         }
-        sonha = soNha.getText().toString();
+
+
         tinh = ArrayTinh();
         adapterTinh = new ArrayAdapter<String>(mainActivity, R.layout.support_simple_spinner_dropdown_item, tinh);
         thanhphoAuto.setAdapter(adapterTinh);
@@ -287,6 +378,7 @@ public class DonHangFragment  extends Fragment {
         btnThemDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sonha = soNha.getText().toString();
                 edtDiaChi.setText(sonha+","+tenXa+","+tenHuyen+","+tenTinh);
                 dialog.dismiss();
             }

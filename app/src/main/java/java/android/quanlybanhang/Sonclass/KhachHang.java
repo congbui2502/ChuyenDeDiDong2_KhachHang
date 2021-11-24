@@ -1,14 +1,23 @@
 package java.android.quanlybanhang.Sonclass;
 
-public class KhachHang {
+import java.io.Serializable;
+
+public class KhachHang implements Serializable {
     private String nameKhachHang;
     private String emailKhachHang;
     private String dateKhachHang;
     private String sdtKhachHang;
-
-
+    private String idKhachhang;
 
     public KhachHang() {
+    }
+
+    public KhachHang(String nameKhachHang, String emailKhachHang, String dateKhachHang, String sdtKhachHang, String idKhachhang) {
+        this.nameKhachHang = nameKhachHang;
+        this.emailKhachHang = emailKhachHang;
+        this.dateKhachHang = dateKhachHang;
+        this.sdtKhachHang = sdtKhachHang;
+        this.idKhachhang = idKhachhang;
     }
 
     public KhachHang(String nameKhachHang, String emailKhachHang, String dateKhachHang, String sdtKhachHang) {
@@ -16,6 +25,14 @@ public class KhachHang {
         this.emailKhachHang = emailKhachHang;
         this.dateKhachHang = dateKhachHang;
         this.sdtKhachHang = sdtKhachHang;
+    }
+
+    public String getIdKhachhang() {
+        return idKhachhang;
+    }
+
+    public void setIdKhachhang(String idKhachhang) {
+        this.idKhachhang = idKhachhang;
     }
 
     public String getNameKhachHang() {

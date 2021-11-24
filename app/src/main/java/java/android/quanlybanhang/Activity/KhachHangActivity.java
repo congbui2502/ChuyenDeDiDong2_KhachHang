@@ -44,6 +44,7 @@ import java.android.quanlybanhang.CongAdapter.Putnotification;
 import java.android.quanlybanhang.CongAdapter.TableFragment;
 import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.CuaHang;
+import java.android.quanlybanhang.Sonclass.KhachHang;
 import java.android.quanlybanhang.Sonclass.SanPham;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -62,12 +63,9 @@ public class KhachHangActivity extends AppCompatActivity {
     }
     private Context context =this;
     private  List<SanPham> products;
-    FrameLayout frameLayout;
+    private KhachHang khachHang;
     public    Fragment fragment;
-    public HomeFragment homeFragment;
-
-    private String idKhachHang="idKhachHang";
-
+    private String idCartShop;
     private String Shop_Id="JxZOOK1RzcMM7pL5I6naGZfYSsu2";
     private int mCount;
     private View viewEndAnimation;
@@ -96,7 +94,13 @@ public class KhachHangActivity extends AppCompatActivity {
         return products;
     }
 
+    public KhachHang getKhachHang() {
+        return khachHang;
+    }
 
+    public void setKhachHang(KhachHang khachHang) {
+        this.khachHang = khachHang;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,26 +108,82 @@ public class KhachHangActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.khachhang_activity);
-
-        
-
-            cart_fragment=new Cart_Fragment(products);
-           cart_fragment.setData(new ProductAdapter.SetPos() {
-               @Override
-               public void setPos(int size) {
-                   setCountProductInBuild(size);
-               }
-           });
-
-        FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container,cart_fragment);
-        transaction.addToBackStack("cartfragment");
-        transaction.commit();
-
-
-
-
         mReference=FirebaseDatabase.getInstance().getReference();
+
+
+
+        Intent intent =this.getIntent();
+        Bundle bundle= intent.getExtras();
+
+        if(bundle!=null)
+        {
+            if(bundle.getSerializable("khachhang")!=null)
+            {
+                khachHang = (KhachHang) bundle.getSerializable("khachhang");
+            }
+        }
+        else {
+            khachHang = new KhachHang("congbui",
+                    "cb@gmail.com","20/03/1999","0374193095","idKhachHang");
+        }
+
+
+        products=getCartList();
+
+
+
+
+
+
+        mReference.child("gioHang").child(khachHang.getIdKhachhang()).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                if(snapshot.getKey().equals("idQuan"))
+                {
+                    idCartShop =    snapshot.getValue(String.class);
+                    if(idCartShop!=null)
+                    {
+                        cart_fragment=new Cart_Fragment(products,idCartShop);
+                        cart_fragment.setData(new ProductAdapter.SetPos() {
+                            @Override
+                            public void setPos(int size) {
+                                setCountProductInBuild(size);
+                            }
+                        });
+                    }
+
+
+
+                }
+
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
         Fragment fragment1=new HomeFragment(this);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment1).addToBackStack("").commit();
@@ -131,7 +191,7 @@ public class KhachHangActivity extends AppCompatActivity {
         setMenuItem();
 
 
-        products=getCartList();
+
 
 
 
@@ -298,7 +358,7 @@ public class KhachHangActivity extends AppCompatActivity {
 //
 //                       fragment = getSupportFragmentManager().findFragmentByTag("cartfragment");
 //                   }else {
-                      Cart_Fragment fragment1=new Cart_Fragment(products);
+                      Cart_Fragment fragment1=new Cart_Fragment(products,idCartShop);
                       fragment1.setData(new ProductAdapter.SetPos() {
                           @Override
                           public void setPos(int size) {
@@ -361,7 +421,7 @@ public class KhachHangActivity extends AppCompatActivity {
     {
 
         List<SanPham> trais=new ArrayList<SanPham>();
-        mReference.child("gioHang").child(idKhachHang).child("sanPham").addValueEventListener(new ValueEventListener() {
+        mReference.child("gioHang").child(khachHang.getIdKhachhang()).child("sanPham").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -397,8 +457,9 @@ public class KhachHangActivity extends AppCompatActivity {
     public List<SanPham> getCartList()
     {
 
+
         List<SanPham> trais=new ArrayList<SanPham>();
-        mReference.child("gioHang").child(idKhachHang).child("sanPham").addChildEventListener(new ChildEventListener() {
+        mReference.child("gioHang").child(khachHang.getIdKhachhang()).child("sanPham").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 SanPham sanPham=snapshot.getValue(SanPham.class);
@@ -473,6 +534,7 @@ public class KhachHangActivity extends AppCompatActivity {
 
     public void sendNotification(SanPham sanPham)
     {
+
         Bitmap bitmap= BitmapFactory.decodeResource(getResources(), R.drawable.add);
 //        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy");
 //        String day =simpleDateFormat.format(new Date());
@@ -529,6 +591,7 @@ public class KhachHangActivity extends AppCompatActivity {
 
     private void getSuperQuangCao()
     {
+
         DatabaseReference reference=FirebaseDatabase.getInstance().getReference("sanPhamQuangCao");
 
         reference.addChildEventListener(new ChildEventListener() {
@@ -544,6 +607,8 @@ public class KhachHangActivity extends AppCompatActivity {
                         if(sanPham.isSuperquangcao())
                         {
                            sendNotification(sanPham);
+                        }else {
+                            Toast.makeText(getApplicationContext(),"aaa",Toast.LENGTH_SHORT).show();
                         }
 
                     }
