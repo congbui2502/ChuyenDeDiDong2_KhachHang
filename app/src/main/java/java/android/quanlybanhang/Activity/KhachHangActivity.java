@@ -2,7 +2,10 @@ package java.android.quanlybanhang.Activity;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -12,6 +15,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,6 +45,7 @@ import java.android.quanlybanhang.CongAdapter.TableFragment;
 import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.CuaHang;
 import java.android.quanlybanhang.Sonclass.SanPham;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -174,18 +179,7 @@ public class KhachHangActivity extends AppCompatActivity {
 //        history_fragment=new Cart_Fragment(this.products);
         setCountProductInBuild(products.size());
 
-        CountDownTimer countDownTimer=new CountDownTimer(2000,2000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-
-            }
-
-            @Override
-            public void onFinish() {
-                sendNotification();
-
-            }
-        }.start();
+        getSuperQuangCao();
 
     }
 
@@ -481,27 +475,38 @@ public class KhachHangActivity extends AppCompatActivity {
         });
     }
 
-    public void sendNotification()
+    public void sendNotification(SanPham sanPham)
     {
         Bitmap bitmap= BitmapFactory.decodeResource(getResources(), R.drawable.add);
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy");
-        String day =simpleDateFormat.format(new Date());
-
-        simpleDateFormat=new SimpleDateFormat("HH:mm:ss");
-
-        String time =simpleDateFormat.format(new Date());
+//        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy");
+//        String day =simpleDateFormat.format(new Date());
+//
+//        simpleDateFormat=new SimpleDateFormat("HH:mm:ss");
+//
+//        String time =simpleDateFormat.format(new Date());
 
         RemoteViews notificationLayout = new RemoteViews(getPackageName(), R.layout.donga_bank_notification);
 //        RemoteViews notificationLayoutExpanded = new RemoteViews(getPackageName(), R.layout.notification_large);
-        notificationLayout.setTextViewText(R.id.tvMessage,day+" "+time+" Ma xac thuc chu...");
+        notificationLayout.setTextViewText(R.id.tvMessage,sanPham.getChitiet());
+        notificationLayout.setTextViewText(R.id.tvTittle,sanPham.getNameProduct());
         notificationLayout.setImageViewBitmap(R.id.imgLogo,bitmap);
+
+        Intent resultIntent = new Intent(this, SuperQuangCaoActivity.class);
+        Bundle bundle=new Bundle();
+        bundle.putSerializable("sanpham", sanPham);
+        resultIntent.putExtras(bundle);
+
+// Create the TaskStackBuilder and add the intent, which inflates the back stack
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addNextIntentWithParentStack(resultIntent);
+// Get the PendingIntent containing the entire back stack
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
         RemoteViews notificationLayoutmax = new RemoteViews(getPackageName(), R.layout.donga_bank_notification_max);
 //        RemoteViews notificationLayoutExpanded = new RemoteViews(getPackageName(), R.layout.notification_large);
-        notificationLayoutmax.setTextViewText(R.id.tvMessagemax,day+" "+time+" Ma xac thuc chuyen khoan " +
-                "ngoai he thong tren INTERNET la 387155. Vui long nhap ma xac thuc trong vong 5 phut " +
-                "de hoan tat giao dich.");
+        notificationLayoutmax.setTextViewText(R.id.tvMessagemax,sanPham.getChitiet());
         notificationLayoutmax.setImageViewBitmap(R.id.imgLogo,bitmap);
 
 
@@ -511,8 +516,8 @@ public class KhachHangActivity extends AppCompatActivity {
 //                .setContentTitle("this is my application")
 //                .setContentText("cmm")
 //                .setLargeIcon(bitmap)
+                .setContentIntent(resultPendingIntent)
                 .setCustomContentView(notificationLayout)
-
                 .setSmallIcon(R.drawable.ic_baseline_message_24)
                 .setCustomBigContentView(notificationLayoutmax)
                 .build();
@@ -521,8 +526,57 @@ public class KhachHangActivity extends AppCompatActivity {
         if(notificationManager!=null)
         {
             notificationManager.notify(0,notification);
+
         }
 
+    }
+
+    private void getSuperQuangCao()
+    {
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("sanPhamQuangCao");
+
+        reference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String key = snapshot.getKey();
+
+                for(DataSnapshot snapshot1: snapshot.getChildren())
+                {
+                    for (DataSnapshot snapshot2: snapshot1.getChildren())
+                    {
+                        SanPham  sanPham =snapshot2.getValue(SanPham.class);
+                        if(sanPham.isSuperquangcao())
+                        {
+                           sendNotification(sanPham);
+                        }
+
+                    }
+
+                }
+
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 

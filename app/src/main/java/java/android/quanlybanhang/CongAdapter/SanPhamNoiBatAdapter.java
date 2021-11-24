@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,7 +23,7 @@ import java.util.List;
 public class SanPhamNoiBatAdapter extends RecyclerView.Adapter<SanPhamNoiBatAdapter.TraiViewHolder>{
     private List<SanPham> trais;
     private IclickAddToCartListener iclickAddToCartListener;
-    private KhachHangActivity activity;
+    private AppCompatActivity activity;
 
 
     public interface IclickAddToCartListener{
@@ -41,7 +42,7 @@ public class SanPhamNoiBatAdapter extends RecyclerView.Adapter<SanPhamNoiBatAdap
     }
 
 
-    public void setData1(KhachHangActivity activity,List<SanPham> list )
+    public void setData1(AppCompatActivity activity,List<SanPham> list )
     {
         this.activity=activity;
         this.trais=list;

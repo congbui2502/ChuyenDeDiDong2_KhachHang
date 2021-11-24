@@ -148,8 +148,15 @@ public class DonHangFragment  extends Fragment {
             }
 
 
+        }else if(khuyenMai.getLoaiKhuyenmai()==2){
+            if(tongtien> khuyenMai.getGiaDeDuocKhuyenMai())
+            {
+
+            }else {
+                Toast.makeText(getContext(), "Tổng tiền không đủ để sử dụng.",Toast.LENGTH_LONG).show();
+            }
         }else {
-            Toast.makeText(getContext(), "không đúng loai khuyen mãi",Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Không đúng loai khuyen mãi",Toast.LENGTH_LONG).show();
         }
 
 

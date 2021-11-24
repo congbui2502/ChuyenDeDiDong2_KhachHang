@@ -1,8 +1,9 @@
 package java.android.quanlybanhang.Sonclass;
 
 
+import java.io.Serializable;
 
-public class SanPham {
+public class SanPham implements Serializable {
     private String chitiet;
     private long giaBan;
     private long giaNhap;
@@ -14,6 +15,7 @@ public class SanPham {
     private long giamGia;
     private String idCuaHang;
     private String tittle;
+    private boolean superquangcao;
 
 
     public SanPham() {
@@ -43,6 +45,30 @@ public class SanPham {
         this.giamGia = giamGia;
         this.idCuaHang = idCuaHang;
         this.tittle = tittle;
+    }
+
+    public SanPham(String chitiet, long giaNhap, String nameProduct, String imgProduct, String nhomsanpham,
+                   int soluong, long giamGia, String idCuaHang, String tittle, boolean superquangcao) {
+        this.chitiet = chitiet;
+        this.giaNhap = giaNhap;
+        this.nameProduct = nameProduct;
+        this.imgProduct = imgProduct;
+        this.nhomsanpham = nhomsanpham;
+        this.soluong = soluong;
+        this.giamGia = giamGia;
+        this.idCuaHang = idCuaHang;
+        this.tittle = tittle;
+        this.superquangcao = superquangcao;
+    }
+
+
+
+    public boolean isSuperquangcao() {
+        return superquangcao;
+    }
+
+    public void setSuperquangcao(boolean superquangcao) {
+        this.superquangcao = superquangcao;
     }
 
     public long getGiamGia() {
