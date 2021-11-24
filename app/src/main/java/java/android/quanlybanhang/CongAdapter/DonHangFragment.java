@@ -111,7 +111,7 @@ public class DonHangFragment  extends Fragment {
         DataAddress dataAddress = new DataAddress();
         try {
             listDiaChi = dataAddress.readCompanyJSONFile(mainActivity);
-//            setDataText();
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -187,6 +187,8 @@ public class DonHangFragment  extends Fragment {
 
                 AlertDialog alert11 = builder1.create();
                 alert11.show();
+//                ThongTinChuyenKhoan_Fragment thongTinChuyenKhoan_fragment = new ThongTinChuyenKhoan_Fragment();
+//       getFragmentManager().beginTransaction().replace(R.id.fragment_container, thongTinChuyenKhoan_fragment).commit();
 
             }
         });

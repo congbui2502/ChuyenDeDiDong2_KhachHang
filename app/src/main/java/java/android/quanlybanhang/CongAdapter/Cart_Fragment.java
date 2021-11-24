@@ -53,8 +53,6 @@ public class Cart_Fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
         mView=inflater.inflate(R.layout.cart_fragment,container,false);
         Log.d("BBB","onCreate CartFragment");
 
@@ -111,7 +109,7 @@ public class Cart_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
 //                setFirebase();
-                DonHangFragment donHangFragment=new DonHangFragment(productAdapter.getListProductIsChecked());
+                DonHangFragment donHangFragment = new DonHangFragment(productAdapter.getListProductIsChecked());
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container,donHangFragment).commit();
 
 

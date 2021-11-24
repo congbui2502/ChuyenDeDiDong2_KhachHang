@@ -231,7 +231,6 @@ public class ShopProductFragment extends Fragment  {
                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                     SanPham sanPham=snapshot.getValue(SanPham.class);
                     sanPhams.add(sanPham);
-
                     dsSanPhamTheoLoai.add((sanPham));
                     loaiTraiAdapter.notifyDataSetChanged();
                     Toast.makeText(context,dsSanPhamTheoLoai.size()+"123",Toast.LENGTH_SHORT).show();
