@@ -19,11 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuanLyBanHang">
         <activity android:name=".Activity.DangNhapKhachHang">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".Activity.DangkyKhachHang">
@@ -41,6 +37,12 @@
             android:exported="true" />
         <activity android:name=".CongAdapter.Tttttttest"></activity>
         <activity android:name=".Activity.KhachHangActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity

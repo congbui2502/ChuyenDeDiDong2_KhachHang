@@ -6,7 +6,7 @@ public class KhachHang {
     private String dateKhachHang;
     private String sdtKhachHang;
 
-    
+
 
     public KhachHang() {
     }
