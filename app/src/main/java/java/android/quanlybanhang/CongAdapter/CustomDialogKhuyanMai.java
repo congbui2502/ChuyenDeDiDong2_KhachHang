@@ -71,10 +71,6 @@ public class CustomDialogKhuyanMai extends Dialog implements
 
         recyKhuyenMai.setAdapter(adapter);
 
-        mReference= FirebaseDatabase.getInstance().getReference();
-
-
-
     }
 
     @Override
@@ -94,7 +90,7 @@ public class CustomDialogKhuyanMai extends Dialog implements
 
     private  void getData()
     {
-        mReference =FirebaseDatabase.getInstance().getReference().child("khuyenmai").child(idCuaHang);
+        mReference = FirebaseDatabase.getInstance().getReference().child("khuyenmai").child(idCuaHang);
 
         mReference.addChildEventListener(new ChildEventListener() {
             @Override

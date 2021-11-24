@@ -76,7 +76,7 @@
             android:lines="2"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="30dp"
-            android:text="Phí ship:       100.000 VND"/>
+            android:text="Phí ship: 10000 VND"/>
 
 
 
