@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -96,8 +97,15 @@ public class CustomDialogKhuyanMai extends Dialog implements
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 KhuyenMai khuyenMai=snapshot.getValue(KhuyenMai.class);
-                sanPhams.add(khuyenMai);
-                adapter.setList(sanPhams);
+                if(khuyenMai==null)
+                {
+                    d.dismiss();
+                    Toast.makeText(getContext(),"Cửa hàng hiện không có chương trình khuyến mãi",Toast.LENGTH_SHORT).show();
+                }else {
+                    sanPhams.add(khuyenMai);
+                    adapter.setList(sanPhams);
+                }
+
 
             }
 

@@ -240,6 +240,34 @@ public class DonHangFragment  extends Fragment {
 
                             }
                         }
+                        else {
+                            DonHangOnline donHangOnline1=new DonHangOnline(idQuan, khachHang.getIdKhachhang(),giaKhuyenmai,
+                                    0,millis,donGia, sanPhams,edtDiaChi.getText().toString(),key, khachHang.getNameKhachHang(),
+                                    khachHang.getSdtKhachHang(), "abcxyz",thunhap,2);
+
+                            HomeFragment fragment =new HomeFragment(mainActivity);
+                            mReference.child(today).child(key).setValue(donHangOnline1);
+                            mainActivity.getSupportFragmentManager().beginTransaction().
+                                    replace(R.id.fragment_container,fragment).commit();
+                            btnDatHang.setEnabled(false);
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+                            builder1.setMessage("Đơn hàng của bạn đã được đặt.");
+                            builder1.setCancelable(true);
+
+                            builder1.setPositiveButton(
+                                    "Ok",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                            AlertDialog alert12 = builder1.create();
+                            alert12.show();
+
+                            alert11.cancel();
+
+                        }
 
                     }
                 });
@@ -252,9 +280,7 @@ public class DonHangFragment  extends Fragment {
 
     private void tinhtoan(KhuyenMai khuyenMai) {
 
-        String[] tienSP = tienShipper.getText().toString().split(" ");
-        long tsp =Long.parseLong(tienSP[2]);
-        tongTien.setText((tongtien+ tsp - tongtien*khuyenMai.getPhanTramKhuyenMai()/100)+" VNĐ");
+
 
 
         if(khuyenMai.getLoaiKhuyenmai()==1)
@@ -269,7 +295,7 @@ public class DonHangFragment  extends Fragment {
 
 
         }else {
-            Toast.makeText(getContext(), "không đúng loai khuyen mãi",Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Không đúng loai khuyen mãi",Toast.LENGTH_LONG).show();
         }
 
 

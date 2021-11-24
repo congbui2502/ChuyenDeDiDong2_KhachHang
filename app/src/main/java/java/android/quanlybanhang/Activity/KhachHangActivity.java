@@ -111,6 +111,7 @@ public class KhachHangActivity extends AppCompatActivity {
         mReference=FirebaseDatabase.getInstance().getReference();
 
 
+
         Intent intent =this.getIntent();
         Bundle bundle= intent.getExtras();
 
@@ -120,7 +121,8 @@ public class KhachHangActivity extends AppCompatActivity {
             {
                 khachHang = (KhachHang) bundle.getSerializable("khachhang");
             }
-        }else {
+        }
+        else {
             khachHang = new KhachHang("congbui",
                     "cb@gmail.com","20/03/1999","0374193095","idKhachHang");
         }
@@ -532,6 +534,7 @@ public class KhachHangActivity extends AppCompatActivity {
 
     public void sendNotification(SanPham sanPham)
     {
+
         Bitmap bitmap= BitmapFactory.decodeResource(getResources(), R.drawable.add);
 //        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy");
 //        String day =simpleDateFormat.format(new Date());
@@ -588,6 +591,7 @@ public class KhachHangActivity extends AppCompatActivity {
 
     private void getSuperQuangCao()
     {
+
         DatabaseReference reference=FirebaseDatabase.getInstance().getReference("sanPhamQuangCao");
 
         reference.addChildEventListener(new ChildEventListener() {
@@ -603,6 +607,8 @@ public class KhachHangActivity extends AppCompatActivity {
                         if(sanPham.isSuperquangcao())
                         {
                            sendNotification(sanPham);
+                        }else {
+                            Toast.makeText(getApplicationContext(),"aaa",Toast.LENGTH_SHORT).show();
                         }
 
                     }
