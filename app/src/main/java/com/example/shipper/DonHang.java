@@ -59,6 +59,25 @@ public class DonHang implements Serializable {
         this.idDonHang=idDonHang;
     }
 
+    public DonHang(int trangthai, String diemnhan, String diaChi, long donGia, List<SanPham> sanpham, String tenKhachhang, String sdtkhachhang, String ghiChu, long thunhap, String time, String idQuan, String shipper, String phoneShipper, String key, String idKhachhang, String idDonHang) {
+        this.trangthai = trangthai;
+        this.diemnhan = diemnhan;
+        this.diaChi = diaChi;
+        this.donGia = donGia;
+        this.sanpham = sanpham;
+        this.tenKhachhang = tenKhachhang;
+        this.sdtkhachhang = sdtkhachhang;
+        this.ghiChu = ghiChu;
+        this.thunhap = thunhap;
+        this.time = time;
+        this.idQuan = idQuan;
+        this.shipper = shipper;
+        this.phoneShipper = phoneShipper;
+        this.key = key;
+        this.idKhachhang = idKhachhang;
+        this.idDonHang = idDonHang;
+    }
+
     public DonHang() {
 
     }
@@ -73,12 +92,12 @@ public class DonHang implements Serializable {
         this.sanpham = sanpham;
     }
 
-    public String getTenKhachHang() {
+    public String getTenKhachhang() {
         return tenKhachhang;
     }
 
-    public void setTenKhachHang(String tenKhachHang) {
-        this.tenKhachhang = tenKhachHang;
+    public void setTenKhachhang(String tenKhachhang) {
+        this.tenKhachhang = tenKhachhang;
     }
 
     public String getSdtkhachhang() {

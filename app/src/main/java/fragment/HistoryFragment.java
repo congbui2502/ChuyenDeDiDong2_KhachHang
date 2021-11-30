@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.shipper.DonHang;
 import com.example.shipper.History;
 import com.example.shipper.LichSuActivity;
 import com.example.shipper.R;
@@ -28,13 +29,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import adapter.HistoryAdapter;
 
 
-public class HistoryFragment extends Fragment {
+public class HistoryFragment<cardview> extends Fragment {
     public static final String KEY_LICHSU = "LICHSU";
     private TextView tvDiemNhan,tvDiemGiao,tvThoiGian;
     private DatabaseReference databaseReference;
@@ -84,14 +87,40 @@ public class HistoryFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+    public String formatDateS(String strDate) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss.sss dd-MM-yyyy");
+        String dt = "";
+        try {
+            Date date = simpleDateFormat.parse(strDate);
+            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd-MM-yyyy");
+            dt = formatter.format(date);
+            return dt;
+        } catch (Exception e) {
+            Date date = new Date();
+            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd-MM-yyyy");
+            dt = formatter.format(date);
+            return dt;
+        }
+    }
 
     private void getDataFromFirebase() {
         mFirebaseAuth=FirebaseAuth.getInstance();
         String id=mFirebaseAuth.getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Shipper").child(id).child("lichSuDonOnline");
         databaseReference.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                arrayList = new ArrayList<History>();
+//                for (DataSnapshot snapshot1 : snapshot.getChildren()){
+//                    History history = snapshot1.getValue(History.class);
+//                    String time = formatDateS(history.getTime());
+//
+//                    arrayList.add(history);
+//
+//                }
+//                adapter.setData(arrayList);
+//                adapter.notifyDataSetChanged();
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                     for (DataSnapshot snapshot2 : snapshot.getChildren()) {
                         History history = snapshot1.getValue(History.class);
@@ -103,7 +132,7 @@ public class HistoryFragment extends Fragment {
                         String sdtkhachhang = history.getSdtkhachhang();
                         long donGia = history.getDonGia();
                         List<SanPham> sanpham = history.getSanpham();
-                        String time = history.getTime();
+                        String time = formatDateS(history.getTime());
                         String idQuan = history.getIdQuan();
                         String shipper = history.getShipper();
                         String phoneShipper = history.getPhoneShipper();
@@ -116,7 +145,7 @@ public class HistoryFragment extends Fragment {
                                 idQuan, shipper, phoneShipper, key, trangthai, idKhachHang, idDonHang);
 
                     }
-                    arrayList.add(historyActivity);
+                    arrayList.add(0,historyActivity);
                     adapter.setData(arrayList);
                 }
             }

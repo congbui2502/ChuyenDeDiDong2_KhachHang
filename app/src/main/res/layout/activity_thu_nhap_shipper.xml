@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_weight="10">
+
+
+    <TextView
+        android:layout_weight="0.1"
+        android:id="@+id/textThem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="17sp"
+        android:textColor="@color/black" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textThem">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_weight="3"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <androidx.cardview.widget.CardView
+                    style="@style/cardview_themsanpham">
+                    <LinearLayout
+                        android:layout_weight="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+
+                        <Spinner
+                            android:id="@+id/spnNgayGio"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:gravity="center"
+                            android:spinnerMode="dropdown"></Spinner>
+                    </LinearLayout>
+                    <View
+                        style="@style/view" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    style="@style/cardview_themsanpham"
+                    android:layout_marginTop="30dp">
+                    <TextView
+                        android:id="@+id/textSoDonHang"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#00000000"
+                        android:padding="10dp"></TextView>
+                    <View
+                        style="@style/view" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    style="@style/cardview_nhomsanpham">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_gravity="bottom"
+                        android:background="@color/teal_200" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    style="@style/cardview_themsanpham">
+                    <TextView
+                        android:inputType="number"
+                        android:id="@+id/textGianhap"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#00000000"
+                        android:padding="10dp"></TextView>
+                    <View
+                        style="@style/view" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    style="@style/cardview_themsanpham">
+                    <TextView
+                        android:inputType="number"
+                        android:id="@+id/textSoluong"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#00000000"
+                        android:padding="10dp"></TextView>
+                    <View
+                        style="@style/view" />
+                </androidx.cardview.widget.CardView>
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    />
+
+                <androidx.cardview.widget.CardView
+                    style="@style/cardview_nhomsanpham">
+                    <LinearLayout
+                        android:layout_weight="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/quaylai"
+                            android:layout_width="10dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.75"
+                            android:background="@color/white"
+                            android:gravity="center"
+                            android:text="Quay lại"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"></Button>
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:layout_gravity="bottom"
+                        android:background="@color/teal_200" />
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>

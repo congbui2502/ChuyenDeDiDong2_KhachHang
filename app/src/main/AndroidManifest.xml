@@ -3,6 +3,10 @@
     package="com.example.shipper">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
 
     <application
         android:allowBackup="true"
@@ -27,6 +31,8 @@
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".DaNhanActivity" />
         <activity android:name=".DangGiaoActivity" />
+        <activity android:name=".ChangePassActivity" />
+        <activity android:name=".ThuNhapShipper" />
     </application>
 
 </manifest>

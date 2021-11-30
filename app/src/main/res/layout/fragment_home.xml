@@ -5,18 +5,21 @@
     android:layout_height="match_parent"
     tools:context="fragment.HomeFragment"
     android:layout_weight="10"
+    android:background="#EEEEEE"
     android:orientation="vertical">
 
 
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:layout_weight="1">
+       android:layout_weight="1"
+       >
 
        <ListView
            android:id="@+id/lvdonhang"
            android:layout_width="match_parent"
-           android:layout_height="match_parent"></ListView>
+           android:layout_height="match_parent"
+           ></ListView>
    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

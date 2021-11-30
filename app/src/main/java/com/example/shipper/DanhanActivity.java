@@ -102,7 +102,7 @@ public class DaNhanActivity extends AppCompatActivity {
                         String diemNhan = donHang.getDiemnhan();
 
                         long thuNhap= donHang.getThunhap();
-                        String tenKhachhang = donHang.getTenKhachHang();
+                        String tenKhachhang = donHang.getTenKhachhang();
                         String ghiChu = donHang.getGhiChu();
                         String sdtkhachhang = donHang.getSdtkhachhang();
                         long donGia= donHang.getDonGia();

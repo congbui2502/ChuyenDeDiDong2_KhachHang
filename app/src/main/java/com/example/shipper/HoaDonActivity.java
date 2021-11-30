@@ -23,8 +23,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
+import adapter.SanPhamAdapter;
 import fragment.HomeFragment;
 
 public class HoaDonActivity extends AppCompatActivity {
@@ -36,6 +38,7 @@ public class HoaDonActivity extends AppCompatActivity {
     TextView tvdiemnhan,tvdiemgiao,tvtonggia,tvtenkh,tvsodt,tvghichu,tvthunhap;
     ListView tvtensp;
     private DonHang donHang;
+    ArrayList<SanPham> arrayList;
     private FirebaseAuth mFirebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,11 @@ public class HoaDonActivity extends AppCompatActivity {
         Anhxa();
         ControlButton();
         ControlButtonHoanThanh();
+
+        arrayList = new ArrayList<>();
+        SanPhamAdapter adapter = new SanPhamAdapter(HoaDonActivity.this, R.layout.activity_sanpham, arrayList);
+        tvtensp.setAdapter(adapter);
+        adapter.setData(donHang.getSanpham());
         btncall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,6 +167,7 @@ public class HoaDonActivity extends AppCompatActivity {
         btnthatbai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                HomeFragment.flag--;
                 AlertDialog.Builder builder = new AlertDialog.Builder(HoaDonActivity.this, android.R.style.Theme_DeviceDefault_Dialog_Alert);
                 builder.setTitle("Xác nhận thất bại");
                 builder.setMessage("");
@@ -196,6 +205,7 @@ public class HoaDonActivity extends AppCompatActivity {
         btnhoanthanh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                HomeFragment.flag--;
                 AlertDialog.Builder builder = new AlertDialog.Builder(HoaDonActivity.this, android.R.style.Theme_DeviceDefault_Dialog_Alert);
                 builder.setTitle("Xác nhận hoàn thành");
                 builder.setMessage("");
@@ -212,7 +222,6 @@ public class HoaDonActivity extends AppCompatActivity {
                         db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("trangthai").setValue(6);
                         db.child("DonHangOnline").child("ShipperDaGiao").child(donHang.getIdKhachhang()).child(donHang.getKey()).setValue(donHang);
                         db.child("DonHangOnline").child("DaLayHang").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).removeValue();
-
                         db.child("Shipper").child(id).child("lichSuDonOnline").push().setValue(donHang);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable(HomeFragment.KEY_DIEMNHAN,donHang);
@@ -249,7 +258,7 @@ public class HoaDonActivity extends AppCompatActivity {
         tvdiemnhan.setText(donHang.getDiemnhan());
         tvdiemgiao.setText(donHang.getDiaChi());
         tvtonggia.setText( donHang.getDonGia()+"");
-        tvtenkh.setText( donHang.getTenKhachHang());
+        tvtenkh.setText( donHang.getTenKhachhang());
         tvsodt.setText(donHang.getSdtkhachhang());
         tvthunhap.setText(donHang.getThunhap()+"");
         tvghichu.setText(donHang.getGhiChu());

@@ -40,9 +40,7 @@ import adapter.DonHangAdapter;
 
 public class HomeFragment extends Fragment {
     public static final String KEY_DIEMNHAN = "DIEMNHAN";
-    public static final String KEY_DIEMGIAO = "DIEMGIAO";
-    public static final String KEY_TONGGIA = "TONGGIA";
-    public static final String KEY_BUNDLE = "BUNDLE";
+    public static int flag = 0;
     private TextView tvDiemNhan,tvDiemGiao,tvTongGia, tvThuNhap,tvTrangThai;
     private DatabaseReference databaseReference;
     private Context context;
@@ -124,13 +122,14 @@ public class HomeFragment extends Fragment {
                 arrayList = new ArrayList<DonHang>();
 
                 for (DataSnapshot snapshot1 : snapshot.getChildren()){
-                    for (DataSnapshot snapshot2 : snapshot1.getChildren()){
 
+                    for (DataSnapshot snapshot2 : snapshot1.getChildren()){
                         DonHang donHang = snapshot2.getValue(DonHang.class);
+
                         String diaChi = donHang.getDiaChi();
                         String diemNhan = donHang.getDiemnhan();
                         long thuNhap= donHang.getThunhap();
-                        String tenKhachhang = donHang.getTenKhachHang();
+                        String tenKhachhang = donHang.getTenKhachhang();
                         String ghiChu = donHang.getGhiChu();
                         String sdtkhachhang = donHang.getSdtkhachhang();
                         long donGia= donHang.getDonGia();

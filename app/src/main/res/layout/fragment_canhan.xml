@@ -2,25 +2,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="fragment.CaNhanFragment"
     android:layout_weight="10"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#EEEEEE">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2.5"
         android:orientation="horizontal"
+
         >
 
-        <ImageView
-            android:layout_width="364dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:id="@+id/avatar"
-            android:background="@drawable/avatar">
 
-        </ImageView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,19 +28,39 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="0.8"
+                android:gravity="center">
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/anhavatar"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="2dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal">
-
-
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    android:src="@drawable/iconfullname"></ImageView>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textSize="18dp"
-                    android:id="@+id/tv_email"
-                    android:gravity="center"
-                    android:background="@drawable/boder"
                     android:textStyle="bold"
+                    android:fontFamily="sans-serif-condensed"
+                    android:id="@+id/tv_hoten"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="85dp"
+
                     android:textColor="@color/xanh"
                     android:layout_gravity="center_horizontal"></TextView>
             </LinearLayout>
@@ -53,17 +69,50 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal">
-                android:background="@drawable/boder"
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    android:src="@drawable/iconmail"></ImageView>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textSize="18dp"
+                    android:id="@+id/tv_email"
+                    android:paddingLeft="85dp"
+                    android:fontFamily="sans-serif-condensed"
+
+                    android:gravity="center_vertical"
+
                     android:textStyle="bold"
-                    android:id="@+id/tv_hoten"
-                    android:gravity="center"
-                    android:background="@drawable/boder"
+                    android:textColor="@color/xanh"
+                    android:layout_gravity="center_horizontal"></TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    android:src="@drawable/iconcmt"></ImageView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:paddingLeft="97dp"
+                    android:fontFamily="sans-serif-condensed"
+
+                    android:id="@+id/tv_cmt"
                     android:textColor="@color/xanh"
                     android:layout_gravity="center_horizontal"></TextView>
             </LinearLayout>
@@ -73,7 +122,11 @@
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 >
-
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    android:src="@drawable/iconbirthday"></ImageView>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -81,8 +134,10 @@
                     android:textSize="20dp"
                     android:id="@+id/tv_ngaysinh"
                     android:textStyle="bold"
-                    android:gravity="center"
-                    android:background="@drawable/boder"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="97dp"
+                    android:fontFamily="sans-serif-condensed"
+
                     android:textColor="@color/xanh"
                     android:layout_gravity="center_horizontal"></TextView>
             </LinearLayout>
@@ -93,7 +148,11 @@
 
                 android:orientation="horizontal">
 
-
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    android:src="@drawable/iconphonenumber"></ImageView>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -101,44 +160,100 @@
                     android:textSize="20dp"
                     android:id="@+id/tv_sdt"
                     android:textStyle="bold"
-                    android:gravity="center"
-                    android:background="@drawable/boder"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="97dp"
+                    android:fontFamily="sans-serif-condensed"
+
                     android:textColor="@color/xanh"
                     android:layout_gravity="center_horizontal"></TextView>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    android:src="@drawable/iconbienso"></ImageView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:id="@+id/tv_bienso"
+                    android:paddingLeft="97dp"
+                    android:fontFamily="sans-serif-condensed"
+
+                    android:gravity="center_vertical"
+                    android:textColor="@color/xanh"
+                    android:layout_gravity="center_horizontal"></TextView>
+            </LinearLayout>
+
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="4"></LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="4"></LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="4"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:padding="5dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:textSize="20dp"
+            android:id="@+id/btn_thunhap"
+            android:fontFamily="sans-serif-condensed"
+
+            android:drawableLeft="@drawable/iconthunhap"
+            android:text="Thu nhập"
+            android:background="@color/white"></TextView>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3"></LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="3"></LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="3"></LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="3">
+        android:layout_weight="4"
+        android:padding="5dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Đổi mật khẩu"
+            android:id="@+id/tv_doimk"
             android:textColor="@color/black"
             android:gravity="center_vertical"
-            android:textSize="30dp"
+            android:textSize="20dp"
+            android:fontFamily="sans-serif-condensed"
+
             android:drawableLeft="@drawable/iconchangepw"
-            android:textStyle="bold"></TextView>
+            android:background="@color/white"
+            ></TextView>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3">
+        android:layout_weight="4"
+        android:padding="5dp">
 
         <TextView
             android:id="@+id/logout"
@@ -148,27 +263,30 @@
             android:gravity="center_vertical"
             android:paddingLeft="5dp"
             android:text="Đăng xuất"
-            android:textSize="30dp"
             android:textColor="@color/black"
-            android:textStyle="bold"></TextView>
+            android:textSize="20dp"
+            android:fontFamily="sans-serif-condensed"
+
+            android:background="@color/white"></TextView>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:orientation="horizontal">
-
+        android:layout_weight="4"
+        android:padding="5dp">
         <TextView
-            android:id="@+id/exit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:drawableLeft="@drawable/iconexit"
             android:gravity="center_vertical"
             android:paddingLeft="5dp"
-            android:text="Thoát"
-            android:textSize="30dp"
+            android:text="Thông tin ứng dụng"
             android:textColor="@color/black"
-            android:textStyle="bold"></TextView>
+            android:textSize="20dp"
+            android:fontFamily="sans-serif-condensed"
+
+            android:background="@color/white"
+            android:drawableLeft="@drawable/iconthongtin"></TextView>
 
     </LinearLayout>
+
 </LinearLayout>

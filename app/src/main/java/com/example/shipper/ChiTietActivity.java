@@ -47,6 +47,7 @@ public class ChiTietActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
     private DatabaseReference mDatabase;
     String idShipper;
+    DatabaseReference db = FirebaseDatabase.getInstance().getReference();
     ArrayList<SanPham> arrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,47 +59,48 @@ public class ChiTietActivity extends AppCompatActivity {
         arrayList = new ArrayList<>();
        SanPhamAdapter adapter = new SanPhamAdapter(ChiTietActivity.this, R.layout.activity_sanpham, arrayList);
         tvtensp.setAdapter(adapter);
-        onDataChange();
         adapter.setData(donHang.getSanpham());
+        onDataChange();
+        ButtonNhanDon();
         btncall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 askPermissionAndCall();
             }
         });
-        btnnhandon.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(ChiTietActivity.this,LayHangActivity.class);
-                String [] keys = donHang.getTime().split(" ");
-                donHang.setTrangthai(1);
-                DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-                String date = formatDateS(donHang.getTime());
-
-                db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("shipper").setValue(name);
-                db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("phoneShipper").setValue(phone);
-                db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("trangthai").setValue(2);
-                Log.d("aad",donHang.getTime());
-//                db.child("DonHangOnline").child("ShipperDaNhan").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).child("shipper").setValue(name);
-//                db.child("DonHangOnline").child("ShipperDaNhan").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).child("phoneShipper").setValue(phone);
-                db.child("DonHangOnline").child("ShipperDaNhan").child(idShipper).child(donHang.getIdDonHang()).setValue(donHang);
-                db.child("DonHangOnline").child("ShipperDaNhan").child(idShipper).child(donHang.getIdDonHang()).child("shipper").setValue(name);
-                db.child("DonHangOnline").child("ShipperDaNhan").child(idShipper).child(donHang.getIdDonHang()).child("phoneShipper").setValue(phone);
-                db.child("DonHangOnline").child("DaDatDon").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).removeValue();
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(HomeFragment.KEY_DIEMNHAN,donHang);
-                intent.putExtras(bundle);
-                startActivity(intent);
-
-            }
-        });
         btnquaylai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ChiTietActivity.this, Home.class);
                 startActivity(intent);
+            }
+        });
+    }
+    private void ButtonNhanDon(){
+        btnnhandon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (HomeFragment.flag<2) {
+                    HomeFragment.flag++;
+                    Intent intent = new Intent(ChiTietActivity.this, LayHangActivity.class);
+                    String[] keys = donHang.getTime().split(" ");
+                    donHang.setTrangthai(1);
+                    String date = formatDateS(donHang.getTime());
+                    db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("shipper").setValue(name);
+                    db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("phoneShipper").setValue(phone);
+                    db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("trangthai").setValue(2);
+                    db.child("DonHangOnline").child("ShipperDaNhan").child(idShipper).child(donHang.getIdDonHang()).setValue(donHang);
+                    db.child("DonHangOnline").child("ShipperDaNhan").child(idShipper).child(donHang.getIdDonHang()).child("shipper").setValue(name);
+                    db.child("DonHangOnline").child("ShipperDaNhan").child(idShipper).child(donHang.getIdDonHang()).child("phoneShipper").setValue(phone);
+                    db.child("DonHangOnline").child("DaDatDon").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).removeValue();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(HomeFragment.KEY_DIEMNHAN, donHang);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(ChiTietActivity.this,"Bạn đang có 2 đơn hàng rồi",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -115,20 +117,12 @@ public class ChiTietActivity extends AppCompatActivity {
                     Shipper sp=snapshot.getValue(Shipper.class);
                     name = sp.getNameShipper();
                     phone = sp.getPhoneShipper();
-
-
-
-
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-
                 }
             });
-
-
-
         }
 
     }
@@ -251,7 +245,7 @@ public class ChiTietActivity extends AppCompatActivity {
         tvdiemnhan.setText(donHang.getDiemnhan());
         tvdiemgiao.setText(donHang.getDiaChi());
         tvtonggia.setText( donHang.getDonGia()+"");
-        tvtenkh.setText( donHang.getTenKhachHang());
+        tvtenkh.setText( donHang.getTenKhachhang());
         tvsodt.setText(donHang.getSdtkhachhang());
         tvthunhap.setText(donHang.getThunhap()+"");
         tvghichu.setText(donHang.getGhiChu());

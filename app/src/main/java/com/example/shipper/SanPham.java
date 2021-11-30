@@ -12,8 +12,7 @@ public class SanPham implements Serializable {
     private int soluong;
     private boolean isAddToCart;
 
-    public SanPham() {
-    }
+
 
     public SanPham(String imgProduct, String chitiet, long giaBan, long giaNhap, String nameProduct, String nhomsanpham, int soluong,boolean isAddToCart) {
         this.chitiet = chitiet;
@@ -25,7 +24,7 @@ public class SanPham implements Serializable {
         this.imgProduct = imgProduct;
         this.isAddToCart=false;
     }
-
+    public SanPham(){}
 
 
 

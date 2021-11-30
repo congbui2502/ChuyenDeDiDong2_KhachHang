@@ -99,32 +99,6 @@ public class DangGiaoActivity extends AppCompatActivity {
                     arrayList.add(donHang);
 
                 }
-//                for (DataSnapshot snapshot1 : snapshot.getChildren()){
-//
-//                    DonHang donHang = snapshot1.getValue(DonHang.class);
-//                    String diaChi = donHang.getDiaChi();
-//                    String diemNhan = donHang.getDiemnhan();
-//                    long thuNhap= donHang.getThunhap();
-//                    String tenKhachhang = donHang.getTenKhachHang();
-//                    String ghiChu = donHang.getGhiChu();
-//                    String sdtkhachhang = donHang.getSdtkhachhang();
-//                    long donGia= donHang.getDonGia();
-//                    List<SanPham> sanpham = donHang.getSanpham();
-//                    String time = donHang.getTime();
-//                    String idQuan = donHang.getIdQuan();
-//                    String shipper = donHang.getShipper();
-//                    String phoneShipper = donHang.getPhoneShipper();
-//                    String key = donHang.getKey();
-//                    int trangthai = donHang.getTrangthai();
-//                    String idKhachHang = donHang.getIdKhachhang();
-//                    String idDonHang= donHang.getIdDonHang();
-//                    donHangActivity = new DonHang(diaChi,diemNhan,donGia,tenKhachhang,sdtkhachhang,thuNhap,sanpham, ghiChu,time,
-//                            idQuan,shipper,phoneShipper,key,trangthai,idKhachHang,idDonHang);
-//                    arrayList.add(donHangActivity);
-//
-//
-//                }
-//                Toast.makeText(DangGiaoActivity.this,donHang.getDiaChi()+"aaaa",Toast.LENGTH_SHORT).show();
                 adapter.setData(arrayList);
                 adapter.notifyDataSetChanged();
             }

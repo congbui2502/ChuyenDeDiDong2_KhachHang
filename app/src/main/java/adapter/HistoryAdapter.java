@@ -52,8 +52,7 @@ public class HistoryAdapter extends ArrayAdapter<History> {
         TextView textView2 = view.findViewById(R.id.tv_diemnhan);
         TextView textView3 = view.findViewById(R.id.tv_diemgiao);
         TextView textView4 = view.findViewById(R.id.tv_thoigian);
-        TextView textView5 = view.findViewById(R.id.tv_thoigiannhan);
-        TextView textView6 = view.findViewById(R.id.tv_thoigiangiao);
+
 
         textView1.setText(history.getTrangthai()+"");
         if (history.getTrangthai()==0){
@@ -70,8 +69,7 @@ public class HistoryAdapter extends ArrayAdapter<History> {
         textView2.setText(history.getDiemnhan());
         textView3.setText(history.getDiaChi());
         textView4.setText(history.getTime());
-        textView5.setText(history.getTgNhanDon());
-        textView6.setText(history.getTgHoanThanh());
+
 
         return view;
     }

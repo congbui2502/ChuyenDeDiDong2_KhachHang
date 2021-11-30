@@ -17,21 +17,42 @@
             android:layout_marginTop="20dp"
             android:background="@color/white"
             android:orientation="vertical">
-
-            <ImageView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/image_view"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_marginLeft="30dp"
-                android:transitionName="logo_image" />
+                android:src="@drawable/anhavatar"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#FF000000"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chọn ảnh"
+                    android:id="@+id/btnSelectImg"
+                    ></Button>
+            </LinearLayout>
+        </LinearLayout>
 
-
-            <TextView
-                android:layout_width="wrap_content"
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:textSize="18sp"
-                android:transitionName="logo_signin" />
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,15 +75,36 @@
                         android:id="@+id/edt_username"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
                         android:hint="Họ và tên"
+                        android:inputType="text"
                         android:textColor="@color/black"
                         android:transitionName="edt_username">
 
                     </com.google.android.material.textfield.TextInputEditText>
 
                 </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/cmt_input"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="20">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_cmt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Số chứng minh thư"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:transitionName="edt_username">
+
+                    </com.google.android.material.textfield.TextInputEditText>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/email_input"
@@ -76,9 +118,9 @@
                         android:id="@+id/edt_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="Email"
                         android:inputType="textEmailAddress"
                         android:textColor="@color/black"
-                        android:hint="Email"
                         android:transitionName="edt_email">
 
                     </com.google.android.material.textfield.TextInputEditText>
@@ -129,7 +171,28 @@
                     </com.google.android.material.textfield.TextInputEditText>
 
                 </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/date_input"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    >
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_bienso"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="Biển số xe"
+                        android:textColor="@color/black"
+                        android:transitionName="edt_phone"
+                        >
+
+                    </com.google.android.material.textfield.TextInputEditText>
+
+                </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/pass_input"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -184,7 +247,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:text="Đăng kí"
                 android:transitionName="button_sign" />
