@@ -65,8 +65,7 @@ public class ThuNhapShipper extends AppCompatActivity {
         ArrayAdapter<String> adapter=new ArrayAdapter<String>
                 (
                         this,
-                        android.R.layout.simple_spinner_item,
-                        arr
+                        android.R.layout.simple_spinner_item,arr
                 );
         //phải gọi lệnh này để hiển thị danh sách cho Spinner
         adapter.setDropDownViewResource

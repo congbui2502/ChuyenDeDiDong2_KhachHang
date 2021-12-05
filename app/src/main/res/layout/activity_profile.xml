@@ -1,54 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="fragment.CaNhanFragment"
-    android:layout_weight="10"
-    android:orientation="vertical"
-    android:background="#EEEEEE">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="3"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/bg_profile">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/anhavatar"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="Tran Quang Hung"
+            android:textColor="@color/xanh"
+            android:textSize="20dp"
+            android:textStyle="bold"></TextView>
+</LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+
+            android:background="@color/xanh"></View>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:background="@drawable/bg_profile"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image"
-                android:layout_width="130dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="45dp"
-                android:src="@drawable/anhavatar"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="2dp" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/usericon"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:text="Shipper"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"></TextView>
 
             <TextView
                 android:id="@+id/tv_hoten"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:paddingBottom="10dp"
+                android:layout_marginLeft="40dp"
                 android:text="Tran Quang Hung"
-                android:textColor="@color/xanh"
-                android:textSize="20dp"
-                android:textStyle="bold"></TextView>
+                android:textSize="18dp">
+
+            </TextView>
+
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
-
-            android:background="@color/xanh"></View>
-
+            android:layout_height="1dp"
+            android:background="#DDDDDD"></View>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -77,9 +107,9 @@
                 android:id="@+id/tv_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:layout_marginLeft="62dp"
-                android:text="email"
-                android:textColor="@color/xanh"
+                android:text="Tran Quang Hung"
                 android:textSize="18dp">
 
 
@@ -120,9 +150,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="43dp"
-                android:text="cmt"
-
-                android:textColor="@color/xanh"
+                android:text="Tran Quang Hung"
                 android:textSize="18dp">
 
             </TextView>
@@ -162,8 +190,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
-                android:text="ngày sinh"
-                android:textColor="@color/xanh"
+                android:text="Tran Quang Hung"
                 android:textSize="18dp">
 
             </TextView>
@@ -202,9 +229,8 @@
                 android:id="@+id/tv_sdt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:text="số điện thoại"
-                android:textColor="@color/xanh"
+                android:layout_marginLeft="25dp"
+                android:text="Tran Quang Hung"
                 android:textSize="18dp">
 
             </TextView>
@@ -243,9 +269,8 @@
                 android:id="@+id/tv_bienso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:text="biển số"
-                android:textColor="@color/xanh"
+                android:layout_marginLeft="25dp"
+                android:text="Tran Quang Hung"
                 android:textSize="18dp">
 
             </TextView>
@@ -266,7 +291,7 @@
                 android:drawableLeft="@drawable/iconthunhap"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_vertical"
-                android:paddingLeft="15dp"
+
                 android:text="Thu nhập"
                 android:textColor="@color/black"
                 android:textSize="20dp"></TextView>
@@ -287,7 +312,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_vertical"
                 android:text="Đổi mật khẩu"
-                android:paddingLeft="15dp"
+
                 android:textColor="@color/black"
                 android:textSize="20dp"></TextView>
         </LinearLayout>
@@ -306,10 +331,10 @@
                 android:drawableLeft="@drawable/iconlogout"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_vertical"
-
+                android:paddingLeft="5dp"
                 android:text="Đăng xuất"
                 android:textColor="@color/black"
-                android:paddingLeft="15dp"
+
                 android:textSize="20dp"></TextView>
         </LinearLayout>
 
@@ -326,15 +351,14 @@
                 android:drawableLeft="@drawable/iconthongtin"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_vertical"
-
+                android:paddingLeft="5dp"
                 android:text="Thông tin ứng dụng"
-                android:paddingLeft="15dp"
+
                 android:textColor="@color/black"
                 android:textSize="20dp"></TextView>
 
         </LinearLayout>
 
     </LinearLayout>
-
 
 </RelativeLayout>
