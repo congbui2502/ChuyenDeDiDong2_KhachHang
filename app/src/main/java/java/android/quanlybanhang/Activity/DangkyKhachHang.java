@@ -25,11 +25,12 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.KhachHang;
+import java.io.Serializable;
 
 public class DangkyKhachHang extends AppCompatActivity implements View.OnClickListener {
     private Button signinNow, signup;
-    private TextView logoText, sloganText, forgetPass;
-    private ImageView imageView;
+    public static final String KEY_KHACHHANG="KHACHHANG";
+    private KhachHang khachHang;
     private TextInputEditText username, email, phone,date, password, confirm_password;
     private CardView google;
 
@@ -65,7 +66,7 @@ public class DangkyKhachHang extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_signin_now:
-                Intent intent = new Intent(DangkyKhachHang.this, DangNhapKhachHang.class);
+                Intent intent = new Intent(DangkyKhachHang.this,DangNhapKhachHangActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_signup:
@@ -122,7 +123,7 @@ public class DangkyKhachHang extends AppCompatActivity implements View.OnClickLi
                         String UID = mFirebaseAuth.getUid();
                         mFirebaseInstance = FirebaseDatabase.getInstance();
                         mFirebaseDatabase = mFirebaseInstance.getReference();
-                        KhachHang khachHang=new KhachHang(userName,dt,mail,mPhone);
+                        KhachHang khachHang=new KhachHang(userName,mail,dt,mPhone,UID);
                         mFirebaseDatabase.child("KhachHang"+"/"+UID).setValue(khachHang);
 //                        LoadingDialog loadingDialog = new LoadingDialog(SignUpActivity.this);
 //                        loadingDialog.startLoadingDialog();
@@ -132,7 +133,10 @@ public class DangkyKhachHang extends AppCompatActivity implements View.OnClickLi
                             public void run() {
 
                                 Toast.makeText(DangkyKhachHang.this, "Signup succes", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(DangkyKhachHang.this, DangNhapKhachHang.class);
+                                Intent intent = new Intent(DangkyKhachHang.this,DangNhapKhachHangActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable(KEY_KHACHHANG,khachHang);
+                                intent.putExtras(bundle);
                                 startActivity(intent);
                                 finish();
                             }

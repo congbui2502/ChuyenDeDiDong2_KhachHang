@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,9 +31,6 @@ public class SanPhamNoiBatAdapter extends RecyclerView.Adapter<SanPhamNoiBatAdap
         void onClickAddToCart(ImageView imageToCart,SanPham trai);
     }
 
-
-
-
     public void setData(KhachHangActivity activity,List<SanPham> list, IclickAddToCartListener listener)
     {
         this.activity=activity;
@@ -46,6 +44,7 @@ public class SanPhamNoiBatAdapter extends RecyclerView.Adapter<SanPhamNoiBatAdap
     {
         this.activity=activity;
         this.trais=list;
+        Toast.makeText(activity.getBaseContext(),trais.size()+"",Toast.LENGTH_SHORT).show();
         notifyDataSetChanged();
     }
 
@@ -66,7 +65,7 @@ public class SanPhamNoiBatAdapter extends RecyclerView.Adapter<SanPhamNoiBatAdap
         }
 
         holder.tvHagtag.setText(trai.getNameProduct());
-//        holder.imageViewSanPhamNoiBat.setBackgroundResource(trai.getImgProduct());
+
         Picasso.get().load(trai.getImgProduct()).into(holder.imageViewSanPhamNoiBat);
         holder.imgaddSanPhamNoiBat.setText(trai.getGiaBan()+" VND");
         holder.textViewgiaSPNoiBat.setText(trai.getChitiet());

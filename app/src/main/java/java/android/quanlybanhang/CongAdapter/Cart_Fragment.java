@@ -140,7 +140,6 @@ public class Cart_Fragment extends Fragment {
                 if(cbCartFragment.isChecked()==true)
                 {
                     productAdapter.setCheckedCheckbox(true);
-
                     productAdapter.iclickAddToCartListener.setGiaDonHang(productAdapter.setGiaDonHang());
                 }else {
                     productAdapter.setCheckedCheckbox(false);

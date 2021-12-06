@@ -18,13 +18,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QuanLyBanHang">
-        <activity android:name=".Activity.DangNhapKhachHang">
 
+        <activity android:name=".Activity.DangkyKhachHang"></activity>
+
+        <activity android:name=".Activity.DangNhapKhachHangActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
-        <activity android:name=".Activity.DangkyKhachHang">
-
-        </activity>
 
         <activity android:name=".Activity.ForgotPasswordActivity">
 
@@ -38,11 +43,7 @@
         <activity android:name=".CongAdapter.Tttttttest"></activity>
         <activity android:name=".Activity.KhachHangActivity">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity

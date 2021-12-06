@@ -2,11 +2,13 @@ package java.android.quanlybanhang.Sonclass;
 
 
 import java.io.Serializable;
+import java.util.List;
 
 public class SanPham implements Serializable {
     private String chitiet;
     private long giaBan;
     private long giaNhap;
+    private List <DonGia> donGia;
     private  String nameProduct;
     private String imgProduct;
     private String nhomsanpham;
@@ -16,7 +18,8 @@ public class SanPham implements Serializable {
     private String idCuaHang;
     private String tittle;
     private boolean superquangcao;
-
+    private String status;
+    private String id;
 
     public SanPham() {
     }
@@ -61,7 +64,50 @@ public class SanPham implements Serializable {
         this.superquangcao = superquangcao;
     }
 
+    public SanPham(String chitiet, long giaNhap, List<DonGia> donGia, String nameProduct,
+                   String imgProduct, String nhomsanpham, int soluong, boolean addToCart,
+                   String status, String id) {
+        this.chitiet = chitiet;
+        this.giaNhap = giaNhap;
+        this.donGia = donGia;
+        this.nameProduct = nameProduct;
+        this.imgProduct = imgProduct;
+        this.nhomsanpham = nhomsanpham;
+        this.soluong = soluong;
+        this.addToCart = addToCart;
+        this.status = status;
+        this.id = id;
+    }
 
+
+    public SanPham(String chitiet, long giaBan, long giaNhap, List<DonGia> donGia,
+                   String nameProduct, String imgProduct, String nhomsanpham, int soluong,
+                   boolean addToCart, long giamGia, String idCuaHang,
+                   String tittle, boolean superquangcao, String status, String id) {
+        this.chitiet = chitiet;
+        this.giaBan = giaBan;
+        this.giaNhap = giaNhap;
+        this.donGia = donGia;
+        this.nameProduct = nameProduct;
+        this.imgProduct = imgProduct;
+        this.nhomsanpham = nhomsanpham;
+        this.soluong = soluong;
+        this.addToCart = addToCart;
+        this.giamGia = giamGia;
+        this.idCuaHang = idCuaHang;
+        this.tittle = tittle;
+        this.superquangcao = superquangcao;
+        this.status = status;
+        this.id = id;
+    }
+
+    public List<DonGia> getDonGia() {
+        return donGia;
+    }
+
+    public void setDonGia(List<DonGia> donGia) {
+        this.donGia = donGia;
+    }
 
     public boolean isSuperquangcao() {
         return superquangcao;
@@ -160,4 +206,19 @@ public class SanPham implements Serializable {
         this.addToCart = addToCart;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2/app/src/main/res/layout/activity_dangnhap_khachhang.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2/app/src/main/res/layout/activity_signup_khachhang.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2/app/src/main/res/layout/chitietsanpham_layout.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2/app/src/main/res/layout/dialog_phuongthucthanhtoan.xml" value="0.25729166666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2/app/src/main/res/layout/donhang_fragment.xml" value="0.25729166666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2/app/src/main/res/layout/thongtincuahang.xml" value="0.203125" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable-hdpi/edittext_style.xml" value="0.23958333333333334" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable-hdpi/ic_baseline_search_24.xml" value="0.23958333333333334" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable-hdpi/new_style.xml" value="0.23958333333333334" />

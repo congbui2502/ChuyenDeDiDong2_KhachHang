@@ -120,6 +120,8 @@ public class KhachHangActivity extends AppCompatActivity {
             if(bundle.getSerializable("khachhang")!=null)
             {
                 khachHang = (KhachHang) bundle.getSerializable("khachhang");
+                Toast.makeText(getApplicationContext(),khachHang.getNameKhachHang(),Toast.LENGTH_SHORT).show();
+
             }
         }
         else {
@@ -129,11 +131,6 @@ public class KhachHangActivity extends AppCompatActivity {
 
 
         products=getCartList();
-
-
-
-
-
 
         mReference.child("gioHang").child(khachHang.getIdKhachhang()).addChildEventListener(new ChildEventListener() {
             @Override
@@ -608,7 +605,7 @@ public class KhachHangActivity extends AppCompatActivity {
                         {
                            sendNotification(sanPham);
                         }else {
-                            Toast.makeText(getApplicationContext(),"aaa",Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getApplicationContext(),"aaa",Toast.LENGTH_SHORT).show();
                         }
 
                     }

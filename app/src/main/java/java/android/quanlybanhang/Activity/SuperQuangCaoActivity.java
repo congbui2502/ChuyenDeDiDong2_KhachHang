@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.android.quanlybanhang.CongAdapter.QuanNoiBatAdapter;
 import java.android.quanlybanhang.CongAdapter.SanPhamNoiBatAdapter;
 import java.android.quanlybanhang.CongAdapter.ShopProductFragment;
+import java.android.quanlybanhang.CongAdapter.SuperQuangCaoAdapter;
 import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.CuaHang;
 import java.android.quanlybanhang.Sonclass.SanPham;
@@ -36,7 +39,7 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
     private DatabaseReference mReference;
     private CuaHang cuaHang;
     private RecyclerView recyclerView;
-    SanPhamNoiBatAdapter adapter;
+    private  SuperQuangCaoAdapter adapter;
 
     private List<SanPham> sanPhamList;
 
@@ -50,14 +53,59 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
         unit();
         Glide.with(this).load(sanPham.getImgProduct()).into(imgSP);
         tvTenSP.setText(sanPham.getNameProduct());
-        tvGia.setText(sanPham.getGiaBan()+" VND");
+        if(sanPham.getDonGia()!=null)
+        {
+            tvGia.setText(sanPham.getDonGia().get(0).getGiaBan()+" VND");
+        }
+
         tvDes.setText(sanPham.getChitiet());
         tvDatMua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mReference= FirebaseDatabase.getInstance().getReference();
-                mReference.child("gioHang").child("idKhachHang").child("sanPham").push().setValue(sanPham);
-                getSupportFragmentManager().popBackStack();
+                mReference.child("gioHang").child("idKhachHang").addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                        if (snapshot.getKey().equals("idQuan"))
+                        {
+                            String idQuan = snapshot.getValue(String.class);
+                            if(idQuan.equals(sanPham.getIdCuaHang()))
+                            {
+                                mReference.child("gioHang").child("idKhachHang").child("sanpham").push().setValue(sanPham);
+                                Toast.makeText(getBaseContext(),"Sản phẩm đã được thêm vào giỏ",Toast.LENGTH_SHORT).show();
+
+                            }else {
+                                mReference.child("gioHang").child("idKhachHang").child("idQuan").setValue(sanPham.getIdCuaHang());
+                                mReference.child("gioHang").child("idKhachHang").child("sanPham").removeValue();
+                                mReference.child("gioHang").child("idKhachHang").child("sanPham").push().setValue(sanPham);
+                                Toast.makeText(getBaseContext(),"Sản phẩm đã được thêm vào giỏ",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+
 
             }
         });
@@ -91,8 +139,68 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
         tvGia=findViewById(R.id.tvGia);
         tvTenQuan=findViewById(R.id.tenQuanquan);
         recyclerView=findViewById(R.id.recySanpham);
-        adapter=new SanPhamNoiBatAdapter();
-        adapter.setData1(SuperQuangCaoActivity.this,sanPhamList);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getBaseContext(),LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter=new SuperQuangCaoAdapter();
+        adapter.setData(SuperQuangCaoActivity.this, new SuperQuangCaoAdapter.IclickAddToCartListener() {
+            @Override
+            public void onClickAddToCart(SanPham trai) {
+                Glide.with(SuperQuangCaoActivity.this).load(trai.getImgProduct()).into(imgSP);
+                tvTenSP.setText(trai.getNameProduct());
+                tvGia.setText(trai.getDonGia().get(0).getGiaBan()+" VND");
+                tvDes.setText(trai.getChitiet());
+                tvDatMua.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mReference= FirebaseDatabase.getInstance().getReference();
+                        mReference.child("gioHang").child("idKhachHang").addChildEventListener(new ChildEventListener() {
+                            @Override
+                            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                                if (snapshot.getKey().equals("idQuan"))
+                                {
+                                    String idQuan = snapshot.getValue(String.class);
+                                    if(idQuan.equals(trai.getIdCuaHang()))
+                                    {
+                                        mReference.child("gioHang").child("idKhachHang").child("sanPham").push().setValue(trai);
+                                        Toast.makeText(getBaseContext(),"Sản phẩm đã được thêm vào giỏ",Toast.LENGTH_SHORT).show();
+
+                                    }else {
+                                        mReference.child("gioHang").child("idKhachHang").child("idQuan").setValue(trai.getIdCuaHang());
+                                        mReference.child("gioHang").child("idKhachHang").child("sanPham").removeValue();
+                                        mReference.child("gioHang").child("idKhachHang").child("sanPham").push().setValue(trai);
+                                        Toast.makeText(getBaseContext(),"Sản phẩm đã được thêm vào giỏ",Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                            }
+
+                            @Override
+                            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+                            }
+
+                            @Override
+                            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+
+
+                    }
+                });
+                getData();
+            }
+        });
         recyclerView.setAdapter(adapter);
         Intent intent=getIntent();
         Bundle bundle= intent.getExtras();
@@ -105,13 +213,14 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
 
     private void getData()
     {
-        mReference= FirebaseDatabase.getInstance().getReference("cuaHang");
+        mReference= FirebaseDatabase.getInstance().getReference();
 
-        mReference.addChildEventListener(new ChildEventListener() {
+        mReference.child("cuaHang").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 if(snapshot.getKey().equals(sanPham.getIdCuaHang()))
                 {
+
 //                    Toast.makeText(getBaseContext(),snapshot.getKey(),Toast.LENGTH_SHORT).show();
                     for (DataSnapshot snapshot1:snapshot.getChildren())
                     {
@@ -122,11 +231,13 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
                             cuaHang = snapshot1.getValue(CuaHang.class);
                             if(cuaHang!=null)
                             {
-                                Toast.makeText(getBaseContext(),cuaHang.getName(),Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getBaseContext(),cuaHang.getName(),Toast.LENGTH_SHORT).show();
                                 Glide.with(getBaseContext()).load(cuaHang.getLogoUrl()).into(imgLogo);
                                 tvTenQuan.setText(cuaHang.getName());
                             }
 
+                        }else {
+//                            Toast.makeText(getBaseContext(),"aaa",Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -156,27 +267,35 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
             }
         });
 
-        mReference.addChildEventListener(new ChildEventListener() {
+        mReference.child("cuaHang").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-                for (DataSnapshot snapshot1:snapshot.getChildren())
-                {
-                    String key= snapshot1.getKey();
-//                    Toast.makeText(getContext(),key,Toast.LENGTH_SHORT).show();
-                    if(key.equals("sanpham"))
-                    {
-                        for (DataSnapshot snapshot2:snapshot1.getChildren())
-                        {
-                            for (DataSnapshot snapshot3:snapshot2.getChildren())
-                            {
-                                SanPham sanPham = snapshot3.getValue(SanPham.class);
-                                sanPhamList.add(sanPham);
-//                                adapter.setData1((KhachHangActivity) getActivity(),sanPhamList);
-                            }
+                if(snapshot.getKey().equals(sanPham.getIdCuaHang())) {
 
+
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+
+                        String key = snapshot1.getKey();
+
+                        if (key.equals("sanpham")) {
+                            for (DataSnapshot snapshot2 : snapshot1.getChildren()) {
+                                for (DataSnapshot snapshot3 : snapshot2.getChildren()) {
+                                    SanPham sanPham = snapshot3.getValue(SanPham.class);
+
+
+                                    sanPhamList.add(sanPham);
+                               //     Toast.makeText(getBaseContext(),sanPhamList.size()+" abc",Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(getBaseContext(),sanPham.getNameProduct(),Toast.LENGTH_SHORT).show();
+                                       adapter.getList(sanPhamList);
+                                }
+
+                            }
+                        }else {
+                           // Toast.makeText(getBaseContext(),"cmm",Toast.LENGTH_SHORT).show();
                         }
                     }
+
                 }
             }
 

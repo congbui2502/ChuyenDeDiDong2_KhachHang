@@ -9,30 +9,23 @@ public class KhachHang implements Serializable {
     private String sdtKhachHang;
     private String idKhachhang;
 
-    public KhachHang() {
-    }
-
-    public KhachHang(String nameKhachHang, String emailKhachHang, String dateKhachHang, String sdtKhachHang, String idKhachhang) {
-        this.nameKhachHang = nameKhachHang;
-        this.emailKhachHang = emailKhachHang;
-        this.dateKhachHang = dateKhachHang;
-        this.sdtKhachHang = sdtKhachHang;
-        this.idKhachhang = idKhachhang;
-    }
-
-    public KhachHang(String nameKhachHang, String emailKhachHang, String dateKhachHang, String sdtKhachHang) {
-        this.nameKhachHang = nameKhachHang;
-        this.emailKhachHang = emailKhachHang;
-        this.dateKhachHang = dateKhachHang;
-        this.sdtKhachHang = sdtKhachHang;
-    }
-
     public String getIdKhachhang() {
         return idKhachhang;
     }
 
     public void setIdKhachhang(String idKhachhang) {
         this.idKhachhang = idKhachhang;
+    }
+
+    public KhachHang() {
+    }
+
+    public KhachHang(String nameKhachHang, String emailKhachHang, String dateKhachHang, String sdtKhachHang,String idKhachhang) {
+        this.nameKhachHang = nameKhachHang;
+        this.emailKhachHang = emailKhachHang;
+        this.dateKhachHang = dateKhachHang;
+        this.sdtKhachHang = sdtKhachHang;
+        this.idKhachhang=idKhachhang;
     }
 
     public String getNameKhachHang() {
