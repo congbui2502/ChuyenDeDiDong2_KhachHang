@@ -29,9 +29,7 @@ import adapter.SanPhamAdapter;
 
 public class DaNhanActivity extends AppCompatActivity {
     public static final String KEY_DIEMNHAN = "DIEMNHAN";
-    public static final String KEY_DIEMGIAO = "DIEMGIAO";
-    public static final String KEY_TONGGIA = "TONGGIA";
-    public static final String KEY_BUNDLE = "BUNDLE";
+
     private TextView tvDiemNhan,tvDiemGiao,tvTongGia, tvThuNhap,tvTrangThai;
     private DatabaseReference databaseReference;
     private Context context;

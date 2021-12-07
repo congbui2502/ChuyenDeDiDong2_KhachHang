@@ -40,27 +40,28 @@
                 android:layout_weight="1"
 
                 android:padding="10dp"
-                android:gravity="center_vertical">
+                android:gravity="center">
 
                 <Button
                     android:id="@+id/btn_danhan"
-                    android:layout_width="170dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/boder"
-                    android:text="Đã nhận"></Button>
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/icondanhan"
+                    ></Button>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="10dp">
+                android:padding="10dp"
+                android:gravity="center">
 
                 <Button
                     android:id="@+id/btn_danggiao"
-                    android:layout_width="170dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/boder"
+                    android:layout_width="130dp"
+                    android:layout_height="70dp"
+                    android:background="@drawable/icondanggiao"
                     android:text="Đang giao"></Button>
             </LinearLayout>
         </LinearLayout>

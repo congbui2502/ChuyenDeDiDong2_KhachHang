@@ -42,11 +42,13 @@ public class ChiTietActivity extends AppCompatActivity {
     private static final String LOG_TAG = "AndroidExample";
     TextView tvdiemnhan,tvdiemgiao,tvtonggia,tvtenkh,tvsodt,tvghichu,tvthunhap;
     ListView tvtensp;
+    private int soDon;
     private DonHang donHang;
     String phone, name;
     private FirebaseAuth mFirebaseAuth;
     private DatabaseReference mDatabase;
     String idShipper;
+    Shipper shipper;
     DatabaseReference db = FirebaseDatabase.getInstance().getReference();
     ArrayList<SanPham> arrayList;
     @Override
@@ -62,6 +64,7 @@ public class ChiTietActivity extends AppCompatActivity {
         adapter.setData(donHang.getSanpham());
         onDataChange();
         ButtonNhanDon();
+        getSoDonHang();
         btncall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,15 +80,35 @@ public class ChiTietActivity extends AppCompatActivity {
             }
         });
     }
+    private void getSoDonHang(){
+
+
+        String id=mFirebaseAuth.getUid();
+        db.child("Shipper").child(id).child("donChuaGiao").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    soDon = snapshot.getValue(Integer.class);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     private void ButtonNhanDon(){
         btnnhandon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (HomeFragment.flag<2) {
-                    HomeFragment.flag++;
+                if (soDon<2) {
+                    soDon++;
+                    String id=mFirebaseAuth.getUid();
+                    db.child("Shipper").child(id).child("donChuaGiao").setValue(soDon);
                     Intent intent = new Intent(ChiTietActivity.this, LayHangActivity.class);
                     String[] keys = donHang.getTime().split(" ");
                     donHang.setTrangthai(1);
+
                     String date = formatDateS(donHang.getTime());
                     db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("shipper").setValue(name);
                     db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("phoneShipper").setValue(phone);

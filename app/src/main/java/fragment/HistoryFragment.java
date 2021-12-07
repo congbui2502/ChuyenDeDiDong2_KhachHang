@@ -17,7 +17,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.shipper.DonHang;
 import com.example.shipper.History;
 import com.example.shipper.LichSuActivity;
 import com.example.shipper.R;
@@ -127,7 +126,7 @@ public class HistoryFragment<cardview> extends Fragment {
                         String diaChi = history.getDiaChi();
                         String diemNhan = history.getDiemnhan();
                         long thuNhap = history.getThunhap();
-                        String tenKhachhang = history.getTenKhachHang();
+                        String tenKhachhang = history.getTenKhachhang();
                         String ghiChu = history.getGhiChu();
                         String sdtkhachhang = history.getSdtkhachhang();
                         long donGia = history.getDonGia();
@@ -149,6 +148,7 @@ public class HistoryFragment<cardview> extends Fragment {
                     adapter.setData(arrayList);
                 }
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

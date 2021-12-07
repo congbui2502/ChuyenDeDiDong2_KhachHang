@@ -1,8 +1,8 @@
 package com.example.shipper;
 
-import android.widget.ImageView;
+import java.io.Serializable;
 
-public class Shipper {
+public class Shipper implements Serializable {
     private String nameShipper;
     private String dateShipper;
     private String emailShipper;
@@ -10,8 +10,9 @@ public class Shipper {
     private String bienSoXe;
     private String soCMT;
     private String imgAvatar;
+    private int donChuaGiao;
 
-    public Shipper(String nameShipper, String dateShipper, String emailShipper, String phoneShipper, String bienSoXe, String soCMT, String imgAvatar) {
+    public Shipper(String nameShipper, String dateShipper, String emailShipper, String phoneShipper, String bienSoXe, String soCMT, String imgAvatar,int donChuaGiao) {
         this.nameShipper = nameShipper;
         this.dateShipper = dateShipper;
         this.emailShipper = emailShipper;
@@ -19,6 +20,7 @@ public class Shipper {
         this.bienSoXe = bienSoXe;
         this.soCMT = soCMT;
         this.imgAvatar = imgAvatar;
+        this.donChuaGiao= donChuaGiao;
     }
 
     public Shipper() {
@@ -78,5 +80,13 @@ public class Shipper {
 
     public void setImgAvatar(String imgAvatar) {
         this.imgAvatar = imgAvatar;
+    }
+
+    public int getDonChuaGiao() {
+        return donChuaGiao;
+    }
+
+    public void setDonChuaGiao(int donChuaGiao) {
+        this.donChuaGiao = donChuaGiao;
     }
 }

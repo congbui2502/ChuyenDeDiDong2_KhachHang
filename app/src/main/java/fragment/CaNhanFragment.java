@@ -37,7 +37,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CaNhanFragment extends Fragment {
     private FirebaseAuth mFirebaseAuth;
-
     private DatabaseReference mDatabase;
     private TextView tv_name,tv_email,tv_phone,tv_date,tv_dangxuat,tv_thoat,tv_doimk,tv_bienso,tv_cmt,tv_thunhap;
     private CircleImageView avatar;

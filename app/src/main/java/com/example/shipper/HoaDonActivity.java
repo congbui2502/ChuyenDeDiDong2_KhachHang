@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import android.content.pm.PackageManager;
 import android.Manifest;
@@ -19,8 +21,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,28 +35,33 @@ import adapter.SanPhamAdapter;
 import fragment.HomeFragment;
 
 public class HoaDonActivity extends AppCompatActivity {
-    Button btnthatbai, btnhoanthanh,btncall;
+    Button btnthatbai, btnhoanthanh,btncall,btnback;
     private static final int MY_PERMISSION_REQUEST_CODE_CALL_PHONE = 555;
 
     private static final String LOG_TAG = "AndroidExample";
-    Button btnnhandon, btnquaylai;
+    DatabaseReference db = FirebaseDatabase.getInstance().getReference();
     TextView tvdiemnhan,tvdiemgiao,tvtonggia,tvtenkh,tvsodt,tvghichu,tvthunhap;
     ListView tvtensp;
+    private int soDon;
     private DonHang donHang;
     ArrayList<SanPham> arrayList;
+    String idShipper;
     private FirebaseAuth mFirebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chitiet);
+        mFirebaseAuth=FirebaseAuth.getInstance();
         Anhxa();
         ControlButton();
         ControlButtonHoanThanh();
-
+        idShipper = mFirebaseAuth.getUid();
+//        ButtonBack();
         arrayList = new ArrayList<>();
         SanPhamAdapter adapter = new SanPhamAdapter(HoaDonActivity.this, R.layout.activity_sanpham, arrayList);
         tvtensp.setAdapter(adapter);
         adapter.setData(donHang.getSanpham());
+        getSoDonHang();
         btncall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +70,10 @@ public class HoaDonActivity extends AppCompatActivity {
         });
 
     }
-
+    private void ButtonBack(){
+        Intent intent = new Intent(HoaDonActivity.this,Home.class);
+        startActivity(intent);
+    }
     private void askPermissionAndCall() {
 
         // With Android Level >= 23, you have to ask the user
@@ -162,12 +175,30 @@ public class HoaDonActivity extends AppCompatActivity {
             return dt;
         }
     }
+    private void getSoDonHang(){
 
+
+        String id=mFirebaseAuth.getUid();
+        db.child("Shipper").child(id).child("donChuaGiao").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                soDon = snapshot.getValue(Integer.class);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     private void ControlButton(){
         btnthatbai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HomeFragment.flag--;
+                soDon--;
+                String id=mFirebaseAuth.getUid();
+                db.child("Shipper").child(id).child("donChuaGiao").setValue(soDon);
                 AlertDialog.Builder builder = new AlertDialog.Builder(HoaDonActivity.this, android.R.style.Theme_DeviceDefault_Dialog_Alert);
                 builder.setTitle("Xác nhận thất bại");
                 builder.setMessage("");
@@ -205,7 +236,9 @@ public class HoaDonActivity extends AppCompatActivity {
         btnhoanthanh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HomeFragment.flag--;
+                soDon--;
+                String id=mFirebaseAuth.getUid();
+                db.child("Shipper").child(id).child("donChuaGiao").setValue(soDon);
                 AlertDialog.Builder builder = new AlertDialog.Builder(HoaDonActivity.this, android.R.style.Theme_DeviceDefault_Dialog_Alert);
                 builder.setTitle("Xác nhận hoàn thành");
                 builder.setMessage("");
@@ -214,14 +247,14 @@ public class HoaDonActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(HoaDonActivity.this,Home.class);
                         mFirebaseAuth=FirebaseAuth.getInstance();
-                        String id = mFirebaseAuth.getUid();
                         String [] keys = donHang.getTime().split(" ");
                         donHang.setTrangthai(4);
                         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
                         String date = formatDateS(donHang.getTime());
                         db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("trangthai").setValue(6);
                         db.child("DonHangOnline").child("ShipperDaGiao").child(donHang.getIdKhachhang()).child(donHang.getKey()).setValue(donHang);
-                        db.child("DonHangOnline").child("DaLayHang").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).removeValue();
+                        db.child("DonHangOnline").child("DaLayHang").child(idShipper).child(donHang.getIdDonHang()).removeValue();
+                        Log.d("baby",idShipper);
                         db.child("Shipper").child(id).child("lichSuDonOnline").push().setValue(donHang);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable(HomeFragment.KEY_DIEMNHAN,donHang);
@@ -242,6 +275,7 @@ public class HoaDonActivity extends AppCompatActivity {
     private void Anhxa(){
         btncall = (Button) findViewById(R.id.btn_call);
         btnhoanthanh = (Button) findViewById(R.id.btn_nhandon);
+//        btnback = (Button) findViewById(R.id.btn_trove);
         btnthatbai = (Button) findViewById(R.id.btn_quaylai);
         tvdiemnhan = (TextView) findViewById(R.id.diemnhan);
         tvdiemgiao = (TextView) findViewById(R.id.diemgiao);

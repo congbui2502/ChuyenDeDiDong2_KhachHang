@@ -33,6 +33,7 @@ import fragment.HomeFragment;
 
 public class DangNhapActivity extends AppCompatActivity implements View.OnClickListener{
     SharedPreferences sharedPreferences;
+    public static int flag = 0;
     SharedPreferences sharedPreferences1;
     SharedPreferences.Editor editor;
     SharedPreferences.Editor editor1;
@@ -57,7 +58,7 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
         chk = (CheckBox) findViewById(R.id.saveUser);
         btnDangKi = (Button) findViewById(R.id.btn_dangki);
         btnClear = (Button) findViewById(R.id.btn_clearUser);
-        HomeFragment.flag=0;
+
         btnDangNhap.setOnClickListener(this);
         initPreferences();
         String savedUser = sharedPreferences.getString("USER","");

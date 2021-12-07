@@ -19,6 +19,7 @@
             android:layout_height="match_parent"
             android:layout_weight="9"
             android:text="Quay lại"
+
             android:id="@+id/btn_back"></Button>
     </LinearLayout>
 </LinearLayout>

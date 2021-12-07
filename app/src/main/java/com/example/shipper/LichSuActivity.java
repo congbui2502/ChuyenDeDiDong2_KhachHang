@@ -9,9 +9,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import adapter.SanPhamAdapter;
 import fragment.HistoryFragment;
@@ -61,7 +59,7 @@ public class LichSuActivity extends AppCompatActivity {
         tvdiemnhan.setText(history.getDiemnhan());
         tvdiemgiao.setText(history.getDiaChi());
         tvtonggia.setText( history.getDonGia()+"");
-        tvtenkh.setText(history.getTenKhachHang());
+        tvtenkh.setText(history.getTenKhachhang());
         tvsodt.setText(history.getSdtkhachhang());
         tvthunhap.setText(history.getThunhap()+"");
         tvghichu.setText(history.getGhiChu());

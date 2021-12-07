@@ -122,7 +122,7 @@ public class DangkyActivity extends AppCompatActivity implements View.OnClickLis
 
         return  mime.getExtensionFromMimeType(cR.getType(uri));
     }
-    private void uploadFile(String userName,String dt,String mail,String mPhone, String bienSo,String cmt, String UID)
+    private void uploadFile(String userName,String dt,String mail,String mPhone, String bienSo,String cmt, String UID,int donChuaGiao)
     {
         if(ImageUri!=null)
         {
@@ -136,7 +136,7 @@ public class DangkyActivity extends AppCompatActivity implements View.OnClickLis
                             mFirebaseInstance = FirebaseDatabase.getInstance();
                             String img = uri.toString();
                             mReference = mFirebaseInstance.getReference();
-                            Shipper shipper=new Shipper(userName,dt,mail,mPhone,bienSo,cmt,img);
+                            Shipper shipper=new Shipper(userName,dt,mail,mPhone,bienSo,cmt,img,donChuaGiao);
                             mReference.child("Shipper"+"/"+UID).setValue(shipper);
                             Toast.makeText(DangkyActivity.this,"Upload successfull",Toast.LENGTH_SHORT).show();
                         }
@@ -201,6 +201,7 @@ public class DangkyActivity extends AppCompatActivity implements View.OnClickLis
         String dt = date.getText().toString();
         String pass = password.getText().toString();
         String cpass = confirm_password.getText().toString();
+        int donCG=0;
          imageView.findViewById(R.id.image_view);
         if (imageView==null){
             Toast.makeText(DangkyActivity.this,"Vui lòng chọn ảnh đại diện",Toast.LENGTH_SHORT).show();
@@ -243,7 +244,7 @@ public class DangkyActivity extends AppCompatActivity implements View.OnClickLis
                     }else{
                         String UID = mFirebaseAuth.getUid();
 
-                        uploadFile(userName,dt,mail,mPhone,bienSo,cmt,UID);
+                        uploadFile(userName,dt,mail,mPhone,bienSo,cmt,UID,donCG);
                         Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             @Override
