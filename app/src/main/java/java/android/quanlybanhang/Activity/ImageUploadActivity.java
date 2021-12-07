@@ -140,7 +140,7 @@ public class ImageUploadActivity extends AppCompatActivity {
     {
         if(ImageUri!=null)
         {
-               StorageReference fileRefence=   mStogref.child("uploads/"+System.currentTimeMillis()+"."+getFileExtenstion(ImageUri));
+               StorageReference fileRefence     =   mStogref.child("uploads/"+System.currentTimeMillis()+"."+getFileExtenstion(ImageUri));
                fileRefence.putFile(ImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                    @Override
                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

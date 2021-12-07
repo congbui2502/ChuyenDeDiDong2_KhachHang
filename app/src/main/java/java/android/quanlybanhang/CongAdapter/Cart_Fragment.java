@@ -10,9 +10,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +39,7 @@ public class Cart_Fragment extends Fragment {
     private TextView tvCartFragment;
     private Button btnCartFragment;
     private ProductAdapter.SetPos setPos;
+    private String idQuan;
 
 
     public void setData(ProductAdapter.SetPos setPos)
@@ -45,8 +48,15 @@ public class Cart_Fragment extends Fragment {
     }
     private List<SanPham> quans;
 
-    public Cart_Fragment(List<SanPham> quan) {
+    public void getidQuan(String idQuan)
+    {
+        this.idQuan=idQuan;
+
+    }
+
+    public Cart_Fragment(List<SanPham> quan,String idQuan) {
         this.quans=quan;
+        this.idQuan = idQuan;
 
     }
 
@@ -64,7 +74,6 @@ public class Cart_Fragment extends Fragment {
         cbCartFragment=mView.findViewById(R.id.cbCartFragment);
         tvCartFragment=mView.findViewById(R.id.tvCartFragment);
         btnCartFragment=mView.findViewById(R.id.btnCartFragment);
-
 
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(mainActivity);
         recyclerProduct.setLayoutManager(linearLayoutManager);
@@ -110,8 +119,15 @@ public class Cart_Fragment extends Fragment {
         btnCartFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                setFirebase();
+
                 DonHangFragment donHangFragment=new DonHangFragment(productAdapter.getListProductIsChecked());
+                if(idQuan!=null)
+                {
+                    donHangFragment.getIdQuan(idQuan);
+                }else {
+                    Toast.makeText(getContext(),"cmm",Toast.LENGTH_SHORT).show();
+                }
+
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container,donHangFragment).commit();
 
 

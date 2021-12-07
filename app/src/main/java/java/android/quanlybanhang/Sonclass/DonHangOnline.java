@@ -10,12 +10,16 @@ public class DonHangOnline {
     private long giaKhuyenMai;
     private int trangthai;
     private String time;
+    private long donGia;
 
     private List<SanPham> sanpham;
     private String diaChi;
     private String key;
     private String tenKhachhang;
     private String sdtkhachhang;
+    private String ghiChu;
+    private long thunhap;
+    private int phuongThucThanhToan;
 
 
 
@@ -57,6 +61,58 @@ public class DonHangOnline {
         this.tenKhachhang = tenKhachhang;
         this.sdtkhachhang = sdtkhachhang;
         this.idKhachhang=idKhachhang;
+    }
+
+    public DonHangOnline(String idQuan, String idKhachhang,  long giaKhuyenMai, int trangthai,
+                         String time, long donGia, List<SanPham> sanpham, String diaChi,
+                         String key, String tenKhachhang, String sdtkhachhang, String ghiChu, long thunhap,int phuongThucThanhToan) {
+        this.idQuan = idQuan;
+        this.idKhachhang = idKhachhang;
+
+        this.giaKhuyenMai = giaKhuyenMai;
+        this.trangthai = trangthai;
+        this.time = time;
+        this.donGia = donGia;
+        this.sanpham = sanpham;
+        this.diaChi = diaChi;
+        this.key = key;
+        this.tenKhachhang = tenKhachhang;
+        this.sdtkhachhang = sdtkhachhang;
+        this.ghiChu = ghiChu;
+        this.thunhap = thunhap;
+        this.phuongThucThanhToan=phuongThucThanhToan;
+    }
+
+    public int getPhuongThucThanhToan() {
+        return phuongThucThanhToan;
+    }
+
+    public void setPhuongThucThanhToan(int phuongThucThanhToan) {
+        this.phuongThucThanhToan = phuongThucThanhToan;
+    }
+
+    public long getDonGia() {
+        return donGia;
+    }
+
+    public void setDonGia(long donGia) {
+        this.donGia = donGia;
+    }
+
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
+
+    public long getThunhap() {
+        return thunhap;
+    }
+
+    public void setThunhap(long thunhap) {
+        this.thunhap = thunhap;
     }
 
     public int getTrangthai() {

@@ -36,6 +36,7 @@
             android:name=".CongAdapter.Tttttttest2"
             android:exported="true" />
         <activity android:name=".CongAdapter.Tttttttest"></activity>
+
         <activity android:name=".Activity.KhachHangActivity">
 
             <intent-filter>
