@@ -56,14 +56,12 @@ import java.util.List;
 public class KhachHangActivity extends AppCompatActivity {
 
 
-    private static  boolean MUST_DETACH_FROM_BACKSTACK = false;
-
     public void setProducts(List<SanPham> products) {
         this.products = products;
     }
     private Context context =this;
     private  List<SanPham> products;
-    private KhachHang khachHang;
+    public static KhachHang khachHang;
     public    Fragment fragment;
     private String idCartShop;
     private String Shop_Id="JxZOOK1RzcMM7pL5I6naGZfYSsu2";
@@ -128,11 +126,6 @@ public class KhachHangActivity extends AppCompatActivity {
 
         products=getCartList();
 
-
-
-
-
-
         mReference.child("gioHang").child(khachHang.getIdKhachhang()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -178,58 +171,11 @@ public class KhachHangActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
         Fragment fragment1=new HomeFragment(this);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment1).addToBackStack("").commit();
 
         setMenuItem();
-
-
-
-
-
-
-//        BottomNavigationView  navigationView=findViewById(R.id.bottomNavigation);
-//
-//        navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-//           @Override
-//           public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//              Fragment cart_fragment=null;
-//
-//               Log.d("AAA",item.getItemId()+"");
-//               Log.d("AAA",R.id.nav_home+"");
-//               Log.d("AAA",R.id.nav_library+"");
-//               Log.d("AAA",R.id.nav_myAccount+"");
-//
-//
-//               if(item.getItemId()==R.id.nav_home)
-//               {
-//
-//               }else  if(item.getItemId()==R.id.nav_library)
-//               {
-//                    cart_fragment=new History_Fragment();
-//               }else  if(item.getItemId()==R.id.nav_myAccount)
-//               {
-//                   cart_fragment=new Account_fragment();
-//
-//               }else {
-//                   cart_fragment=new HomeFragment();
-//
-//               }
-//
-//
-//                   getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,cart_fragment).commit();
-//
-//              return true;
-//           }
-//       });
-
-        Log.d("AAA",getListProduct().size()+"");
-
 
         setCountProductInBuild(products.size());
 
@@ -455,14 +401,25 @@ public class KhachHangActivity extends AppCompatActivity {
     public List<SanPham> getCartList()
     {
 
-
         List<SanPham> trais=new ArrayList<SanPham>();
-        mReference.child("gioHang").child(khachHang.getIdKhachhang()).child("sanPham").addChildEventListener(new ChildEventListener() {
+        mReference.child("gioHang").child(khachHang.getIdKhachhang()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                SanPham sanPham=snapshot.getValue(SanPham.class);
-                trais.add(sanPham);
-                mReference.child("sanphamQuangcao").push().setValue(sanPham);
+                for (DataSnapshot snapshot1: snapshot.getChildren())
+                {
+
+                    if (snapshot1.getKey().equals("sanPham"))
+                    {
+                        for (DataSnapshot snapshot3:snapshot1.getChildren())
+                        {
+                            Toast.makeText(getApplicationContext(),snapshot3.getKey(),Toast.LENGTH_SHORT).show();
+                            SanPham sanPham=snapshot3.getValue(SanPham.class);
+                            trais.add(sanPham);
+                        }
+                    }
+                }
+
+
 
                 setCountProductInBuild(trais.size());
             }
@@ -545,7 +502,7 @@ public class KhachHangActivity extends AppCompatActivity {
         notificationLayout.setTextViewText(R.id.tvMessage,sanPham.getChitiet());
         notificationLayout.setTextViewText(R.id.tvTittle,sanPham.getNameProduct());
         notificationLayout.setImageViewBitmap(R.id.imgLogo,bitmap);
-
+        sanPham.setSoluong(1);
         Intent resultIntent = new Intent(this, SuperQuangCaoActivity.class);
         Bundle bundle=new Bundle();
         bundle.putSerializable("sanpham", sanPham);

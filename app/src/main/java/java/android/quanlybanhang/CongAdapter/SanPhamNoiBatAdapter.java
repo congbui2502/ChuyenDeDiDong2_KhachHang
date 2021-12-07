@@ -30,9 +30,6 @@ public class SanPhamNoiBatAdapter extends RecyclerView.Adapter<SanPhamNoiBatAdap
         void onClickAddToCart(ImageView imageToCart,SanPham trai);
     }
 
-
-
-
     public void setData(KhachHangActivity activity,List<SanPham> list, IclickAddToCartListener listener)
     {
         this.activity=activity;
@@ -81,9 +78,6 @@ public class SanPhamNoiBatAdapter extends RecyclerView.Adapter<SanPhamNoiBatAdap
                 transaction.commit();
             }
         });
-
-
-
     }
 
     @Override

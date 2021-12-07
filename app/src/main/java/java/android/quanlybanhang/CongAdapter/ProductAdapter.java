@@ -93,7 +93,7 @@ public  class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Product
         if(product!=null)
         {
             holder.tenMon.setText(product.getNameProduct());
-            holder.gia.setText(product.getGiaBan()+" VND");
+            holder.gia.setText(Cart_Fragment.addDauPhay(product.getDonGia().get(0).getGiaBan())+" VND");
             holder.soLuong.setText("1");
             holder.btnTru.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -105,7 +105,7 @@ public  class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Product
                     {
                         holder.btnTru.setEnabled(false);
                         holder.soLuong.setText(i+"");
-                        holder.gia.setText(product.getGiaBan()*i+" VND");
+                        holder.gia.setText(Cart_Fragment.addDauPhay(product.getDonGia().get(0).getGiaBan()*i)+" VND");
                         products.get(abc).setSoluong(i);
 
                         iclickAddToCartListener.setGiaDonHang(setGiaDonHang());
@@ -113,7 +113,7 @@ public  class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Product
                     }else {
                         i--;
                         holder.soLuong.setText(i+"");
-                        holder.gia.setText(product.getGiaBan()*i+" VND");
+                        holder.gia.setText(Cart_Fragment.addDauPhay(product.getDonGia().get(0).getGiaBan()*i)+" VND");
                         products.get(abc).setSoluong(i);
                         iclickAddToCartListener.setGiaDonHang(setGiaDonHang());
                         if (i==0)
@@ -136,14 +136,14 @@ public  class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Product
                         holder.btnTru.setEnabled(true);
                         i++;
                         holder.soLuong.setText(i+"");
-                        holder.gia.setText(product.getGiaBan()*i+" VND");
+                        holder.gia.setText(Cart_Fragment.addDauPhay(product.getDonGia().get(0).getGiaBan()*i)+" VND");
                         products.get(abc).setSoluong(i);
                         iclickAddToCartListener.setGiaDonHang(setGiaDonHang());
 
                     }else {
                         i++;
                         holder.soLuong.setText(i+"");
-                        holder.gia.setText(product.getGiaBan()*i+" VND");
+                        holder.gia.setText(Cart_Fragment.addDauPhay(product.getDonGia().get(0).getGiaBan()*i)+" VND");
                         products.get(abc).setSoluong(i);
 
                         iclickAddToCartListener.setGiaDonHang(setGiaDonHang());
@@ -283,7 +283,7 @@ public  class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Product
         for (int i = 0; i <holderList.size() ; i++) {
             if(holderList.get(i).checkBox.isChecked())
             {
-                build=build+products.get(i).getGiaBan()*products.get(i).getSoluong();
+                build=build+products.get(i).getDonGia().get(0).getGiaBan()*products.get(i).getSoluong();
             }
 //            else if(holderList.get(i).checkBox.isChecked()==false && holderList.get(i).flag==0){
 //                build=build-products.get(i).getGiaBan()*products.get(i).getSoluong();

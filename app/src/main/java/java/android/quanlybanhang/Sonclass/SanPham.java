@@ -2,6 +2,7 @@ package java.android.quanlybanhang.Sonclass;
 
 
 import java.io.Serializable;
+import java.util.List;
 
 public class SanPham implements Serializable {
     private String chitiet;
@@ -14,8 +15,10 @@ public class SanPham implements Serializable {
     private boolean addToCart;
     private long giamGia;
     private String idCuaHang;
-    private String tittle;
+    private String title;
     private boolean superquangcao;
+    private List <DonGia> donGia;
+
 
 
     public SanPham() {
@@ -44,7 +47,7 @@ public class SanPham implements Serializable {
         this.soluong = soluong;
         this.giamGia = giamGia;
         this.idCuaHang = idCuaHang;
-        this.tittle = tittle;
+        this.title = tittle;
     }
 
     public SanPham(String chitiet, long giaNhap, String nameProduct, String imgProduct, String nhomsanpham,
@@ -57,11 +60,24 @@ public class SanPham implements Serializable {
         this.soluong = soluong;
         this.giamGia = giamGia;
         this.idCuaHang = idCuaHang;
-        this.tittle = tittle;
+        this.title = tittle;
         this.superquangcao = superquangcao;
     }
 
 
+    public SanPham(String chitiet, long giaNhap, String nameProduct, String imgProduct, String nhomsanpham, int soluong,
+                   long giamGia, String idCuaHang, String title,List<DonGia> donGia) {
+        this.chitiet = chitiet;
+        this.giaNhap = giaNhap;
+        this.nameProduct = nameProduct;
+        this.imgProduct = imgProduct;
+        this.nhomsanpham = nhomsanpham;
+        this.soluong = soluong;
+        this.giamGia = giamGia;
+        this.idCuaHang = idCuaHang;
+        this.title = title;
+        this.donGia = donGia;
+    }
 
     public boolean isSuperquangcao() {
         return superquangcao;
@@ -87,12 +103,12 @@ public class SanPham implements Serializable {
         this.idCuaHang = idCuaHang;
     }
 
-    public String getTittle() {
-        return tittle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getChitiet() {
@@ -160,4 +176,11 @@ public class SanPham implements Serializable {
         this.addToCart = addToCart;
     }
 
+    public List<DonGia> getDonGia() {
+        return donGia;
+    }
+
+    public void setDonGia(List<DonGia> donGia) {
+        this.donGia = donGia;
+    }
 }

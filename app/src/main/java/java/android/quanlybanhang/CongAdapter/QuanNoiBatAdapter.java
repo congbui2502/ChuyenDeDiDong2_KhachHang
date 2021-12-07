@@ -64,7 +64,7 @@ public class QuanNoiBatAdapter extends RecyclerView.Adapter<QuanNoiBatAdapter.Tr
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fragmentTransaction=  mainActivity.getSupportFragmentManager().beginTransaction();
+                FragmentTransaction fragmentTransaction =  mainActivity.getSupportFragmentManager().beginTransaction();
                 ShopProductFragment fragment1=new ShopProductFragment(mainActivity,context, new getdata() {
                     @Override
                     public CuaHang getData() {

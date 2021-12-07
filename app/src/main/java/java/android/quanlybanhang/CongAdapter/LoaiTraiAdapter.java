@@ -95,8 +95,6 @@ public class LoaiTraiAdapter extends RecyclerView.Adapter<LoaiTraiAdapter.LoaiTr
             else  if(position == 1)
             {
 
-//                holder.tittle.setText("Quán nổi bật");
-
                 QuanNoiBatAdapter traiAdapter=new QuanNoiBatAdapter();
 
                 traiAdapter.setData(loaiTrai.getCuahangs(),mainActivity,mContext);
