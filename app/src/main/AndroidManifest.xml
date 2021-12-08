@@ -18,36 +18,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QuanLyBanHang">
-
-        <activity android:name=".Activity.DangkyKhachHang"></activity>
-
+        <activity
+            android:name=".functions.DatBan.DanhSachDatBan"
+            android:exported="false" />
+        <activity
+            android:name=".functions.DatBan.DatBan"
+            android:exported="false" />
+        <activity android:name=".Activity.DangkyKhachHang" />
         <activity android:name=".Activity.DangNhapKhachHangActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-        <activity android:name=".Activity.ForgotPasswordActivity">
-
-        </activity>
-        <activity android:name=".Activity.SuperQuangCaoActivity"
-            android:parentActivityName=".Activity.KhachHangActivity"
-            android:exported="true" />
+        <activity android:name=".Activity.ForgotPasswordActivity" />
+        <activity
+            android:name=".Activity.SuperQuangCaoActivity"
+            android:exported="true"
+            android:parentActivityName=".Activity.KhachHangActivity" />
         <activity
             android:name=".CongAdapter.Tttttttest2"
             android:exported="true" />
-        <activity android:name=".CongAdapter.Tttttttest"></activity>
-        <activity android:name=".Activity.KhachHangActivity">
-
-
-
-        </activity>
-        <activity
-            android:name=".Activity.ShopActivity"></activity>
+        <activity android:name=".CongAdapter.Tttttttest" />
+        <activity android:name=".Activity.KhachHangActivity" />
+        <activity android:name=".Activity.ShopActivity" />
         <activity
             android:name=".ChiTietSanPham.Card_San_Pham"
             android:exported="true" />
@@ -66,7 +61,7 @@
         <activity
             android:name=".Activity.MonOrder"
             android:exported="true"
-            android:parentActivityName=".Activity.OrderMenu" />
+            android:parentActivityName=".functions.DatBan.DanhSachChonBan" />
         <activity android:name=".Activity.AccountInformationActivity" />
         <activity android:name=".login.FacebookAuthActivity" />
         <activity android:name=".login.ForgetPasswordActivity" />
@@ -76,7 +71,7 @@
         <activity android:name=".Activity.Income" />
         <activity android:name=".Activity.Processing" />
         <activity
-            android:name=".Activity.OrderMenu"
+            android:name=".functions.DatBan.DanhSachChonBan"
             android:parentActivityName=".Activity.ShopActivity" />
         <activity android:name=".Common.OnboardingScreenActivity" />
         <activity android:name=".login.SignUpActivity" />

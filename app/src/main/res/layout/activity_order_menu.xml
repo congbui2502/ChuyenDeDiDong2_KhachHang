@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.OrderMenu"
     android:background="@color/white"
-    >
+    tools:context=".functions.DatBan.DanhSachChonBan">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -20,70 +19,96 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/back"
-
         />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rv_kv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbars" >
+        android:layout_width="136dp"
+        android:layout_height="463dp"
+        android:background="@drawable/vien_border"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="7dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_1">
+        app:layout_constraintStart_toEndOf="@+id/rv_1"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="1dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="0dp"
             android:layout_marginEnd="1dp"
-            android:background="@color/white"
+            android:background="@drawable/vien_border"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:scaleType="fitXY"
+            android:id="@+id/img_nocart"
+            android:layout_width="276dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/nocard"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_1" />
-    </ScrollView>
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
-    <com.sa90.materialarcmenu.ArcMenu
-        android:id="@+id/arcmenu"
-        android:layout_width="wrap_content"
+    </RelativeLayout>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="93dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="3dp"
+        android:indeterminate="true"
+        android:visibility="visible"
+        app:indicatorColor="@color/vang"
+        app:layout_constraintBottom_toTopOf="@+id/rv_1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:menu_open="arc_left"
-        app:menu_scr="@drawable/adds">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+        app:trackColor="@color/xanh" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab1"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/vang"
+        android:layout_marginBottom="7dp"
+        app:layout_constraintBottom_toTopOf="@+id/rv_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbars">
+
+        <com.denzcoskun.imageslider.ImageSlider
+            android:id="@+id/image_slider"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/add" />
+            android:layout_height="match_parent"
+            app:iss_auto_cycle="true"
+            app:iss_period="1000"
+            app:iss_delay="0"
+            app:iss_placeholder="@color/den_nhat"
+            app:iss_error_image="@color/vang"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addban"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/add" />
-
-
-    </com.sa90.materialarcmenu.ArcMenu>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

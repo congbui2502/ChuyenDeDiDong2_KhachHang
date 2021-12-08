@@ -118,7 +118,6 @@ public class DonHangFragment  extends Fragment {
         View view=inflater.inflate(R.layout.donhang_fragment,container,false);
         mainActivity=(KhachHangActivity) getActivity();
         khachHang= mainActivity.getKhachHang();
-        Log.d("aaa","nhap sai roi");
         recyDonHang=view.findViewById(R.id.recyDonHang);
         giaKhuyenMai=view.findViewById(R.id.tvKhuyenMai);
         tongTien=view.findViewById(R.id.tvTongGia);
@@ -193,7 +192,7 @@ public class DonHangFragment  extends Fragment {
 
 
         });
-        Log.d("kakashi",chuyenKhoan+"");
+
 
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

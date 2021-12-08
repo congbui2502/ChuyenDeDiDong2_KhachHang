@@ -2,9 +2,42 @@ package java.android.quanlybanhang.Ban;
 
 public class StaticBanModel {
 
+    private String ID ;
 
+    private   String tenban;
+    private  String tenNhanVien;
+    private  String gioDaOder;
+    public StaticBanModel(String ID, String tenban, String trangthai, String tenNhanVien, String gioDaOder) {
+        this.ID = ID;
+        this.tenban = tenban;
+        this.trangthai = trangthai;
+        this.tenNhanVien = tenNhanVien;
+        this.gioDaOder = gioDaOder;
+    }
 
+    public String getID() {
+        return ID;
+    }
 
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public void setTenban(String tenban) {
+        this.tenban = tenban;
+    }
+
+    public void setTrangthai(String trangthai) {
+        this.trangthai = trangthai;
+    }
+
+    public void setTenNhanVien(String tenNhanVien) {
+        this.tenNhanVien = tenNhanVien;
+    }
+
+    public void setGioDaOder(String gioDaOder) {
+        this.gioDaOder = gioDaOder;
+    }
 
 
     public String getTenNhanVien() {
@@ -22,7 +55,6 @@ public class StaticBanModel {
         return trangthai;
     }
 
-    private   String tenban;
 
     public StaticBanModel(String tenban, String trangthai, String tenNhanVien, String gioDaOder) {
         this.tenban = "";
@@ -41,8 +73,9 @@ public class StaticBanModel {
         this.trangthai = trangthai;
     }
 
-    private  String tenNhanVien;
-    private  String gioDaOder;
-
-
+    public StaticBanModel(String ID, String tenban, String trangthai) {
+        this.ID = ID;
+        this.tenban = tenban;
+        this.trangthai = trangthai;
+    }
 }

@@ -7,7 +7,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recy1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
     <me.relex.circleindicator.CircleIndicator2
         android:id="@+id/indicator"
         app:ci_drawable="@drawable/style_indicator"

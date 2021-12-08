@@ -1,6 +1,7 @@
 package java.android.quanlybanhang.CongAdapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -33,6 +35,8 @@ import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.CuaHang;
 import java.android.quanlybanhang.Sonclass.SanPham;
 import java.android.quanlybanhang.Activity.KhachHangActivity;
+import java.android.quanlybanhang.functions.DatBan.DanhSachChonBan;
+import java.android.quanlybanhang.functions.DatBan.DatBan;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +62,7 @@ public class ShopProductFragment extends Fragment  {
     private CuaHang cuaHang;
     private String id_shop= "";
     private String logoUrl="";
+    private Button bnt_datban;
 
     public ShopProductFragment(KhachHangActivity mainActivity, Context context, QuanNoiBatAdapter.getdata getdata) {
             this.khachHangActivity =mainActivity;
@@ -67,12 +72,9 @@ public class ShopProductFragment extends Fragment  {
             this.Shop_Name=cuaHang.getName();
             this.logoUrl= cuaHang.getLogoUrl();
     }
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d("BBB","onCreate ShopFragment");
         View view=inflater.inflate(R.layout.shop_product,container,false);
         initUI(view);
         initToolBar();
@@ -81,10 +83,6 @@ public class ShopProductFragment extends Fragment  {
         onClickButtonCart();
         return view;
     }
-
-
-
-
 
     private  void initUI(View view)
     {
@@ -96,16 +94,13 @@ public class ShopProductFragment extends Fragment  {
         collapsingToolbarLayout=view.findViewById(R.id.CollapsingToolbarLayout);
         toolbar=view.findViewById(R.id.toolBar);
         imgShop=view.findViewById(R.id.imgShop);
-
+        bnt_datban = view.findViewById(R.id.bnt_datban);
         fabAdd=view.findViewById(R.id.FloatingActionButton);
         recyProduct=view.findViewById(R.id.recyShopproduct);
         recyLoaiSP=view.findViewById(R.id.recyLoaisanPham);
         Glide.with(context).load(logoUrl).into(imgShop);
-
-        Log.d("abc",logoUrl+" cdc");
-        Log.d("abc",id_shop+" cdc");
-
         getloaiDoUong();
+        onclickdatban();
 
     }
 
@@ -162,9 +157,6 @@ public class ShopProductFragment extends Fragment  {
         shop_adapter.setOnClick(new Shop_Adapter.IclickchangRecycleView() {
             @Override
             public void changListProduct(String s) {
-//                dsSanPhamTheoLoai=getListproduct(s);
-//                loaiTraiAdapter.notifyDataSetChanged();
-
                     loaiTraiAdapter.setData(getListproduct(s));
                     loaiTraiAdapter.notifyDataSetChanged();
             }
@@ -224,7 +216,6 @@ public class ShopProductFragment extends Fragment  {
     private List<SanPham> getListproduct(String s)
     {
                 dsSanPhamTheoLoai=new ArrayList<>();
-
             List<SanPham> sanPhams=new ArrayList<>();
             mReference.child("cuaHang").child(id_shop).child("sanpham").child(s).addChildEventListener(new ChildEventListener() {
                 @Override
@@ -235,7 +226,6 @@ public class ShopProductFragment extends Fragment  {
                     dsSanPhamTheoLoai.add((sanPham));
                     loaiTraiAdapter.notifyDataSetChanged();
                     Toast.makeText(context,dsSanPhamTheoLoai.size()+"123",Toast.LENGTH_SHORT).show();
-                    Log.d("CCC",sanPhams.size()+"abc");
 
                 }
 
@@ -256,18 +246,11 @@ public class ShopProductFragment extends Fragment  {
 
                 }
             });
-
-            Log.d("ccc",sanPhams.size()+"");
-
-
-
             return sanPhams;
     }
 
     private void getloaiDoUong()
     {
-
-
         mReference.child("cuaHang").child(id_shop).child("sanpham").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -352,6 +335,17 @@ public class ShopProductFragment extends Fragment  {
     public void onDestroy() {
         super.onDestroy();
         Log.d("BBB","onDestroy ShopFragment");
+    }
+    private void onclickdatban(){
+        bnt_datban.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(khachHangActivity, DanhSachChonBan.class);
+                intent.putExtra("id_cuahang",id_shop);
+                startActivity(intent);
+
+            }
+        });
     }
 
 

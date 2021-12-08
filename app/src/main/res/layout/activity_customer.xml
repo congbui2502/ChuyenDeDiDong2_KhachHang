@@ -19,9 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/bottommenu"
         android:background="?attr/actionBarItemBackground"
-        />
+        app:menu="@menu/bottommenu" />
 
 
 </RelativeLayout>

@@ -31,7 +31,6 @@ public class SuperQuangCaoAdapter extends RecyclerView.Adapter<SuperQuangCaoAdap
         void onClickAddToCart(SanPham trai);
     }
 
-
     public void getList(List<SanPham> list)
     {
         this.trais=list;

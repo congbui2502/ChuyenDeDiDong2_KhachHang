@@ -26,4 +26,7 @@
     <color name="first_edt">#5d8cfe</color>
     <color name="last_edt">#3ea6fd</color>
     <color name="xanh_dam">#0A45B8</color>
+    <color name="so_hoa_don">#a8b328</color>
+    <color name="colorPrimary">#024265</color>
+    <color name="colorPrimaryDark">#024265</color>
 </resources>

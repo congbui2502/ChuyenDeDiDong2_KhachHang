@@ -56,14 +56,12 @@ import java.util.List;
 public class KhachHangActivity extends AppCompatActivity {
 
 
-    private static  boolean MUST_DETACH_FROM_BACKSTACK = false;
-
     public void setProducts(List<SanPham> products) {
         this.products = products;
     }
     private Context context =this;
     private  List<SanPham> products;
-    private KhachHang khachHang;
+    public static KhachHang khachHang;
     public    Fragment fragment;
     private String idCartShop;
     private String Shop_Id="JxZOOK1RzcMM7pL5I6naGZfYSsu2";
@@ -111,7 +109,6 @@ public class KhachHangActivity extends AppCompatActivity {
         mReference=FirebaseDatabase.getInstance().getReference();
 
 
-
         Intent intent =this.getIntent();
         Bundle bundle= intent.getExtras();
 
@@ -120,18 +117,14 @@ public class KhachHangActivity extends AppCompatActivity {
             if(bundle.getSerializable("khachhang")!=null)
             {
                 khachHang = (KhachHang) bundle.getSerializable("khachhang");
-                Toast.makeText(getApplicationContext(),khachHang.getNameKhachHang(),Toast.LENGTH_SHORT).show();
-
             }
-        }
-        else {
+        }else {
             khachHang = new KhachHang("congbui",
                     "cb@gmail.com","20/03/1999","0374193095","idKhachHang");
         }
 
 
-        products=getCartList();
-
+        products = getCartList();
         mReference.child("gioHang").child(khachHang.getIdKhachhang()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -148,12 +141,7 @@ public class KhachHangActivity extends AppCompatActivity {
                             }
                         });
                     }
-
-
-
                 }
-
-
             }
 
             @Override
@@ -177,58 +165,11 @@ public class KhachHangActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
         Fragment fragment1=new HomeFragment(this);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment1).addToBackStack("").commit();
 
         setMenuItem();
-
-
-
-
-
-
-//        BottomNavigationView  navigationView=findViewById(R.id.bottomNavigation);
-//
-//        navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-//           @Override
-//           public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//              Fragment cart_fragment=null;
-//
-//               Log.d("AAA",item.getItemId()+"");
-//               Log.d("AAA",R.id.nav_home+"");
-//               Log.d("AAA",R.id.nav_library+"");
-//               Log.d("AAA",R.id.nav_myAccount+"");
-//
-//
-//               if(item.getItemId()==R.id.nav_home)
-//               {
-//
-//               }else  if(item.getItemId()==R.id.nav_library)
-//               {
-//                    cart_fragment=new History_Fragment();
-//               }else  if(item.getItemId()==R.id.nav_myAccount)
-//               {
-//                   cart_fragment=new Account_fragment();
-//
-//               }else {
-//                   cart_fragment=new HomeFragment();
-//
-//               }
-//
-//
-//                   getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,cart_fragment).commit();
-//
-//              return true;
-//           }
-//       });
-
-        Log.d("AAA",getListProduct().size()+"");
-
 
         setCountProductInBuild(products.size());
 
@@ -244,7 +185,7 @@ public class KhachHangActivity extends AppCompatActivity {
                 .setBackgroundColor(ContextCompat.getColor(this, R.color.red))
                 .setTextColor(ContextCompat.getColor(this, R.color.green))
                 .build();
-            bottomNavigation.setNotification(notification, 1);
+        bottomNavigation.setNotification(notification, 1);
 
     }
 
@@ -298,7 +239,7 @@ public class KhachHangActivity extends AppCompatActivity {
 
     private void setMenuItem()
     {
-         bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
+        bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
 
 // Create items
         AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_1, R.drawable.ic_baseline_home_24, R.color.red);
@@ -325,8 +266,8 @@ public class KhachHangActivity extends AppCompatActivity {
             public boolean onTabSelected(int position, boolean wasSelected) {
                 // Do something cool here...
                 Log.d("AAA",""+position);
-               if(position==0)
-               {
+                if(position==0)
+                {
 //                   if(getSupportFragmentManager().findFragmentByTag("homefragment")!=null)
 //                   {
 //                       Log.d("jjj","abcxyz");
@@ -336,54 +277,54 @@ public class KhachHangActivity extends AppCompatActivity {
 //                       fragment=new HomeFragment();
 //                       Log.d("jjj","xyzabc");
 //                   }
-                   if(getSupportFragmentManager().findFragmentByTag("homefragment")!=null)
-                   {
-                       getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,getSupportFragmentManager().findFragmentByTag("homefragment")).commit();
-                   }else{
-                       fragment=new HomeFragment(KhachHangActivity.this);
+                    if(getSupportFragmentManager().findFragmentByTag("homefragment")!=null)
+                    {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,getSupportFragmentManager().findFragmentByTag("homefragment")).commit();
+                    }else{
+                        fragment=new HomeFragment(KhachHangActivity.this);
 
-                       FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
-                       transaction.replace(R.id.fragment_container,fragment);
-                       transaction.addToBackStack("cartfragment");
-                       transaction.commit();
-                   }
+                        FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragment_container,fragment);
+                        transaction.addToBackStack("cartfragment");
+                        transaction.commit();
+                    }
 
-               }else  if(position==1)
-               {
+                }else  if(position==1)
+                {
 //                   if(getSupportFragmentManager().findFragmentByTag("cartfragment")!=null)
 //                   {
 //
 //                       fragment = getSupportFragmentManager().findFragmentByTag("cartfragment");
 //                   }else {
-                      Cart_Fragment fragment1=new Cart_Fragment(products,idCartShop);
-                      fragment1.setData(new ProductAdapter.SetPos() {
-                          @Override
-                          public void setPos(int size) {
-                              setCountProductInBuild(size);
-                          }
-                      });
+                    Cart_Fragment fragment1=new Cart_Fragment(products,idCartShop);
+                    fragment1.setData(new ProductAdapter.SetPos() {
+                        @Override
+                        public void setPos(int size) {
+                            setCountProductInBuild(size);
+                        }
+                    });
 
 //                   }
-                   FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
-                   transaction.replace(R.id.fragment_container,fragment1);
-                   transaction.addToBackStack("cartfragment");
-                   transaction.commit();
+                    FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.fragment_container,fragment1);
+                    transaction.addToBackStack("cartfragment");
+                    transaction.commit();
 
-               }else  if(position==2)
-               {
+                }else  if(position==2)
+                {
 //                   if(getSupportFragmentManager().findFragmentByTag("accountfragment")!=null)
 //                   {
 //
 //                       fragment = getSupportFragmentManager().findFragmentByTag("accountfragment");
 //                   }else {
-                       fragment=new Account_fragment();
+                    fragment=new Account_fragment();
 //                   }
 //
-                   FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
-                   transaction.replace(R.id.fragment_container,fragment);
-                   transaction.addToBackStack("accountfragment");
-                   transaction.commit();
-               }else {
+                    FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.fragment_container,fragment);
+                    transaction.addToBackStack("accountfragment");
+                    transaction.commit();
+                }else {
 //                   fragment=new ShopProductFragment(MainActivity.this,MainActivity.this);
 
 //                   if(getSupportFragmentManager().findFragmentByTag("tablefragment")!=null)
@@ -391,15 +332,15 @@ public class KhachHangActivity extends AppCompatActivity {
 //
 //                       fragment = getSupportFragmentManager().findFragmentByTag("tablefragment");
 //                   }else {
-                       fragment =new TableFragment();
+                    fragment =new TableFragment();
 //                   }
 
-                   FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
-                   transaction.replace(R.id.fragment_container,fragment);
-                   transaction.addToBackStack("tablefragment");
-                   transaction.commit();
+                    FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.fragment_container,fragment);
+                    transaction.addToBackStack("tablefragment");
+                    transaction.commit();
 
-               }
+                }
 
                 return true;
             }
@@ -454,14 +395,25 @@ public class KhachHangActivity extends AppCompatActivity {
     public List<SanPham> getCartList()
     {
 
-
         List<SanPham> trais=new ArrayList<SanPham>();
-        mReference.child("gioHang").child(khachHang.getIdKhachhang()).child("sanPham").addChildEventListener(new ChildEventListener() {
+        mReference.child("gioHang").child(khachHang.getIdKhachhang()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                SanPham sanPham=snapshot.getValue(SanPham.class);
-                trais.add(sanPham);
-                mReference.child("sanphamQuangcao").push().setValue(sanPham);
+                for (DataSnapshot snapshot1: snapshot.getChildren())
+                {
+
+                    if (snapshot1.getKey().equals("sanPham"))
+                    {
+                        for (DataSnapshot snapshot3:snapshot1.getChildren())
+                        {
+                            Toast.makeText(getApplicationContext(),snapshot3.getKey(),Toast.LENGTH_SHORT).show();
+                            SanPham sanPham=snapshot3.getValue(SanPham.class);
+                            trais.add(sanPham);
+                        }
+                    }
+                }
+
+
 
                 setCountProductInBuild(trais.size());
             }
@@ -531,7 +483,6 @@ public class KhachHangActivity extends AppCompatActivity {
 
     public void sendNotification(SanPham sanPham)
     {
-
         Bitmap bitmap= BitmapFactory.decodeResource(getResources(), R.drawable.add);
 //        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy");
 //        String day =simpleDateFormat.format(new Date());
@@ -545,7 +496,7 @@ public class KhachHangActivity extends AppCompatActivity {
         notificationLayout.setTextViewText(R.id.tvMessage,sanPham.getChitiet());
         notificationLayout.setTextViewText(R.id.tvTittle,sanPham.getNameProduct());
         notificationLayout.setImageViewBitmap(R.id.imgLogo,bitmap);
-
+        sanPham.setSoluong(1);
         Intent resultIntent = new Intent(this, SuperQuangCaoActivity.class);
         Bundle bundle=new Bundle();
         bundle.putSerializable("sanpham", sanPham);
@@ -588,7 +539,6 @@ public class KhachHangActivity extends AppCompatActivity {
 
     private void getSuperQuangCao()
     {
-
         DatabaseReference reference=FirebaseDatabase.getInstance().getReference("sanPhamQuangCao");
 
         reference.addChildEventListener(new ChildEventListener() {
@@ -603,9 +553,7 @@ public class KhachHangActivity extends AppCompatActivity {
                         SanPham  sanPham =snapshot2.getValue(SanPham.class);
                         if(sanPham.isSuperquangcao())
                         {
-                           sendNotification(sanPham);
-                        }else {
-//                            Toast.makeText(getApplicationContext(),"aaa",Toast.LENGTH_SHORT).show();
+                            sendNotification(sanPham);
                         }
 
                     }
@@ -656,5 +604,5 @@ public class KhachHangActivity extends AppCompatActivity {
         Log.d("BBB","onStop Mainactivity");
     }
 
-    
+
 }

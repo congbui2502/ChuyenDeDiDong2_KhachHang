@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 import java.android.quanlybanhang.R;
+import java.android.quanlybanhang.functions.DatBan.DanhSachChonBan;
 import java.android.quanlybanhang.login.LoginActivity;
 
 public class ShopActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -39,7 +40,7 @@ public class ShopActivity extends AppCompatActivity implements NavigationView.On
         ordermenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ShopActivity.this, OrderMenu.class);
+                Intent intent = new Intent(ShopActivity.this, DanhSachChonBan.class);
                 startActivity(intent);
             }
         });
@@ -85,7 +86,7 @@ public class ShopActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_homes:
                 break;
             case R.id.ds_order:
-                Intent intent = new Intent(ShopActivity.this, OrderMenu.class);
+                Intent intent = new Intent(ShopActivity.this, DanhSachChonBan.class);
                 startActivity(intent);
                 break;
             case R.id.ds_chebien:
