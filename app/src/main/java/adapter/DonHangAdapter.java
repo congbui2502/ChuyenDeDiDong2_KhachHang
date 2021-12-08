@@ -47,12 +47,13 @@ public class DonHangAdapter extends ArrayAdapter<DonHang> {
             TextView textView3 = view.findViewById(R.id.tv_diemgiao);
             TextView textView4 = view.findViewById(R.id.tv_tonggia);
             TextView textView5= view.findViewById(R.id.tv_thunhap);
-
+            TextView textView6= view.findViewById(R.id.tv_thoigian);
             textView1.setText("Chưa nhận đơn");
             textView2.setText(donHang.getDiemnhan());
             textView3.setText(donHang.getDiaChi());
             textView4.setText(donHang.getDonGia()+"đ");
             textView5.setText(donHang.getThunhap()+"đ");
+            textView6.setText(donHang.getTime());
         }
 
 

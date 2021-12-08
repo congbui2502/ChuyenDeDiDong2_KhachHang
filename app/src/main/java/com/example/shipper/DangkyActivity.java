@@ -1,5 +1,6 @@
 package com.example.shipper;
 
+import android.app.DatePickerDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
@@ -10,6 +11,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 
 import android.widget.TextView;
@@ -25,6 +27,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +37,9 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -45,7 +50,6 @@ public class DangkyActivity extends AppCompatActivity implements View.OnClickLis
     private TextInputEditText username, email, phone,date, password, confirm_password,bienSoXe,soCMT;
     private CardView google;
     private static final int   PICK_IMAGE_REQUEST=1;
-
     private Uri ImageUri;
     private CircleImageView imageView;
     private StorageReference mStogref;
@@ -64,8 +68,7 @@ public class DangkyActivity extends AppCompatActivity implements View.OnClickLis
         signinNow = findViewById(R.id.btn_signin_now);
         signup = findViewById(R.id.btn_signup);
         date = findViewById(R.id.edt_date);
-//        logoText = findViewById(R.id.logoText);
-//        sloganText = findViewById(R.id.sloganText);
+
         username = findViewById(R.id.edt_username);
         email = findViewById(R.id.edt_email);
         phone = findViewById(R.id.edt_phone);
@@ -80,6 +83,13 @@ public class DangkyActivity extends AppCompatActivity implements View.OnClickLis
         btnChoose=findViewById(R.id.btnSelectImg);
         signinNow.setOnClickListener(this);
         signup.setOnClickListener(this);
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chonNgay();
+            }
+        });
         btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +112,21 @@ public class DangkyActivity extends AppCompatActivity implements View.OnClickLis
     public void onBackPressed() {
         super.onBackPressed();
     }
-
+    private void chonNgay(){
+        final Calendar calendar = Calendar.getInstance();
+        int ngay = calendar.get(Calendar.DATE);
+        int thang = calendar.get(Calendar.MONTH);
+        int nam = calendar.get(Calendar.YEAR);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(year,month,dayOfMonth);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                date.setText(simpleDateFormat.format(calendar.getTime()));
+            }
+        },nam, thang, ngay);
+        datePickerDialog.show();
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){

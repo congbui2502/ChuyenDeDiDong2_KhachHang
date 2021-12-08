@@ -163,6 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:text="ngày sinh"
+                android:inputType="date"
                 android:textColor="@color/xanh"
                 android:textSize="18dp">
 

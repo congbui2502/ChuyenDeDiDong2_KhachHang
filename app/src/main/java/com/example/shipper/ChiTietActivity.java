@@ -42,7 +42,7 @@ public class ChiTietActivity extends AppCompatActivity {
     private static final String LOG_TAG = "AndroidExample";
     TextView tvdiemnhan,tvdiemgiao,tvtonggia,tvtenkh,tvsodt,tvghichu,tvthunhap;
     ListView tvtensp;
-    private int soDon;
+    private int soDon =0;
     private DonHang donHang;
     String phone, name;
     private FirebaseAuth mFirebaseAuth;

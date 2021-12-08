@@ -47,6 +47,7 @@
                 android:textColor="@color/white"
                 android:text="8km"
                 android:textSize="20dp"
+                android:id="@+id/tv_thoigian"
                 android:textStyle="italic"></TextView>
             <TextView
                 android:layout_weight="1"

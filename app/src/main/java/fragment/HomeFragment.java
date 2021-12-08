@@ -32,7 +32,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import adapter.DonHangAdapter;
@@ -40,7 +42,7 @@ import adapter.DonHangAdapter;
 
 public class HomeFragment extends Fragment {
     public static final String KEY_DIEMNHAN = "DIEMNHAN";
-    public static int flag = 0;
+
     private TextView tvDiemNhan,tvDiemGiao,tvTongGia, tvThuNhap,tvTrangThai;
     private DatabaseReference databaseReference;
     private Context context;
@@ -103,6 +105,21 @@ public class HomeFragment extends Fragment {
         return view;
 
     }
+    public String formatDateS(String strDate) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss.sss dd-MM-yyyy");
+        String dt = "";
+        try {
+            Date date = simpleDateFormat.parse(strDate);
+            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+            dt = formatter.format(date);
+            return dt;
+        } catch (Exception e) {
+            Date date = new Date();
+            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+            dt = formatter.format(date);
+            return dt;
+        }
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -134,7 +151,7 @@ public class HomeFragment extends Fragment {
                         String sdtkhachhang = donHang.getSdtkhachhang();
                         long donGia= donHang.getDonGia();
                         List<SanPham> sanpham = donHang.getSanpham();
-                        String time = donHang.getTime();
+                        String time = formatDateS(donHang.getTime());
                         Log.d("asd",sanpham.size()+"");
                         String idQuan = donHang.getIdQuan();
                         String shipper = donHang.getShipper();

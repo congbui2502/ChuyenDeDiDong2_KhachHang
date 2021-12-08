@@ -32,7 +32,7 @@ import fragment.HomeFragment;
 public class LayHangActivity extends AppCompatActivity {
     private static final int MY_PERMISSION_REQUEST_CODE_CALL_PHONE = 555;
     private static final String LOG_TAG = "AndroidExample";
-    Button btnhuydon, btndalayhang,btncall;
+    Button btnhuydon, btndalayhang,btncall,btnquaylai;
     TextView tvdiemnhan,tvdiemgiao,tvtonggia,tvtenkh,tvsodt,tvghichu,tvthunhap;
     private DonHang donHang;
 
@@ -49,12 +49,17 @@ public class LayHangActivity extends AppCompatActivity {
         ControlButtonHuyDon();
         ControlButtonDaLayHang();
         ButtonCall();
+//        ButtonBack();
         mFirebaseAuth= FirebaseAuth.getInstance();
         idShipper = mFirebaseAuth.getUid();
         arrayList = new ArrayList<>();
         SanPhamAdapter adapter = new SanPhamAdapter(LayHangActivity.this, R.layout.activity_sanpham, arrayList);
         tvtensp.setAdapter(adapter);
         adapter.setData(donHang.getSanpham());
+    }
+    private void ButtonBack(){
+        Intent intent = new Intent(LayHangActivity.this,Home.class);
+        startActivity(intent);
     }
     private void ButtonCall(){
         btncall.setOnClickListener(new View.OnClickListener() {
@@ -240,6 +245,7 @@ public class LayHangActivity extends AppCompatActivity {
         });
     }
     private void Anhxa(){
+        btnquaylai = findViewById(R.id.btn_back);
         btncall = (Button) findViewById(R.id.btn_call);
         btndalayhang = (Button) findViewById(R.id.btn_nhandon);
         btnhuydon = (Button) findViewById(R.id.btn_quaylai);

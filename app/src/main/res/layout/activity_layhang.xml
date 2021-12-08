@@ -258,7 +258,21 @@
                 android:layout_weight="1"
 
                 >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
 
+                    android:padding="10dp"
+                    android:gravity="center_vertical">
+
+                    <Button
+                        android:id="@+id/btn_back"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/boder"
+                        android:text="Quay lại"></Button>
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

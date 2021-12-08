@@ -31,6 +31,7 @@
             android:background="@drawable/boder"
             android:drawableLeft="@drawable/usericon"
             android:hint="Tên đăng nhập"
+            android:inputType="textEmailAddress"
             android:padding="20px"></EditText>
 
         <EditText
@@ -44,6 +45,7 @@
             android:drawableLeft="@drawable/pwicon"
             android:hint="Mật khẩu"
             android:padding="20px"
+            android:inputType="textPassword"
             android:password="true"></EditText>
 
         <LinearLayout

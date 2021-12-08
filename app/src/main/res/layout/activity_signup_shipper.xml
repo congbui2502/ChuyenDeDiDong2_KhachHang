@@ -98,7 +98,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Số chứng minh thư"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:textColor="@color/black"
                         android:transitionName="edt_username">
 
@@ -162,17 +162,16 @@
                         android:id="@+id/edt_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
                         android:hint="Ngày sinh (dd/mm/yyyy)"
+                        android:inputType="textWebEditText"
                         android:textColor="@color/black"
-                        android:transitionName="edt_phone"
-                        >
+                        android:transitionName="edt_phone">
 
                     </com.google.android.material.textfield.TextInputEditText>
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/date_input"
+                    android:id="@+id/bienso_input"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
