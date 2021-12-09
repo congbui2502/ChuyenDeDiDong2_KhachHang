@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.android.quanlybanhang.Activity.KhachHangActivity;
 import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.CuaHang;
 import java.android.quanlybanhang.Sonclass.SanPham;
@@ -37,7 +38,7 @@ public class SearchFragment extends Fragment {
 
     private  List<CuaHang> cuaHangSearchList;
     private List<SanPham> sanPhamSearchList;
-
+    private KhachHangActivity activity;
     private SearchAdapter adapter;
 
 
@@ -48,7 +49,12 @@ public class SearchFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.search_fragment,container,false);
         unit(view);
-
+        edtSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.getSupportFragmentManager().popBackStack();
+            }
+        });
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -56,14 +62,16 @@ public class SearchFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
             @Override
             public void afterTextChanged(Editable s) {
-               String key = edtSearch.getText().toString();
+                   String key = edtSearch.getText().toString();
                 setData(key);
             }
         });
-
-
-
         return view;
+    }
+
+    public  void getActivity(KhachHangActivity activity)
+    {
+        this.activity=activity;
     }
 
     private void unit(View view) {
@@ -71,7 +79,7 @@ public class SearchFragment extends Fragment {
         recyclerView=view.findViewById(R.id.recySearch);
         getCuaHang();
         adapter= new SearchAdapter();
-        adapter.setData(cuaHangList,sanPhamList,getContext());
+        adapter.setData(cuaHangList,sanPhamList,getContext(),activity);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -80,7 +88,7 @@ public class SearchFragment extends Fragment {
     private void getCuaHang()
     {
              cuaHangList=new ArrayList<>();
-            sanPhamList= new ArrayList<>();
+                sanPhamList= new ArrayList<>();
 
         mReference= FirebaseDatabase.getInstance().getReference("cuaHang");
        Toast.makeText(getContext(),mReference.getKey(),Toast.LENGTH_SHORT).show();
@@ -96,6 +104,7 @@ public class SearchFragment extends Fragment {
                     if(key.equals("thongtin"))
                     {
                         CuaHang cuaHang = snapshot1.getValue(CuaHang.class);
+
                         cuaHangList.add(cuaHang);
                         adapter.notifyDataSetChanged();
 
@@ -181,12 +190,12 @@ public class SearchFragment extends Fragment {
         if(edtSearch.getText().toString().equals(""))
         {
             Log.d("aaa","aaa");
-            adapter.setData(cuaHangList,sanPhamList,getContext());
+            adapter.setData(cuaHangList,sanPhamList,getContext(),activity);
             return;
         }
         cuaHangSearchList=new ArrayList<>();
         for (int i = 0; i < cuaHangList.size(); i++) {
-            if(cuaHangList.get(i).getName().contains(key))
+            if(cuaHangList.get(i).getName().toUpperCase().contains(key.toUpperCase()))
             {
                 cuaHangSearchList.add(cuaHangList.get(i));
             }
@@ -202,7 +211,7 @@ public class SearchFragment extends Fragment {
 
         }
 
-        adapter.setData(cuaHangSearchList,sanPhamSearchList,getContext());
+        adapter.setData(cuaHangSearchList,sanPhamSearchList,getContext(),activity);
 
 
 

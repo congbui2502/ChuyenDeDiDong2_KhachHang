@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
@@ -44,6 +45,7 @@ import java.android.quanlybanhang.CongAdapter.Putnotification;
 import java.android.quanlybanhang.CongAdapter.TableFragment;
 import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.CuaHang;
+import java.android.quanlybanhang.Sonclass.HomeProduct;
 import java.android.quanlybanhang.Sonclass.KhachHang;
 import java.android.quanlybanhang.Sonclass.SanPham;
 import java.io.Serializable;
@@ -61,16 +63,19 @@ public class KhachHangActivity extends AppCompatActivity {
     }
     private Context context =this;
     private  List<SanPham> products;
-    public static KhachHang khachHang;
+    public static KhachHang khachHang ;
     public    Fragment fragment;
-    private String idCartShop;
-    private String Shop_Id="JxZOOK1RzcMM7pL5I6naGZfYSsu2";
+    public static String idCartShop;
+    private String Shop_Id;
     private int mCount;
     private View viewEndAnimation;
     private ImageView viewAnimation;
     private DatabaseReference mReference;
-    private   AHBottomNavigation bottomNavigation;
+    public static    AHBottomNavigation bottomNavigation;
     public static Cart_Fragment cart_fragment;
+    private int pos;
+
+
 
     public AHBottomNavigation getBottomNavigation() {
         return bottomNavigation;
@@ -109,6 +114,7 @@ public class KhachHangActivity extends AppCompatActivity {
         mReference=FirebaseDatabase.getInstance().getReference();
 
 
+
         Intent intent =this.getIntent();
         Bundle bundle= intent.getExtras();
 
@@ -124,72 +130,63 @@ public class KhachHangActivity extends AppCompatActivity {
         }
 
 
-        products=getCartList();
+        setMenuItem();
 
-        mReference.child("gioHang").child(khachHang.getIdKhachhang()).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                if(snapshot.getKey().equals("idQuan"))
-                {
-                    idCartShop =    snapshot.getValue(String.class);
-                    if(idCartShop!=null)
-                    {
-                        cart_fragment=new Cart_Fragment(products,idCartShop);
-                        cart_fragment.setData(new ProductAdapter.SetPos() {
-                            @Override
-                            public void setPos(int size) {
-                                setCountProductInBuild(size);
-                            }
-                        });
-                    }
+       // setCountProductInBuild(products.size(),KhachHangActivity.this);
 
-
-
-                }
-
-
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        //        mReference.child("gioHang").child(khachHang.getIdKhachhang()).addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//                for (DataSnapshot snapshot1: snapshot.getChildren())
+//                {
+//                    for (DataSnapshot snapshot2:snapshot1.getChildren())
+//                    {
+//
+//
+//                    }
+//                }
+//
+//
+//
+//            }
+//
+//            @Override
+//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
         Fragment fragment1=new HomeFragment(this);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment1).addToBackStack("").commit();
-
-        setMenuItem();
-
-        setCountProductInBuild(products.size());
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment1).commit();
+        pos=0;
 
         getSuperQuangCao();
-
     }
 
-    public void setCountProductInBuild(int count)
+    public static  void setCountProductInBuild(int count,AppCompatActivity activity)
     {
-        mCount=count;
+
         AHNotification notification = new AHNotification.Builder()
                 .setText(String.valueOf(count))
-                .setBackgroundColor(ContextCompat.getColor(this, R.color.red))
-                .setTextColor(ContextCompat.getColor(this, R.color.green))
+                .setBackgroundColor(ContextCompat.getColor(activity.getApplicationContext(), R.color.red))
+                .setTextColor(ContextCompat.getColor(activity.getApplicationContext(), R.color.green))
                 .build();
             bottomNavigation.setNotification(notification, 1);
 
@@ -274,15 +271,7 @@ public class KhachHangActivity extends AppCompatActivity {
                 Log.d("AAA",""+position);
                if(position==0)
                {
-//                   if(getSupportFragmentManager().findFragmentByTag("homefragment")!=null)
-//                   {
-//                       Log.d("jjj","abcxyz");
 //
-//                       fragment = getSupportFragmentManager().findFragmentByTag("homefragment");
-//                   }else {
-//                       fragment=new HomeFragment();
-//                       Log.d("jjj","xyzabc");
-//                   }
                    if(getSupportFragmentManager().findFragmentByTag("homefragment")!=null)
                    {
                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,getSupportFragmentManager().findFragmentByTag("homefragment")).commit();
@@ -297,49 +286,33 @@ public class KhachHangActivity extends AppCompatActivity {
 
                }else  if(position==1)
                {
-//                   if(getSupportFragmentManager().findFragmentByTag("cartfragment")!=null)
-//                   {
-//
-//                       fragment = getSupportFragmentManager().findFragmentByTag("cartfragment");
-//                   }else {
-                      Cart_Fragment fragment1=new Cart_Fragment(products,idCartShop);
-                      fragment1.setData(new ProductAdapter.SetPos() {
-                          @Override
-                          public void setPos(int size) {
-                              setCountProductInBuild(size);
-                          }
-                      });
 
-//                   }
-                   FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
-                   transaction.replace(R.id.fragment_container,fragment1);
-                   transaction.addToBackStack("cartfragment");
-                   transaction.commit();
+                        Cart_Fragment fragment1=new Cart_Fragment(getCartList(KhachHangActivity.this),idCartShop);
+                        fragment1.setData(new ProductAdapter.SetPos() {
+                            @Override
+                            public void setPos(int size) {
+                                setCountProductInBuild(size,KhachHangActivity.this);
+                            }
+                        });
+                        FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragment_container,fragment1);
+                        transaction.addToBackStack("homefragment");
+                        transaction.commit();
+
+
+
 
                }else  if(position==2)
                {
-//                   if(getSupportFragmentManager().findFragmentByTag("accountfragment")!=null)
-//                   {
-//
-//                       fragment = getSupportFragmentManager().findFragmentByTag("accountfragment");
-//                   }else {
+
                        fragment=new Account_fragment();
-//                   }
-//
-                   FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
+                    FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
                    transaction.replace(R.id.fragment_container,fragment);
                    transaction.addToBackStack("accountfragment");
                    transaction.commit();
                }else {
-//                   fragment=new ShopProductFragment(MainActivity.this,MainActivity.this);
 
-//                   if(getSupportFragmentManager().findFragmentByTag("tablefragment")!=null)
-//                   {
-//
-//                       fragment = getSupportFragmentManager().findFragmentByTag("tablefragment");
-//                   }else {
                        fragment =new TableFragment();
-//                   }
 
                    FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
                    transaction.replace(R.id.fragment_container,fragment);
@@ -398,11 +371,12 @@ public class KhachHangActivity extends AppCompatActivity {
         return trais;
     }
 
-    public List<SanPham> getCartList()
+    public static List<SanPham> getCartList(AppCompatActivity activity)
     {
 
         List<SanPham> trais=new ArrayList<SanPham>();
-        mReference.child("gioHang").child(khachHang.getIdKhachhang()).addChildEventListener(new ChildEventListener() {
+        DatabaseReference mReference1=FirebaseDatabase.getInstance().getReference();
+        mReference1.child("gioHang").child(khachHang.getIdKhachhang()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 for (DataSnapshot snapshot1: snapshot.getChildren())
@@ -412,16 +386,22 @@ public class KhachHangActivity extends AppCompatActivity {
                     {
                         for (DataSnapshot snapshot3:snapshot1.getChildren())
                         {
-                            Toast.makeText(getApplicationContext(),snapshot3.getKey(),Toast.LENGTH_SHORT).show();
                             SanPham sanPham=snapshot3.getValue(SanPham.class);
+                            sanPham.setSoluong(1);
                             trais.add(sanPham);
+                            setCountProductInBuild(trais.size(),activity);
                         }
+                    }else if(snapshot1.getKey().equals("idQuan"))
+                    {
+                        idCartShop =  snapshot1.getValue(String.class);
+
+                    }
+                    else {
+                        Toast.makeText(activity.getApplicationContext(),"null",Toast.LENGTH_SHORT).show();
                     }
                 }
 
-
-
-                setCountProductInBuild(trais.size());
+                setCountProductInBuild(trais.size(),activity);
             }
 
             @Override
@@ -504,16 +484,17 @@ public class KhachHangActivity extends AppCompatActivity {
         notificationLayout.setImageViewBitmap(R.id.imgLogo,bitmap);
         sanPham.setSoluong(1);
         Intent resultIntent = new Intent(this, SuperQuangCaoActivity.class);
+        resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         Bundle bundle=new Bundle();
         bundle.putSerializable("sanpham", sanPham);
         resultIntent.putExtras(bundle);
 
 // Create the TaskStackBuilder and add the intent, which inflates the back stack
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addNextIntentWithParentStack(resultIntent);
+//        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+//        stackBuilder.addNextIntentWithParentStack(resultIntent);
 // Get the PendingIntent containing the entire back stack
         PendingIntent resultPendingIntent =
-                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.getActivity(this,0,resultIntent ,PendingIntent.FLAG_UPDATE_CURRENT);
 
 
         RemoteViews notificationLayoutmax = new RemoteViews(getPackageName(), R.layout.donga_bank_notification_max);
@@ -596,6 +577,13 @@ public class KhachHangActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.d("BBB","onResume Mainactivity");
+
+
+        products=getCartList(KhachHangActivity.this);
+
+
+
+
     }
 
     @Override
@@ -610,5 +598,11 @@ public class KhachHangActivity extends AppCompatActivity {
         Log.d("BBB","onStop Mainactivity");
     }
 
-    
+    @Override
+    protected void onDestroy() {
+        Toast.makeText(getApplicationContext(),"Destroy",Toast.LENGTH_SHORT).show();
+        super.onDestroy();
+    }
+
+
 }

@@ -36,6 +36,7 @@ public class CustomDialogKhuyanMai extends Dialog implements
     private DatabaseReference mReference;
     private KhuyenMaiAdapter adapter;
     private String idCuaHang;
+    private TextView tvThongBao;
 
 
     private KhuyenMaiAdapter.setTvKhuyenMai tvKhuyenMai;
@@ -61,6 +62,8 @@ public class CustomDialogKhuyanMai extends Dialog implements
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_khuyenmai);
         recyKhuyenMai=findViewById(R.id.recyKhuyenmai);
+        tvThongBao=findViewById(R.id.tvThongBao);
+
         sanPhams=new ArrayList<KhuyenMai>();
         getData();
         d=this;
@@ -90,14 +93,23 @@ public class CustomDialogKhuyanMai extends Dialog implements
 
     private  void getData()
     {
-        mReference = FirebaseDatabase.getInstance().getReference().child("khuyenmai").child(idCuaHang);
+        mReference = FirebaseDatabase.getInstance().getReference().child("khuyenmai");
 
         mReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                KhuyenMai khuyenMai=snapshot.getValue(KhuyenMai.class);
-                sanPhams.add(khuyenMai);
-                adapter.setList(sanPhams);
+                if(snapshot.getKey().equals(idCuaHang))
+                {
+                    for (DataSnapshot snapshot1: snapshot.getChildren())
+                    {
+                        KhuyenMai khuyenMai=snapshot1.getValue(KhuyenMai.class);
+                        sanPhams.add(khuyenMai);
+                        adapter.setList(sanPhams);
+                        tvThongBao.setVisibility(View.GONE);
+                    }
+                }
+
+
 
             }
 

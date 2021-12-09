@@ -28,8 +28,13 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.android.quanlybanhang.Activity.KhachHangActivity;
 import java.android.quanlybanhang.R;
+import java.android.quanlybanhang.Sonclass.CuaHang;
+import java.android.quanlybanhang.Sonclass.HomeProduct;
 import java.android.quanlybanhang.Sonclass.KhachHang;
+import java.android.quanlybanhang.Sonclass.SanPham;
 import java.android.quanlybanhang.login.ForgetPasswordActivity;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DangNhapKhachHangActivity extends AppCompatActivity {
@@ -41,11 +46,15 @@ public class DangNhapKhachHangActivity extends AppCompatActivity {
     private String idUser;
     private FirebaseAuth mFirebaseAuth;
     private DatabaseReference mReference;
+    public  static KhachHang  khachHang;
+    public static List<HomeProduct> listHome;
+    private int flag=-1;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dangnhap_khachhang);
+        listHome=getList();
         btnDangki = findViewById(R.id.btn_dangky);
         btnDangNhap = (Button) findViewById(R.id.btn_dangnhap);
         edtDangNhap = (EditText) findViewById(R.id.edt_dangnhap);
@@ -113,12 +122,20 @@ public class DangNhapKhachHangActivity extends AppCompatActivity {
                             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                                 if(snapshot.getKey().equals(idUser))
                                 {
-                                    KhachHang khachHang = snapshot.getValue(KhachHang.class);
-                                    Intent intent = new Intent(DangNhapKhachHangActivity.this, KhachHangActivity.class);
-                                    Bundle bundle= new Bundle();
-                                    bundle.putSerializable("khachhang",khachHang);
-                                    intent.putExtras(bundle);
-                                    startActivity(intent);
+                                    if(flag>0 && listHome.size()>0)
+                                    {
+                                        khachHang = snapshot.getValue(KhachHang.class);
+                                        Intent intent = new Intent(DangNhapKhachHangActivity.this, KhachHangActivity.class);
+                                        Bundle bundle= new Bundle();
+                                        bundle.putSerializable("khachhang",khachHang);
+
+                                        intent.putExtras(bundle);
+                                        startActivity(intent);
+                                    }
+                                    else {
+                                        Toast.makeText(getApplicationContext(),"null",Toast.LENGTH_SHORT).show();
+                                    }
+
                                 }
                             }
 
@@ -151,6 +168,142 @@ public class DangNhapKhachHangActivity extends AppCompatActivity {
         } else {
             Toast.makeText(DangNhapKhachHangActivity.this, "Error Occurred!", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public List<HomeProduct> getList()
+    {
+
+        List<HomeProduct> loaiTrais=new ArrayList<>();
+        List<SanPham> sanphamnoibat=new ArrayList<>();
+        List<CuaHang> cuahang=new ArrayList<>();
+        List<SanPham> sanphamquangcao=new ArrayList<>();
+        mReference= FirebaseDatabase.getInstance().getReference();
+        mReference.child("sanphamnoibat").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                SanPham sanPham=snapshot.getValue(SanPham.class);
+                sanphamnoibat.add(sanPham);
+                flag++;
+
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        loaiTrais.add(new HomeProduct("Sản phẩm nổi bật",sanphamnoibat,new ArrayList<CuaHang>(),new ArrayList<SanPham>()));
+
+
+
+
+        mReference.child("cuaHang").addChildEventListener(new ChildEventListener() {
+            String idShop="";
+            String nameShop="";
+            String logoUrl="";
+
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                idShop = snapshot.getKey();
+                idShop=snapshot.child("thongtin").child("id").getValue(String.class);
+                logoUrl=snapshot.child("thongtin").child("logoUrl").getValue(String.class);
+                nameShop=snapshot.child("thongtin").child("name").getValue(String.class);
+
+                CuaHang sanPham=new CuaHang(idShop,logoUrl,nameShop);
+                cuahang.add(sanPham);
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        loaiTrais.add(new HomeProduct("Của hàng",new ArrayList<SanPham>(),cuahang,new ArrayList<SanPham>()));
+
+
+        mReference.child("sanPhamQuangCao").addChildEventListener(new ChildEventListener() {
+
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                for (DataSnapshot snapshot1: snapshot.getChildren())
+                {
+                    if(snapshot1.getKey().equals("sanpham"))
+                    {
+                        for (DataSnapshot snapshot2: snapshot1.getChildren())
+                        {
+                            SanPham sanPham=snapshot2.getValue(SanPham.class);
+                            sanPham.setSoluong(1);
+                            sanphamquangcao.add(sanPham);
+
+                        }
+                    }
+                }
+
+
+
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        loaiTrais.add(new HomeProduct("Sản phẩm mới",new ArrayList<SanPham>(),new ArrayList<CuaHang>(),sanphamquangcao));
+
+
+        return loaiTrais;
     }
 
 }

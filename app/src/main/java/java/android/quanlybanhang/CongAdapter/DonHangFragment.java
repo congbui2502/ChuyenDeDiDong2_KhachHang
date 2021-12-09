@@ -28,6 +28,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -36,6 +40,7 @@ import org.json.JSONException;
 import java.android.quanlybanhang.CongAdapter.AddressVN.DataAddress;
 import java.android.quanlybanhang.CongAdapter.AddressVN.DiaChi;
 import java.android.quanlybanhang.R;
+import java.android.quanlybanhang.Sonclass.CuaHang;
 import java.android.quanlybanhang.Sonclass.DonHangOnline;
 import java.android.quanlybanhang.Sonclass.KhachHang;
 import java.android.quanlybanhang.Sonclass.KhuyenMai;
@@ -51,7 +56,8 @@ import java.util.List;
 
 public class DonHangFragment  extends Fragment {
 
-    private String idQuan="JxZOOK1RzcMM7pL5I6naGZfYSsu2";
+    private CuaHang cuaHang;
+    private String idQuan;
     private RecyclerView recyDonHang;
     private TextView giaKhuyenMai;
     private TextView tongTien;
@@ -118,8 +124,8 @@ public class DonHangFragment  extends Fragment {
         donHangAdapter.setData(sanPhams);
         recyDonHang.setAdapter(donHangAdapter);
         tongtien = donHangAdapter.tinhTongTien();
-        tongTien.setText(tongtien+" VND");
-
+        tongTien.setText("Tổng: "+Cart_Fragment.addDauPhay(tongtien)+" VND");
+        getDataShop();
         DataAddress dataAddress = new DataAddress();
         try {
             listDiaChi = dataAddress.readCompanyJSONFile(mainActivity);
@@ -134,7 +140,7 @@ public class DonHangFragment  extends Fragment {
          thunhap =Long.parseLong(tienKM[2]);
          donGia = tongtien+thunhap;
 
-        tongTien.setText((tongtien+ thunhap)+" VNĐ");
+        tongTien.setText("Tổng: "+Cart_Fragment.addDauPhay(tongtien+ thunhap)+" VNĐ");
 
 
         edtDiaChi.setOnClickListener(new View.OnClickListener() {
@@ -168,6 +174,7 @@ public class DonHangFragment  extends Fragment {
                 DatabaseReference mReference= FirebaseDatabase.getInstance().getReference()
                         .child("CuaHangOder")
                         .child(idQuan).child("donhangonline").child("dondadat");
+
                 Date date = Calendar.getInstance().getTime();
                 // Display a date in day, month, year format
                 DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -211,7 +218,7 @@ public class DonHangFragment  extends Fragment {
                             else {
                                 DonHangOnline donHangOnline1=new DonHangOnline(idQuan, khachHang.getIdKhachhang(),giaKhuyenmai,
                                         0,millis,donGia, sanPhams,edtDiaChi.getText().toString(),key, khachHang.getNameKhachHang(),
-                                        khachHang.getSdtKhachHang(), "abcxyz",thunhap,1);
+                                        khachHang.getSdtKhachHang(), "abcxyz",thunhap,1, cuaHang.getName());
 
                                 HomeFragment fragment =new HomeFragment(mainActivity);
                                 mReference.child(today).child(key).setValue(donHangOnline1);
@@ -240,7 +247,7 @@ public class DonHangFragment  extends Fragment {
                         else {
                             DonHangOnline donHangOnline1=new DonHangOnline(idQuan, khachHang.getIdKhachhang(),giaKhuyenmai,
                                     0,millis,donGia, sanPhams,edtDiaChi.getText().toString(),key, khachHang.getNameKhachHang(),
-                                    khachHang.getSdtKhachHang(), "abcxyz",thunhap,2);
+                                    khachHang.getSdtKhachHang(), "abcxyz",thunhap,2, cuaHang.getName());
 
                             HomeFragment fragment =new HomeFragment(mainActivity);
                             mReference.child(today).child(key).setValue(donHangOnline1);
@@ -404,6 +411,49 @@ public class DonHangFragment  extends Fragment {
         }
 
         return arr;
+    }
+
+    private void  getDataShop()
+    {
+        DatabaseReference mReference= FirebaseDatabase.getInstance().getReference("cuaHang");
+        mReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                if(snapshot.getKey().equals(idQuan))
+                {
+//                    Toast.makeText(getBaseContext(),snapshot.getKey(),Toast.LENGTH_SHORT).show();
+                    for (DataSnapshot snapshot1:snapshot.getChildren())
+                    {
+                        String key= snapshot1.getKey();
+//                    Toast.makeText(getContext(),key,Toast.LENGTH_SHORT).show();
+                        if(key.equals("thongtin"))
+                        {
+                            cuaHang = snapshot1.getValue(CuaHang.class);
+
+                        }
+                    }
+
+                }
+
+
+            }
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
 

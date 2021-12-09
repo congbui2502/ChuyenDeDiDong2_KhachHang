@@ -1,26 +1,38 @@
 package java.android.quanlybanhang.CongAdapter;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
+import java.android.quanlybanhang.Activity.ChangePassActivity;
+
+import java.android.quanlybanhang.Activity.DangNhapKhachHangActivity;
+import java.android.quanlybanhang.Activity.KhachHangActivity;
 import java.android.quanlybanhang.R;
+import java.android.quanlybanhang.Sonclass.KhachHang;
 import java.android.quanlybanhang.Sonclass.Mon;
 import java.android.quanlybanhang.Sonclass.Table;
 import java.android.quanlybanhang.Sonclass.TestChangProduct;
@@ -28,179 +40,110 @@ import java.android.quanlybanhang.TrietAdapter.TableViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class TableFragment extends Fragment {
-    private RecyclerView recyclerViewTable;
+
+    private FirebaseAuth mFirebaseAuth;
     private DatabaseReference mDatabase;
-    private List<Table> tableList;
-    private TableViewHolder tableViewHolder;
-    private List<String> stringList;
-    private List<String> keyListSelected;
-    private   List<Mon> mons = new ArrayList<>();
+    private TextView tv_name,tv_ngaysinh,tv_sodt,tv_email,tv_doimk,tv_dangxuat;
+    private CircleImageView avatar;
 
 
-    View v;
     public TableFragment() {
-        // Required empty public constructor
-        Log.d("III","ACascsa");
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        tables();
-        v= inflater.inflate(R.layout.frag_ban, container, false);
-        recyclerViewTable= v.findViewById(R.id.recycler);
-        tableViewHolder=new TableViewHolder(getActivity(),getContext());
-        tableViewHolder.setData(tableList);
-        recyclerViewTable.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerViewTable.setAdapter(tableViewHolder);
-        keyListSelected=new ArrayList<>();
+        View v = inflater.inflate(R.layout.frag_ban, container, false);
+        tv_name = v.findViewById(R.id.tv_hoten);
+        tv_ngaysinh = v.findViewById(R.id.tv_ngaysinh);
+        tv_sodt = v.findViewById(R.id.tv_sdt);
+        tv_email = v.findViewById(R.id.tv_email);
+        avatar = v.findViewById(R.id.profile_image);
+        tv_doimk = v.findViewById(R.id.tv_doimk);
+        tv_dangxuat= v.findViewById(R.id.logout);
+        onDataChange();
+        DoiMatKhau();
+        DangXuat();
         return v;
 
     }
+    private void DangXuat(){
+        tv_dangxuat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_DeviceDefault_Dialog_Alert);
+                builder.setTitle("Đăng xuất");
+                builder.setMessage("Bạn có muốn đăng xuất?");
+                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getContext(), DangNhapKhachHangActivity.class);
 
+                        startActivity(intent);
+                    }
+                });
+                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.show();
+            }
+        });
+    }
+    public void DoiMatKhau(){
+        tv_doimk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ChangePassActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        tableList=new ArrayList<>();
+
 
     }
-    public void tables(){
-        List<Mon> mons=new ArrayList<>();
-        stringList=new ArrayList<>();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("sanphamorder").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                stringList.add(snapshot.getKey());
-                //xet xem co su thay doi cua Firebase
-                onDataChange(snapshot.getKey());
 
+    private void onDataChange() {
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        String id = mFirebaseAuth.getUid();
 
-            }
+        if (id != null) {
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+            mDatabase.child("KhachHang").child(id).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    KhachHang sp = snapshot.getValue(KhachHang.class);
+                    String imgAvatar=sp.getImgAvatar();
+                    String nameKH = sp.getNameKhachHang();
+                    String phoneKH = sp.getSdtKhachHang();
+                    String emailKH = sp.getEmailKhachHang();
+                    String dateKH = sp.getDateKhachHang();
 
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
-    private void onDataChange(String list_key)
-    {
-
-
-        mDatabase.child("sanphamorder").child(list_key).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-               mons = getListProductFromTable(list_key);
-                Log.d("gg",snapshot.getKey());
-                TestChangProduct testChangProduct=snapshot.getValue(TestChangProduct.class);
-                if(testChangProduct.isFlag()==true)
-                {
-
-                    keyListSelected.add(list_key);
-                    tableList.add(new Table(list_key,mons));
-                    tableViewHolder.setData(tableList);
-
-                }
-                else {
-
-                    for (int i=0;i<keyListSelected.size();i++)
-                    {
-                        if(keyListSelected.get(i).equals(list_key))
-                        {
-                            tableList.remove(i);
-                            keyListSelected.remove(i);
-                            tableViewHolder.setData(tableList);
-                        }
-                    }
+                    Picasso.get().load(imgAvatar).into(avatar);
+                    tv_name.setText(nameKH);
+                    tv_ngaysinh.setText(dateKH);
+                    tv_sodt.setText(phoneKH);
+                    tv_email.setText(emailKH);
 
                 }
 
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+                }
+            });
 
 
-
-    }
-
-
-    private List<Mon> getListProductFromTable(String key)
-    {
-        List<Mon> mons=new ArrayList<>();
-
-
-
-        mDatabase.child("sanphamorder").child(key).child("sanpham").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Mon mon=snapshot.getValue(Mon.class);
-                mons.add(mon);
-                tableViewHolder.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
-//        mDatabase.child("sanphamorder").child(key).child("sanpham").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Log.d("gg",key);
-////                Log.d("gg",snapshot.getKey());
-//
-////                Mon mon=snapshot.getValue(Mon.class);
-////                mons.add(mon);
-////                tableViewHolder.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-
-        return  mons;
+        }
     }
 }

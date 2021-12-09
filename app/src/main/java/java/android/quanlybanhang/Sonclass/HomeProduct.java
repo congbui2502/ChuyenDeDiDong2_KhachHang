@@ -1,8 +1,9 @@
 package java.android.quanlybanhang.Sonclass;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class HomeProduct {
+public class HomeProduct implements Serializable {
 
 
     private String tittle;

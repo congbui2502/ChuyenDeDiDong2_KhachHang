@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.palette.graphics.Palette;
@@ -49,10 +50,10 @@ public class ShopProductFragment extends Fragment  {
     private  List<SanPham> dsSanPhamTheoLoai;
     private List<String> dsLoaiSanPham;
     private boolean isExpanded=true;
-    private KhachHangActivity khachHangActivity;
+    private AppCompatActivity khachHangActivity;
     private Context context;
     private ImageView imgShop;
-    private ShopProductAdapter loaiTraiAdapter;
+    private SanPhamNoiBatAdapter loaiTraiAdapter;
     private Shop_Adapter shop_adapter;
     private String Shop_Name="Highland";
     private CuaHang cuaHang;
@@ -67,6 +68,7 @@ public class ShopProductFragment extends Fragment  {
             this.Shop_Name=cuaHang.getName();
             this.logoUrl= cuaHang.getLogoUrl();
     }
+
 
 
     @Nullable
@@ -149,8 +151,8 @@ public class ShopProductFragment extends Fragment  {
         recyProduct.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(context);
         recyProduct.setLayoutManager(linearLayoutManager);
-        loaiTraiAdapter=new ShopProductAdapter();
-        loaiTraiAdapter.setData(dsSanPhamTheoLoai);
+        loaiTraiAdapter=new SanPhamNoiBatAdapter();
+        loaiTraiAdapter.setData1(khachHangActivity,dsSanPhamTheoLoai);
         recyProduct.setAdapter(loaiTraiAdapter);
 
         LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
@@ -165,7 +167,7 @@ public class ShopProductFragment extends Fragment  {
 //                dsSanPhamTheoLoai=getListproduct(s);
 //                loaiTraiAdapter.notifyDataSetChanged();
 
-                    loaiTraiAdapter.setData(getListproduct(s));
+                    loaiTraiAdapter.setData1(khachHangActivity,getListproduct(s));
                     loaiTraiAdapter.notifyDataSetChanged();
             }
 
@@ -180,7 +182,7 @@ public class ShopProductFragment extends Fragment  {
     public void  setRecycleView(String s)
     {
 
-        loaiTraiAdapter.setData( getListproduct(s));
+        loaiTraiAdapter.setData1(khachHangActivity, getListproduct(s));
         loaiTraiAdapter.notifyDataSetChanged();
 
     }

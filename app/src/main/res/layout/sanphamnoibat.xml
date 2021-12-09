@@ -1,79 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
 
-xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardView"
-android:orientation="horizontal"
-android:layout_width="match_parent"
-app:cardCornerRadius="10dp"
-android:layout_height="140dp"
-android:layout_margin="15dp">
+
 
 <LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:clipChildren="false"
+android:clipToPadding="false"
+android:orientation="vertical"
+tools:context=".Activity.KhachHangActivity">
+
+<com.ramotion.foldingcell.FoldingCell
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:folding-cell="http://schemas.android.com/tools"
+    android:id="@+id/folding_cell"
+    folding-cell:animationDuration="1000"
+    folding-cell:backSideColor="@color/bgBackSideColor"
+    folding-cell:additionalFlipsCount="2"
+    folding-cell:cameraHeight="30"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="3">
-        <ImageView
-            android:id="@+id/imgRecy3"
-
-            android:scaleType="fitXY"
+    android:layout_height="wrap_content">
+    ​
+    <FrameLayout
+        android:id="@+id/cell_content_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_green_dark"
+        android:visibility="gone">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="400dp"
+            android:layout_weight="5"
+            android:layout_margin="2dp"
+            android:background="@drawable/chitiet_sp_style"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:orientation="vertical">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    app:cardCornerRadius="20dp"
+                    android:layout_margin="10dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="8">
+                    <ImageView
+                        android:id="@+id/imgSP"
+                        android:scaleType="fitXY"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
 
-    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="7"
-        android:background="@color/xam"
-        android:paddingLeft="10dp"
+                <LinearLayout
+                    android:id="@+id/lineShop"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/circleShop"
+                        android:layout_width="50dp"
+                        android:layout_gravity="center"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:src="@mipmap/ic_launcher"/>
 
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/tvHagtag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="diving"
-            android:textSize="15sp"
-            android:textColor="@color/blue"
-            android:layout_marginTop="10dp"/>
-
-        <TextView
-            android:id="@+id/tvTittle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="The latest in scuba diving news "
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-
-            android:layout_marginTop="10dp"/>
-
-        <TextView
-            android:id="@+id/tvDesscription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="The latest in scuba diving news "
-            android:textStyle="normal"
-            android:textColor="@color/den_nhat"
-            android:textSize="15sp"
-
-            android:layout_marginTop="10dp"/>
+                    <TextView
+                        android:id="@+id/tvShop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="Cong Bui Shop"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"/>
+                </LinearLayout>
+            </LinearLayout>
 
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tvTensp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:text="Ten san pham"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvGia"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:text="20.000 VND"
+                    android:textSize="20sp"
+                    android:textStyle="italic"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Loại: "/>
+
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:text="Description"
+                    android:textSize="20sp"
+                    android:textStyle="normal"/>
+
+                <TextView
+                    android:id="@+id/tvDatmua"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:text="Đặt Mua"
+                    android:background="@drawable/edittext_style"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
 
 
 
-    </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </FrameLayout>
+    ​
+    <FrameLayout
+        android:id="@+id/cell_title_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            app:cardCornerRadius="10dp"
+            android:layout_height="140dp"
+            android:layout_margin="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3">
+                    <ImageView
+                        android:id="@+id/imgRecy3"
+                        android:scaleType="fitXY"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    android:background="@color/xam"
+                    android:paddingLeft="10dp"
+
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tvHagtag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="diving"
+                        android:textSize="15sp"
+                        android:textColor="@color/blue"
+                        android:layout_marginTop="10dp"/>
+
+                    <TextView
+                        android:id="@+id/tvTittle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="The latest in scuba diving news "
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+
+                        android:layout_marginTop="10dp"/>
+
+                    <TextView
+                        android:id="@+id/tvDesscription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="The latest in scuba diving news "
+                        android:textStyle="normal"
+                        android:textColor="@color/den_nhat"
+                        android:textSize="15sp"
+
+                        android:layout_marginTop="10dp"/>
+
+
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+    ​
+</com.ramotion.foldingcell.FoldingCell>
 
 </LinearLayout>
-
-
-
-</androidx.cardview.widget.CardView>

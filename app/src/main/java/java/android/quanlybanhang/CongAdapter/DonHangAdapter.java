@@ -45,8 +45,9 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.DonHangV
         }
 
         holder.tenMon.setText(trai.getNameProduct());
-        holder.giaTien.setText(trai.getGiaBan()*trai.getSoluong()+" VND");
+        holder.giaTien.setText(Cart_Fragment.addDauPhay(trai.getDonGia().get(0).getGiaBan()*trai.getSoluong())+" VND");
         holder.soLuong.setText("x"+trai.getSoluong());
+        holder.tvLoai.setText(trai.getDonGia().get(0).getTenDonGia());
 
     }
 
@@ -65,12 +66,14 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.DonHangV
         private TextView tenMon;
         private TextView soLuong;
         private TextView giaTien;
+        private TextView tvLoai;
 
         public DonHangViewHolder(@NonNull View itemView) {
             super(itemView);
             tenMon=itemView.findViewById(R.id.tvTensp);
             soLuong=itemView.findViewById(R.id.tvSoluongDat);
             giaTien=itemView.findViewById(R.id.tvGiaSP);
+            tvLoai=itemView.findViewById(R.id.tvLoai);
         }
     }
 
@@ -78,7 +81,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.DonHangV
     {
         long tong=0;
         for (int i = 0; i < trais.size(); i++) {
-            tong=tong+ trais.get(i).getGiaBan()*trais.get(i).getSoluong();
+            tong=tong+ trais.get(i).getDonGia().get(0).getGiaBan()*trais.get(i).getSoluong();
         }
         return tong;
     }

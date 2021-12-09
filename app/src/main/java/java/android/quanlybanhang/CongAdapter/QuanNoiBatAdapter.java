@@ -72,7 +72,7 @@ public class QuanNoiBatAdapter extends RecyclerView.Adapter<QuanNoiBatAdapter.Tr
                     }
                 });
                 fragmentTransaction.replace(R.id.fragment_container,fragment1);
-//                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
             }

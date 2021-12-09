@@ -33,19 +33,29 @@
         <activity android:name=".Activity.ForgotPasswordActivity">
 
         </activity>
+
+        <activity android:name=".Activity.ChangePassActivity">
+
+        </activity>
+
+        <activity android:name=".Activity.KhachHangActivity"
+           >
+        </activity>
+
         <activity android:name=".Activity.SuperQuangCaoActivity"
             android:parentActivityName=".Activity.KhachHangActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"/>
         <activity
             android:name=".CongAdapter.Tttttttest2"
             android:exported="true" />
         <activity android:name=".CongAdapter.Tttttttest"></activity>
 
-        <activity android:name=".Activity.KhachHangActivity">
 
 
 
-        </activity>
         <activity
             android:name=".Activity.ShopActivity"></activity>
         <activity

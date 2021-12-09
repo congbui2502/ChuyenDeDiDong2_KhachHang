@@ -8,6 +8,7 @@ public class KhachHang implements Serializable {
     private String dateKhachHang;
     private String sdtKhachHang;
     private String idKhachhang;
+    private String imgAvatar;
 
     public KhachHang() {
     }
@@ -25,6 +26,24 @@ public class KhachHang implements Serializable {
         this.emailKhachHang = emailKhachHang;
         this.dateKhachHang = dateKhachHang;
         this.sdtKhachHang = sdtKhachHang;
+    }
+
+    public KhachHang(String nameKhachHang, String emailKhachHang, String dateKhachHang,
+                     String sdtKhachHang, String idKhachhang, String imgAvatar) {
+        this.nameKhachHang = nameKhachHang;
+        this.emailKhachHang = emailKhachHang;
+        this.dateKhachHang = dateKhachHang;
+        this.sdtKhachHang = sdtKhachHang;
+        this.idKhachhang = idKhachhang;
+        this.imgAvatar = imgAvatar;
+    }
+
+    public String getImgAvatar() {
+        return imgAvatar;
+    }
+
+    public void setImgAvatar(String imgAvatar) {
+        this.imgAvatar = imgAvatar;
     }
 
     public String getIdKhachhang() {

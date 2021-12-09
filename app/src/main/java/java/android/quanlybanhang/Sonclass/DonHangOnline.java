@@ -20,6 +20,7 @@ public class DonHangOnline {
     private String ghiChu;
     private long thunhap;
     private int phuongThucThanhToan;
+    private String tencuahang;
 
 
 
@@ -65,10 +66,11 @@ public class DonHangOnline {
 
     public DonHangOnline(String idQuan, String idKhachhang,  long giaKhuyenMai, int trangthai,
                          String time, long donGia, List<SanPham> sanpham, String diaChi,
-                         String key, String tenKhachhang, String sdtkhachhang, String ghiChu, long thunhap,int phuongThucThanhToan) {
+                         String key, String tenKhachhang, String sdtkhachhang, String ghiChu,
+                         long thunhap,int phuongThucThanhToan,String tencuahang) {
         this.idQuan = idQuan;
         this.idKhachhang = idKhachhang;
-
+        this.tencuahang=tencuahang;
         this.giaKhuyenMai = giaKhuyenMai;
         this.trangthai = trangthai;
         this.time = time;
@@ -205,8 +207,13 @@ public class DonHangOnline {
         this.sanpham = sanpham;
     }
 
+    public String getTencuahang() {
+        return tencuahang;
+    }
 
-
+    public void setTencuahang(String tencuahang) {
+        this.tencuahang = tencuahang;
+    }
     //tinh tien cho don hang
 
     private long tinhTongDonHang()

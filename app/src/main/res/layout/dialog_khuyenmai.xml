@@ -4,6 +4,17 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvThongBao"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:text="Không có khuyến mãi nào"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_margin="10dp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyKhuyenmai"
         android:layout_width="match_parent"

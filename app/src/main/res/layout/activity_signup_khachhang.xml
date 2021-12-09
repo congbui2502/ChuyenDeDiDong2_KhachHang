@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DangkyActivity">
+    tools:context=".Activity.DangkyKhachHang">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,28 +17,43 @@
             android:layout_marginTop="20dp"
             android:background="@color/white"
             android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/image_view"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/anhavatar"
+                    app:civ_border_width="2dp"
+                    android:layout_marginHorizontal="10dp"
+                    app:civ_border_color="#FF000000"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical">
 
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginLeft="30dp"
-                android:transitionName="logo_image"
-                android:background="@drawable/pngtree_coffe"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Chọn ảnh"
+                        android:id="@+id/btnSelectImg"
+                        ></Button>
+                </LinearLayout>
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="51dp"
-                android:layout_marginLeft="20dp"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                android:transitionName="logo_welcome" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:textSize="18sp"
-                android:transitionName="logo_signin" />
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,8 +76,8 @@
                         android:id="@+id/edt_username"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="Họ và tên"
                         android:inputType="text"
-                        android:hint="Username"
                         android:textColor="@color/black"
                         android:transitionName="edt_username">
 
@@ -83,9 +98,9 @@
                         android:id="@+id/edt_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="Email"
                         android:inputType="textEmailAddress"
                         android:textColor="@color/black"
-                        android:hint="Email"
                         android:transitionName="edt_email">
 
                     </com.google.android.material.textfield.TextInputEditText>
@@ -106,7 +121,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
-                        android:hint="Phone"
+                        android:hint="Số điện thoại"
                         android:textColor="@color/black"
                         android:transitionName="edt_phone"
                         >
@@ -115,7 +130,7 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/date_input"
+                    android:id="@+id/date_input1"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -128,7 +143,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
-                        android:hint="Date dd/mm/yy"
+                        android:hint="Ngày sinh (dd/mm/yyyy)"
                         android:textColor="@color/black"
                         android:transitionName="edt_phone"
                         >
@@ -136,7 +151,6 @@
                     </com.google.android.material.textfield.TextInputEditText>
 
                 </com.google.android.material.textfield.TextInputLayout>
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/pass_input"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -152,6 +166,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:textColor="@color/black"
+                        android:hint="Mật khẩu"
                         android:transitionName="edt_password"
                         >
 
@@ -174,6 +189,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:textColor="@color/black"
+                        android:hint="Xác nhận mật khẩu"
                         android:transitionName="edt_password"
                         >
 
@@ -189,9 +205,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textStyle="bold"
-                android:text="Sign In"
+                android:text="Đăng kí"
                 android:transitionName="button_sign" />
 
             <Button
@@ -202,44 +218,10 @@
                 android:layout_marginRight="20dp"
                 android:background="#00000000"
                 android:textColor="@color/black"
-                android:text="Signup Now"
+                android:text="Đăng nhập ngay"
                 android:transitionName="button_signin" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_gravity="bottom|center"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingBottom="30dp">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="200dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="30dp"
-                    android:transitionName="button_sign"
-                    app:cardCornerRadius="3dp"
-                    app:cardElevation="4dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="10dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="5dp" />
-
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -54,6 +54,8 @@ public class Cart_Fragment extends Fragment {
 
     }
 
+
+
     public Cart_Fragment(List<SanPham> quan,String idQuan) {
         this.quans=quan;
         this.idQuan = idQuan;
@@ -79,6 +81,7 @@ public class Cart_Fragment extends Fragment {
         recyclerProduct.setLayoutManager(linearLayoutManager);
 
         productAdapter=new ProductAdapter(quans);
+        productAdapter.setListCart();
         productAdapter.setData( mainActivity,new ProductAdapter.IclickAddToCartListener() {
             @Override
             public void onClickAddToCart(ImageView imageToCart, SanPham product) {
@@ -93,7 +96,7 @@ public class Cart_Fragment extends Fragment {
                         imageToCart.setBackgroundResource(R.drawable.cart_unshopping);
                         product.setAddToCart(true);
                         productAdapter.notifyDataSetChanged();
-                        mainActivity.setCountProductInBuild(quans.size()+1);
+                        mainActivity.setCountProductInBuild(quans.size()+1,mainActivity);
 
                     }
 
@@ -120,16 +123,16 @@ public class Cart_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                DonHangFragment donHangFragment=new DonHangFragment(productAdapter.getListProductIsChecked());
-                if(idQuan!=null)
-                {
-                    donHangFragment.getIdQuan(idQuan);
-                }else {
-                    Toast.makeText(getContext(),"cmm",Toast.LENGTH_SHORT).show();
-                }
+                    if(productAdapter.getListProductIsChecked().size()>0)
+                    {
+                        DonHangFragment donHangFragment=new DonHangFragment(productAdapter.getListProductIsChecked());
+                        donHangFragment.getIdQuan(idQuan);
+                        mainActivity.getSupportFragmentManager().beginTransaction().addToBackStack(null)
+                                .replace(R.id.fragment_container,donHangFragment).commit();
 
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,donHangFragment).commit();
-
+                    }else {
+                        Toast.makeText(getContext(),"Vui lòng chọn sản phẩm",Toast.LENGTH_SHORT).show();
+                    }
 
             }
         });
@@ -161,40 +164,21 @@ public class Cart_Fragment extends Fragment {
     public   static  String addDauPhay(long abc)
     {
         String xyz=abc+"";
-
-        String x="";
-        if(abc==0)
-        {
-            return "0";
-        }
-        while (abc/1000>0)
-        {
-            if(x=="")
+        String [] list = xyz.split("");
+        String kq="";
+        int pos =1;
+        for (int i = (list.length-1); i >=0 ; i--) {
+            if(pos%3==0 && pos <list.length)
             {
-                if(abc%1000==0)
-                {
-                    x="000";
-                }
-
-
+                kq =","+ list[i]+kq;
             }else {
-                x=(abc%1000)+","+x;
-
+                kq = list[i]+kq;
             }
-
-            abc=abc/1000;
-            Log.d("bbb",x+" bbb");
-        }
-        if(abc!=0)
-        {
-            x=abc+","+x;
+            pos++;
         }
 
-        Log.d("bbb",x+" bbb");
 
-
-
-        return  x;
+        return  kq;
     }
 
     @Override

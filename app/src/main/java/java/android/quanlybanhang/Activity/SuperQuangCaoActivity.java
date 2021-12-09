@@ -49,6 +49,8 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
     private Spinner spinner;
     private List<SanPham> sanPhamList;
     private List<String> list_spinner;
+    private int pos,oldList;
+
 
 
 
@@ -56,11 +58,9 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chitietsanpham_layout);
-
-
         unit();
         getData();
-
+        oldList= sanPham.getDonGia().size();
         Glide.with(this).load(sanPham.getImgProduct()).into(imgSP);
         tvTenSP.setText(sanPham.getNameProduct());
         tvGia.setText(Cart_Fragment.addDauPhay(sanPham.getDonGia().get(0).getGiaBan())+" VND");
@@ -68,101 +68,14 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
         tvDatMua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mReference= FirebaseDatabase.getInstance().getReference().child("gioHang");
-//                List<SanPham> sanPhams2 = new ArrayList<>();
-//                sanPhams2.add(sanPham);
-//                GioHang gioHang2 = new GioHang(cuaHang.getId(),sanPhams2);
-//                mReference.child(KhachHangActivity.khachHang.getIdKhachhang()).push().setValue(gioHang2);
 
-
-                mReference.addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                        String key =snapshot.getKey();
-
-
-                        if(key.equals((KhachHangActivity.khachHang.getIdKhachhang())))
-                        {
-                            for (DataSnapshot snapshot1:snapshot.getChildren())
-                            {
-                                    String key3=snapshot1.getKey() ;
-                                //Toast.makeText(getApplicationContext(),key3,Toast.LENGTH_SHORT).show();
-                                GioHang gioHang = snapshot1.getValue(GioHang.class);
-                                if (gioHang.getIdQuan().equals(cuaHang.getId()))
-                                {
-                                    boolean flag = true;
-                                    for (int i = 0; i < gioHang.getSanPham().size(); i++) {
-                                        if(sanPham.getNameProduct().equals(gioHang.getSanPham().
-                                                get(i).getNameProduct()))
-                                        {
-                                            flag= false;
-                                            gioHang.getSanPham().get(i).setSoluong(
-                                                    gioHang.getSanPham().get(i).getSoluong()+1);
-                                        }
-                                    }
-                                    if(flag)
-                                    {
-                                            gioHang.getSanPham().add(sanPham);
-                                            Toast.makeText(getApplicationContext(),"Đã thêm vào giỏ hàng 1",Toast.LENGTH_SHORT).show();
-                                            mReference.child(KhachHangActivity.khachHang.getIdKhachhang()).child(key3).setValue(gioHang);
-
-                                    }else {
-
-
-                                        for (DataSnapshot snapshot2:snapshot1.getChildren())
-                                        {
-
-                                           Toast.makeText(getApplicationContext(),"Đã thêm vào giỏ hàng 2",Toast.LENGTH_SHORT).show();
-                                            mReference.child(KhachHangActivity.khachHang.getIdKhachhang()).child(key3).setValue(gioHang);
-
-                                        }
-
-                                    }
-
-                                }else {
-                                    List<SanPham> sanPhams1=new ArrayList<>();
-                                    sanPhams1.add(sanPham);
-                                    GioHang gioHang1=new GioHang(cuaHang.getId(), sanPhams1);
-
-                                     mReference.child(KhachHangActivity.khachHang.getIdKhachhang()).push().setValue(gioHang1);
-                                    Toast.makeText(getApplicationContext(),"Đã thêm vào giỏ hàng 3",Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                        }
-                        else {
-                            List<SanPham> sanPhams = new ArrayList<>();
-                            sanPhams.add(sanPham);
-                            GioHang gioHang = new GioHang(cuaHang.getId(),sanPhams);
-                            mReference.child(KhachHangActivity.khachHang.getIdKhachhang()).push().setValue(gioHang);
-                            Toast.makeText(getApplicationContext(),"Đã thêm vào giỏ hàng 4",Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                    addCart(cuaHang,sanPham,SuperQuangCaoActivity.this,pos);
             }
         });
-
+        list_spinner=new ArrayList<>();
+        for (int i = 0; i < sanPham.getDonGia().size(); i++) {
+            list_spinner.add(sanPham.getDonGia().get(i).getTenDonGia());
+        }
         ArrayAdapter<String> spin_adapter = new ArrayAdapter<String>(SuperQuangCaoActivity.this,
                 android.R.layout.simple_list_item_1, list_spinner);
 
@@ -173,6 +86,8 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 onItemSelectedHandler( parent,  view,  position,  id);
+                pos=position;
+
             }
 
             @Override
@@ -197,13 +112,16 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     private void onItemSelectedHandler(AdapterView<?> adapterView, View view, int position, long id) {
-        tvGia.setText(Cart_Fragment.addDauPhay(sanPham.getDonGia().get(position).getGiaBan())+" VND");
+        tvGia.setText(Cart_Fragment.addDauPhay(sanPham.getDonGia().
+                get(sanPham.getDonGia().size()-oldList+position).getGiaBan())+" VND");
     }
 
     private void unit() {
+        pos=0;
         sanPhamList=new ArrayList<>();
         imgSP=findViewById(R.id.imgSP);
         imgLogo=findViewById(R.id.imgLogo);
@@ -220,7 +138,7 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
                 sanPham=trai;
                 list_spinner=new ArrayList<>();
                 for (int i = 0; i < trai.getDonGia().size(); i++) {
-                    list_spinner.add(trai.getDonGia().get(0).getTenDonGia());
+                    list_spinner.add(trai.getDonGia().get(i).getTenDonGia());
                 }
                 ArrayAdapter<String> spin_adapter = new ArrayAdapter<String>(SuperQuangCaoActivity.this,
                         android.R.layout.simple_list_item_1, list_spinner);
@@ -419,5 +337,86 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
 //            }
 //        });
 
+    }
+
+
+    public static void addCart(CuaHang cuaHang,SanPham sanPham,AppCompatActivity activity,int pos)
+    {
+
+
+        for (int i = 0; i < sanPham.getDonGia().size(); i++) {
+            if(i==pos)
+            {
+                sanPham.getDonGia().add(0,sanPham.getDonGia().get(i));
+            }
+        }
+        DatabaseReference mReference1= FirebaseDatabase.getInstance().getReference().child("gioHang");
+
+        mReference1.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String key =snapshot.getKey();
+
+
+                if(key.equals((KhachHangActivity.khachHang.getIdKhachhang())))
+                {
+                    for (DataSnapshot snapshot1:snapshot.getChildren())
+                    {
+                        String key3=snapshot1.getKey() ;
+                        //Toast.makeText(getApplicationContext(),key3,Toast.LENGTH_SHORT).show();
+                        GioHang gioHang = snapshot1.getValue(GioHang.class);
+                        if (gioHang.getIdQuan().equals(cuaHang.getId()))
+                        {
+                            boolean flag = true;
+                            for (int i = 0; i < gioHang.getSanPham().size(); i++) {
+                                if(sanPham.getNameProduct().equals(gioHang.getSanPham().
+                                        get(i).getNameProduct()) &&
+                                        sanPham.getDonGia().get(0).getTenDonGia().equals(gioHang.getSanPham().
+                                                get(i).getDonGia().get(0).getTenDonGia()))
+                                {
+                                    flag= false;
+                                    gioHang.getSanPham().get(i).setSoluong(
+                                            gioHang.getSanPham().get(i).getSoluong()+1);
+                                }
+                            }
+                            if(flag)
+                            {
+                                gioHang.getSanPham().add(sanPham);
+                                Toast.makeText(activity.getApplicationContext(),"Đã thêm vào giỏ hàng 1",Toast.LENGTH_SHORT).show();
+                                mReference1.child(KhachHangActivity.khachHang.getIdKhachhang()).child(key3).setValue(gioHang);
+
+                            }else {
+                                    Toast.makeText(activity.getApplicationContext(),"Đã thêm vào giỏ hàng 2",Toast.LENGTH_SHORT).show();
+                                    mReference1.child(KhachHangActivity.khachHang.getIdKhachhang()).child(key3).setValue(gioHang);
+
+                            }
+
+                        }else {
+                            List<SanPham> sanPhams1=new ArrayList<>();
+                            sanPhams1.add(sanPham);
+                            GioHang gioHang1=new GioHang(cuaHang.getId(), sanPhams1);
+                            mReference1.child(KhachHangActivity.khachHang.getIdKhachhang()).child(key3).setValue(gioHang1);
+                            Toast.makeText(activity.getApplicationContext(),"Đã thêm vào giỏ hàng 3",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) { }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) { }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) { }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

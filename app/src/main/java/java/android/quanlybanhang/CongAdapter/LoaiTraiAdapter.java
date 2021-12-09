@@ -56,8 +56,6 @@ public class LoaiTraiAdapter extends RecyclerView.Adapter<LoaiTraiAdapter.LoaiTr
         {
             return new LoaiTraiHolder(view1);
         }
-
-
             return new LoaiTraiHolder(view);
 
     }
@@ -79,24 +77,19 @@ public class LoaiTraiAdapter extends RecyclerView.Adapter<LoaiTraiAdapter.LoaiTr
                 TraiAdapter traiAdapter=new TraiAdapter();
                 traiAdapter.setData(loaiTrai.getSanphamnoibats(),mainActivity);
                 holder.recycleView.setAdapter(traiAdapter);
+                holder.recycleView.setOnFlingListener(null);
                 LinearLayoutManager layoutManager = new
                         LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false);
                 holder.recycleView.setLayoutManager(layoutManager);
-//                PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
-//                pagerSnapHelper.attachToRecyclerView(holder.recycleView);
-//
-//
-//                holder.indicator2.attachToRecyclerView(holder.recycleView, pagerSnapHelper);
-
-
-
+                PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
+                pagerSnapHelper.attachToRecyclerView(holder.recycleView);
+                holder.indicator2.attachToRecyclerView(holder.recycleView, pagerSnapHelper);
             }
 
             else  if(position == 1)
             {
 
                 QuanNoiBatAdapter traiAdapter=new QuanNoiBatAdapter();
-
                 traiAdapter.setData(loaiTrai.getCuahangs(),mainActivity,mContext);
                 LinearLayoutManager linearLayoutManager=new LinearLayoutManager(mContext,RecyclerView.HORIZONTAL,false);
                 holder.trais.setLayoutManager(linearLayoutManager);
@@ -122,9 +115,9 @@ public class LoaiTraiAdapter extends RecyclerView.Adapter<LoaiTraiAdapter.LoaiTr
                                 imageToCart.setBackgroundResource(R.drawable.cart_unshopping);
                                 trai.setAddToCart(true);
                                 traiAdapter.notifyDataSetChanged();
-                                mainActivity.setCountProductInBuild(mLoaiTrais.size()+1);
+                                mainActivity.setCountProductInBuild(mLoaiTrais.size()+1,mainActivity);
                                 mainActivity.getProducts().add(trai);
-                                mainActivity.setCountProductInBuild( mainActivity.getProducts().size());
+                                mainActivity.setCountProductInBuild( mainActivity.getProducts().size(),mainActivity);
 
                             }
 
@@ -141,8 +134,6 @@ public class LoaiTraiAdapter extends RecyclerView.Adapter<LoaiTraiAdapter.LoaiTr
                 holder.trais.setAdapter(traiAdapter);
 
             }
-
-
 
         }
 
@@ -174,6 +165,7 @@ public class LoaiTraiAdapter extends RecyclerView.Adapter<LoaiTraiAdapter.LoaiTr
                 if(vitri==0)
                 {
                     recycleView =itemView.findViewById(R.id.recy1);
+
                     indicator2 =itemView.findViewById(R.id.indicator);
                 }else {
                     tittle=itemView.findViewById(R.id.tvLoai);
