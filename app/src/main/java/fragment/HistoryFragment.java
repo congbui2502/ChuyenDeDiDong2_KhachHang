@@ -131,7 +131,7 @@ public class HistoryFragment<cardview> extends Fragment {
                         String sdtkhachhang = history.getSdtkhachhang();
                         long donGia = history.getDonGia();
                         List<SanPham> sanpham = history.getSanpham();
-                        String time = formatDateS(history.getTime());
+                        String time = history.getTime();
                         String idQuan = history.getIdQuan();
                         String shipper = history.getShipper();
                         String phoneShipper = history.getPhoneShipper();

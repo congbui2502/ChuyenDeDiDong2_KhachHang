@@ -275,11 +275,14 @@ public class HoaDonActivity extends AppCompatActivity {
                         donHang.setTrangthai(4);
                         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
                         String date = formatDateS(donHang.getTime());
+
                         db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("trangthai").setValue(6);
                         db.child("DonHangOnline").child("ShipperDaGiao").child(donHang.getIdKhachhang()).child(donHang.getKey()).setValue(donHang);
                         db.child("DonHangOnline").child("ShipperDaGiao").child(donHang.getIdKhachhang()).child(donHang.getKey()).child("idShipper").setValue(idShipper);
                         db.child("DonHangOnline").child("ShipperDaGiao").child(donHang.getIdKhachhang()).child(donHang.getKey()).child("nameShipper").setValue(name);
                         db.child("DonHangOnline").child("ShipperDaGiao").child(donHang.getIdKhachhang()).child(donHang.getKey()).child("phoneShipper").setValue(phone);
+                        db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("donhoanthanh").child(date).child(donHang.getKey()).setValue(donHang);
+                        db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("donhoanthanh").child(date).child(donHang.getKey()).child("idShipper").setValue(idShipper);
                         db.child("DonHangOnline").child("DaLayHang").child(idShipper).child(donHang.getIdDonHang()).removeValue();
                         db.child("Shipper").child(id).child("lichSuDonOnline").push().setValue(donHang);
                         Bundle bundle = new Bundle();

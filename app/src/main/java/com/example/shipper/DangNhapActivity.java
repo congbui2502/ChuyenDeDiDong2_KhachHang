@@ -33,7 +33,6 @@ import fragment.HomeFragment;
 
 public class DangNhapActivity extends AppCompatActivity implements View.OnClickListener{
     SharedPreferences sharedPreferences;
-    public static int flag = 0;
     SharedPreferences sharedPreferences1;
     SharedPreferences.Editor editor;
     SharedPreferences.Editor editor1;
