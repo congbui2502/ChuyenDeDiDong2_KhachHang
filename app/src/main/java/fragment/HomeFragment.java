@@ -110,12 +110,12 @@ public class HomeFragment extends Fragment {
         String dt = "";
         try {
             Date date = simpleDateFormat.parse(strDate);
-            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd-MM-yyyy");
             dt = formatter.format(date);
             return dt;
         } catch (Exception e) {
             Date date = new Date();
-            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd-MM-yyyy");
             dt = formatter.format(date);
             return dt;
         }

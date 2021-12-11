@@ -103,6 +103,7 @@ public class ThuNhapShipper extends AppCompatActivity {
                                 String[] date= history.getTime().split(" ");
                                 long thunhap=0;
                                 long donGia=0;
+
                                 if(simpleDateFormat.format(calendar.getTime()).equals(date[1])){
                                     arrayList.add(history);
                                 }
@@ -136,7 +137,6 @@ public class ThuNhapShipper extends AppCompatActivity {
                                 for (int i=0;i<list.size();i++){
                                     if(list.get(i).equals(date[1])){
                                         arrayList.add(history);
-                                        Log.d("trietdeptrai", "onDataChange: "+arrayList.size());
                                     }
                                 }
                                 for (int i=0;i<arrayList.size();i++){

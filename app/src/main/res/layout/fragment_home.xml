@@ -62,7 +62,7 @@
                     android:layout_width="130dp"
                     android:layout_height="70dp"
                     android:background="@drawable/icondanggiao"
-                    android:text="Đang giao"></Button>
+                   ></Button>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

@@ -14,13 +14,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,11 +39,12 @@ public class LayHangActivity extends AppCompatActivity {
     Button btnhuydon, btndalayhang,btncall,btnquaylai;
     TextView tvdiemnhan,tvdiemgiao,tvtonggia,tvtenkh,tvsodt,tvghichu,tvthunhap;
     private DonHang donHang;
-
+    DatabaseReference db = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth mFirebaseAuth;
     private DatabaseReference mDatabase;
     String idShipper;
     ListView tvtensp;
+    private int soDon = 0;
     ArrayList<SanPham> arrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +54,11 @@ public class LayHangActivity extends AppCompatActivity {
         ControlButtonHuyDon();
         ControlButtonDaLayHang();
         ButtonCall();
+
 //        ButtonBack();
         mFirebaseAuth= FirebaseAuth.getInstance();
         idShipper = mFirebaseAuth.getUid();
+        getSoDonHang();
         arrayList = new ArrayList<>();
         SanPhamAdapter adapter = new SanPhamAdapter(LayHangActivity.this, R.layout.activity_sanpham, arrayList);
         tvtensp.setAdapter(adapter);
@@ -69,11 +76,27 @@ public class LayHangActivity extends AppCompatActivity {
             }
         });
     }
+    private void getSoDonHang(){
+
+
+        String id=mFirebaseAuth.getUid();
+        db.child("Shipper").child(id).child("donChuaGiao").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                soDon = snapshot.getValue(Integer.class);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     private void ControlButtonHuyDon(){
         btnhuydon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                HomeFragment.flag--;
                 AlertDialog.Builder builder = new AlertDialog.Builder(LayHangActivity.this, android.R.style.Theme_DeviceDefault_Dialog_Alert);
                 builder.setTitle("Xác nhận hủy đơn");
                 builder.setMessage("");
@@ -84,13 +107,16 @@ public class LayHangActivity extends AppCompatActivity {
                         mFirebaseAuth=FirebaseAuth.getInstance();
                         String id = mFirebaseAuth.getUid();
                         String date = formatDateS(donHang.getTime());
-//                        String [] keys = donHang.getTime().split(" ");
+                        soDon--;
+                        db.child("Shipper").child(id).child("donChuaGiao").setValue(soDon);
                         donHang.setTrangthai(0);
                         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
                         db.child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("trangthai").setValue(1);
                         db.child("DonHangOnline").child("DaDatDon").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).setValue(donHang);
                         db.child("DonHangOnline").child("ShipperDaNhan").child(idShipper).child(donHang.getIdDonHang()).removeValue();
                         db.child("Shipper").child(id).child("lichSuDonOnline").push().setValue(donHang);
+
+
                         Bundle bundle = new Bundle();
                         bundle.putSerializable(HomeFragment.KEY_DIEMNHAN,donHang);
                         intent.putExtras(bundle);

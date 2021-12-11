@@ -45,8 +45,10 @@ public class HoaDonActivity extends AppCompatActivity {
     private int soDon;
     private DonHang donHang;
     ArrayList<SanPham> arrayList;
+    String phone, name;
     String idShipper;
     private FirebaseAuth mFirebaseAuth;
+    private DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +57,7 @@ public class HoaDonActivity extends AppCompatActivity {
         Anhxa();
         ControlButton();
         ControlButtonHoanThanh();
+        onDataChange();
         idShipper = mFirebaseAuth.getUid();
 //        ButtonBack();
         arrayList = new ArrayList<>();
@@ -196,9 +199,6 @@ public class HoaDonActivity extends AppCompatActivity {
         btnthatbai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                soDon--;
-                String id=mFirebaseAuth.getUid();
-                db.child("Shipper").child(id).child("donChuaGiao").setValue(soDon);
                 AlertDialog.Builder builder = new AlertDialog.Builder(HoaDonActivity.this, android.R.style.Theme_DeviceDefault_Dialog_Alert);
                 builder.setTitle("Xác nhận thất bại");
                 builder.setMessage("");
@@ -209,11 +209,11 @@ public class HoaDonActivity extends AppCompatActivity {
                         mFirebaseAuth=FirebaseAuth.getInstance();
                         String id = mFirebaseAuth.getUid();
                         String date = formatDateS(donHang.getTime());
-//                        String [] keys = donHang.getTime().split(" ");
+                        soDon--;
                         donHang.setTrangthai(3);
+                        db.child("Shipper").child(id).child("donChuaGiao").setValue(soDon);
                         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
                         db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("trangthai").setValue(6);
-                        db.child("DonHangOnline").child("DaDatDon").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).setValue(donHang);
                         db.child("DonHangOnline").child("ShipperDaNhan").child(donHang.getIdKhachhang()).child(donHang.getIdDonHang()).removeValue();
                         db.child("Shipper").child(id).child("lichSuDonOnline").push().setValue(donHang);
                         Bundle bundle = new Bundle();
@@ -232,13 +232,35 @@ public class HoaDonActivity extends AppCompatActivity {
             }
         });
     }
+    private void onDataChange()
+    {
+        mFirebaseAuth= FirebaseAuth.getInstance();
+        String id=mFirebaseAuth.getUid();
+        if (id!=null){
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+            mDatabase.child("Shipper").child(id).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    Shipper sp=snapshot.getValue(Shipper.class);
+                    name = sp.getNameShipper();
+                    phone = sp.getPhoneShipper();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+        }
+
+    }
     private void ControlButtonHoanThanh(){
         btnhoanthanh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                soDon--;
+
                 String id=mFirebaseAuth.getUid();
-                db.child("Shipper").child(id).child("donChuaGiao").setValue(soDon);
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(HoaDonActivity.this, android.R.style.Theme_DeviceDefault_Dialog_Alert);
                 builder.setTitle("Xác nhận hoàn thành");
                 builder.setMessage("");
@@ -247,14 +269,18 @@ public class HoaDonActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(HoaDonActivity.this,Home.class);
                         mFirebaseAuth=FirebaseAuth.getInstance();
-                        String [] keys = donHang.getTime().split(" ");
+                        soDon--;
+                        db.child("Shipper").child(id).child("donChuaGiao").setValue(soDon);
+
                         donHang.setTrangthai(4);
                         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
                         String date = formatDateS(donHang.getTime());
                         db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("trangthai").setValue(6);
                         db.child("DonHangOnline").child("ShipperDaGiao").child(donHang.getIdKhachhang()).child(donHang.getKey()).setValue(donHang);
+                        db.child("DonHangOnline").child("ShipperDaGiao").child(donHang.getIdKhachhang()).child(donHang.getKey()).child("idShipper").setValue(idShipper);
+                        db.child("DonHangOnline").child("ShipperDaGiao").child(donHang.getIdKhachhang()).child(donHang.getKey()).child("nameShipper").setValue(name);
+                        db.child("DonHangOnline").child("ShipperDaGiao").child(donHang.getIdKhachhang()).child(donHang.getKey()).child("phoneShipper").setValue(phone);
                         db.child("DonHangOnline").child("DaLayHang").child(idShipper).child(donHang.getIdDonHang()).removeValue();
-                        Log.d("baby",idShipper);
                         db.child("Shipper").child(id).child("lichSuDonOnline").push().setValue(donHang);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable(HomeFragment.KEY_DIEMNHAN,donHang);
