@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:background="@drawable/bg_profile"
+            android:background="@color/xanh"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -26,19 +26,19 @@
                 android:id="@+id/profile_image"
                 android:layout_width="130dp"
                 android:layout_height="120dp"
-                android:layout_marginTop="45dp"
+                android:layout_marginBottom="10dp"
                 android:src="@drawable/anhavatar"
                 app:civ_border_color="#FF000000"
-                app:civ_border_width="2dp" />
+                app:civ_border_width="2dp"/>
 
             <TextView
                 android:id="@+id/tv_hoten"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:paddingBottom="10dp"
+
+                android:layout_marginBottom="5dp"
                 android:text="Tran Quang Hung"
-                android:textColor="@color/xanh"
+                android:textColor="@color/white"
                 android:textSize="20dp"
                 android:textStyle="bold"></TextView>
         </LinearLayout>
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="7dp"
-                android:text="Email"
+
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold"></TextView>
@@ -110,7 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="7dp"
-                android:text="Số CMT"
+
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold"></TextView>
@@ -119,7 +119,7 @@
                 android:id="@+id/tv_cmt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="43dp"
+                android:layout_marginLeft="64dp"
                 android:text="cmt"
 
                 android:textColor="@color/xanh"
@@ -149,10 +149,10 @@
                 android:src="@drawable/iconbirthday"></ImageView>
 
             <TextView
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="7dp"
-                android:text="Ngày sinh"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold"></TextView>
@@ -161,9 +161,9 @@
                 android:id="@+id/tv_ngaysinh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:text="ngày sinh"
+                android:layout_marginLeft="63dp"
                 android:inputType="date"
+                android:text="ngày sinh"
                 android:textColor="@color/xanh"
                 android:textSize="18dp">
 
@@ -194,7 +194,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="7dp"
-                android:text="Điện thoại"
+
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold"></TextView>
@@ -203,7 +203,7 @@
                 android:id="@+id/tv_sdt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
+                android:layout_marginLeft="63dp"
                 android:text="số điện thoại"
                 android:textColor="@color/xanh"
                 android:textSize="18dp">
@@ -235,7 +235,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="7dp"
-                android:text="Biển số xe"
+
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold"></TextView>
@@ -244,7 +244,7 @@
                 android:id="@+id/tv_bienso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
+                android:layout_marginLeft="63dp"
                 android:text="biển số"
                 android:textColor="@color/xanh"
                 android:textSize="18dp">
@@ -287,8 +287,8 @@
                 android:drawableLeft="@drawable/iconchangepw"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_vertical"
-                android:text="Đổi mật khẩu"
                 android:paddingLeft="15dp"
+                android:text="Đổi mật khẩu"
                 android:textColor="@color/black"
                 android:textSize="20dp"></TextView>
         </LinearLayout>
@@ -308,9 +308,9 @@
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_vertical"
 
+                android:paddingLeft="15dp"
                 android:text="Đăng xuất"
                 android:textColor="@color/black"
-                android:paddingLeft="15dp"
                 android:textSize="20dp"></TextView>
         </LinearLayout>
 
@@ -327,9 +327,9 @@
                 android:drawableLeft="@drawable/iconthongtin"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_vertical"
-
-                android:text="Thông tin ứng dụng"
+                android:id="@+id/tv_info"
                 android:paddingLeft="15dp"
+                android:text="Thông tin ứng dụng"
                 android:textColor="@color/black"
                 android:textSize="20dp"></TextView>
 

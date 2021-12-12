@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".HoaDonActivity">
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="130dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="7dp"
+        android:src="@drawable/windship"></ImageView>
+<TextView
+    android:paddingLeft="20dp"
+
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="17dp"
+    android:text="     WindShip là một ứng dụng dành cho SHIPPER giao đồ ăn, thức uống nhanh được tạo ra từ nhóm QH trong thời gian làm chuyên đề tốt nghiệp tại trường TDC "></TextView>
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="20dp"
+    android:textSize="17dp"
+    android:text="     Wind là hệ thống dịch vụ phần mềm thông minh hỗ trợ tương tác giữa người bán hàng (shop) và người giao hàng (shipper) thông qua thiết bị di động (điện thoại) hoặc máy tính bảng"></TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:textSize="17dp"
+        android:text="     Giúp shop gọi shipper nhanh chóng, quản lý đơn hàng, theo dõi tình trạng đơn hàng, hạn chế tối đa tình trạng shipper làm việc không nghiêm túc. Đối với shipper, đây là công cụ hỗ trợ đắc lực trong việc nhận các nhu cầu ship hàng, quản lý các đơn hàng cần ship."></TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:textSize="17dp"
+        android:text="     Nhóm QH tạo ra ứng dụng này nhằm phục vụ cho mọi người :"></TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:textSize="17dp"
+        android:text="           + Giải quyết nhu cầu tìm việc làm thêm, tăng thêm thu nhập"></TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:textSize="17dp"
+        android:text="           + Không mất phí trung gian cho các công ty"></TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:textSize="17dp"
+        android:text="           + Hạn chế tình trạng lừa đảo các chủ cửa hàng"></TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:textSize="17dp"
+        android:text="           + Giúp shipper săn ship và tìm kiếm các đơn hàng nhanh nhất."></TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:textSize="17dp"
+        android:text="           + Ứng dụng gom đơn hàng, gom ship giúp shipper tiết kiệm thời gian"></TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:textSize="17dp"
+        android:text="           + Ứng dụng phù hợp với cả những tài xế grab, GrabBike, tài xế uber, uberbike"></TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:textSize="17dp"
+        android:text="           + Việc làm thêm cho sinh viên, sinh viên làm thêm, phù hợp với sinh viên kiếm thêm thu nhập"></TextView>
+</LinearLayout>

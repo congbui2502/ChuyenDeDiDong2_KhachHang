@@ -269,7 +269,7 @@
                         android:layout_height="match_parent"
                         android:text="Quay lại"
                         android:id="@+id/btn_quaylai"
-                        android:background="@drawable/button"
+                        android:background="@drawable/boder"
                         ></Button>
                 </LinearLayout>
             </LinearLayout>

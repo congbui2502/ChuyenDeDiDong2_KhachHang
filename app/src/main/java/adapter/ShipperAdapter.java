@@ -12,7 +12,7 @@ import fragment.HistoryFragment;
 import fragment.HomeFragment;
 
 public class ShipperAdapter extends FragmentStatePagerAdapter {
-    private String listTab[] = {"Home","Lịch sử","Cá nhân"};
+    private String listTab[] = {"Đơn hàng","Lịch sử","Cá nhân"};
     private HomeFragment homeFragment;
     private HistoryFragment historyFragment;
     private CaNhanFragment caNhanFragment;

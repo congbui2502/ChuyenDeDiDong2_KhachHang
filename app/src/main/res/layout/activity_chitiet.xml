@@ -234,6 +234,7 @@
                             android:gravity="center_vertical"
                             android:text="Điểm giao hàng"
                             android:textSize="14dp"
+                            android:textColor="@color/xanh"
                             android:textStyle="bold"></TextView>
                         <ImageView
                             android:layout_width="125dp"
@@ -272,6 +273,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/boder"
+                        android:textStyle="italic"
                         android:text="Quay lại"></Button>
                 </LinearLayout>
 
@@ -286,6 +288,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/boder"
+                        android:textStyle="italic"
                         android:text="Nhận đơn"></Button>
                 </LinearLayout>
             </LinearLayout>

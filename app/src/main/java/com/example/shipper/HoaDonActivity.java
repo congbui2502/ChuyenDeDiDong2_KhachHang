@@ -52,7 +52,7 @@ public class HoaDonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chitiet);
+        setContentView(R.layout.activity_hoa_don);
         mFirebaseAuth=FirebaseAuth.getInstance();
         Anhxa();
         ControlButton();
@@ -303,9 +303,9 @@ public class HoaDonActivity extends AppCompatActivity {
     }
     private void Anhxa(){
         btncall = (Button) findViewById(R.id.btn_call);
-        btnhoanthanh = (Button) findViewById(R.id.btn_nhandon);
-//        btnback = (Button) findViewById(R.id.btn_trove);
-        btnthatbai = (Button) findViewById(R.id.btn_quaylai);
+        btnhoanthanh = (Button) findViewById(R.id.btn_hoanthanh);
+        btnback = (Button) findViewById(R.id.btn_trove);
+        btnthatbai = (Button) findViewById(R.id.btn_thatbai);
         tvdiemnhan = (TextView) findViewById(R.id.diemnhan);
         tvdiemgiao = (TextView) findViewById(R.id.diemgiao);
         tvtonggia = (TextView) findViewById(R.id.tonggia);
@@ -327,8 +327,8 @@ public class HoaDonActivity extends AppCompatActivity {
         tvghichu.setText(donHang.getGhiChu());
 
 
-        btnhoanthanh.setText("Hoàn thành");
-        btnthatbai.setText("Thất bại");
+//        btnhoanthanh.setText("Hoàn thành");
+//        btnthatbai.setText("Thất bại");
 
     }
 }

@@ -49,13 +49,13 @@ public class LayHangActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chitiet);
+        setContentView(R.layout.activity_layhang);
         Anhxa();
         ControlButtonHuyDon();
         ControlButtonDaLayHang();
         ButtonCall();
 
-//        ButtonBack();
+        ButtonBack();
         mFirebaseAuth= FirebaseAuth.getInstance();
         idShipper = mFirebaseAuth.getUid();
         getSoDonHang();
@@ -65,8 +65,13 @@ public class LayHangActivity extends AppCompatActivity {
         adapter.setData(donHang.getSanpham());
     }
     private void ButtonBack(){
-        Intent intent = new Intent(LayHangActivity.this,Home.class);
-        startActivity(intent);
+        btnquaylai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LayHangActivity.this,Home.class);
+                startActivity(intent);
+            }
+        });
     }
     private void ButtonCall(){
         btncall.setOnClickListener(new View.OnClickListener() {
@@ -273,8 +278,8 @@ public class LayHangActivity extends AppCompatActivity {
     private void Anhxa(){
         btnquaylai = findViewById(R.id.btn_back);
         btncall = (Button) findViewById(R.id.btn_call);
-        btndalayhang = (Button) findViewById(R.id.btn_nhandon);
-        btnhuydon = (Button) findViewById(R.id.btn_quaylai);
+        btndalayhang = (Button) findViewById(R.id.btn_dalayhang);
+        btnhuydon = (Button) findViewById(R.id.btn_huydon);
         tvdiemnhan = (TextView) findViewById(R.id.diemnhan);
         tvdiemgiao = (TextView) findViewById(R.id.diemgiao);
         tvtonggia = (TextView) findViewById(R.id.tonggia);
@@ -303,7 +308,7 @@ public class LayHangActivity extends AppCompatActivity {
 //        tvsodt.setText(donDaNhan.getSdtkhachhang());
 //        tvthunhap.setText(donDaNhan.getThunhap()+"");
 //        tvghichu.setText(donDaNhan.getGhiChu());
-        btndalayhang.setText("Đã lấy hàng");
-        btnhuydon.setText("Hủy đơn");
+//        btndalayhang.setText("Đã lấy hàng");
+//        btnhuydon.setText("Hủy đơn");
 }
 }

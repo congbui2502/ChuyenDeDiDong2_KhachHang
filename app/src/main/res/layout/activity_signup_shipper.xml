@@ -14,9 +14,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:background="@color/white"
             android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -26,24 +27,33 @@
                 android:id="@+id/image_view"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                android:layout_marginLeft="15dp"
                 android:src="@drawable/anhavatar"
                 app:civ_border_width="2dp"
                 app:civ_border_color="#FF000000"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:gravity="center_vertical">
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Chọn ảnh"
-                    android:id="@+id/btnSelectImg"
-                    ></Button>
-            </LinearLayout>
-        </LinearLayout>
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/windship"></ImageView>
+            </LinearLayout>
+
+        </LinearLayout>
+            <Button
+                android:id="@+id/btnSelectImg"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="15dp"
+                android:text="Chọn ảnh"></Button>
             <ProgressBar
                 android:id="@+id/progressBar"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"

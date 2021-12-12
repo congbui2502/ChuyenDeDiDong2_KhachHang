@@ -33,6 +33,7 @@
         <activity android:name=".DangGiaoActivity" />
         <activity android:name=".ChangePassActivity" />
         <activity android:name=".ThuNhapShipper" />
+        <activity android:name=".ThongTinActivity" />
     </application>
 
 </manifest>

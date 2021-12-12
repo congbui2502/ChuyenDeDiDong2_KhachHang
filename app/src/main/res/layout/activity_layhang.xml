@@ -216,11 +216,11 @@
                             android:textSize="14dp"
                             android:textStyle="bold"></TextView>
 
-                        <ImageView
-                            android:layout_width="125dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="2"
-                            android:background="@drawable/location"></ImageView>
+<!--                        <ImageView-->
+<!--                            android:layout_width="125dp"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_weight="2"-->
+<!--                            android:background="@drawable/location"></ImageView>-->
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -234,12 +234,13 @@
                             android:gravity="center_vertical"
                             android:text="Điểm giao hàng"
                             android:textSize="14dp"
+                            android:textColor="@color/xanh"
                             android:textStyle="bold"></TextView>
-                        <ImageView
-                            android:layout_width="125dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="2"
-                            android:background="@drawable/location"></ImageView>
+<!--                        <ImageView-->
+<!--                            android:layout_width="125dp"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_weight="2"-->
+<!--                            android:background="@drawable/location"></ImageView>-->
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -271,6 +272,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/boder"
+                        android:textStyle="italic"
                         android:text="Quay lại"></Button>
                 </LinearLayout>
                 <LinearLayout
@@ -282,11 +284,12 @@
                     android:gravity="center_vertical">
 
                     <Button
-                        android:id="@+id/btn_quaylai"
+                        android:id="@+id/btn_huydon"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/boder"
-                        android:text="Quay lại"></Button>
+                        android:textStyle="italic"
+                        android:text="Hủy đơn"></Button>
                 </LinearLayout>
 
                 <LinearLayout
@@ -296,11 +299,12 @@
                     android:padding="10dp">
 
                     <Button
-                        android:id="@+id/btn_nhandon"
+                        android:id="@+id/btn_dalayhang"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/boder"
-                        android:text="Nhận đơn"></Button>
+                        android:textStyle="italic"
+                        android:text="Đã lấy hàng"></Button>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
