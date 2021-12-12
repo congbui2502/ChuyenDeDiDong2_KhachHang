@@ -9,10 +9,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
 import android.widget.Toast;
@@ -28,7 +26,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
-
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,10 +43,7 @@ import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.CuaHang;
 import java.android.quanlybanhang.Sonclass.KhachHang;
 import java.android.quanlybanhang.Sonclass.SanPham;
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -102,8 +96,6 @@ public class KhachHangActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("BBB","onCreate Mainactivity");
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.khachhang_activity);
         mReference=FirebaseDatabase.getInstance().getReference();
@@ -188,6 +180,42 @@ public class KhachHangActivity extends AppCompatActivity {
         bottomNavigation.setNotification(notification, 1);
 
     }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        getMenuInflater().inflate(R.menu.menu_main_dsdatban, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem itemk) {
+//        int item_id = itemk.getItemId();
+//        if (item_id == R.id.menu1) {
+////            Intent intent = new Intent(DatBan.this, DanhSachDatBan.class);
+////            intent.putExtra("id_ban",  id_ban);
+////            intent.putExtra("id_khuvuc",  id_khuvuc);
+////            intent.putExtra("id_shop",  id_shop);
+////            intent.putExtra("tenban",  tenban);
+////            startActivity(intent);
+////            finish();
+//            Toast.makeText(KhachHangActivity.this,"jdfhjhshdf",Toast.LENGTH_LONG).show();
+//        }
+//        if (item_id == R.id.menu2) {
+////            Intent intent = new Intent(DatBan.this, DanhSachDatBan.class);
+////            intent.putExtra("id_ban",  id_ban);
+////            intent.putExtra("id_khuvuc",  id_khuvuc);
+////            intent.putExtra("id_shop",  id_shop);
+////            intent.putExtra("tenban",  tenban);
+////            startActivity(intent);
+////            finish();
+//            Toast.makeText(KhachHangActivity.this,"jdfhjhshdf",Toast.LENGTH_LONG).show();
+//        }
+//        if (item_id == android.R.id.home) {
+//            onBackPressed();
+//            return true;
+//        }
+//        return true;
+//    }
 
 
 

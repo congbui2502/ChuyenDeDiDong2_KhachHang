@@ -27,6 +27,18 @@
     <color name="last_edt">#3ea6fd</color>
     <color name="xanh_dam">#0A45B8</color>
     <color name="so_hoa_don">#a8b328</color>
+    //truong
     <color name="colorPrimary">#024265</color>
     <color name="colorPrimaryDark">#024265</color>
+    //Thach
+    <color name="colorbackgroundShimmer">#fff</color>
+    <color name="background_baocao">#f0f4f6</color>
+    <color name="btn_gio">#EE97C4DA</color>
+    <color name="color_two">#E3E0E0</color>
+    <color name="black1">#CCCCCC</color>
+    <color name="coffee">#B38867</color>
+    <color name="Python">#66BB6A</color>
+    <color name="CPP">#EF5350</color>
+    <color name="blue_berry">#075271</color>
+    <color name="link">#EE2F708F</color>
 </resources>

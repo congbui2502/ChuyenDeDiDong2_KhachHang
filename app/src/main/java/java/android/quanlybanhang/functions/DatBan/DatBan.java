@@ -1,9 +1,5 @@
 package java.android.quanlybanhang.functions.DatBan;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -21,13 +17,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.android.quanlybanhang.Activity.KhachHangActivity;
-import java.android.quanlybanhang.CongAdapter.ShopProductFragment;
 import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.CuaHang;
 import java.android.quanlybanhang.Sonclass.KhachHang;
@@ -263,27 +261,25 @@ public class DatBan extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem itemk) {
-
         int item_id = itemk.getItemId();
-        TextView ad;
-
-
         if (item_id == R.id.menu1) {
             Intent intent = new Intent(DatBan.this, DanhSachDatBan.class);
-            intent.putExtra("id_datban",  "");
+            intent.putExtra("id_ban",  id_ban);
+            intent.putExtra("id_khuvuc",  id_khuvuc);
+            intent.putExtra("id_shop",  id_shop);
+            intent.putExtra("tenban",  tenban);
             startActivity(intent);
-            finish();
+
         }
-
-
         if (item_id == android.R.id.home) {
             onBackPressed();
             return true;
         }
+        return true;
     }
-
     public String hamlaydate() {
         String date = new SimpleDateFormat("dd-MM-YYYY", Locale.getDefault()).format(new java.util.Date());
         return date;
     }
+
 }

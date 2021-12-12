@@ -1,16 +1,24 @@
 package java.android.quanlybanhang.CongAdapter;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,13 +38,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.android.quanlybanhang.Activity.KhachHangActivity;
 import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.CuaHang;
 import java.android.quanlybanhang.Sonclass.SanPham;
-import java.android.quanlybanhang.Activity.KhachHangActivity;
 import java.android.quanlybanhang.functions.DatBan.DanhSachChonBan;
-import java.android.quanlybanhang.functions.DatBan.DatBan;
+import java.android.quanlybanhang.functions.DatBan.DanhSachDanhGia;
+import java.android.quanlybanhang.functions.DatBan.RatingModel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +73,13 @@ public class ShopProductFragment extends Fragment  {
     private String id_shop= "";
     private String logoUrl="";
     private Button bnt_datban;
+    private Dialog dialogban;
+    Window window;
+    TextView DatBan, thoat,danhgia;
+    RatingBar ratingstart;
+    private DatabaseReference mDatabase;
+    ArrayList<RatingModel> ratingModels;
+    float sao,saos;
 
     public ShopProductFragment(KhachHangActivity mainActivity, Context context, QuanNoiBatAdapter.getdata getdata) {
             this.khachHangActivity =mainActivity;
@@ -81,6 +98,8 @@ public class ShopProductFragment extends Fragment  {
         initRecycleView();
         initToolbarAnimation();
         onClickButtonCart();
+        OnclickMenuchucnang();
+        hamlaysao();
         return view;
     }
 
@@ -90,7 +109,7 @@ public class ShopProductFragment extends Fragment  {
         this.dsLoaiSanPham=new ArrayList<>();
         mReference=FirebaseDatabase.getInstance().getReference();
         appBarLayout=view.findViewById(R.id.AppBarLayout);
-
+        ratingstart = view.findViewById(R.id.ratingstart);
         collapsingToolbarLayout=view.findViewById(R.id.CollapsingToolbarLayout);
         toolbar=view.findViewById(R.id.toolBar);
         imgShop=view.findViewById(R.id.imgShop);
@@ -288,8 +307,6 @@ public class ShopProductFragment extends Fragment  {
             }
         });
 
-
-
     }
 
 
@@ -336,17 +353,119 @@ public class ShopProductFragment extends Fragment  {
         super.onDestroy();
         Log.d("BBB","onDestroy ShopFragment");
     }
+
     private void onclickdatban(){
+//        bnt_datban.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(khachHangActivity, DanhSachChonBan.class);
+//                intent.putExtra("id_cuahang",id_shop);
+//                startActivity(intent);
+//
+//            }
+//        });
+    }
+    private void HamTaodialog(int gravity) {
+
+        dialogban = new Dialog(khachHangActivity);
+        dialogban.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogban.setContentView(R.layout.dailongthanhtoan);
+
+        window = dialogban.getWindow();
+        if (window == null) {
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams windownAttributes = window.getAttributes();
+        window.setAttributes(windownAttributes);
+        if (Gravity.BOTTOM == gravity) {
+            dialogban.setCancelable(true);
+        } else {
+            dialogban.setCancelable(false);
+        }
+        DatBan = dialogban.findViewById(R.id.tvdatban);
+        thoat = dialogban.findViewById(R.id.thoat);
+        danhgia = dialogban.findViewById(R.id.tvdanhgia);
+        OnclickChucnang(DatBan, thoat,danhgia);
+        dialogban.show();
+    }
+
+    public void OnclickMenuchucnang() {
         bnt_datban.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                HamTaodialog(Gravity.BOTTOM);
+            }
+        });
+    }
+
+    public void OnclickChucnang( TextView DatBan, TextView thoat,TextView tvdanhgia) {
+        DatBan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(khachHangActivity, "Đặt Bàn", Toast.LENGTH_LONG).show();
+                dialogban.dismiss();
                 Intent intent = new Intent(khachHangActivity, DanhSachChonBan.class);
                 intent.putExtra("id_cuahang",id_shop);
                 startActivity(intent);
 
             }
         });
+        tvdanhgia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(khachHangActivity, "Đánh Giá", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(khachHangActivity, DanhSachDanhGia.class);
+                intent.putExtra("id_cuahang",id_shop);
+                startActivity(intent);
+                dialogban.dismiss();
+
+            }
+        });
+
+        thoat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(khachHangActivity, "Đóng", Toast.LENGTH_LONG).show();
+                dialogban.dismiss();
+            }
+        });
+
     }
+    private void hamlaysao(){
+        mDatabase = FirebaseDatabase.getInstance().getReference("rating").child("idcuahang").child(id_shop);
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ratingModels = new ArrayList<>();
+                if(snapshot.getValue()!=null) {
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                        for(DataSnapshot snap : snapshot1.getChildren()){
+                            Log.d("keyaaa", snap.getKey() + "");
+                            String comment = snap.child("comment").getValue() + "";
+                            String date = snap.child("date").getValue() + "";
+                            String numberrating = snap.child("numberrating").getValue() + "";
+                            String tenkhachhang = snap.child("tenkhachhang").getValue() + "";
+                            ratingModels.add(new RatingModel(comment, date, numberrating, tenkhachhang));
+                            saos += Float.parseFloat(numberrating) ;
+                        }
+                    }
+                    sao = saos / ratingModels.size() ;
+                    ratingstart.setRating(sao);
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+
+
 
 
 }

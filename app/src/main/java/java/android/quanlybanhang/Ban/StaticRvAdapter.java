@@ -65,6 +65,8 @@ public class StaticRvAdapter extends RecyclerView.Adapter<StaticRvAdapter.Static
                     intent.putExtra("id_khuvuc",Id_khuvuc);
                     intent.putExtra("id_shop",id_shop);
                     danhSachChonBan.startActivity(intent);
+
+
                 }
             });
 
