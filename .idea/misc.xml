@@ -107,6 +107,8 @@
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/item_listdatban.xml" value="0.3359375" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/item_recycleview_tab_don_hang_online.xml" value="0.3359375" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/item_theodoidonhang.xml" value="0.3359375" />
+        <entry key="..\:/ChuyenDeDiDong2_KhachHang7/app/src/main/res/layout/item_donhang.xml" value="0.20416666666666666" />
+        <entry key="..\:/ChuyenDeDiDong2_KhachHang7/app/src/main/res/layout/item_donhanghuy.xml" value="0.20416666666666666" />
         <entry key="..\:/QuanLyBanHang/app/src/main/res/drawable-hdpi/rv_kv.xml" value="0.19583333333333333" />
         <entry key="..\:/QuanLyBanHang/app/src/main/res/drawable-mdpi/rv_khuvuc_bg.xml" value="0.19583333333333333" />
         <entry key="..\:/QuanLyBanHang/app/src/main/res/drawable/bnt_huy.xml" value="0.37222222222222223" />
@@ -153,7 +155,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

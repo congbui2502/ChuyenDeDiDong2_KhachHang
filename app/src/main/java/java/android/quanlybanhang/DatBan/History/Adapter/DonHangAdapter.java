@@ -108,7 +108,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.DonHangH
 
         holder.lblThoiGian.setText(support.formartDate(list.get(position).getDate()));
         holder.lblKhachang.setText(list.get(position).getTencuahang());
-        holder.lblDonGia.setText(formatDouble.formatStr(list.get(position).getDonGia()));
+        holder.lblDonGia.setText(formatDouble.formatStr(list.get(position).getDonGia() - list.get(position).getThunhap()));
         holder.tv_id_donhang.setText(list.get(position).getIdDonHang());
     }
 
@@ -152,17 +152,19 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.DonHangH
 
         TextView tenkhachhang = dialog.findViewById(R.id.tenkhachhang);
         TextView diachi = dialog.findViewById(R.id.diachi);
+        TextView khuyenmai = dialog.findViewById(R.id.khuyenmai);
         RecyclerView recycleview = dialog.findViewById(R.id.recycleview);
         TextView tongtien = dialog.findViewById(R.id.tongtien);
         ImageView close = dialog.findViewById(R.id.close);
-        TextView khuyenmai = dialog.findViewById(R.id.khuyenmai);
         TextView thanhTien = dialog.findViewById(R.id.thanhTien);
+        TextView thoigian = dialog.findViewById(R.id.thoigian);
 
-        tenkhachhang.setText(list.get(position).getTencuahang());
+        thoigian.setText(support.formartDate(list.get(position).getDate()));
+        tenkhachhang.setText(list.get(position).getTenKhachhang());
         diachi.setText(list.get(position).getDiaChi());
-        tongtien.setText(formatDouble.formatStr(support.TinhTongTien(list.get(position).getSanpham())));
+        tongtien.setText(formatDouble.formatStr(list.get(position).getDonGia() - list.get(position).getThunhap() + list.get(position).getGiaKhuyenMai()));
         khuyenmai.setText(formatDouble.formatStr(list.get(position).getGiaKhuyenMai()));
-        thanhTien.setText(formatDouble.formatStr(support.TinhTongTien(list.get(position).getSanpham()) - list.get(position).getGiaKhuyenMai()));
+        thanhTien.setText(formatDouble.formatStr(list.get(position).getDonGia() - list.get(position).getThunhap()));
 
         displayItem(recycleview, dialog, position);
 

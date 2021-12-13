@@ -25,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.android.quanlybanhang.Activity.KhachHangActivity;
 import java.android.quanlybanhang.DatBan.History.Adapter.DonHangAdapter;
+import java.android.quanlybanhang.DatBan.History.Adapter.DonHangHuyAdapter;
 import java.android.quanlybanhang.DatBan.History.Data.DonHang;
 import java.android.quanlybanhang.DatBan.History.Data.SupportFragmentDonOnline;
 import java.android.quanlybanhang.R;
@@ -67,7 +68,7 @@ public class DonHangHuyFrament extends Fragment implements SwipeRefreshLayout.On
     }
 
     private RecyclerView recyclerView;
-    private DonHangAdapter donHangFragmentAdapter;
+    private DonHangHuyAdapter donHangFragmentAdapter;
     private ArrayList<DonHang> donHangs;
     private Dialog dialog;
     private FirebaseDatabase mFirebaseInstance;
@@ -103,7 +104,7 @@ public class DonHangHuyFrament extends Fragment implements SwipeRefreshLayout.On
     private void displayItem(View view){
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(), 1));
-        donHangFragmentAdapter = new DonHangAdapter(view.getContext(), donHangs, dialog);
+        donHangFragmentAdapter = new DonHangHuyAdapter(view.getContext(), donHangs, dialog);
         recyclerView.setAdapter(donHangFragmentAdapter);
         donHangFragmentAdapter.notifyDataSetChanged();
     }
@@ -123,7 +124,7 @@ public class DonHangHuyFrament extends Fragment implements SwipeRefreshLayout.On
                             DonHang donHang = snap.getValue(DonHang.class);
 
                             if(donHang.getIdKhachhang().equals(khachHang.getIdKhachhang())){
-                                if (donHang.getTrangthai() == 7 ) {
+                                if (donHang.getTrangthai() == 7 || donHang.getTrangthai() == 8 ) {
                                     donHangs.add(donHang);
                                     String key = snap.getKey();
                                     donHangs.get(i).setIdDonHang(key);

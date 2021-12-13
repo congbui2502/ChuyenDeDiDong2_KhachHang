@@ -27,6 +27,7 @@ public class DonHang implements Serializable {
     private String idDonHang;
     private String tencuahang;
     private String idShipper;
+    private long thunhap;
 
     public DonHang() { }
 
@@ -182,6 +183,14 @@ public class DonHang implements Serializable {
         this.phuongThucThanhToan = phuongThucThanhToan;
         this.idQuan = idQuan;
         this.idDonHang = idDonHang;
+    }
+
+    public long getThunhap() {
+        return thunhap;
+    }
+
+    public void setThunhap(long thunhap) {
+        this.thunhap = thunhap;
     }
 
     public String getTencuahang() {
