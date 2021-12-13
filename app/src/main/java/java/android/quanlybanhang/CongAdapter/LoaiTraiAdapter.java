@@ -101,33 +101,7 @@ public class LoaiTraiAdapter extends RecyclerView.Adapter<LoaiTraiAdapter.LoaiTr
                 holder.tittle.setText(loaiTrai.getTittle());
 
                 SanPhamNoiBatAdapter traiAdapter=new SanPhamNoiBatAdapter();
-                traiAdapter.setData(mainActivity,loaiTrai.getSanphamQuangcao(), new SanPhamNoiBatAdapter.IclickAddToCartListener() {
-                    @Override
-                    public void onClickAddToCart(ImageView imageToCart, SanPham trai) {
-                        AnimationUlti.translateAnimation( mainActivity.getViewAnimation(), imageToCart, mainActivity.getViewEndAnimation(), new Animation.AnimationListener() {
-                            @Override
-                            public void onAnimationStart(Animation animation) {
-
-                            }
-
-                            @Override
-                            public void onAnimationEnd(Animation animation) {
-                                imageToCart.setBackgroundResource(R.drawable.cart_unshopping);
-                                trai.setAddToCart(true);
-                                traiAdapter.notifyDataSetChanged();
-                                mainActivity.setCountProductInBuild(mLoaiTrais.size()+1,mainActivity);
-                                mainActivity.getProducts().add(trai);
-                                mainActivity.setCountProductInBuild( mainActivity.getProducts().size(),mainActivity);
-
-                            }
-
-                            @Override
-                            public void onAnimationRepeat(Animation animation) {
-
-                            }
-                        });
-                    }
-                });
+                traiAdapter.setData(mainActivity,loaiTrai.getSanphamQuangcao());
 
                 LinearLayoutManager linearLayoutManager=new LinearLayoutManager(mContext,RecyclerView.VERTICAL,false);
                 holder.trais.setLayoutManager(linearLayoutManager);
@@ -136,8 +110,6 @@ public class LoaiTraiAdapter extends RecyclerView.Adapter<LoaiTraiAdapter.LoaiTr
             }
 
         }
-
-
 
     }
 

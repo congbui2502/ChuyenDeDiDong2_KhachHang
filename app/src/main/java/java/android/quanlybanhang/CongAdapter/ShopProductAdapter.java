@@ -69,8 +69,6 @@ public class ShopProductAdapter extends RecyclerView.Adapter<ShopProductAdapter.
 //
 //            }
 //        });
-
-
     }
 
     @Override

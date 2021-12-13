@@ -52,8 +52,6 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
     private int pos,oldList;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +59,7 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
         unit();
         getData();
         oldList= sanPham.getDonGia().size();
+
         Glide.with(this).load(sanPham.getImgProduct()).into(imgSP);
         tvTenSP.setText(sanPham.getNameProduct());
         tvGia.setText(Cart_Fragment.addDauPhay(sanPham.getDonGia().get(0).getGiaBan())+" VND");
@@ -118,7 +117,7 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
 
     private void onItemSelectedHandler(AdapterView<?> adapterView, View view, int position, long id) {
         tvGia.setText(Cart_Fragment.addDauPhay(sanPham.getDonGia().
-                get(sanPham.getDonGia().size()-oldList+position).getGiaBan())+" VND");
+                get(sanPham.getDonGia().size()-oldList +position).getGiaBan())+" VND");
     }
 
     private void unit() {
@@ -133,10 +132,12 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
         tvTenQuan=findViewById(R.id.tenQuanquan);
         recyclerView=findViewById(R.id.recySanpham);
         adapter= new SuperQuangCaoAdapter();
+
         adapter.setData(SuperQuangCaoActivity.this, new SuperQuangCaoAdapter.IclickAddToCartListener() {
             @Override
             public void setSanPham(SanPham trai) {
                 sanPham=trai;
+                oldList= sanPham.getDonGia().size();
                 list_spinner=new ArrayList<>();
                 for (int i = 0; i < trai.getDonGia().size(); i++) {
                     list_spinner.add(trai.getDonGia().get(i).getTenDonGia());
@@ -146,19 +147,6 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
 
                 spin_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(spin_adapter);
-
-                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        onItemSelectedHandler( parent,  view,  position,  id);
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
-
                 Glide.with(SuperQuangCaoActivity.this).load(trai.getImgProduct()).into(imgSP);
                 tvTenSP.setText(trai.getNameProduct());
                 tvGia.setText(Cart_Fragment.addDauPhay(trai.getDonGia().get(0).getGiaBan())+" VND");
@@ -173,6 +161,8 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
                 });
             }
         });
+
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -182,10 +172,7 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
         if(bundle.getSerializable("sanpham")!=null)
         {
             sanPham= (SanPham) bundle.getSerializable("sanpham");
-            list_spinner=new ArrayList<>();
-            for (int i = 0; i < sanPham.getDonGia().size(); i++) {
-                list_spinner.add(sanPham.getDonGia().get(0).getTenDonGia());
-            }
+
         }
 
         spinner=findViewById(R.id.spinner);
@@ -381,7 +368,7 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
                                 }
                             }
                             if(flag)
-                            {
+                            {   sanPham.setSoluong(1);
                                 gioHang.getSanPham().add(sanPham);
                                 Toast.makeText(activity.getApplicationContext(),"Đã thêm vào giỏ hàng 1",Toast.LENGTH_SHORT).show();
                                 mReference1.child(KhachHangActivity.khachHang.getIdKhachhang()).child(key3).setValue(gioHang);
@@ -393,6 +380,8 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
                             }
 
                         }else {
+
+                            sanPham.setSoluong(1);
                             List<SanPham> sanPhams1=new ArrayList<>();
                             sanPhams1.add(sanPham);
                             GioHang gioHang1=new GioHang(cuaHang.getId(), sanPhams1);

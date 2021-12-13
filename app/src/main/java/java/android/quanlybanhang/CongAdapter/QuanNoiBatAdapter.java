@@ -17,7 +17,7 @@ import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.CuaHang;
 import java.android.quanlybanhang.Activity.KhachHangActivity;
 import java.util.List;
-import java.android.quanlybanhang.DatBan.ShopProductFragment;
+import java.android.quanlybanhang.CongAdapter.ShopProductFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -66,7 +66,7 @@ public class QuanNoiBatAdapter extends RecyclerView.Adapter<QuanNoiBatAdapter.Tr
             @Override
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction =  mainActivity.getSupportFragmentManager().beginTransaction();
-                ShopProductFragment fragment1=new ShopProductFragment(mainActivity,context, new getdata() {
+               ShopProductFragment fragment1=new ShopProductFragment(mainActivity,context, new getdata() {
                     @Override
                     public CuaHang getData() {
                         return trai;

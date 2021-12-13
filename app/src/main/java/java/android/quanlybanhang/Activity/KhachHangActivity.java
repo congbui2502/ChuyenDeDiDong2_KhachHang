@@ -580,6 +580,7 @@ public class KhachHangActivity extends AppCompatActivity {
         super.onResume();
         Log.d("BBB","onResume Mainactivity");
 
+//        Toast.makeText(getApplicationContext(),khachHang.getIdKhachhang()+"",Toast.LENGTH_SHORT).show();
 
         products=getCartList(KhachHangActivity.this);
 

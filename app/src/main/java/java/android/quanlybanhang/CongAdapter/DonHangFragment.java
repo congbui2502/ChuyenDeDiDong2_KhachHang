@@ -2,10 +2,15 @@ package java.android.quanlybanhang.CongAdapter;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,6 +24,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,41 +34,44 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
 
 import java.android.quanlybanhang.CongAdapter.AddressVN.DataAddress;
 import java.android.quanlybanhang.CongAdapter.AddressVN.DiaChi;
 import java.android.quanlybanhang.R;
-import java.android.quanlybanhang.Sonclass.CuaHang;
 import java.android.quanlybanhang.Sonclass.DonHangOnline;
 import java.android.quanlybanhang.Sonclass.KhachHang;
 import java.android.quanlybanhang.Sonclass.KhuyenMai;
 import java.android.quanlybanhang.Sonclass.SanPham;
 import java.android.quanlybanhang.Activity.KhachHangActivity;
+import java.android.quanlybanhang.Sonclass.ThongTinShop;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class DonHangFragment  extends Fragment {
-
-    private CuaHang cuaHang;
+public class DonHangFragment  extends Fragment implements OnMapReadyCallback {
+    private ThongTinShop thongTinShop;
     private String idQuan;
     private RecyclerView recyDonHang;
     private TextView giaKhuyenMai;
     private TextView tongTien;
     private TextView edtDiaChi,tienShipper;
-    private EditText soNha;
+    private EditText soNha,edtghichu;
     private Button btnDatHang, btnThemDialog, btnHuyDialog;
     private KhachHangActivity mainActivity;
     private AutoCompleteTextView phuongxaAuto, thanhphoAuto, quan_huyenAuto;
@@ -71,11 +80,12 @@ public class DonHangFragment  extends Fragment {
     private long tongtien;
     private Dialog dialog;
     private Window window;
+    private Dialog dialog1;
+    private Window window1;
     private String[] tinh;
     private String[] huyen;
     private String[] xa;
     private String sonha;
-    private AlertDialog alert11;
     private long giaKhuyenmai;
     private String tenTinh;
     private String tenHuyen;
@@ -87,6 +97,19 @@ public class DonHangFragment  extends Fragment {
     private int ViTri = 0;
     private long thunhap;
     private long donGia;
+    private String ghiChu;
+    private RadioGroup radioGroup;
+    private Button btnThem,btnHuy;
+    private Date date;
+    private DateFormat formatter;
+    private RadioButton btnChuyenKhoan,btnTienMat;
+    private String today,millis,key;
+    private DatabaseReference mReference;
+    private DatabaseReference mReference1;
+    private String STR_CH = "cuaHang";
+    private String STR_TT = "thongtin";
+    private boolean chuyenKhoan = false ;
+    private boolean tienMat = false ;
 
     private ArrayList<DiaChi> listDiaChi = new ArrayList<>();
 
@@ -96,14 +119,17 @@ public class DonHangFragment  extends Fragment {
 
     }
 
-    public DonHangFragment(List<SanPham> sanPhams) {
+    public DonHangFragment(List<SanPham> sanPhams,ThongTinShop thongTinShop) {
         this.sanPhams = sanPhams;
+        this.thongTinShop=thongTinShop;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.donhang_fragment,container,false);
+
+
         mainActivity=(KhachHangActivity) getActivity();
         khachHang= mainActivity.getKhachHang();
         Log.d("aaa","nhap sai roi");
@@ -113,10 +139,87 @@ public class DonHangFragment  extends Fragment {
         btnDatHang=view.findViewById(R.id.btnDatDon);
         edtDiaChi = view.findViewById(R.id.edtDiachi);
         tienShipper= view.findViewById(R.id.tvTienShipper);
+        edtghichu = view.findViewById(R.id.edtghichu);
+
+        //
+
+        mReference= FirebaseDatabase.getInstance().getReference()
+                .child("CuaHangOder")
+                .child(idQuan).child("donhangonline").child("dondadat");
+        mReference1= FirebaseDatabase.getInstance().getReference();
+
+
+        date = Calendar.getInstance().getTime();
+        // Display a date in day, month, year format
+        formatter = new SimpleDateFormat("dd-MM-yyyy");
+        today = formatter.format(date);
+        millis =java.time.LocalTime.now().toString()+" " +today;
+        key = System.currentTimeMillis()+"";
+//
+
         dialog = new Dialog(mainActivity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dilog_daichikhachhang);
         window = dialog.getWindow();
+
+        dialog1 = new Dialog(mainActivity);
+        dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog1.setContentView(R.layout.dialog_phuongthucthanhtoan);
+        window1 = dialog1.getWindow();
+
+        radioGroup = dialog1.findViewById(R.id.radioGruop);
+        btnChuyenKhoan = dialog1.findViewById(R.id.PT1);
+        btnTienMat = dialog1.findViewById(R.id.PT2);
+        btnThem = dialog1.findViewById(R.id.btnthemDiaLogPT);
+        btnHuy = dialog1.findViewById(R.id.btnhuyDiaLogPT);
+        mReference1.child(STR_CH).child(idQuan).child(STR_TT).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String a =  snapshot.child("chuyenKhoan").getValue().toString();
+                String b =  snapshot.child("tienMat").getValue().toString();
+
+                if(a.equals("true")){
+                    chuyenKhoan = true;
+                }
+                if(b.equals("true")){
+                    tienMat = true;
+                }
+
+                if(chuyenKhoan == false){
+                    btnChuyenKhoan.setVisibility(View.GONE);
+                }
+                if(tienMat == false){
+                    btnTienMat.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+
+        });
+        Log.d("kakashi",chuyenKhoan+"");
+
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId)
+                {
+                    case R.id.PT1:
+                        btnChuyenKhoan.setChecked(true);
+                        break;
+                    case R.id.PT2:
+                        btnTienMat.setChecked(true);
+                        break;
+                }
+
+
+            }
+        });
+
         LinearLayoutManager manager=new LinearLayoutManager(mainActivity);
         recyDonHang.setLayoutManager(manager);
         giaKhuyenmai =0;
@@ -124,8 +227,9 @@ public class DonHangFragment  extends Fragment {
         donHangAdapter.setData(sanPhams);
         recyDonHang.setAdapter(donHangAdapter);
         tongtien = donHangAdapter.tinhTongTien();
-        tongTien.setText("Tổng: "+Cart_Fragment.addDauPhay(tongtien)+" VND");
-        getDataShop();
+        tongTien.setText(tongtien+" VND");
+
+
         DataAddress dataAddress = new DataAddress();
         try {
             listDiaChi = dataAddress.readCompanyJSONFile(mainActivity);
@@ -140,7 +244,7 @@ public class DonHangFragment  extends Fragment {
          thunhap =Long.parseLong(tienKM[2]);
          donGia = tongtien+thunhap;
 
-        tongTien.setText("Tổng: "+Cart_Fragment.addDauPhay(tongtien+ thunhap)+" VNĐ");
+        tongTien.setText(Cart_Fragment.addDauPhay(tongtien+ thunhap)+" VNĐ");
 
 
         edtDiaChi.setOnClickListener(new View.OnClickListener() {
@@ -171,88 +275,82 @@ public class DonHangFragment  extends Fragment {
         btnDatHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference mReference= FirebaseDatabase.getInstance().getReference()
-                        .child("CuaHangOder")
-                        .child(idQuan).child("donhangonline").child("dondadat");
+                dathang(Gravity.CENTER);
+            }
+        });
+        return view;
+    }
 
-                Date date = Calendar.getInstance().getTime();
-                // Display a date in day, month, year format
-                DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-                String today = formatter.format(date);
-                String millis =java.time.LocalTime.now().toString()+" " +today;
-                String key = System.currentTimeMillis()+"";
 
-                View view1 = inflater.inflate(R.layout.dialog_phuongthucthanhtoan, null);
-                Button btnThem=view1.findViewById(R.id.btnthemDiaLogDVT);
-                Button btnHuyBo=view1.findViewById(R.id.btnhuyDiaLogDVT);
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//                LayoutInflater inflater = getLayoutInflater();
-                builder.setView(view1);
 
-                alert11 = builder.create();
+    private void dathang(int gravity){
+        if (window1 == null) {
+            return;
+        }
+        window1.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+        window1.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams windownAttributes = window1.getAttributes();
+        windownAttributes.gravity = gravity;
+        window1.setAttributes(windownAttributes);
+        if(Gravity.BOTTOM == gravity){
+            dialog1.setCancelable(true);
+        }
+        else {
+            dialog1.setCancelable(false);
 
-                alert11.show();
+        }
 
-                btnHuyBo.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+        ghiChu = edtghichu.getText().toString();
 
-                        alert11.cancel();
-                    }
-                });
-                btnThem.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        RadioButton btnChuyenKhoan=view1.findViewById(R.id.PT1);
-                        RadioButton btnTienMat=view1.findViewById(R.id.gtPT2);
 
-                        if(btnChuyenKhoan.isChecked()==false && btnTienMat.isChecked() ==false)
-                        {
-                            Toast.makeText(getContext(),"Vui lòng chọn phương thức thanh toán",Toast.LENGTH_SHORT).show();
-                        }else if (btnChuyenKhoan.isChecked() == false)
-                        {
-                            if(edtDiaChi.getText().toString().equals(""))
-                            {
-                                Toast.makeText(getContext(),"Vui lòng chọn địa chỉ giao hàng",Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                DonHangOnline donHangOnline1=new DonHangOnline(idQuan, khachHang.getIdKhachhang(),giaKhuyenmai,
-                                        0,millis,donGia, sanPhams,edtDiaChi.getText().toString(),key, khachHang.getNameKhachHang(),
-                                        khachHang.getSdtKhachHang(), "abcxyz",thunhap,1, cuaHang.getName());
+        edtDiaChi.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                String addressKH = edtghichu.getText().toString();
+                LatLng lnKH =getLocationFromAddress(getContext(),addressKH);
+                LatLng lngShop =getLocationFromAddress(getContext(),thongTinShop.getShopAddress());
+                int khongcach = CalculationByDistance(lnKH,lngShop);
+                Toast.makeText(getContext(),khongcach+"abc",Toast.LENGTH_SHORT).show();
+            }
+        });
 
-                                HomeFragment fragment =new HomeFragment(mainActivity);
-                                mReference.child(today).child(key).setValue(donHangOnline1);
-                                mainActivity.getSupportFragmentManager().beginTransaction().
-                                        replace(R.id.fragment_container,fragment).commit();
-                                btnDatHang.setEnabled(false);
-                                AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
-                                builder1.setMessage("Đơn hàng của bạn đã được đặt.");
-                                builder1.setCancelable(true);
+        btnHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog1.dismiss();
+            }
+        });
 
-                                builder1.setPositiveButton(
-                                        "Ok",
-                                        new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int id) {
-                                                dialog.cancel();
-                                            }
-                                        });
+        btnThem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                                AlertDialog alert12 = builder1.create();
-                                alert12.show();
-
-                                alert11.cancel();
-
-                            }
+                if(btnChuyenKhoan.isChecked()==false && btnTienMat.isChecked() ==false)
+                {
+                    Toast.makeText(getContext(),"Vui lòng chọn phương thức thanh toán",Toast.LENGTH_SHORT).show();
+                }else if (btnChuyenKhoan.isChecked() == false)
+                {
+                    if(edtDiaChi.getText().toString().equals(""))
+                    {
+                        Toast.makeText(getContext(),"Vui lòng chọn địa chỉ giao hàng",Toast.LENGTH_SHORT).show();
+                    }else {
+                        if(edtDiaChi.getText().toString().isEmpty()){
+                            edtDiaChi.setError("Chọn địa chỉ");
+                            edtDiaChi.getText().toString();
                         }
                         else {
-                            DonHangOnline donHangOnline1=new DonHangOnline(idQuan, khachHang.getIdKhachhang(),giaKhuyenmai,
-                                    0,millis,donGia, sanPhams,edtDiaChi.getText().toString(),key, khachHang.getNameKhachHang(),
-                                    khachHang.getSdtKhachHang(), "abcxyz",thunhap,2, cuaHang.getName());
+                            DonHangOnline donHangOnline1 = new DonHangOnline(idQuan, khachHang.getIdKhachhang(), giaKhuyenmai,
+                                    0, millis, donGia, sanPhams, edtDiaChi.getText().toString(), key, khachHang.getNameKhachHang(),
+                                    khachHang.getSdtKhachHang(), ghiChu, thunhap, 1, thongTinShop.getName());
 
-                            HomeFragment fragment =new HomeFragment(mainActivity);
+                            HomeFragment fragment = new HomeFragment(mainActivity);
                             mReference.child(today).child(key).setValue(donHangOnline1);
                             mainActivity.getSupportFragmentManager().beginTransaction().
-                                    replace(R.id.fragment_container,fragment).commit();
+                                    replace(R.id.fragment_container, fragment).commit();
                             btnDatHang.setEnabled(false);
                             AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
                             builder1.setMessage("Đơn hàng của bạn đã được đặt.");
@@ -269,25 +367,43 @@ public class DonHangFragment  extends Fragment {
                             AlertDialog alert12 = builder1.create();
                             alert12.show();
 
-                            alert11.cancel();
+                        }
+                    }
+                }
+                else {
+                    if(edtDiaChi.getText().toString().isEmpty()){
+                        Toast.makeText(mainActivity,"Chưa có địa chỉ",Toast.LENGTH_LONG).show();
+                    }else {
+                        DonHangOnline donHangOnline1 = new DonHangOnline(idQuan, khachHang.getIdKhachhang(), giaKhuyenmai,
+                                0, millis, donGia, sanPhams, edtDiaChi.getText().toString(), key, khachHang.getNameKhachHang(),
+                                khachHang.getSdtKhachHang(), ghiChu, thunhap, 2, thongTinShop.getName());
+                        ThongTinChuyenKhoan_Fragment thongTinChuyenKhoan_fragment = new ThongTinChuyenKhoan_Fragment(donHangOnline1);
 
+
+                        if (idQuan != null) {
+                            thongTinChuyenKhoan_fragment.getIdQuan(idQuan);
+                        } else {
+                            Toast.makeText(getContext(), "cmm", Toast.LENGTH_SHORT).show();
                         }
 
+                        getFragmentManager().beginTransaction().replace(R.id.fragment_container, thongTinChuyenKhoan_fragment).commit();
+                        dialog1.dismiss();
+
+
                     }
-                });
+
+                }
+
+
 
 
             }
         });
-        return view;
+
+        dialog1.show();
     }
 
     private void tinhtoan(KhuyenMai khuyenMai) {
-
-        String[] tienSP = tienShipper.getText().toString().split(" ");
-        long tsp =Long.parseLong(tienSP[2]);
-        tongTien.setText(Cart_Fragment.addDauPhay(tongtien+ tsp - tongtien*khuyenMai.getPhanTramKhuyenMai()/100)+" VNĐ");
-
 
         if(khuyenMai.getLoaiKhuyenmai()==1)
         {
@@ -299,9 +415,8 @@ public class DonHangFragment  extends Fragment {
                 Toast.makeText(getContext(), "Tổng tiền không đủ để sử dụng.",Toast.LENGTH_LONG).show();
             }
 
-
         }else {
-            Toast.makeText(getContext(), "không đúng loai khuyen mãi",Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Không đúng loai khuyen mãi",Toast.LENGTH_LONG).show();
         }
 
 
@@ -336,7 +451,6 @@ public class DonHangFragment  extends Fragment {
         thanhphoAuto.setAdapter(adapterTinh);
         adapterTinh.notifyDataSetChanged();
 
-        int i = 0;
 
         thanhphoAuto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -385,8 +499,38 @@ public class DonHangFragment  extends Fragment {
             @Override
             public void onClick(View v) {
                 sonha = soNha.getText().toString();
-                edtDiaChi.setText(sonha+","+tenXa+","+tenHuyen+","+tenTinh);
-                dialog.dismiss();
+                if(tenTinh.isEmpty()){
+                    Toast.makeText(mainActivity,"Chưa có địa chỉ",Toast.LENGTH_LONG).show();
+                }
+                else if(sonha.isEmpty()){
+                    Toast.makeText(mainActivity,"Chưa có số nhà",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    edtDiaChi.setText(sonha+" , "+tenXa+" , "+tenHuyen+" , "+tenTinh);
+
+                        String addressKH = edtDiaChi.getText().toString();
+//                        addressKH.replace("Tỉnh","");
+//                        addressKH.replace("Thành phố","");
+//                        addressKH.replace("Quận","");
+//                        addressKH.replace("Huyện","");
+//                        addressKH.replace("Phường","");
+//                        addressKH.replace("Xã","");
+//                        Toast.makeText(getContext(),addressKH,Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(),thongTinShop.getShopAddress(),Toast.LENGTH_SHORT).show();
+                        LatLng lnKH =getLocationFromAddress(getContext(),addressKH);
+                        LatLng lngShop =getLocationFromAddress(getContext(),thongTinShop.getShopAddress());
+
+                        int khongcach = CalculationByDistance(lnKH,lngShop);
+                        tienShipper.setText("Phí Ship: "
+                                +Cart_Fragment.addDauPhay(tinhPhiShip(khongcach))+" VND");
+
+
+
+
+                    dialog.dismiss();
+                }
+
+
             }
         });
         dialog.show();
@@ -413,47 +557,65 @@ public class DonHangFragment  extends Fragment {
         return arr;
     }
 
-    private void  getDataShop()
+
+
+    public LatLng getLocationFromAddress(Context context, String strAddress) {
+
+        Geocoder coder = new Geocoder(context);
+        List<Address> address;
+        LatLng p1 = null;
+
+        try {
+            // May throw an IOException
+            address = coder.getFromLocationName(strAddress, 5);
+            if (address == null) {
+                return null;
+            }
+
+            Address location = address.get(0);
+            p1 = new LatLng(location.getLatitude(), location.getLongitude() );
+
+        } catch (IOException ex) {
+
+            ex.printStackTrace();
+        }
+
+        return p1;
+    }
+
+    public int CalculationByDistance(LatLng StartP, LatLng EndP) {
+        int Radius=6371;//radius of earth in Km
+        double lat1 = StartP.latitude;
+        double lat2 = EndP.latitude;
+        double lon1 = StartP.longitude;
+        double lon2 = EndP.longitude;
+        double dLat = Math.toRadians(lat2-lat1);
+        double dLon = Math.toRadians(lon2-lon1);
+        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                        Math.sin(dLon/2) * Math.sin(dLon/2);
+        double c = 2 * Math.asin(Math.sqrt(a));
+        double valueResult= Radius*c;
+        double km=valueResult/1;
+        DecimalFormat newFormat = new DecimalFormat("####");
+        int kmInDec =  Integer.valueOf(newFormat.format(km));
+        double meter=valueResult%1000;
+        int  meterInDec= Integer.valueOf(newFormat.format(meter));
+        Log.i("Radius Value",""+valueResult+"   KM  "+kmInDec+" Meter   "+meterInDec);
+//        Toast.makeText(getApplicationContext(),(int) (Radius * c*1000)+ "",Toast.LENGTH_SHORT).show();
+        return ((int) (Radius * c*1000));
+    }
+
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+    }
+
+    // moi 1 km shipper se nhan duoc 8000VND
+
+    private long tinhPhiShip(int s)
     {
-        DatabaseReference mReference= FirebaseDatabase.getInstance().getReference("cuaHang");
-        mReference.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                if(snapshot.getKey().equals(idQuan))
-                {
-//                    Toast.makeText(getBaseContext(),snapshot.getKey(),Toast.LENGTH_SHORT).show();
-                    for (DataSnapshot snapshot1:snapshot.getChildren())
-                    {
-                        String key= snapshot1.getKey();
-//                    Toast.makeText(getContext(),key,Toast.LENGTH_SHORT).show();
-                        if(key.equals("thongtin"))
-                        {
-                            cuaHang = snapshot1.getValue(CuaHang.class);
-
-                        }
-                    }
-
-                }
-
-
-            }
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        long kq= s*8/1000*1000;
+        return kq;
     }
 }
 

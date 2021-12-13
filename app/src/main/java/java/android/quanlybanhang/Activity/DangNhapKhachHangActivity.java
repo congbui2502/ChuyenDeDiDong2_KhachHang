@@ -222,8 +222,6 @@ public class DangNhapKhachHangActivity extends AppCompatActivity implements View
                 SanPham sanPham=snapshot.getValue(SanPham.class);
                 sanphamnoibat.add(sanPham);
                 flag++;
-
-
             }
 
             @Override

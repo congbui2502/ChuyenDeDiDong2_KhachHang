@@ -38,7 +38,7 @@
                 android:layout_weight="1"
                 android:hint="Chuyển khoản"></RadioButton>
             <RadioButton
-                android:id="@+id/gtPT2"
+                android:id="@+id/PT2"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -51,7 +51,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="16dp">
             <Button
-                android:id="@+id/btnhuyDiaLogDVT"
+                android:id="@+id/btnhuyDiaLogPT"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -63,7 +63,7 @@
 
 
             <Button
-                android:id="@+id/btnthemDiaLogDVT"
+                android:id="@+id/btnthemDiaLogPT"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

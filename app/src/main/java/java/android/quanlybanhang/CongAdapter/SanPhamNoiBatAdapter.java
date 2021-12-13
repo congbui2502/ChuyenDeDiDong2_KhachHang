@@ -50,10 +50,10 @@ public class SanPhamNoiBatAdapter extends RecyclerView.Adapter<SanPhamNoiBatAdap
         void onClickAddToCart(ImageView imageToCart,SanPham trai);
     }
 
-    public void setData(KhachHangActivity activity,List<SanPham> list, IclickAddToCartListener listener)
+    public void setData(AppCompatActivity activity,List<SanPham> list)
     {
         this.activity=activity;
-        this.iclickAddToCartListener=listener;
+
         this.trais=list;
         notifyDataSetChanged();
     }

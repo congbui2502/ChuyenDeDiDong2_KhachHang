@@ -20,6 +20,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -28,6 +31,7 @@ import java.android.quanlybanhang.Sonclass.DonHangOnline;
 import java.android.quanlybanhang.Sonclass.SanPham;
 import java.android.quanlybanhang.Activity.AnimationUlti;
 import java.android.quanlybanhang.Activity.KhachHangActivity;
+import java.android.quanlybanhang.Sonclass.ThongTinShop;
 import java.util.List;
 
 public class Cart_Fragment extends Fragment {
@@ -125,10 +129,45 @@ public class Cart_Fragment extends Fragment {
 
                     if(productAdapter.getListProductIsChecked().size()>0)
                     {
-                        DonHangFragment donHangFragment=new DonHangFragment(productAdapter.getListProductIsChecked());
-                        donHangFragment.getIdQuan(idQuan);
-                        mainActivity.getSupportFragmentManager().beginTransaction().addToBackStack(null)
-                                .replace(R.id.fragment_container,donHangFragment).commit();
+                        DatabaseReference reference= FirebaseDatabase.getInstance().getReference().
+                                child("cuaHang").child(idQuan);
+                        reference.addChildEventListener(new ChildEventListener() {
+                            @Override
+                            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                                if(snapshot.getKey().equals("thongtin"))
+                                {
+                                    ThongTinShop thongTinShop= snapshot.getValue(ThongTinShop.class);
+                                    DonHangFragment donHangFragment=new DonHangFragment(productAdapter.getListProductIsChecked(),thongTinShop);
+                                    donHangFragment.getIdQuan(idQuan);
+                                    mainActivity.getSupportFragmentManager().beginTransaction().addToBackStack(null)
+                                            .replace(R.id.fragment_container,donHangFragment).commit();
+                                }
+                            }
+
+
+                            @Override
+                            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                            }
+
+                            @Override
+                            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+                            }
+
+                            @Override
+                            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+
 
                     }else {
                         Toast.makeText(getContext(),"Vui lòng chọn sản phẩm",Toast.LENGTH_SHORT).show();
@@ -253,5 +292,42 @@ public class Cart_Fragment extends Fragment {
         mReference.child("dondagiao").push().setValue(donHangOnline);
         mReference.child("dondanhan").push().setValue(donHangOnline);
         mReference.child("dondahuy").push().setValue(donHangOnline);
+    }
+    private void getThongTinShop()
+    {
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference().
+                child("cuaHang").child(idQuan);
+        reference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                if(snapshot.getKey().equals("thongtin"))
+                {
+                    ThongTinShop thongTinShop= snapshot.getValue(ThongTinShop.class);
+                    Toast.makeText(getContext(),thongTinShop.getName(),Toast.LENGTH_SHORT).show();
+                }
+            }
+
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
