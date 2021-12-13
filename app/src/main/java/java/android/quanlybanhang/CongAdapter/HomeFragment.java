@@ -140,7 +140,6 @@ public class HomeFragment  extends Fragment {
             String idShop="";
             String nameShop="";
             String logoUrl="";
-
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 idShop = snapshot.getKey();
@@ -176,7 +175,6 @@ public class HomeFragment  extends Fragment {
 
         loaiTrais.add(new HomeProduct("Của hàng",new ArrayList<SanPham>(),cuahang,new ArrayList<SanPham>()));
         loaiTraiAdapter.notifyDataSetChanged();
-
 
 
 

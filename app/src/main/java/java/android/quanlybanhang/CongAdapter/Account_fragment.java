@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import java.android.quanlybanhang.Activity.KhachHangActivity;
-import java.android.quanlybanhang.CongAdapter.History.Adapter.FragmentAdapter;
-import java.android.quanlybanhang.CongAdapter.History.Adapter.TablayoutAdapter;
+import java.android.quanlybanhang.functions.DatBan.History.Adapter.FragmentAdapter;
+import java.android.quanlybanhang.functions.DatBan.History.Adapter.TablayoutAdapter;
 import java.android.quanlybanhang.R;
 import java.util.ArrayList;
 

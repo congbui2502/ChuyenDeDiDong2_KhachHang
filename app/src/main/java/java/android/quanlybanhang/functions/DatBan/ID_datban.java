@@ -20,9 +20,6 @@ public class ID_datban {
     public void setDatBanModels(ArrayList<DatBanModel> datBanModels) {
         this.datBanModels = datBanModels;
     }
-
-
-
     public ID_datban(String id, ArrayList<DatBanModel> datBanModels) {
         this.id = id;
         this.datBanModels = datBanModels;

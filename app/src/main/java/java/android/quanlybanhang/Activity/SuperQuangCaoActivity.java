@@ -3,13 +3,11 @@ package java.android.quanlybanhang.Activity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,9 +20,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.android.quanlybanhang.CongAdapter.QuanNoiBatAdapter;
-import java.android.quanlybanhang.CongAdapter.SanPhamNoiBatAdapter;
-import java.android.quanlybanhang.CongAdapter.ShopProductFragment;
 import java.android.quanlybanhang.CongAdapter.SuperQuangCaoAdapter;
 import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.CuaHang;

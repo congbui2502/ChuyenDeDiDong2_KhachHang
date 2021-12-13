@@ -27,12 +27,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sa90.materialarcmenu.ArcMenu;
 
-import java.android.quanlybanhang.Ban.StaticBanModel;
-import java.android.quanlybanhang.Ban.StaticRvAdapter;
+import java.android.quanlybanhang.functions.DatBan.Ban.StaticBanModel;
+import java.android.quanlybanhang.functions.DatBan.Ban.StaticRvAdapter;
 import java.android.quanlybanhang.ChiTietSanPham.Interface_KhuVuc_ban;
-import java.android.quanlybanhang.KhuVuc.StaticModelKhuVuc;
+import java.android.quanlybanhang.functions.DatBan.KhuVuc.StaticModelKhuVuc;
 
-import java.android.quanlybanhang.KhuVuc.StaticRvKhuVucAdapter;
+import java.android.quanlybanhang.functions.DatBan.KhuVuc.StaticRvKhuVucAdapter;
 import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.CuaHang;
 import java.util.ArrayList;
@@ -52,6 +52,7 @@ public class DanhSachChonBan extends AppCompatActivity implements Interface_KhuV
     private String id_shop;
     ProgressBar progressBar;
     ImageView img_nocart;
+    String  ten_cuahang;
 
 
 
@@ -68,6 +69,7 @@ public class DanhSachChonBan extends AppCompatActivity implements Interface_KhuV
         img_nocart = findViewById(R.id.img_nocart);
         Intent intent1 = getIntent();
         id_shop = intent1.getStringExtra("id_cuahang");
+        ten_cuahang =intent1.getStringExtra("ten_cuahang");
         ArrayList<String> listImage = new ArrayList<>();
 
         mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("cuaHang").child(id_shop).child("thongtin/image");
@@ -134,7 +136,7 @@ public class DanhSachChonBan extends AppCompatActivity implements Interface_KhuV
         });
         items = new ArrayList<>();
         recyclerView2 = findViewById(R.id.rv_2);
-        staticRvAdapter = new StaticRvAdapter(items, DanhSachChonBan.this, item, "","",id_shop);
+        staticRvAdapter = new StaticRvAdapter(items, DanhSachChonBan.this, item, "","",id_shop,ten_cuahang);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
         recyclerView2.setLayoutManager(gridLayoutManager);
         recyclerView2.setAdapter(staticRvAdapter);
@@ -147,7 +149,7 @@ public class DanhSachChonBan extends AppCompatActivity implements Interface_KhuV
     public void GetBack(int position, ArrayList<StaticBanModel> items, String id_khuvuc,String trangthai) {
         id_khuvuc = item.get(position).getId_khuvuc();
         trangthai = item.get(position).getTrangthai();
-        staticRvAdapter = new StaticRvAdapter(items, DanhSachChonBan.this, item, id_khuvuc,trangthai,id_shop);
+        staticRvAdapter = new StaticRvAdapter(items, DanhSachChonBan.this, item, id_khuvuc,trangthai,id_shop,ten_cuahang);
         staticRvAdapter.notifyDataSetChanged();
         recyclerView2.setAdapter(staticRvAdapter);
 

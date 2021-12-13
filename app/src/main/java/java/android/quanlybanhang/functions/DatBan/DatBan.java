@@ -55,7 +55,7 @@ public class DatBan extends AppCompatActivity implements View.OnClickListener {
     private Dialog dialog, dialog1, dialog2, dialog3, dialog4;
     Timestamp timestamp;
     Timestamp timestamp1;
-    String id_shop;
+    String id_shop,ten_cuahang;
 
 
     @Override
@@ -72,6 +72,7 @@ public class DatBan extends AppCompatActivity implements View.OnClickListener {
         id_khuvuc = intent.getStringExtra("id_khuvuc");
         id_shop = intent.getStringExtra("id_shop");
         tenban = intent.getStringExtra("tenban");
+        ten_cuahang =intent.getStringExtra("ten_cuahang");
         actionBar.setTitle("Đặt Bàn:" + tenban + "");
         tvtenkhachhang = findViewById(R.id.tvtenkhachhang);
         tvsodienthoai = findViewById(R.id.tvsodienthoai);
@@ -213,6 +214,8 @@ public class DatBan extends AppCompatActivity implements View.OnClickListener {
                     databaseReference.child("giodat").setValue(tvgiodatban.getText().toString());
                     databaseReference.child("tenban").setValue(tenban);
                     databaseReference.child("trangthai").setValue("0");
+                    databaseReference.child("ten_cuahang").setValue(ten_cuahang);
+                    databaseReference.child("trangthai_dat").setValue("0");
                     databaseReference.child("gioketthuc").setValue(tvgiodatbankt.getText().toString());
                     Intent intent = new Intent(DatBan.this, KhachHangActivity.class);
                     startActivity(intent);
@@ -282,4 +285,12 @@ public class DatBan extends AppCompatActivity implements View.OnClickListener {
         return date;
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(DatBan.this,DanhSachChonBan.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+        super.onBackPressed();
+    }
 }

@@ -45,8 +45,6 @@ public class DanhSachDanhGia extends AppCompatActivity {
                             String tenkhachhang = snap.child("tenkhachhang").getValue() + "";
                             ratingModels.add(new RatingModel(comment, date, numberrating, tenkhachhang));
                         }
-
-
                     }
                     Log.d("ratingModelss", ratingModels.size() + "");
                     recyclerView = findViewById(R.id.rv_1);

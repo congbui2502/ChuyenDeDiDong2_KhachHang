@@ -632,5 +632,10 @@ public class KhachHangActivity extends AppCompatActivity {
         Log.d("BBB","onStop Mainactivity");
     }
 
-
+    @Override
+    public void onBackPressed() {
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        super.onBackPressed();
+        finish();
+    }
 }

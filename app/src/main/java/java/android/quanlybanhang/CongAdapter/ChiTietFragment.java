@@ -1,21 +1,16 @@
 package java.android.quanlybanhang.CongAdapter;
 
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -28,14 +23,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.android.quanlybanhang.Activity.KhachHangActivity;
 import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.CuaHang;
-import java.android.quanlybanhang.Sonclass.DonHangOnline;
-import java.android.quanlybanhang.Sonclass.KhuyenMai;
 import java.android.quanlybanhang.Sonclass.SanPham;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.android.quanlybanhang.functions.DatBan.ShopProductFragment;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class ChiTietFragment extends Fragment {

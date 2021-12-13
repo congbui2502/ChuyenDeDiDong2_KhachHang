@@ -2,13 +2,16 @@ package java.android.quanlybanhang.Activity;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,13 +29,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.android.quanlybanhang.Activity.KhachHangActivity;
 import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.KhachHang;
 import java.android.quanlybanhang.login.ForgetPasswordActivity;
 
 
-public class DangNhapKhachHangActivity extends AppCompatActivity {
+public class DangNhapKhachHangActivity extends AppCompatActivity implements View.OnClickListener {
     Button btnDangNhap,btnDangki;
     EditText edtDangNhap, edtMatKhau;
     TextView tv_quemk;
@@ -40,8 +42,12 @@ public class DangNhapKhachHangActivity extends AppCompatActivity {
     String user,pass;
     private String idUser;
     private FirebaseAuth mFirebaseAuth;
-
+    SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences1;
+    SharedPreferences.Editor editor;
+    SharedPreferences.Editor editor1;
     private DatabaseReference mReference;
+    ProgressBar progressBar2;
 
 
     @Override
@@ -52,8 +58,16 @@ public class DangNhapKhachHangActivity extends AppCompatActivity {
         btnDangNhap = (Button) findViewById(R.id.btn_dangnhap);
         edtDangNhap = (EditText) findViewById(R.id.edt_dangnhap);
         edtMatKhau = (EditText) findViewById(R.id.edt_matkhau);
+        progressBar2 = findViewById(R.id.progressBar2);
         tv_quemk=findViewById(R.id.tv_quenmk);
         chk = (CheckBox) findViewById(R.id.saveUser);
+        initPreferences();
+        String savedUser = sharedPreferences.getString("USER","");
+        String savedPass = sharedPreferences1.getString("PASS","");
+        edtDangNhap.setText(savedUser);
+        edtMatKhau.setText(savedPass);
+
+        chk.setOnClickListener(this);
         btnDangNhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,24 +102,28 @@ public class DangNhapKhachHangActivity extends AppCompatActivity {
             startActivity(intent, options.toBundle());
         }
     }
-
     String strUser, strPass;
     private void login() {
+        progressBar2.setVisibility(View.VISIBLE);
         strUser = edtDangNhap.getText().toString();
         strPass = edtMatKhau.getText().toString();
         mFirebaseAuth = FirebaseAuth.getInstance();
         if (strUser.isEmpty()) {
             edtDangNhap.setError("Plese enter email id");
             edtDangNhap.requestFocus();
+            progressBar2.setVisibility(View.INVISIBLE);
         } else if (strPass.isEmpty()) {
             edtMatKhau.setError("Plese enter your password");
             edtMatKhau.requestFocus();
+            progressBar2.setVisibility(View.INVISIBLE);
         } else if (strUser.isEmpty() && strPass.isEmpty()) {
             Toast.makeText(DangNhapKhachHangActivity.this, "Fialds Are Empty!", Toast.LENGTH_LONG).show();
+            progressBar2.setVisibility(View.INVISIBLE);
         } else if (!(strUser.isEmpty() && strPass.isEmpty())) {
             mFirebaseAuth.signInWithEmailAndPassword(strUser, strPass).addOnCompleteListener(DangNhapKhachHangActivity.this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
+
                     if (!task.isSuccessful()) {
                         Toast.makeText(DangNhapKhachHangActivity.this, "Signin error", Toast.LENGTH_SHORT).show();
                     } else {
@@ -115,15 +133,18 @@ public class DangNhapKhachHangActivity extends AppCompatActivity {
                         mReference.addChildEventListener(new ChildEventListener() {
                             @Override
                             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
                                 if(snapshot.getKey().equals(idUser))
                                 {
+                                    btnDangNhap.setBackgroundResource(R.drawable.bnt_dangnhap);
+                                    btnDangNhap.setEnabled(false);
                                     KhachHang khachHang =snapshot.getValue(KhachHang.class);
                                     Intent intent = new Intent(DangNhapKhachHangActivity.this, KhachHangActivity.class);
                                     Bundle bundle = new Bundle();
                                     bundle.putSerializable("khachhang",khachHang);
                                     intent.putExtras(bundle);
                                     startActivity(intent);
-
+                                    finish();
                                 }
                             }
 
@@ -136,7 +157,6 @@ public class DangNhapKhachHangActivity extends AppCompatActivity {
                             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
 
                             }
-
                             @Override
                             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
@@ -147,8 +167,10 @@ public class DangNhapKhachHangActivity extends AppCompatActivity {
 
                             }
                         });
+                        progressBar2.setVisibility(View.INVISIBLE);
 
                     }
+                    progressBar2.setVisibility(View.INVISIBLE);
 
                 }
             });
@@ -157,6 +179,24 @@ public class DangNhapKhachHangActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v == chk){
+            String pass = edtMatKhau.getText().toString();
+            String taikhoan = edtDangNhap.getText().toString();
+            editor1.putString("PASS",pass);
+            editor.putString("USER",taikhoan);
+            editor1.commit();
+            editor.commit();
+            Toast.makeText(DangNhapKhachHangActivity.this,"Đã lưu thông tin đăng nhập",Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void initPreferences() {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences1 = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = sharedPreferences.edit();
+        editor1 = sharedPreferences1.edit();
+    }
 }
 
 

@@ -19,9 +19,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuanLyBanHang">
         <activity
-            android:name=".functions.DatBan.DanhGiaShipper"
-            android:exported="false" />
-        <activity
             android:name=".functions.DatBan.DanhSachDanhGia"
             android:exported="false" />
         <activity

@@ -1,13 +1,14 @@
 package java.android.quanlybanhang.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,7 +26,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.KhachHang;
-import java.io.Serializable;
 
 public class DangkyKhachHang extends AppCompatActivity implements View.OnClickListener {
     private Button signinNow, signup;
@@ -33,11 +33,15 @@ public class DangkyKhachHang extends AppCompatActivity implements View.OnClickLi
     private KhachHang khachHang;
     private TextInputEditText username, email, phone,date, password, confirm_password;
     private CardView google;
-
+    SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences1;
+    SharedPreferences.Editor editor;
+    SharedPreferences.Editor editor1;
     //Firebase
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
     private FirebaseAuth mFirebaseAuth;
+    ProgressBar progressBar2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +56,9 @@ public class DangkyKhachHang extends AppCompatActivity implements View.OnClickLi
         phone = findViewById(R.id.edt_phone);
         password = findViewById(R.id.edt_password);
         confirm_password = findViewById(R.id.edt_confirm_password);
+        initPreferences();
+        String savedUser = sharedPreferences.getString("USER","");
+        String savedPass = sharedPreferences1.getString("PASS","");
 
         signinNow.setOnClickListener(this);
         signup.setOnClickListener(this);
@@ -73,9 +80,16 @@ public class DangkyKhachHang extends AppCompatActivity implements View.OnClickLi
                 signup();
                 break;
         }
+//        if (v == chk){
+//            String pass = edtMatKhau.getText().toString();
+//            editor1.putString("PASS",pass);
+//            editor1.commit();
+//            Toast.makeText(DangNhapActivity.this,"Đã lưu thông tin đăng nhập",Toast.LENGTH_SHORT).show();
+//        }
     }
 
     private void signup(){
+        progressBar2.setVisibility(View.VISIBLE);
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         String mail = email.getText().toString();
@@ -87,31 +101,41 @@ public class DangkyKhachHang extends AppCompatActivity implements View.OnClickLi
 
 
         if(userName.isEmpty()){
+
             username.setError("Plese enter username");
             username.requestFocus();
+            progressBar2.setVisibility(View.INVISIBLE);
         }else if(mail.isEmpty()){
             email.setError("Plese enter email");
             email.requestFocus();
+            progressBar2.setVisibility(View.INVISIBLE);
         }else if (!Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
             email.setError("please provide valid email");
             email.requestFocus();
+            progressBar2.setVisibility(View.INVISIBLE);
         } else if(mPhone.isEmpty()){
             phone.setError("Plese enter email");
             phone.requestFocus();
+            progressBar2.setVisibility(View.INVISIBLE);
         } else if(dt.isEmpty()){
             date.setError("Plese enter date");
             date.requestFocus();
+            progressBar2.setVisibility(View.INVISIBLE);
         }else if(pass.isEmpty()){
             password.setError("Plese enter password");
             password.requestFocus();
+            progressBar2.setVisibility(View.INVISIBLE);
         }else if(cpass.isEmpty()){
             confirm_password.setError("Plese enter confirm password");
             confirm_password.requestFocus();
+            progressBar2.setVisibility(View.INVISIBLE);
         }else if (!pass.equals(cpass)){
             confirm_password.setError("Passwords are not the sames");
             confirm_password.requestFocus();
+            progressBar2.setVisibility(View.INVISIBLE);
         }
         else if(mail.isEmpty() && pass.isEmpty()){
+            progressBar2.setVisibility(View.INVISIBLE);
             Toast.makeText(DangkyKhachHang.this,"Fialds Are Empty!", Toast.LENGTH_LONG).show();
         }else if(!(mail.isEmpty() && pass.isEmpty() && mPhone.isEmpty() &&userName.isEmpty() )){
             mFirebaseAuth.createUserWithEmailAndPassword(mail, pass).addOnCompleteListener(DangkyKhachHang.this, new OnCompleteListener<AuthResult>() {
@@ -130,17 +154,18 @@ public class DangkyKhachHang extends AppCompatActivity implements View.OnClickLi
                         Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             @Override
-                            public void run() {
+                                public void run() {
 
-                                Toast.makeText(DangkyKhachHang.this, "Signup succes", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(DangkyKhachHang.this,DangNhapKhachHangActivity.class);
-                                Bundle bundle = new Bundle();
-                                bundle.putSerializable(KEY_KHACHHANG,khachHang);
-                                intent.putExtras(bundle);
-                                startActivity(intent);
-                                finish();
-                            }
+                                    Toast.makeText(DangkyKhachHang.this, "Signup succes", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(DangkyKhachHang.this,DangNhapKhachHangActivity.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putSerializable(KEY_KHACHHANG,khachHang);
+                                    intent.putExtras(bundle);
+                                    startActivity(intent);
+                                    finish();
+                                }
                         }, 1000);
+                        progressBar2.setVisibility(View.INVISIBLE);
                     }
                 }
             });}else {
@@ -148,5 +173,12 @@ public class DangkyKhachHang extends AppCompatActivity implements View.OnClickLi
         }
 
     }
+    private void initPreferences() {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences1 = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = sharedPreferences.edit();
+        editor1 = sharedPreferences1.edit();
+    }
+
 
 }

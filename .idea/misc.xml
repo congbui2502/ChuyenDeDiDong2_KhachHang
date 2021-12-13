@@ -74,6 +74,8 @@
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/drawable-v24/bnt_custom.xml" value="0.22685185185185186" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/drawable/bg_titel_16.xml" value="0.3125" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/drawable/bnt_backgroud.xml" value="0.3515625" />
+        <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/drawable/bnt_dangnhap.xml" value="0.31666666666666665" />
+        <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/drawable/button.xml" value="0.31666666666666665" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/drawable/cart_shopping.xml" value="0.22685185185185186" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/drawable/custom_dialog_background.xml" value="0.3515625" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/drawable/ratingbar_red.xml" value="0.3125" />
@@ -84,11 +86,14 @@
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/activity_account_information.xml" value="0.17552083333333332" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/activity_customer.xml" value="0.23489583333333333" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/activity_dangnhap.xml" value="0.23489583333333333" />
+        <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/activity_dangnhap_khachhang.xml" value="0.25" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/activity_danh_gia_cua_hang.xml" value="0.5" />
+        <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/activity_danh_gia_shipper.xml" value="0.2986111111111111" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/activity_danh_sach_danh_gia.xml" value="0.33" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/activity_danh_sach_dat_ban.xml" value="0.23489583333333333" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/activity_dat_ban.xml" value="0.25" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/activity_order_menu.xml" value="0.25" />
+        <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/activity_signup_khachhang.xml" value="0.2986111111111111" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/autorun_viewpager2.xml" value="0.17552083333333332" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/cart_fragment.xml" value="0.17552083333333332" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/cart_product.xml" value="0.17552083333333332" />
@@ -120,9 +125,11 @@
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/item_khuvuc.xml" value="0.3359375" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/item_khuyenmai.xml" value="0.17552083333333332" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/item_listdatban.xml" value="0.33" />
+        <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/item_quangcao.xml" value="0.2986111111111111" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/item_recycleview_tab_don_hang_online.xml" value="0.2986111111111111" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/loai_douong.xml" value="0.2986111111111111" />
-        <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/loaitrai.xml" value="0.17552083333333332" />
+        <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/loaitrai.xml" value="0.5" />
+        <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/quannoibat.xml" value="0.2986111111111111" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/ratting_cuahang.xml" value="0.29444444444444445" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/sanphamcuahang_layout.xml" value="0.33125" />
         <entry key="..\:/ChuyenDeDiDong2_KhachHang/app/src/main/res/layout/sanphamnoibat.xml" value="0.17552083333333332" />

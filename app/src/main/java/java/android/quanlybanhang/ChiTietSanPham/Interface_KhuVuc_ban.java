@@ -1,6 +1,6 @@
 package java.android.quanlybanhang.ChiTietSanPham;
 
-import java.android.quanlybanhang.Ban.StaticBanModel;
+import java.android.quanlybanhang.functions.DatBan.Ban.StaticBanModel;
 import java.util.ArrayList;
 
 public interface Interface_KhuVuc_ban {

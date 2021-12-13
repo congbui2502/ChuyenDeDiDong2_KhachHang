@@ -70,24 +70,41 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginBottom="5dp"
-                android:gravity="center"
-                android:orientation="vertical">
-
+                android:orientation="vertical"
+                android:gravity="left"
+               >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
                 <RatingBar
-                    android:background="@drawable/vien_rating"
                     android:id="@+id/ratingstart"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
-                    android:theme="@style/RatingBar"
-                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
                     android:fontFamily="@font/alike_angular"
-                    android:gravity="center"
                     android:numStars="5"
-                    android:stepSize="0.5"
-                    android:textStyle="bold" />
 
+                    android:scaleX="0.7"
+                    android:scaleY="0.7"
+                    android:stepSize="0.5"
+                    android:textStyle="bold"
+                    android:theme="@style/RatingBar"
+                    />
+
+                    <TextView
+                        android:id="@+id/tv_danhgia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/alike_angular"
+                        android:gravity="center"
+                        android:text="0/5 (0 lượt đánh giá)"
+                        android:textColor="#8E3030">
+
+                    </TextView>
+                </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyLoaisanPham"
                     android:layout_width="match_parent"
