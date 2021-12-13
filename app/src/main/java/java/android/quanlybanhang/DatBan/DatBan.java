@@ -204,7 +204,7 @@ public class DatBan extends AppCompatActivity implements View.OnClickListener {
                     title.setText("chưa chọn giờ kết thúc");
                     dialog3.show();
                 } else {
-                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("CuaHangOder").child(id_shop).child("DuyetDatBan").child(id_ban + "_" + id_khuvuc).child(timestamp.getTime() + "");
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("DuyetDatBan").child(khachHang.getIdKhachhang()).child(id_ban + "_" + id_khuvuc).child(timestamp.getTime() + "");
                     databaseReference.child("tenkhachhang").setValue(khachHang.getNameKhachHang());
                     databaseReference.child("id_bk").setValue(id_ban + "_" + id_khuvuc);
                     databaseReference.child("sodienthoai").setValue(khachHang.getSdtKhachHang());
@@ -216,7 +216,10 @@ public class DatBan extends AppCompatActivity implements View.OnClickListener {
                     databaseReference.child("trangthai").setValue("0");
                     databaseReference.child("ten_cuahang").setValue(ten_cuahang);
                     databaseReference.child("trangthai_dat").setValue("0");
+                    databaseReference.child("id_cuahang").setValue(id_shop);
                     databaseReference.child("gioketthuc").setValue(tvgiodatbankt.getText().toString());
+                    databaseReference.child("key_khachhang").setValue(khachHang.getIdKhachhang());
+
                     Intent intent = new Intent(DatBan.this, KhachHangActivity.class);
                     startActivity(intent);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

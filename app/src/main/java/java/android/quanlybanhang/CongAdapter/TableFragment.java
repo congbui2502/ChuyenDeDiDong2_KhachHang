@@ -31,6 +31,9 @@ import java.android.quanlybanhang.Activity.ChangePassActivity;
 
 import java.android.quanlybanhang.Activity.DangNhapKhachHangActivity;
 import java.android.quanlybanhang.Activity.KhachHangActivity;
+import java.android.quanlybanhang.DatBan.DanhSachTheoDoiDatBan;
+import java.android.quanlybanhang.DatBan.DatBanModel;
+import java.android.quanlybanhang.DatBan.ID_datban;
 import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.KhachHang;
 import java.android.quanlybanhang.Sonclass.Mon;
@@ -45,9 +48,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class TableFragment extends Fragment {
 
     private FirebaseAuth mFirebaseAuth;
-    private DatabaseReference mDatabase;
-    private TextView tv_name,tv_ngaysinh,tv_sodt,tv_email,tv_doimk,tv_dangxuat;
+    private DatabaseReference mDatabase, mDatabase1;
+    private TextView tv_name, tv_ngaysinh, tv_sodt, tv_email, tv_doimk, tv_dangxuat, tv_datban;
     private CircleImageView avatar;
+    private KhachHang khachHang = KhachHangActivity.khachHang;
+    String id_bk;
+    private ArrayList<DatBanModel> datBanModels;
+    private ArrayList<ID_datban> ID_datbans;
 
 
     public TableFragment() {
@@ -64,14 +71,24 @@ public class TableFragment extends Fragment {
         tv_email = v.findViewById(R.id.tv_email);
         avatar = v.findViewById(R.id.profile_image);
         tv_doimk = v.findViewById(R.id.tv_doimk);
-        tv_dangxuat= v.findViewById(R.id.logout);
+        tv_dangxuat = v.findViewById(R.id.logout);
+        tv_datban = v.findViewById(R.id.tv_datban);
         onDataChange();
         DoiMatKhau();
         DangXuat();
+//        hamtheodoidatban();
+        tv_datban.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), DanhSachTheoDoiDatBan.class);
+                startActivity(intent);
+            }
+        });
         return v;
 
     }
-    private void DangXuat(){
+
+    private void DangXuat() {
         tv_dangxuat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +113,8 @@ public class TableFragment extends Fragment {
             }
         });
     }
-    public void DoiMatKhau(){
+
+    public void DoiMatKhau() {
         tv_doimk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +123,7 @@ public class TableFragment extends Fragment {
             }
         });
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,7 +142,7 @@ public class TableFragment extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                     KhachHang sp = snapshot.getValue(KhachHang.class);
-                    String imgAvatar=sp.getImgAvatar();
+                    String imgAvatar = sp.getImgAvatar();
                     String nameKH = sp.getNameKhachHang();
                     String phoneKH = sp.getSdtKhachHang();
                     String emailKH = sp.getEmailKhachHang();
@@ -146,4 +165,64 @@ public class TableFragment extends Fragment {
 
         }
     }
+
+//    private void hamtheodoidatban() {
+//        mDatabase1 = FirebaseDatabase.getInstance().getReference("DuyetDatBan");
+//        mDatabase1.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//
+//                if (snapshot.getValue() != null) {
+//                    for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+//                        ID_datbans = new ArrayList<>();
+//                        if (postSnapshot.getKey().equals(khachHang.getIdKhachhang()))
+//                            Log.d("keyTruong", postSnapshot.getKey() + "for1");
+//                        DataSnapshot sss = postSnapshot;
+//                        for (DataSnapshot aaa : sss.getChildren()) {
+//                            datBanModels = new ArrayList<>();
+//                            Log.d("keyTruong", aaa.getKey() + "for2");
+//                            DataSnapshot kkk = aaa;
+//                            for (DataSnapshot bbb : kkk.getChildren()) {
+//                                Log.d("keyTruong", bbb.getKey() + "for3");
+//                                String trangthai_dat = aaa.child("trangthai_dat").getValue() + "";
+//                                if (trangthai_dat.equals("0")) {
+//                                    id_bk = bbb.child("id_bk").getValue() + "";
+//                                    String id_ngaydat = bbb.getKey();
+//                                    String giodat = bbb.child("giodat").getValue() + "";
+//                                    String gioketthuc = bbb.child("gioketthuc").getValue() + "";
+//                                    String ngaydat = bbb.child("ngaydat").getValue() + "";
+//                                    String ngayhientai = bbb.child("ngayhientai").getValue() + "";
+//                                    String sodienthoai = bbb.child("sodienthoai").getValue() + "";
+//                                    String sotiendattruoc = bbb.child("sotiendattruoc").getValue() + "";
+//                                    String tenkhachhang = bbb.child("tenkhachhang").getValue() + "";
+//                                    String tenban = bbb.child("tenban").getValue() + "";
+//                                    String trangthai = bbb.child("trangthai").getValue() + "";
+//                                    String id = bbb.getKey();
+//                                    datBanModels.add(new DatBanModel(tenban, id_ngaydat, giodat, gioketthuc, id_bk, ngaydat, ngayhientai, sodienthoai, sotiendattruoc, tenkhachhang, trangthai));
+//                                    ID_datban datban = new ID_datban(id, datBanModels);
+//                                    ID_datbans.add(datban);
+//                                }
+//
+//                            }
+//                        }
+//                    }
+//                } else {
+////                            rong.setVisibility(View.VISIBLE);
+//                }
+////                        progressBar.setVisibility(View.INVISIBLE);
+////                        datBanAdapter = new DatBanOnlineAdapter(ID_datbans, XacNhanDatBan.this);
+////                        recyclerView.setLayoutManager(new LinearLayoutManager(XacNhanDatBan.this, LinearLayoutManager.VERTICAL, false));
+////                        recyclerView.setAdapter(datBanAdapter);
+////                        datBanAdapter.notifyDataSetChanged();
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//    }
+
 }

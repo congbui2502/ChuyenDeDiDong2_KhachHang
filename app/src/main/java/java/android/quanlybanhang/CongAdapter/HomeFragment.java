@@ -34,11 +34,9 @@ public class HomeFragment  extends Fragment {
 
     private RecyclerView recyclerView;
     private LoaiTraiAdapter loaiTraiAdapter;
-
     private DatabaseReference mReference;
     private KhachHangActivity activity;
     private TextView tvSearch;
-
     public HomeFragment(KhachHangActivity activity) {
         this.activity = activity;
     }

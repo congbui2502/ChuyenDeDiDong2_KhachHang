@@ -123,12 +123,12 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.DonHangH
         public DonHangHolder(@NonNull View ItemView) {
             super(ItemView);
             lblThoiGian = ItemView.findViewById(R.id.lblThoiGian);
-            lblDonGia = ItemView.findViewById(R.id.lblDonGia);
+            lblDonGia = ItemView.findViewById(R.id.lblTienDat);
             lblHuy = ItemView.findViewById(R.id.lblhuy);
             layoutThongTin = ItemView.findViewById(R.id.layoutThongTin);
             lblKhachang = ItemView.findViewById(R.id.lblKhachang);
             trangthai = ItemView.findViewById(R.id.trangthai);
-            tv_id_donhang = ItemView.findViewById(R.id.tv_id_donhang);
+            tv_id_donhang = ItemView.findViewById(R.id.lbl_idban);
         }
     }
 

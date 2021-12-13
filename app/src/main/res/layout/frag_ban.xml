@@ -9,7 +9,6 @@
     android:background="#EEEEEE"
     android:orientation="vertical">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -55,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_weight="4">
+                android:layout_weight="5">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -201,18 +200,39 @@
                     android:padding="5dp">
 
                         <TextView
-                            android:id="@+id/tv_doimk"
+                            android:id="@+id/tv_datban"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/white"
-                            android:drawableLeft="@drawable/iconchangepw"
+                            android:drawableLeft="@drawable/icons8ordertracking24"
+                            android:drawablePadding="20dp"
                             android:fontFamily="sans-serif-condensed"
                             android:gravity="center_vertical"
-                            android:text="Đổi mật khẩu"
+                            android:text="Theo Dõi Đơn Đã Đặt"
                             android:paddingLeft="15dp"
                             android:textColor="@color/black"
-                            android:textSize="20dp"></TextView>
+                            android:textSize="18dp"></TextView>
                 </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/tv_doimk"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:drawableLeft="@drawable/icons8lock24"
+                    android:drawablePadding="20dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:gravity="center_vertical"
+                    android:text="Đổi mật khẩu"
+                    android:paddingLeft="15dp"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"></TextView>
+            </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -225,10 +245,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/white"
-                            android:drawableLeft="@drawable/iconlogout"
+                            android:drawableLeft="@drawable/icons8logout24"
                             android:fontFamily="sans-serif-condensed"
                             android:gravity="center_vertical"
-
+                            android:drawablePadding="20dp"
                             android:text="Đăng xuất"
                             android:textColor="@color/black"
                             android:paddingLeft="15dp"
@@ -245,10 +265,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/white"
-                            android:drawableLeft="@drawable/iconthongtin"
+                            android:drawableLeft="@drawable/icons8information24"
                             android:fontFamily="sans-serif-condensed"
                             android:gravity="center_vertical"
-
+                            android:drawablePadding="20dp"
                             android:text="Thông tin ứng dụng"
                             android:paddingLeft="15dp"
                             android:textColor="@color/black"

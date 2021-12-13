@@ -65,7 +65,7 @@
                     android:textSize="13sp" />
 
                 <TextView
-                    android:id="@+id/tv_id_donhang"
+                    android:id="@+id/lbl_idban"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="14dp"
@@ -115,7 +115,7 @@
                     android:textSize="13sp" />
 
                 <TextView
-                    android:id="@+id/lblDonGia"
+                    android:id="@+id/lblTienDat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="14dp"

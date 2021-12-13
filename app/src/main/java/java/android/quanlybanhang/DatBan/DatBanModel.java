@@ -12,7 +12,8 @@ public class DatBanModel {
     private String sotiendadattruoc;
     private String tenkhachhang;
     private  String trangthai;
-
+    private  String ten_cuahang;
+    private  String trangthai_dat;
 
     public boolean isUp() {
         return up;
@@ -58,6 +59,23 @@ public class DatBanModel {
         this.sotiendadattruoc = sotiendadattruoc;
         this.tenkhachhang = tenkhachhang;
         this.trangthai = trangthai;
+
+    }
+    public DatBanModel(String tenban, String id_ngaydat, String giodat, String gioketthuc, String id_bk, String ngaydat, String ngayhientai, String sodienthoai, String sotiendadattruoc, String tenkhachhang, String trangthai,String ten_cuahang,String trangthai_dat) {
+        this.tenban = tenban;
+        this.id_ngaydat = id_ngaydat;
+        this.giodat = giodat;
+        this.gioketthuc = gioketthuc;
+        this.id_bk = id_bk;
+        this.ngaydat = ngaydat;
+        this.ngayhientai = ngayhientai;
+        this.sodienthoai = sodienthoai;
+        this.sotiendadattruoc = sotiendadattruoc;
+        this.tenkhachhang = tenkhachhang;
+        this.trangthai = trangthai;
+        this.ten_cuahang = ten_cuahang;
+        this.trangthai_dat =trangthai_dat;
+
     }
 
     public String getGioketthuc() {
@@ -139,5 +157,21 @@ public class DatBanModel {
 
     public void setTrangthai(String trangthai) {
         this.trangthai = trangthai;
+    }
+
+    public String getTen_cuahang() {
+        return ten_cuahang;
+    }
+
+    public void setTen_cuahang(String ten_cuahang) {
+        this.ten_cuahang = ten_cuahang;
+    }
+
+    public String getTrangthai_dat() {
+        return trangthai_dat;
+    }
+
+    public void setTrangthai_dat(String trangthai_dat) {
+        this.trangthai_dat = trangthai_dat;
     }
 }

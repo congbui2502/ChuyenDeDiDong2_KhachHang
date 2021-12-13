@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuanLyBanHang">
         <activity
+            android:name=".DatBan.DanhSachTheoDoiDatBan"
+            android:exported="false" />
+        <activity
             android:name=".DatBan.DanhSachDanhGia"
             android:exported="false" />
         <activity
@@ -33,12 +36,6 @@
         <activity
             android:name=".DatBan.DanhSachChonBan"
             android:exported="false" />
-
-
-
-
-
-
         <activity android:name=".Activity.DangNhapKhachHangActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,39 +43,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Activity.DangkyKhachHang">
-
-        </activity>
-
-        <activity android:name=".Activity.ForgotPasswordActivity">
-
-        </activity>
-
-        <activity android:name=".Activity.ChangePassActivity">
-
-        </activity>
-
-        <activity android:name=".Activity.KhachHangActivity"
-           >
-        </activity>
-
-        <activity android:name=".Activity.SuperQuangCaoActivity"
-            android:parentActivityName=".Activity.KhachHangActivity"
+        <activity android:name=".Activity.DangkyKhachHang"></activity>
+        <activity android:name=".Activity.ForgotPasswordActivity"></activity>
+        <activity android:name=".Activity.ChangePassActivity"></activity>
+        <activity android:name=".Activity.KhachHangActivity"></activity>
+        <activity
+            android:name=".Activity.SuperQuangCaoActivity"
+            android:excludeFromRecents="true"
             android:exported="true"
             android:launchMode="singleTask"
-            android:taskAffinity=""
-            android:excludeFromRecents="true"/>
+            android:parentActivityName=".Activity.KhachHangActivity"
+            android:taskAffinity="" />
         <activity
             android:name=".CongAdapter.Tttttttest2"
             android:exported="true" />
-        <activity android:name=".CongAdapter.Tttttttest"></activity>
-
-
-
-
-        <activity
-            android:name=".Activity.ShopActivity"></activity>
+        <activity android:name=".CongAdapter.Tttttttest" />
+        <activity android:name=".Activity.ShopActivity" />
         <activity
             android:name=".ChiTietSanPham.Card_San_Pham"
             android:exported="true" />
@@ -137,9 +117,8 @@
         <activity android:name=".Activity.ImageUploadActivity" />
         <activity android:name=".Activity.BepActivity" />
 
-
-
-        <service android:name=".CongAdapter.MyNotification"
+        <service
+            android:name=".CongAdapter.MyNotification"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>

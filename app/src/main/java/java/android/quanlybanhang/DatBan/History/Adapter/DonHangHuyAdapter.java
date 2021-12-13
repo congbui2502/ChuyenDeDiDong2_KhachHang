@@ -92,11 +92,11 @@ public class DonHangHuyAdapter extends RecyclerView.Adapter<DonHangHuyAdapter.Da
         public DaHuy(@NonNull View ItemView) {
             super(ItemView);
             lblThoiGian = ItemView.findViewById(R.id.lblThoiGian);
-            lblDonGia = ItemView.findViewById(R.id.lblDonGia);
+            lblDonGia = ItemView.findViewById(R.id.lblTienDat);
             layoutThongTin = ItemView.findViewById(R.id.layoutThongTin);
             lblKhachang = ItemView.findViewById(R.id.lblKhachang);
             trangthai = ItemView.findViewById(R.id.trangthai);
-            tv_id_donhang = ItemView.findViewById(R.id.tv_id_donhang);
+            tv_id_donhang = ItemView.findViewById(R.id.lbl_idban);
         }
     }
 
