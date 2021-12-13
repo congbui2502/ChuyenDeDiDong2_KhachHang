@@ -5,7 +5,10 @@
 
 
 
-
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#858583</item>
+        <item name="colorControlActivated">#FFB81C</item>
+    </style>
     <style name="so_luong">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

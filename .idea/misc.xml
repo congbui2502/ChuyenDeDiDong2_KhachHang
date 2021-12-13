@@ -7,12 +7,17 @@
         <entry key="..\:/Shipper/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.22666666666666666" />
         <entry key="..\:/Shipper/app/src/main/res/drawable/ic_baseline_photo_library_24.xml" value="0.22666666666666666" />
         <entry key="..\:/Shipper/app/src/main/res/drawable/ic_baseline_sentiment_satisfied_alt_24.xml" value="0.22666666666666666" />
+        <entry key="..\:/Shipper/app/src/main/res/font/alike.xml" value="0.25092592592592594" />
+        <entry key="..\:/Shipper/app/src/main/res/font/alike_angular.xml" value="0.25092592592592594" />
+        <entry key="..\:/Shipper/app/src/main/res/font/armata.xml" value="0.25092592592592594" />
         <entry key="..\:/Shipper/app/src/main/res/font/baloo.xml" value="0.25092592592592594" />
+        <entry key="..\:/Shipper/app/src/main/res/font/basic.xml" value="0.25092592592592594" />
         <entry key="..\:/Shipper/app/src/main/res/font/finger_paint.xml" value="0.25092592592592594" />
         <entry key="..\:/Shipper/app/src/main/res/layout/activity_change_password.xml" value="0.14356884057971014" />
         <entry key="..\:/Shipper/app/src/main/res/layout/activity_chitiet.xml" value="0.20416666666666666" />
         <entry key="..\:/Shipper/app/src/main/res/layout/activity_dang_giao.xml" value="0.14356884057971014" />
         <entry key="..\:/Shipper/app/src/main/res/layout/activity_dangnhap.xml" value="0.20416666666666666" />
+        <entry key="..\:/Shipper/app/src/main/res/layout/activity_danh_sach_danh_gia.xml" value="0.22056159420289856" />
         <entry key="..\:/Shipper/app/src/main/res/layout/activity_danhan.xml" value="0.14130434782608695" />
         <entry key="..\:/Shipper/app/src/main/res/layout/activity_don_giao.xml" value="0.14356884057971014" />
         <entry key="..\:/Shipper/app/src/main/res/layout/activity_donhang.xml" value="0.20416666666666666" />
@@ -26,6 +31,7 @@
         <entry key="..\:/Shipper/app/src/main/res/layout/activity_sanpham.xml" value="0.17074275362318841" />
         <entry key="..\:/Shipper/app/src/main/res/layout/activity_shipper_forgot_password.xml" value="0.11096014492753623" />
         <entry key="..\:/Shipper/app/src/main/res/layout/activity_signup_shipper.xml" value="0.19293478260869565" />
+        <entry key="..\:/Shipper/app/src/main/res/layout/activity_thongtin.xml" value="0.22056159420289856" />
         <entry key="..\:/Shipper/app/src/main/res/layout/activity_thu_nhap_shipper.xml" value="0.12360688956433637" />
         <entry key="..\:/Shipper/app/src/main/res/layout/chitietlichsu_activity.xml" value="0.19293478260869565" />
         <entry key="..\:/Shipper/app/src/main/res/layout/content_profile.xml" value="0.25416666666666665" />
@@ -33,8 +39,10 @@
         <entry key="..\:/Shipper/app/src/main/res/layout/fragment_danhan.xml" value="0.16666666666666666" />
         <entry key="..\:/Shipper/app/src/main/res/layout/fragment_history.xml" value="0.20416666666666666" />
         <entry key="..\:/Shipper/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Shipper/app/src/main/res/layout/item_danhsachrating.xml" value="0.22056159420289856" />
         <entry key="..\:/Shipper/app/src/main/res/layout/toolbar.xml" value="0.18645833333333334" />
         <entry key="..\:/Shipper/app/src/main/res/menu/menus.xml" value="0.25416666666666665" />
+        <entry key="..\:/Shipper/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.25092592592592594" />
       </map>
     </option>
   </component>

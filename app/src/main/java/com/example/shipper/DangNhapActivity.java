@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
     EditText edtDangNhap, edtMatKhau;
     CheckBox chk;
     TextView tvQuenMK;
+    ProgressBar progressBar;
     String strUser, strPass;
     private String idUser;
     private FirebaseAuth mFirebaseAuth;
@@ -57,7 +59,7 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
         chk = (CheckBox) findViewById(R.id.saveUser);
         btnDangKi = (Button) findViewById(R.id.btn_dangki);
         btnClear = (Button) findViewById(R.id.btn_clearUser);
-
+        progressBar = findViewById(R.id.progressBar2);
         btnDangNhap.setOnClickListener(this);
         initPreferences();
         String savedUser = sharedPreferences.getString("USER","");
@@ -65,6 +67,7 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
         edtDangNhap.setText(savedUser);
         edtMatKhau.setText(savedPass);
         chk.setOnClickListener(this);
+
         btnDangNhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,16 +116,20 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
         editor1.commit();
     }
     private void login() {
+        progressBar.setVisibility(View.VISIBLE);
         strUser = edtDangNhap.getText().toString();
         strPass = edtMatKhau.getText().toString();
         mFirebaseAuth = FirebaseAuth.getInstance();
         if (strUser.isEmpty()) {
+            progressBar.setVisibility(View.INVISIBLE);
             edtDangNhap.setError("Plese enter email id");
             edtDangNhap.requestFocus();
         } else if (strPass.isEmpty()) {
+            progressBar.setVisibility(View.INVISIBLE);
             edtMatKhau.setError("Plese enter your password");
             edtMatKhau.requestFocus();
         } else if (strUser.isEmpty() && strPass.isEmpty()) {
+            progressBar.setVisibility(View.INVISIBLE);
             Toast.makeText(DangNhapActivity.this, "Fialds Are Empty!", Toast.LENGTH_LONG).show();
         } else if (!(strUser.isEmpty() && strPass.isEmpty())) {
             mFirebaseAuth.signInWithEmailAndPassword(strUser, strPass).addOnCompleteListener(DangNhapActivity.this, new OnCompleteListener<AuthResult>() {
@@ -133,11 +140,12 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
                     } else {
                         idUser = mFirebaseAuth.getUid();
                         Intent intent = new Intent(DangNhapActivity.this, Home.class);
-                        String user = edtDangNhap.getText().toString();
-                        editor.putString("USER", user);
-                        editor.commit();
+//                        String user = edtDangNhap.getText().toString();
+//                        editor.putString("USER", user);
+//                        editor.commit();
                         startActivity(intent);
-                    }
+
+                    }progressBar.setVisibility(View.INVISIBLE);
                 }
             });
         } else {
@@ -149,7 +157,10 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         if (v == chk){
             String pass = edtMatKhau.getText().toString();
+            String user = edtDangNhap.getText().toString();
+            editor.putString("USER",user);
             editor1.putString("PASS",pass);
+            editor.commit();
             editor1.commit();
             Toast.makeText(DangNhapActivity.this,"Đã lưu thông tin đăng nhập",Toast.LENGTH_SHORT).show();
         }

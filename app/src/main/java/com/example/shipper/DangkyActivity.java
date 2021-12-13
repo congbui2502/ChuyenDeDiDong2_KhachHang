@@ -255,6 +255,8 @@ public class DangkyActivity extends AppCompatActivity implements View.OnClickLis
         }else if (!pass.equals(cpass)){
             confirm_password.setError("Passwords are not the sames");
             confirm_password.requestFocus();
+        }else if (ImageUri == null) {
+            Toast.makeText(DangkyActivity.this, "Chưa chọn ảnh đại diện", Toast.LENGTH_SHORT).show();
         }
         else if(mail.isEmpty() && pass.isEmpty()){
             Toast.makeText(DangkyActivity.this,"Fialds Are Empty!", Toast.LENGTH_LONG).show();

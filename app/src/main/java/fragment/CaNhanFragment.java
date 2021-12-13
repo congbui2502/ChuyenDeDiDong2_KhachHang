@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.shipper.ChangePassActivity;
@@ -22,6 +23,7 @@ import com.example.shipper.DangNhapActivity;
 import com.example.shipper.HoaDonActivity;
 import com.example.shipper.Home;
 import com.example.shipper.R;
+import com.example.shipper.RatingModel;
 import com.example.shipper.Shipper;
 import com.example.shipper.ThongTinActivity;
 import com.example.shipper.ThuNhapShipper;
@@ -33,6 +35,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -41,7 +45,11 @@ public class CaNhanFragment extends Fragment {
     private DatabaseReference mDatabase;
     private TextView tv_name,tv_email,tv_phone,tv_date,tv_dangxuat,tv_doimk,tv_bienso,tv_cmt,tv_thunhap,tv_info;
     private CircleImageView avatar;
+    private RatingBar ratingBar;
     String imgAvatar;
+    String id;
+    float saos,sao;
+    ArrayList<RatingModel> ratingModels;
     public CaNhanFragment() {
         // Required empty public constructor
     }
@@ -61,11 +69,13 @@ public class CaNhanFragment extends Fragment {
         avatar = view.findViewById(R.id.profile_image);
         tv_thunhap = view.findViewById(R.id.btn_thunhap);
         tv_info = view.findViewById(R.id.tv_info);
+        ratingBar = view.findViewById(R.id.ratingBar);
         DangXuat();
         thuNhap();
         DoiMatKhau();
         onDataChange();
         thongTin();
+        hamlaysao();
         return view;
     }
     private void thongTin(){
@@ -120,10 +130,43 @@ public class CaNhanFragment extends Fragment {
             }
         });
     }
+    private void hamlaysao(){
+        mDatabase = FirebaseDatabase.getInstance().getReference("rating").child("idshipper").child(id);
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ratingModels = new ArrayList<>();
+                if(snapshot.getValue()!=null) {
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                        for(DataSnapshot snap : snapshot1.getChildren()){
+
+                            String comment = snap.child("comment").getValue() + "";
+                            String date = snap.child("date").getValue() + "";
+                            String numberrating = snap.child("numberrating").getValue() + "";
+                            String tenkhachhang = snap.child("tenkhachhang").getValue() + "";
+                            ratingModels.add(new RatingModel(comment, date, numberrating, tenkhachhang));
+                            saos += Float.parseFloat(numberrating) ;
+                        }
+                    }
+                    sao = saos / ratingModels.size() ;
+                    ratingBar.setRating(sao);
+                    ratingBar.setFocusable(false);
+                }else {
+                    ratingBar.setRating(5);
+                    ratingBar.setFocusable(false);
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     private void onDataChange()
     {
         mFirebaseAuth= FirebaseAuth.getInstance();
-        String id=mFirebaseAuth.getUid();
+        id=mFirebaseAuth.getUid();
 
         if (id!=null){
         mDatabase = FirebaseDatabase.getInstance().getReference();

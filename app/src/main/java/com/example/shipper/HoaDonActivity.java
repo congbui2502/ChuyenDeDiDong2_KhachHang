@@ -277,6 +277,7 @@ public class HoaDonActivity extends AppCompatActivity {
                         String date = formatDateS(donHang.getTime());
 
                         db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("trangthai").setValue(6);
+                        db.child("CuaHangOder").child(donHang.getIdQuan()).child("donhangonline").child("dondadat").child(date).child(donHang.getKey()).child("idShipper").setValue(idShipper);
                         db.child("DonHangOnline").child("ShipperDaGiao").child(donHang.getIdKhachhang()).child(donHang.getKey()).setValue(donHang);
                         db.child("DonHangOnline").child("ShipperDaGiao").child(donHang.getIdKhachhang()).child(donHang.getKey()).child("idShipper").setValue(idShipper);
                         db.child("DonHangOnline").child("ShipperDaGiao").child(donHang.getIdKhachhang()).child(donHang.getKey()).child("nameShipper").setValue(name);
