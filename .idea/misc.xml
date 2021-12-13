@@ -43,6 +43,11 @@
         <entry key="..\:/Shipper/app/src/main/res/layout/toolbar.xml" value="0.18645833333333334" />
         <entry key="..\:/Shipper/app/src/main/res/menu/menus.xml" value="0.25416666666666665" />
         <entry key="..\:/Shipper/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.25092592592592594" />
+        <entry key="..\:/Shipper_prj/app/src/main/res/layout/activity_chitiet.xml" value="0.2658514492753623" />
+        <entry key="..\:/Shipper_prj/app/src/main/res/layout/activity_main2.xml" value="0.27291666666666664" />
+        <entry key="..\:/Shipper_prj/app/src/main/res/layout/activity_sanpham.xml" value="0.13272543059777103" />
+        <entry key="..\:/Shipper_prj/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Shipper_prj/app/src/main/res/layout/google_map_fragment.xml" value="0.27291666666666664" />
       </map>
     </option>
   </component>
@@ -51,5 +56,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.2658514492753623" />
+      </ProjectState>
+    </option>
   </component>
 </project>

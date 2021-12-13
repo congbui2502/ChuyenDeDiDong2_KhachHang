@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import android.content.pm.PackageManager;
 import android.Manifest;
@@ -22,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +37,7 @@ import java.util.Date;
 
 import adapter.DonHangAdapter;
 import adapter.SanPhamAdapter;
+import fragment.GooGleFragment;
 import fragment.HomeFragment;
 
 public class ChiTietActivity extends AppCompatActivity {
@@ -51,6 +55,7 @@ public class ChiTietActivity extends AppCompatActivity {
     Shipper shipper;
     DatabaseReference db = FirebaseDatabase.getInstance().getReference();
     ArrayList<SanPham> arrayList;
+    private ImageView imgDiemNhan,imgDiemGiao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +84,64 @@ public class ChiTietActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        imgDiemNhan=findViewById(R.id.imgDiemNhan);
+        imgDiemGiao=findViewById(R.id.imgDiemGiao);
+
+        imgDiemNhan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseReference reference= FirebaseDatabase.getInstance().getReference().
+                        child("cuaHang").child(donHang.getIdQuan());
+                reference.addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                        if(snapshot.getKey().equals("thongtin"))
+                        {
+                            ThongTinShop thongTinShop= snapshot.getValue(ThongTinShop.class);
+                            Intent intent = new Intent(ChiTietActivity.this,GoogleMapActivity.class);
+                            Bundle bundle=new Bundle();
+                            bundle.putSerializable("tts",thongTinShop);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+                    }
+
+
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+
+        imgDiemGiao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChiTietActivity.this,GoogleMapActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("dc",donHang.getDiaChi());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
     }
     private void getSoDonHang(){
 

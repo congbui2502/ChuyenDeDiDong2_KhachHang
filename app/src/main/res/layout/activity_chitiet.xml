@@ -2,11 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lineBao"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChiTietActivity">
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="8"
@@ -217,6 +219,7 @@
                             android:textStyle="bold"></TextView>
 
                         <ImageView
+                            android:id="@+id/imgDiemNhan"
                             android:layout_width="125dp"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
@@ -237,6 +240,7 @@
                             android:textColor="@color/xanh"
                             android:textStyle="bold"></TextView>
                         <ImageView
+                            android:id="@+id/imgDiemGiao"
                             android:layout_width="125dp"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
