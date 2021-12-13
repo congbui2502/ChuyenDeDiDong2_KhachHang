@@ -39,8 +39,8 @@ public class ShopActivity extends AppCompatActivity implements NavigationView.On
         ordermenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ShopActivity.this, OrderMenu.class);
-                startActivity(intent);
+//                Intent intent = new Intent(ShopActivity.this, OrderMenu.class);
+//                startActivity(intent);
             }
         });
         // Write a message to the database
@@ -85,8 +85,8 @@ public class ShopActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_homes:
                 break;
             case R.id.ds_order:
-                Intent intent = new Intent(ShopActivity.this, OrderMenu.class);
-                startActivity(intent);
+//                Intent intent = new Intent(ShopActivity.this, OrderMenu.class);
+//                startActivity(intent);
                 break;
             case R.id.ds_chebien:
                 Intent intent1 = new Intent(ShopActivity.this, AddCategory.class);

@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.android.quanlybanhang.Activity.SuperQuangCaoActivity;
 import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.CuaHang;
 import java.android.quanlybanhang.Sonclass.SanPham;
@@ -69,6 +70,15 @@ public class ShopProductFragment extends Fragment  {
             this.logoUrl= cuaHang.getLogoUrl();
     }
 
+    public ShopProductFragment(SuperQuangCaoActivity mainActivity, Context context, QuanNoiBatAdapter.getdata getdata) {
+        this.khachHangActivity =mainActivity;
+        this.context=context;
+        this.cuaHang=getdata.getData();
+        this.id_shop=cuaHang.getId();
+        this.Shop_Name=cuaHang.getName();
+        this.logoUrl= cuaHang.getLogoUrl();
+    }
+
 
 
     @Nullable
@@ -104,8 +114,6 @@ public class ShopProductFragment extends Fragment  {
         recyLoaiSP=view.findViewById(R.id.recyLoaisanPham);
         Glide.with(context).load(logoUrl).into(imgShop);
 
-        Log.d("abc",logoUrl+" cdc");
-        Log.d("abc",id_shop+" cdc");
 
         getloaiDoUong();
 
@@ -236,7 +244,7 @@ public class ShopProductFragment extends Fragment  {
 
                     dsSanPhamTheoLoai.add((sanPham));
                     loaiTraiAdapter.notifyDataSetChanged();
-                    Toast.makeText(context,dsSanPhamTheoLoai.size()+"123",Toast.LENGTH_SHORT).show();
+
                     Log.d("CCC",sanPhams.size()+"abc");
 
                 }

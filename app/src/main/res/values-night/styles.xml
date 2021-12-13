@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--  style so luong layout activity_bao_cao_tong_quan  -->
+
+    <style name="so_luong">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/bac</item>
+    </style>
+
+    <style name="cardview_tongquan">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:padding">5dp</item>
+        <item name="cardCornerRadius">2dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <style name="cardview_hoadon">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">70dp</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:padding">5dp</item>
+        <item name="cardCornerRadius">2dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <style name="cardview_themsanpham">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_margin">3dp</item>
+        <!--        <item name="android:layout_weight">10</item>-->
+        <item name="android:padding">5dp</item>
+        <item name="cardCornerRadius">5dp</item>
+        <item name="cardElevation">4dp</item>
+    </style>
+
+
+    <style name="cardview_themnhanvien">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:padding">5dp</item>
+        <item name="cardCornerRadius">5dp</item>
+        <item name="cardElevation">4dp</item>
+    </style>
+
+    <style name="cardview_calam">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:padding">5dp</item>
+        <item name="cardCornerRadius">5dp</item>
+        <item name="cardElevation">4dp</item>
+    </style>
+
+    <style name="cardview_congviec">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:padding">5dp</item>
+        <item name="cardCornerRadius">5dp</item>
+        <item name="cardElevation">4dp</item>
+    </style>
+
+
+    <style name="cardview_nhomsanpham">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:padding">5dp</item>
+        <item name="cardCornerRadius">5dp</item>
+        <item name="cardElevation">4dp</item>
+    </style>
+    <style name="cardview_thu">
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:padding">5dp</item>
+        <item name="cardCornerRadius">5dp</item>
+        <item name="cardElevation">4dp</item>
+    </style>
+
+    <style name="cardview_calam1">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:padding">5dp</item>
+        <item name="cardCornerRadius">5dp</item>
+        <item name="cardElevation">4dp</item>
+    </style>
+
+    <style name="image">
+        <item name="android:layout_width">375dp</item>
+        <item name="android:layout_height">150dp</item>
+        <item name="cardCornerRadius">8dp</item>
+    </style>
+
+    <style name="view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">3dp</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:background">@color/teal_200</item>
+    </style>
+
+    <style name="color_nav">
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
+
+
+
+
+    <style name="cardview_khuyenmaioff">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">55dp</item>
+        <item name="cardCornerRadius">5dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:windowAnimationStyle">@style/DialogAnimation</item> <!--custom animation style-->
+    </style>
+    <style name="RatingBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">#858583</item>
+        <item name="colorControlActivated">#FFB81C</item>
+    </style>
+
+</resources>

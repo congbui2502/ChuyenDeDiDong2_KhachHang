@@ -7,6 +7,9 @@
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable-hdpi/ic_baseline_search_24.xml" value="0.23958333333333334" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable-hdpi/new_style.xml" value="0.23958333333333334" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable-hdpi/style_indicator.xml" value="0.15572916666666667" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable-v24/bnt_custom.xml" value="0.1824074074074074" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable-xhdpi/bg_tab_don_online.xml" value="0.1824074074074074" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable-xhdpi/custom_dialog_background.xml" value="0.1824074074074074" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable-xhdpi/ic_baseline_message_24.xml" value="0.2890625" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable-xhdpi/person.xml" value="0.16510416666666666" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable-xxxhdpi/donhang_style.xml" value="0.18518518518518517" />
@@ -17,22 +20,46 @@
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable/chitiet_sp_style.xml" value="0.2890625" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable/pwicon.xml" value="0.18518518518518517" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/drawable/usericon.xml" value="0.18518518518518517" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/font/alike.xml" value="0.14074074074074075" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/account_fragment.xml" value="0.21458333333333332" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/activity_dangnhap_khachhang.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/activity_danh_gia_cua_hang.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/activity_danh_sach_danh_gia.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/activity_danh_sach_dat_ban.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/activity_khachhang_forgot_password.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/activity_order_menu.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/activity_signup_khachhang.xml" value="0.21927083333333333" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/autorun_viewpager2.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/cart_fragment.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/cart_product.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/chitietsanpham_layout.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/dailongchondanhgia.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/dailongthanhtoan.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/dialog_canhbao.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/dialog_don_hang.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/dialog_huy_don.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/dialog_phuongthucthanhtoan.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/dialog_thanhtoan_aleart.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/donga_bank_notification.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/donga_bank_notification_max.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/donhang_fragment.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/donhang_recy.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/frag_ban.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/fragment_donhang.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/frament_donhanghuy.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/frament_donhangnhan.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/home_fragment.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/item_ban.xml" value="0.1953125" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/item_danhsachrating.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/item_dialog_don_online.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/item_donhang.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/item_donhanghuy.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/item_donhangnhan.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/item_khuvuc.xml" value="0.1953125" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/item_khuyenmai.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/item_listdatban.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/item_quangcao.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/item_recycleview_tab_don_hang_online.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/item_search_layout.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/item_spinner_1.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/khachhang_activity.xml" value="0.27291666666666664" />
@@ -43,6 +70,7 @@
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/search_fragment.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/shop_product.xml" value="0.1859375" />
         <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/layout/test.xml" value="0.1484375" />
+        <entry key="..\:/AndroidStudio/ChuyenDeDiDong2_KhachHang.git/app/src/main/res/menu/menu_main_dsdatban.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudio/Thach (1)/app/src/main/res/layout/activity_image_upload.xml" value="0.24791666666666667" />
         <entry key="..\:/AndroidStudio/Thach (1)/app/src/main/res/layout/cart_fragment.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/Thach (1)/app/src/main/res/layout/cart_product.xml" value="0.25" />

@@ -40,6 +40,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.android.quanlybanhang.CongAdapter.Account_fragment;
 import java.android.quanlybanhang.CongAdapter.Cart_Fragment;
 import java.android.quanlybanhang.CongAdapter.HomeFragment;
+import java.android.quanlybanhang.CongAdapter.MyNotification;
 import java.android.quanlybanhang.CongAdapter.ProductAdapter;
 import java.android.quanlybanhang.CongAdapter.Putnotification;
 import java.android.quanlybanhang.CongAdapter.TableFragment;
@@ -509,6 +510,7 @@ public class KhachHangActivity extends AppCompatActivity {
 //                .setContentTitle("this is my application")
 //                .setContentText("cmm")
 //                .setLargeIcon(bitmap)
+                .setTicker("cmm")
                 .setContentIntent(resultPendingIntent)
                 .setCustomContentView(notificationLayout)
                 .setSmallIcon(R.drawable.ic_baseline_message_24)

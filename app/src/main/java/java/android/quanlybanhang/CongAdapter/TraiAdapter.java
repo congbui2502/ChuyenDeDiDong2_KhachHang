@@ -1,8 +1,10 @@
 package java.android.quanlybanhang.CongAdapter;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import java.android.quanlybanhang.Activity.KhachHangActivity;
+import java.android.quanlybanhang.Activity.SuperQuangCaoActivity;
 import java.android.quanlybanhang.R;
 import java.android.quanlybanhang.Sonclass.SanPham;
 import java.util.List;
@@ -70,6 +73,18 @@ public class TraiAdapter extends RecyclerView.Adapter<TraiAdapter.TraiViewHolder
 
        holder.tvTrending.setText(trai.getNameProduct());
        holder.tvDescription.setText(trai.getChitiet());
+
+       holder.lineBG.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent resultIntent = new Intent(activity, SuperQuangCaoActivity.class);
+               resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+               Bundle bundle=new Bundle();
+               bundle.putSerializable("sanpham", trai);
+               resultIntent.putExtras(bundle);
+               activity.startActivity(resultIntent);
+           }
+       });
 
     }
 

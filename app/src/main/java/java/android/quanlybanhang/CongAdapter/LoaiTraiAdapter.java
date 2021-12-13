@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -50,12 +51,13 @@ public class LoaiTraiAdapter extends RecyclerView.Adapter<LoaiTraiAdapter.LoaiTr
 
         View view1= LayoutInflater.from(parent.getContext()).inflate(R.layout.autorun_viewpager2,parent,false);
 
-        vitri++;
-        Log.d("AAA",vitri+"");
-        if(vitri==0)
-        {
-            return new LoaiTraiHolder(view1);
-        }
+
+
+//
+//        if(vitri%3==0)
+//        {
+//            return new LoaiTraiHolder(view1);
+//        }
             return new LoaiTraiHolder(view);
 
     }
@@ -66,29 +68,27 @@ public class LoaiTraiAdapter extends RecyclerView.Adapter<LoaiTraiAdapter.LoaiTr
 
         Log.d("qqq",mLoaiTrais.get(position).getCuahangs().size()+" ccc");
 
-
-
         if(loaiTrai!=null)
         {
             if(position==0)
             {
 
-//                holder.tittle.setText(loaiTrai.getTittle());
+                holder.tittle.setText(loaiTrai.getTittle());
                 TraiAdapter traiAdapter=new TraiAdapter();
                 traiAdapter.setData(loaiTrai.getSanphamnoibats(),mainActivity);
-                holder.recycleView.setAdapter(traiAdapter);
-                holder.recycleView.setOnFlingListener(null);
+                holder.trais.setAdapter(traiAdapter);
+                holder.trais.setOnFlingListener(null);
                 LinearLayoutManager layoutManager = new
                         LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false);
-                holder.recycleView.setLayoutManager(layoutManager);
+                holder.trais.setLayoutManager(layoutManager);
                 PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
-                pagerSnapHelper.attachToRecyclerView(holder.recycleView);
-                holder.indicator2.attachToRecyclerView(holder.recycleView, pagerSnapHelper);
+                pagerSnapHelper.attachToRecyclerView(holder.trais);
+                holder.indicator2.attachToRecyclerView(holder.trais, pagerSnapHelper);
             }
 
             else  if(position == 1)
             {
-
+                holder.tittle.setText(loaiTrai.getTittle());
                 QuanNoiBatAdapter traiAdapter=new QuanNoiBatAdapter();
                 traiAdapter.setData(loaiTrai.getCuahangs(),mainActivity,mContext);
                 LinearLayoutManager linearLayoutManager=new LinearLayoutManager(mContext,RecyclerView.HORIZONTAL,false);
@@ -161,19 +161,21 @@ public class LoaiTraiAdapter extends RecyclerView.Adapter<LoaiTraiAdapter.LoaiTr
 
         public LoaiTraiHolder(@NonNull View itemView) {
             super(itemView);
+//            vitri++;
 
-                if(vitri==0)
-                {
-                    recycleView =itemView.findViewById(R.id.recy1);
+//                if(vitri%3==0)
+//                {
+////                    recycleView =itemView.findViewById(R.id.recy1);
+////
+////                    indicator2 =itemView.findViewById(R.id.indicator);
+//                }else {
+//                    tittle=itemView.findViewById(R.id.tvLoai);
+//                    trais=itemView.findViewById(R.id.recyLoai);
+//                }
 
-                    indicator2 =itemView.findViewById(R.id.indicator);
-                }else {
-                    tittle=itemView.findViewById(R.id.tvLoai);
-                    trais=itemView.findViewById(R.id.recyLoai);
-                }
-
-
-
+            tittle=itemView.findViewById(R.id.tvLoai);
+            trais=itemView.findViewById(R.id.recyLoai);
+            indicator2 =itemView.findViewById(R.id.indicator);
         }
     }
 }

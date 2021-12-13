@@ -286,14 +286,14 @@ public class DonHangFragment  extends Fragment {
 
         String[] tienSP = tienShipper.getText().toString().split(" ");
         long tsp =Long.parseLong(tienSP[2]);
-        tongTien.setText((tongtien+ tsp - tongtien*khuyenMai.getPhanTramKhuyenMai()/100)+" VNĐ");
+        tongTien.setText(Cart_Fragment.addDauPhay(tongtien+ tsp - tongtien*khuyenMai.getPhanTramKhuyenMai()/100)+" VNĐ");
 
 
         if(khuyenMai.getLoaiKhuyenmai()==1)
         {
             if(tongtien>khuyenMai.getGiaDeDuocKhuyenMai())
             {
-                tongTien.setText((tongtien- tongtien*khuyenMai.getPhanTramKhuyenMai()/100)+" VNĐ");
+                tongTien.setText(Cart_Fragment.addDauPhay(tongtien- tongtien*khuyenMai.getPhanTramKhuyenMai()/100)+" VNĐ");
                 giaKhuyenmai = tongtien * khuyenMai.getPhanTramKhuyenMai()/100;
             }else {
                 Toast.makeText(getContext(), "Tổng tiền không đủ để sử dụng.",Toast.LENGTH_LONG).show();

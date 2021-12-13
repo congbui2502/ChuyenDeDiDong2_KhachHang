@@ -99,16 +99,17 @@ public class SuperQuangCaoActivity extends AppCompatActivity {
         imgLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                FragmentTransaction fragmentTransaction=  getSupportFragmentManager().beginTransaction();
-//                ShopProductFragment fragment1=new ShopProductFragment(SuperQuangCaoActivity.this,this, new QuanNoiBatAdapter.getdata() {
-//                    @Override
-//                    public CuaHang getData() {
-//                        return cuaHang;
-//                    }
-//                });
-//                fragmentTransaction.replace(R.id.fragment_container,fragment1);
-////                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
+                FragmentTransaction fragmentTransaction=  getSupportFragmentManager().beginTransaction();
+                ShopProductFragment fragment1=new ShopProductFragment(SuperQuangCaoActivity.this,SuperQuangCaoActivity.this,
+                        new QuanNoiBatAdapter.getdata() {
+                    @Override
+                    public CuaHang getData() {
+                        return cuaHang;
+                    }
+                });
+                fragmentTransaction.replace(R.id.lineShop,fragment1);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 
