@@ -521,10 +521,11 @@ public class DonHangFragment  extends Fragment implements OnMapReadyCallback {
                         LatLng lngShop =getLocationFromAddress(getContext(),thongTinShop.getShopAddress());
 
                         int khongcach = CalculationByDistance(lnKH,lngShop);
+                        thunhap = tinhPhiShip(khongcach);
                         tienShipper.setText("Phí Ship: "
-                                +Cart_Fragment.addDauPhay(tinhPhiShip(khongcach))+" VND");
+                                +Cart_Fragment.addDauPhay(thunhap)+" VND");
 
-
+                        tongTien.setText(Cart_Fragment.addDauPhay(tongtien+ +thunhap )+" VNĐ");
 
 
                     dialog.dismiss();

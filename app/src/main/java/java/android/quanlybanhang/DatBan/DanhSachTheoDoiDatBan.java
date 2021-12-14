@@ -98,9 +98,6 @@ public class DanhSachTheoDoiDatBan extends AppCompatActivity {
                             rv_1.setAdapter(adapterDanhSachTheoDoi);
                             adapterDanhSachTheoDoi.notifyDataSetChanged();
                         }
-                        else {
-                            rong.setVisibility(View.VISIBLE);
-                        }
 
                     }
                 } else {
